@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.map;
 
 import com.b3dgs.lionengine.game.map.MapTileGame;
-import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
 import com.b3dgs.tyrian.entity.scenery.EntitySceneryType;
 import com.b3dgs.tyrian.entity.scenery.FactoryEntityScenery;
@@ -38,7 +38,7 @@ public final class Map
      * @param n The tile number.
      * @return The entity instance, <code>null</code> if none.
      */
-    private static Entity create(FactoryEntityScenery factory, int n)
+    private static EntityOpponent create(FactoryEntityScenery factory, int n)
     {
         switch (n)
         {
@@ -105,7 +105,7 @@ public final class Map
                 if (tile != null)
                 {
                     final int n = tile.getNumber();
-                    final Entity entity = Map.create(factoryEntityStatic, n);
+                    final EntityOpponent entity = Map.create(factoryEntityStatic, n);
                     if (entity != null)
                     {
                         entity.teleport(tile.getX(), tile.getY() + 28);

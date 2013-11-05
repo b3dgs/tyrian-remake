@@ -15,24 +15,43 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.entity.scenery;
+package com.b3dgs.tyrian.weapon.other;
 
+import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
+import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.weapon.SetupWeapon;
+import com.b3dgs.tyrian.weapon.Weapon;
 
 /**
- * Double canon implementation.
+ * Impulser implementation.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-public final class DoubleCanon
-        extends EntityScenery
+public final class Impulser
+        extends Weapon
 {
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * @see Weapon#Weapon(SetupWeapon)
      */
-    public DoubleCanon(SetupEntity setup)
+    public Impulser(SetupWeapon setup)
     {
         super(setup);
+        setOffsetY(-5);
+        setRate(1000);
+    }
+
+    /*
+     * Weapon
+     */
+
+    @Override
+    protected void launchProjectile(Entity owner, Entity target)
+    {
+        int dmg;
+        final int speed = 2;
+        Sfx.WEAPON_PULSE.play();
+        dmg = 60;
+        addProjectile(ProjectileType.IMPULSE, dmg, target, speed, 0, 0);
     }
 }

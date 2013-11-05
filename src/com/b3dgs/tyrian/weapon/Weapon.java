@@ -77,6 +77,12 @@ public abstract class Weapon
      */
 
     @Override
+    protected void launchProjectile(Entity owner)
+    {
+        // Nothing to do
+    }
+
+    @Override
     protected void launchProjectile(Entity owner, Entity target)
     {
         // Nothing to do

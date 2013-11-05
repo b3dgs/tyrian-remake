@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.entity.scenery;
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
 import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
@@ -28,7 +29,7 @@ import com.b3dgs.tyrian.entity.SetupEntity;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 abstract class EntityScenery
-        extends Entity
+        extends EntityOpponent
 {
     /** Animator. */
     private final Animator animator;

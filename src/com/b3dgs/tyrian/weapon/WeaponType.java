@@ -24,7 +24,7 @@ import com.b3dgs.tyrian.weapon.front.HyperPulse;
 import com.b3dgs.tyrian.weapon.front.MachineGun;
 import com.b3dgs.tyrian.weapon.front.MissileLauncherFront;
 import com.b3dgs.tyrian.weapon.front.PulseCannon;
-import com.b3dgs.tyrian.weapon.other.Pulse;
+import com.b3dgs.tyrian.weapon.other.Impulser;
 import com.b3dgs.tyrian.weapon.rear.MissileLauncherRear;
 import com.b3dgs.tyrian.weapon.rear.WaveCannonRear;
 
@@ -62,7 +62,7 @@ public enum WeaponType implements ObjectType
      */
 
     /** Pulse. */
-    PULSE(Pulse.class, WeaponCategory.OTHER);
+    IMPULSER(Impulser.class, WeaponCategory.OTHER);
 
     /** Class target. */
     private final Class<?> target;

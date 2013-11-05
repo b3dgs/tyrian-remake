@@ -15,43 +15,35 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.weapon.other;
+package com.b3dgs.tyrian.entity;
 
-import com.b3dgs.tyrian.Sfx;
-import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
-import com.b3dgs.tyrian.weapon.SetupWeapon;
-import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.entity.ship.Ship;
 
 /**
- * Pulse implementation.
+ * Entity opponent implementation base.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-public final class Pulse
-        extends Weapon
+public abstract class EntityOpponent
+        extends Entity
 {
     /**
-     * @see Weapon#Weapon(SetupWeapon)
+     * Constructor.
+     * 
+     * @param setup The setup reference.
      */
-    public Pulse(SetupWeapon setup)
+    protected EntityOpponent(SetupEntity setup)
     {
         super(setup);
-        setOffsetY(-5);
-        setRate(1000);
     }
 
-    /*
-     * Weapon
+    /**
+     * Update routine considering the ship reference.
+     * 
+     * @param ship The ship reference.
      */
-
-    @Override
-    protected void launchProjectile(Entity owner)
+    public void update(Ship ship)
     {
-        int dmg;
-        final int speed = 2;
-        Sfx.WEAPON_PULSE.play();
-        dmg = 60;
-        addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 0);
+        // Nothing by default
     }
 }

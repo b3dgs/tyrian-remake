@@ -41,8 +41,6 @@ public abstract class Ship
     private Weapon weaponFront;
     /** Weapon rear. */
     private Weapon weaponRear;
-    /** Old offset. */
-    private int offsetOldX;
 
     /**
      * @param setup The setup reference.
@@ -70,7 +68,7 @@ public abstract class Ship
     {
         final double x = mouse.getOnWindowX() - getWidth() / 2 + camera.getLocationIntX();
         final double y = screenHeight - mouse.getOnWindowY();
-        setLocationOffset(x, y);
+        setLocation(x, y);
     }
 
     /**
@@ -83,16 +81,15 @@ public abstract class Ship
      */
     public void update(double extrp, Mouse mouse, CameraGame camera, int screenHeight)
     {
-        offsetOldX = getLocationOffsetX();
-        final double destX = mouse.getOnWindowX() - getWidth() / 2 + camera.getLocationIntX();
-        final double destY = screenHeight - mouse.getOnWindowY();
-        final double x = UtilityMath.curveValue(getLocationOffsetX(), destX, 3.0);
-        final double y = UtilityMath.curveValue(getLocationOffsetY(), destY, 3.0);
+        final double camY = camera.getLocationY();
+        final double destX = mouse.getOnWindowX() - getWidth() / 2 + camera.getLocationX();
+        final double destY = screenHeight - mouse.getOnWindowY() + camY;
+        final double x = UtilityMath.curveValue(getLocationX(), destX, 3.0);
+        final double y = UtilityMath.curveValue(getLocationY(), destY, 3.0);
         final double ox = UtilityMath.fixBetween(x, 0, camera.getViewWidth());
-        final double oy = UtilityMath.fixBetween(y, getHeight() / 2, camera.getViewHeight());
-        setLocationOffset(ox, oy);
+        final double oy = UtilityMath.fixBetween(y, getHeight() / 2 + camY, camera.getViewHeight() + camY);
 
-        moveLocation(extrp, 0.0, 1.0);
+        setLocation(ox, oy);
         updateTileOffset();
         updateCollision();
 
@@ -158,7 +155,7 @@ public abstract class Ship
      */
     private void updateTileOffset()
     {
-        final double diffX = getLocationOffsetX() - offsetOldX;
+        final double diffX = getLocationX() - getLocationOldX();
         if (diffX >= -1 && diffX <= 1)
         {
             setTileOffset(2);

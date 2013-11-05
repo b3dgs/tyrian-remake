@@ -24,8 +24,10 @@ package com.b3dgs.tyrian.projectile;
  */
 public enum ProjectileCategory
 {
-    /** Front weapon. */
+    /** Front. */
     FRONT,
-    /** Rear weapon. */
-    REAR;
+    /** Rear. */
+    REAR,
+    /** Other. */
+    OTHER;
 }

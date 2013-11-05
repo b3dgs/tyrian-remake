@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.dynamic;
 
-import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
@@ -26,7 +26,7 @@ import com.b3dgs.tyrian.entity.SetupEntity;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 abstract class Meteor
-        extends Entity
+        extends EntityOpponent
 {
     /**
      * Constructor

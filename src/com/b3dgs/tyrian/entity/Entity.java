@@ -75,8 +75,8 @@ public abstract class Entity
      */
     public void render(Graphic g, CameraGame camera)
     {
-        final int x = camera.getViewpointX(getLocationIntX()) + getLocationOffsetX();
-        final int y = camera.getViewpointY(getLocationIntY()) - getLocationOffsetY();
+        final int x = camera.getViewpointX(getLocationIntX());
+        final int y = camera.getViewpointY(getLocationIntY());
         sprite.render(g, tileOffset, x, y);
     }
 

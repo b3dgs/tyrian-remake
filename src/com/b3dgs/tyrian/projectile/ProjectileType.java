@@ -45,7 +45,14 @@ public enum ProjectileType implements ObjectType
     /** Wave. */
     WAVE(Wave.class, ProjectileCategory.REAR),
     /** Missile rear left. */
-    MISSILE_REAR(MissileRear.class, ProjectileCategory.REAR);
+    MISSILE_REAR(MissileRear.class, ProjectileCategory.REAR),
+
+    /*
+     * Other
+     */
+
+    /** Impulse. */
+    IMPULSE(Impulse.class, ProjectileCategory.OTHER);
 
     /** Class target. */
     private final Class<?> target;

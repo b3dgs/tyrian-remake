@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
-import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.ship.Ship;
 
 /**
@@ -26,7 +26,7 @@ import com.b3dgs.tyrian.entity.ship.Ship;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 abstract class Bonus
-        extends Entity
+        extends EntityOpponent
 {
     /**
      * Constructor.

@@ -34,7 +34,7 @@ import com.b3dgs.lionengine.utility.LevelRipConverter;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
-import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
 import com.b3dgs.tyrian.entity.bonus.EntityBonusType;
 import com.b3dgs.tyrian.entity.bonus.FactoryEntityBonus;
@@ -166,6 +166,7 @@ final class World
 
         factoryShip = new FactoryShip(factoryEffect, handlerEffect, factoryWeapon);
         ship = factoryShip.create(ShipType.GENCORE_PHOENIX);
+        handlerEntityScenery.setShip(ship);
         handlerEntityDynamic.setShip(ship);
         handlerEntityBonus.setShip(ship);
 
@@ -201,8 +202,8 @@ final class World
     @Override
     public void update(double extrp)
     {
-        camera.setLocationX(ship.getLocationOffsetX() / 12);
-        camera.setLocationY(ship.getLocationY());
+        camera.moveLocation(extrp, 0.0, 1.0);
+        camera.setLocationX(ship.getLocationX() / 12);
 
         ship.update(extrp, mouse, camera, height);
 
@@ -219,7 +220,7 @@ final class World
         {
             if (UtilityRandom.getRandomInteger(50) == 0)
             {
-                final Entity entity = factoryEntityDynamic.create(EntityDynamicType.METEOR_BIG);
+                final EntityOpponent entity = factoryEntityDynamic.create(EntityDynamicType.METEOR_BIG);
                 entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                         camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
                 handlerEntityDynamic.add(entity);
@@ -254,7 +255,7 @@ final class World
                     break;
 
             }
-            final Entity entity = factoryEntityBonus.create(bonus);
+            final EntityOpponent entity = factoryEntityBonus.create(bonus);
             entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                     camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
             handlerEntityBonus.add(entity);

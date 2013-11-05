@@ -28,7 +28,7 @@ import com.b3dgs.tyrian.entity.ship.Ship;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class HandlerEntity
-        extends HandlerEntityGame<Entity>
+        extends HandlerEntityGame<EntityOpponent>
 {
     /** Camera reference. */
     private final CameraGame camera;
@@ -61,9 +61,10 @@ public final class HandlerEntity
      */
 
     @Override
-    protected void update(double extrp, Entity entity)
+    protected void update(double extrp, EntityOpponent entity)
     {
         super.update(extrp, entity);
+        entity.update(ship);
         if (ship != null && entity.collide(ship))
         {
             entity.onHit(ship);
@@ -71,7 +72,7 @@ public final class HandlerEntity
     }
 
     @Override
-    protected void render(Graphic g, Entity entity)
+    protected void render(Graphic g, EntityOpponent entity)
     {
         if (camera.isVisible(entity))
         {

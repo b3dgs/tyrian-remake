@@ -19,6 +19,9 @@ package com.b3dgs.tyrian.entity.scenery;
 
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.SetupEntity;
+import com.b3dgs.tyrian.entity.ship.Ship;
+import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponType;
 
 /**
  * Green pulse implementation.
@@ -28,11 +31,28 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class GreenPulse
         extends EntityScenery
 {
+    /** Weapon. */
+    private final Weapon weapon;
+
     /**
      * {@link Entity#Entity(SetupEntity)}
      */
     public GreenPulse(SetupEntity setup)
     {
         super(setup);
+        weapon = setup.factoryWeapon.create(WeaponType.IMPULSER);
+        weapon.setRate(1000);
+        weapon.setOwner(this);
+    }
+
+    /*
+     * EntityScenery
+     */
+
+    @Override
+    public void update(Ship ship)
+    {
+        super.update(ship);
+        weapon.launch(ship);
     }
 }
