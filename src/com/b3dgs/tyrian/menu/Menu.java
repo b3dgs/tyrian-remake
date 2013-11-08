@@ -26,8 +26,8 @@ import com.b3dgs.lionengine.audio.Midi;
 import com.b3dgs.lionengine.core.Click;
 import com.b3dgs.lionengine.core.Key;
 import com.b3dgs.lionengine.core.Loader;
-import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.Sequence;
+import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.drawable.SpriteFont;
@@ -97,22 +97,24 @@ public final class Menu
             colorGreen[i] = new ColorRgba(0, 255, 0, i);
         }
 
-        buttonsSurfaces = Drawable.loadSpriteTiled(Media.get("fonts", "buttons.png"), 96, 16);
-        font = Drawable.loadSpriteFont(Media.get("fonts", "font.png"), Media.get("fonts", "font.xml"), 8, 9);
-        font2 = Drawable.loadSpriteFont(Media.get("fonts", "font2.png"), Media.get("fonts", "font2.xml"), 6, 6);
+        buttonsSurfaces = Drawable.loadSpriteTiled(UtilityMedia.get("fonts", "buttons.png"), 96, 16);
+        font = Drawable.loadSpriteFont(UtilityMedia.get("fonts", "font.png"), UtilityMedia.get("fonts", "font.xml"), 8,
+                9);
+        font2 = Drawable.loadSpriteFont(UtilityMedia.get("fonts", "font2.png"), UtilityMedia.get("fonts", "font2.xml"),
+                6, 6);
 
         surfaces = new Sprite[5];
-        surfaces[0] = Drawable.loadSprite(Media.get("pics", "background.png"));
-        surfaces[1] = Drawable.loadSprite(Media.get("fonts", "tyrian.png"));
-        surfaces[2] = Drawable.loadSprite(Media.get("fonts", "remake.png"));
-        surfaces[3] = Drawable.loadSprite(Media.get("pics", "start.png"));
-        surfaces[4] = Drawable.loadSprite(Media.get("pics", "howto.png"));
+        surfaces[0] = Drawable.loadSprite(UtilityMedia.get("pics", "background.png"));
+        surfaces[1] = Drawable.loadSprite(UtilityMedia.get("fonts", "tyrian.png"));
+        surfaces[2] = Drawable.loadSprite(UtilityMedia.get("fonts", "remake.png"));
+        surfaces[3] = Drawable.loadSprite(UtilityMedia.get("pics", "start.png"));
+        surfaces[4] = Drawable.loadSprite(UtilityMedia.get("pics", "howto.png"));
 
-        cursor = Drawable.loadSprite(Media.get("sprites", "cursor.png"));
-        armory = Drawable.loadSprite(Media.get("sprites", "armory.png"));
-        ship = Drawable.loadSpriteTiled(Media.get("ships", "usp_fang.png"), 24, 28);
+        cursor = Drawable.loadSprite(UtilityMedia.get("sprites", "cursor.png"));
+        armory = Drawable.loadSprite(UtilityMedia.get("sprites", "armory.png"));
+        ship = Drawable.loadSpriteTiled(UtilityMedia.get("ships", "usp_fang.png"), 24, 28);
 
-        midi = AudioMidi.loadMidi(Media.get("musics", "menu.mid"));
+        midi = AudioMidi.loadMidi(UtilityMedia.get("musics", "menu.mid"));
         buttons = new Button[3];
     }
 

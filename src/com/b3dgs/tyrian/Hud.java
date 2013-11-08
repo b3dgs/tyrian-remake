@@ -19,7 +19,7 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Graphic;
-import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.game.Bar;
@@ -44,7 +44,7 @@ final class Hud
      */
     Hud()
     {
-        hud = Drawable.loadSprite(Media.get("sprites", "hud.png"));
+        hud = Drawable.loadSprite(UtilityMedia.get("sprites", "hud.png"));
         hud.load(false);
         weaponFront = new Bar(11, 96);
         weaponFront.setLocation(268, 11);

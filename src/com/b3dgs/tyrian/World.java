@@ -24,6 +24,7 @@ import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilityRandom;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.Sequence;
+import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.core.Verbose;
 import com.b3dgs.lionengine.file.File;
 import com.b3dgs.lionengine.file.FileReading;
@@ -68,7 +69,7 @@ final class World
      */
     private static void ripLevel(Map map, Media levelrip, Media tilesheet, Media output)
     {
-        if (Media.checkExist(output))
+        if (output.getFile().exists())
         {
             try (final FileReading file = File.createFileReading(output);)
             {
@@ -176,14 +177,14 @@ final class World
             final int index = UtilityRandom.getRandomInteger(20);
             if (i == 0)
             {
-                World.ripLevel(map, Media.get("levels", "images", index + ".png"), Media.get("tiles", "level1"),
-                        Media.get("levels", "0.map"));
+                World.ripLevel(map, UtilityMedia.get("levels", "images", index + ".png"),
+                        UtilityMedia.get("tiles", "level1"), UtilityMedia.get("levels", "0.map"));
             }
             else
             {
                 final Map newMap = new Map();
-                World.ripLevel(newMap, Media.get("levels", "images", index + ".png"), Media.get("tiles", "level1"),
-                        Media.get("levels", i + ".map"));
+                World.ripLevel(newMap, UtilityMedia.get("levels", "images", index + ".png"),
+                        UtilityMedia.get("tiles", "level1"), UtilityMedia.get("levels", i + ".map"));
                 map.append(newMap, 0, newMap.getHeightInTile() * i);
             }
         }

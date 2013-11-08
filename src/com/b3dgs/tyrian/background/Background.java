@@ -21,8 +21,8 @@ import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilityRandom;
-import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.UtilityMath;
+import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
@@ -67,7 +67,7 @@ public final class Background
         alpha = normal;
         alphaDest = alpha;
         alphaReal = alphaDest;
-        surface = Drawable.loadSpriteTiled(Media.get("backgrounds", "stars.png"), 3, 6);
+        surface = Drawable.loadSpriteTiled(UtilityMedia.get("backgrounds", "stars.png"), 3, 6);
         surface.load(false);
         stars = new Star[256];
         for (int i = 0; i < stars.length; i++)
