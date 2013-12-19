@@ -260,8 +260,7 @@ final class World
             entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                     camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
             handlerEntityBonus.add(entity);
-            timerBonus.stop();
-            timerBonus.start();
+            timerBonus.restart();
         }
     }
 

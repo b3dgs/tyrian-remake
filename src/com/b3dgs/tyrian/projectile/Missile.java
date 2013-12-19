@@ -118,8 +118,7 @@ public abstract class Missile
         if (timerEffect.elapsed(40))
         {
             addEffect(getLocationIntX(), getLocationIntY());
-            timerEffect.stop();
-            timerEffect.start();
+            timerEffect.restart();
         }
     }
 }
