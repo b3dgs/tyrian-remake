@@ -69,7 +69,7 @@ public final class AppTyrian
         final Resolution output = new Resolution(640, 400, 60);
         final Config config = new Config(output, 16, true);
         final Loader loader = new Loader(config);
-        loader.start(new Scene(loader));
+        loader.start(Scene.class);
     }
 
     /**

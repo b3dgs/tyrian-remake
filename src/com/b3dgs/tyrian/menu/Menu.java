@@ -21,11 +21,14 @@ import com.b3dgs.lionengine.Align;
 import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Resolution;
-import com.b3dgs.lionengine.audio.Midi;
 import com.b3dgs.lionengine.core.AudioMidi;
 import com.b3dgs.lionengine.core.Click;
+import com.b3dgs.lionengine.core.DeviceType;
 import com.b3dgs.lionengine.core.Key;
+import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
+import com.b3dgs.lionengine.core.Midi;
+import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.drawable.Drawable;
@@ -44,6 +47,10 @@ import com.b3dgs.tyrian.Sfx;
 public final class Menu
         extends Sequence
 {
+    /** Keyboard. */
+    private final Keyboard keyboard;
+    /** Mouse. */
+    private final Mouse mouse;
     /** Colors alpha. */
     private final ColorRgba colors[];
     /** Color green alpha. */
@@ -89,6 +96,8 @@ public final class Menu
     public Menu(Loader loader)
     {
         super(loader, new Resolution(320, 200, 60));
+        keyboard = getInputDevice(DeviceType.KEYBOARD);
+        mouse = getInputDevice(DeviceType.MOUSE);
         colors = new ColorRgba[256];
         colorGreen = new ColorRgba[256];
         for (int i = 0; i < 256; i++)
@@ -169,7 +178,7 @@ public final class Menu
         alpha = 0;
         menu = 0;
         titleY = 72;
-        setMouseVisible(false);
+        setSystemCursorVisible(false);
         midi.play(true);
         used = true;
     }
@@ -177,8 +186,8 @@ public final class Menu
     @Override
     protected void update(double extrp)
     {
-        mx = mouse.getOnWindowX();
-        my = mouse.getOnWindowY();
+        mx = mouse.getX();
+        my = mouse.getY();
         if (keyboard.isPressed(Key.ESCAPE))
         {
             end();
@@ -243,7 +252,7 @@ public final class Menu
                 if (alpha < 0)
                 {
                     alpha = 0;
-                    this.end(new Scene(loader));
+                    end(Scene.class);
                 }
                 break;
             case 5: // Fade out menu -> how to play
@@ -276,7 +285,7 @@ public final class Menu
                 ship.setAlpha(alpha);
                 break;
             case 7: // How to play
-                if (!used && (keyboard.used() || mouse.getMouseClick() > 0))
+                if (!used && (keyboard.used() || mouse.getClick() > 0))
                 {
                     menu = 8;
                     used = true;
@@ -299,7 +308,7 @@ public final class Menu
             default:
                 break;
         }
-        if (mouse.getMouseClick() == 0 && !keyboard.used())
+        if (mouse.getClick() == 0 && !keyboard.used())
         {
             used = false;
         }
@@ -308,7 +317,7 @@ public final class Menu
     @Override
     protected void render(Graphic g)
     {
-        g.clear(source);
+        g.clear(0, 0, getWidth(), getHeight());
         if (menu < 7)
         {
             surfaces[0].render(g, 0, 0);
@@ -351,7 +360,7 @@ public final class Menu
         if (menu == 4)
         {
             g.setColor(colors[255 - alpha]);
-            g.drawRect(0, 0, width, height, true);
+            g.drawRect(0, 0, getWidth(), getHeight(), true);
         }
     }
 

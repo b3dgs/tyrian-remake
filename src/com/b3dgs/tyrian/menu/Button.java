@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.menu;
 
 import com.b3dgs.lionengine.Graphic;
-import com.b3dgs.lionengine.Mouse;
+import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.tyrian.Sfx;
 
@@ -78,8 +78,8 @@ abstract class Button
      */
     public void update(double extrp, Mouse mouse, int click)
     {
-        final int mx = mouse.getOnWindowX();
-        final int my = mouse.getOnWindowY();
+        final int mx = mouse.getX();
+        final int my = mouse.getY();
         if (mx >= x && mx <= x + width && my > y && my < y + height)
         {
             over = true;

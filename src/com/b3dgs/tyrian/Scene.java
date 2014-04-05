@@ -19,7 +19,9 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Resolution;
+import com.b3dgs.lionengine.core.DeviceType;
 import com.b3dgs.lionengine.core.Key;
+import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.tyrian.menu.Menu;
@@ -35,6 +37,8 @@ public final class Scene
     /** Native resolution. */
     private static final Resolution NATIVE = new Resolution(320, 200, 60);
 
+    /** Keyboard. */
+    private final Keyboard keyboard;
     /** World reference. */
     private final World world;
 
@@ -46,8 +50,9 @@ public final class Scene
     public Scene(Loader loader)
     {
         super(loader, Scene.NATIVE);
+        keyboard = getInputDevice(DeviceType.KEYBOARD);
         world = new World(this);
-        setMouseVisible(false);
+        setSystemCursorVisible(false);
     }
 
     /*
@@ -66,7 +71,7 @@ public final class Scene
         world.update(extrp);
         if (keyboard.isPressed(Key.ESCAPE))
         {
-            end(new Menu(loader));
+            end(Menu.class);
         }
     }
 
