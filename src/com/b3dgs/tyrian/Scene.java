@@ -20,7 +20,6 @@ package com.b3dgs.tyrian;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.core.DeviceType;
-import com.b3dgs.lionengine.core.Key;
 import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Sequence;
@@ -69,7 +68,7 @@ public final class Scene
     protected void update(double extrp)
     {
         world.update(extrp);
-        if (keyboard.isPressed(Key.ESCAPE))
+        if (keyboard.isPressed(Keyboard.ESCAPE))
         {
             end(Menu.class);
         }

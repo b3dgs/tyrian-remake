@@ -17,7 +17,6 @@
  */
 package com.b3dgs.tyrian.entity.ship;
 
-import com.b3dgs.lionengine.core.Click;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.UtilityMath;
 import com.b3dgs.lionengine.game.Alterable;
@@ -94,7 +93,7 @@ public abstract class Ship
         updateCollision();
 
         energy.increase(50);
-        if (mouse.hasClicked(Click.LEFT))
+        if (mouse.hasClicked(Mouse.LEFT))
         {
             weaponFront.launch(energy);
             weaponRear.launch(energy);

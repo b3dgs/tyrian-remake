@@ -22,9 +22,7 @@ import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.core.AudioMidi;
-import com.b3dgs.lionengine.core.Click;
 import com.b3dgs.lionengine.core.DeviceType;
-import com.b3dgs.lionengine.core.Key;
 import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Midi;
@@ -188,7 +186,7 @@ public final class Menu
     {
         mx = mouse.getX();
         my = mouse.getY();
-        if (keyboard.isPressed(Key.ESCAPE))
+        if (keyboard.isPressed(Keyboard.ESCAPE))
         {
             end();
         }
@@ -231,7 +229,7 @@ public final class Menu
             case 2: // Main buttons handling
                 for (final Button button : buttons)
                 {
-                    button.update(extrp, mouse, Click.LEFT);
+                    button.update(extrp, mouse, Mouse.LEFT);
                 }
                 break;
             case 3: // Exit
