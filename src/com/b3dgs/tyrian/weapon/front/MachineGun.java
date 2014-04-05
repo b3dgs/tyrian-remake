@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon.front;
 
-import com.b3dgs.lionengine.core.UtilityMath;
+import com.b3dgs.lionengine.UtilityMath;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.ProjectileType;
