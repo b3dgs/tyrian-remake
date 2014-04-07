@@ -145,6 +145,7 @@ final class World
     {
         super(sequence);
         mouse = sequence.getInputDevice(DeviceType.MOUSE);
+        mouse.setConfig(config);
         hud = new Hud();
         map = new Map();
         background = new Background();
@@ -208,6 +209,7 @@ final class World
     @Override
     public void update(double extrp)
     {
+        mouse.update();
         camera.moveLocation(extrp, 0.0, 1.0);
         camera.setLocationX(ship.getLocationX() / 12);
 
