@@ -22,7 +22,6 @@ import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.core.AudioMidi;
-import com.b3dgs.lionengine.core.DeviceType;
 import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Midi;
@@ -94,8 +93,8 @@ public final class Menu
     public Menu(Loader loader)
     {
         super(loader, new Resolution(320, 200, 60));
-        keyboard = getInputDevice(DeviceType.KEYBOARD);
-        mouse = getInputDevice(DeviceType.MOUSE);
+        keyboard = getInputDevice(Keyboard.class);
+        mouse = getInputDevice(Mouse.class);
         colors = new ColorRgba[256];
         colorGreen = new ColorRgba[256];
         for (int i = 0; i < 256; i++)

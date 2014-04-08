@@ -22,7 +22,6 @@ import java.io.IOException;
 import com.b3dgs.lionengine.Graphic;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilityRandom;
-import com.b3dgs.lionengine.core.DeviceType;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
@@ -144,7 +143,7 @@ final class World
     World(Sequence sequence)
     {
         super(sequence);
-        mouse = sequence.getInputDevice(DeviceType.MOUSE);
+        mouse = sequence.getInputDevice(Mouse.class);
         mouse.setConfig(config);
         hud = new Hud();
         map = new Map();
