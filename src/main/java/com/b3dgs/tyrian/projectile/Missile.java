@@ -19,7 +19,8 @@ package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.tyrian.effect.Effect;
-import com.b3dgs.tyrian.effect.EffectType;
+import com.b3dgs.tyrian.effect.Explode2;
+import com.b3dgs.tyrian.effect.Smoke;
 import com.b3dgs.tyrian.entity.Entity;
 
 /**
@@ -58,7 +59,7 @@ public abstract class Missile
      */
     public void addEffect(int x, int y)
     {
-        final Effect effect = factoryEffect.create(EffectType.SMOKE);
+        final Effect effect = factoryEffect.create(Smoke.class);
         effect.start(x, y, 0);
         handlerEffect.add(effect);
     }
@@ -88,8 +89,8 @@ public abstract class Missile
         final int y = getLocationIntY() + getHeight();
         for (int i = 0; i < size; i++)
         {
-            final Effect effect1 = factoryEffect.create(EffectType.EXPLODE2);
-            final Effect effect2 = factoryEffect.create(EffectType.EXPLODE2);
+            final Effect effect1 = factoryEffect.create(Explode2.class);
+            final Effect effect2 = factoryEffect.create(Explode2.class);
 
             effect1.start(x - i * effect1.getWidth() / 2, y, i * 20);
             effect2.start(x + i * effect2.getWidth() / 2, y, i * 20);
@@ -99,8 +100,8 @@ public abstract class Missile
         }
         for (int i = 0; i < size; i++)
         {
-            final Effect effect1 = factoryEffect.create(EffectType.EXPLODE2);
-            final Effect effect2 = factoryEffect.create(EffectType.EXPLODE2);
+            final Effect effect1 = factoryEffect.create(Explode2.class);
+            final Effect effect2 = factoryEffect.create(Explode2.class);
 
             effect1.start(x, y - i * effect1.getHeight() / 2, i * 20);
             effect2.start(x, y + i * effect2.getHeight() / 2, i * 20);

@@ -30,6 +30,6 @@ public final class MissileLauncherFront
      */
     public MissileLauncherFront(SetupEntityBonus setup)
     {
-        super(setup, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.MissileLauncherFront.class, true);
     }
 }

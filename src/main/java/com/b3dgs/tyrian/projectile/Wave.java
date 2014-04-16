@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.tyrian.effect.Effect;
-import com.b3dgs.tyrian.effect.EffectType;
+import com.b3dgs.tyrian.effect.Explode3;
 import com.b3dgs.tyrian.entity.Entity;
 
 /**
@@ -47,7 +47,7 @@ public final class Wave
     public void onHit(Entity entity, int damages)
     {
         super.onHit(entity, damages);
-        final Effect effect = factoryEffect.create(EffectType.EXPLODE3);
+        final Effect effect = factoryEffect.create(Explode3.class);
         effect.start(getLocationIntX(), getLocationIntY() + effect.getHeight() / 2, 0);
         handlerEffect.add(effect);
     }

@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.front;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.Pulse;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -55,42 +55,42 @@ public final class HyperPulse
         {
             case 0:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 0);
                 break;
             case 1:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, -0.4, speed, -2, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.4, speed, 2, 0);
+                addProjectile(Pulse.class, dmg, -0.4, speed, -2, 0);
+                addProjectile(Pulse.class, dmg, 0.4, speed, 2, 0);
                 break;
             case 2:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, -0.5, speed, -4, -5);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.5, speed, 4, -5);
+                addProjectile(Pulse.class, dmg, -0.5, speed, -4, -5);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 0);
+                addProjectile(Pulse.class, dmg, 0.5, speed, 4, -5);
                 break;
             case 3:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, -0.6, speed, -8, -5);
-                addProjectile(ProjectileType.PULSE, dmg, -0.2, speed, -3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.2, speed, 3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.6, speed, 8, -5);
+                addProjectile(Pulse.class, dmg, -0.6, speed, -8, -5);
+                addProjectile(Pulse.class, dmg, -0.2, speed, -3, 0);
+                addProjectile(Pulse.class, dmg, 0.2, speed, 3, 0);
+                addProjectile(Pulse.class, dmg, 0.6, speed, 8, -5);
                 break;
             case 4:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, -0.7, speed, -10, -5);
-                addProjectile(ProjectileType.PULSE, dmg, -0.3, speed, -4, -2);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.3, speed, 4, -2);
-                addProjectile(ProjectileType.PULSE, dmg, 0.7, speed, 10, -5);
+                addProjectile(Pulse.class, dmg, -0.7, speed, -10, -5);
+                addProjectile(Pulse.class, dmg, -0.3, speed, -4, -2);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 0);
+                addProjectile(Pulse.class, dmg, 0.3, speed, 4, -2);
+                addProjectile(Pulse.class, dmg, 0.7, speed, 10, -5);
                 break;
             case 5:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, -0.6, speed, -10, -5);
-                addProjectile(ProjectileType.PULSE, dmg, -0.3, speed, -6, -2);
-                addProjectile(ProjectileType.PULSE, dmg, -0.1, speed, -2, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.1, speed, 2, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0.3, speed, 6, -2);
-                addProjectile(ProjectileType.PULSE, dmg, 0.6, speed, 10, -5);
+                addProjectile(Pulse.class, dmg, -0.6, speed, -10, -5);
+                addProjectile(Pulse.class, dmg, -0.3, speed, -6, -2);
+                addProjectile(Pulse.class, dmg, -0.1, speed, -2, 0);
+                addProjectile(Pulse.class, dmg, 0.1, speed, 2, 0);
+                addProjectile(Pulse.class, dmg, 0.3, speed, 6, -2);
+                addProjectile(Pulse.class, dmg, 0.6, speed, 10, -5);
                 break;
             default:
                 break;

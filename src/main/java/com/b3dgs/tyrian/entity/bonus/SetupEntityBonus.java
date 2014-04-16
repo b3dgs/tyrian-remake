@@ -18,7 +18,6 @@
 package com.b3dgs.tyrian.entity.bonus;
 
 import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.tyrian.effect.EffectType;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
 import com.b3dgs.tyrian.entity.SetupEntity;
@@ -32,10 +31,6 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
 public class SetupEntityBonus
         extends SetupEntity
 {
-    /** Type. */
-    public final EntityBonusType type;
-    /** Effect. */
-    public final EffectType effect;
     /** Weapon factory. */
     public final FactoryWeapon factoryWeapon;
 
@@ -43,17 +38,14 @@ public class SetupEntityBonus
      * Constructor.
      * 
      * @param config The config file.
-     * @param type The entity type.
      * @param factoryEffect The factory effect reference.
      * @param handlerEffect The handler effect reference.
      * @param factoryWeapon The weapon factory reference.
      */
-    public SetupEntityBonus(Media config, EntityBonusType type, FactoryEffect factoryEffect,
-            HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
+    public SetupEntityBonus(Media config, FactoryEffect factoryEffect, HandlerEffect handlerEffect,
+            FactoryWeapon factoryWeapon)
     {
         super(config, factoryEffect, handlerEffect, null);
-        this.type = type;
         this.factoryWeapon = factoryWeapon;
-        effect = type.getEffect();
     }
 }

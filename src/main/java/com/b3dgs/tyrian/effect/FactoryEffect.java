@@ -28,15 +28,14 @@ import com.b3dgs.tyrian.AppTyrian;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEffect
-        extends FactoryObjectGame<EffectType, SetupSurfaceGame, Effect>
+        extends FactoryObjectGame<SetupSurfaceGame, Effect>
 {
     /**
      * Constructor.
      */
     public FactoryEffect()
     {
-        super(EffectType.class, AppTyrian.EFFECTS_DIR);
-        load();
+        super(AppTyrian.EFFECTS_DIR);
     }
 
     /*
@@ -44,7 +43,7 @@ public final class FactoryEffect
      */
 
     @Override
-    protected SetupSurfaceGame createSetup(EffectType type, Media config)
+    protected SetupSurfaceGame createSetup(Class<? extends Effect> type, Media config)
     {
         return new SetupSurfaceGame(config);
     }

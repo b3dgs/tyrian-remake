@@ -17,8 +17,8 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.tyrian.effect.BulletHit;
 import com.b3dgs.tyrian.effect.Effect;
-import com.b3dgs.tyrian.effect.EffectType;
 import com.b3dgs.tyrian.entity.Entity;
 
 /**
@@ -47,7 +47,7 @@ public final class Bullet
     public void onHit(Entity entity, int damages)
     {
         super.onHit(entity, damages);
-        final Effect effect = factoryEffect.create(EffectType.BULLET_HIT);
+        final Effect effect = factoryEffect.create(BulletHit.class);
         effect.start(getLocationIntX(), getLocationIntY() + effect.getHeight() / 2, 0);
         handlerEffect.add(effect);
     }

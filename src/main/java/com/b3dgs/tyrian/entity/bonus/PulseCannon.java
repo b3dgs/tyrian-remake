@@ -30,6 +30,6 @@ public final class PulseCannon
      */
     public PulseCannon(SetupEntityBonus setup)
     {
-        super(setup, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.PulseCannon.class, true);
     }
 }

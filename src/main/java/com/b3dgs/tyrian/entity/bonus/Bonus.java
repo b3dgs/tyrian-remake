@@ -25,7 +25,7 @@ import com.b3dgs.tyrian.entity.ship.Ship;
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-abstract class Bonus
+public abstract class Bonus
         extends EntityOpponent
 {
     /**

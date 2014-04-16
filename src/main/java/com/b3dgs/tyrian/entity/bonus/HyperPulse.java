@@ -30,6 +30,6 @@ public final class HyperPulse
      */
     public HyperPulse(SetupEntityBonus setup)
     {
-        super(setup, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.HyperPulse.class, true);
     }
 }

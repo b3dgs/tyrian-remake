@@ -21,7 +21,6 @@ import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.projectile.LauncherProjectileGame;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.Projectile;
-import com.b3dgs.tyrian.projectile.ProjectileType;
 
 /**
  * Weapon base implementation.
@@ -29,7 +28,7 @@ import com.b3dgs.tyrian.projectile.ProjectileType;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public abstract class Weapon
-        extends LauncherProjectileGame<ProjectileType, Entity, Entity, Projectile>
+        extends LauncherProjectileGame<Entity, Entity, Projectile>
 {
     /** Energy to consume. */
     private int consume;

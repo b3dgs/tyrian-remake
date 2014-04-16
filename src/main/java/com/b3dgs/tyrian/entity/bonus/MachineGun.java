@@ -30,6 +30,6 @@ public final class MachineGun
      */
     public MachineGun(SetupEntityBonus setup)
     {
-        super(setup, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.MachineGun.class, true);
     }
 }

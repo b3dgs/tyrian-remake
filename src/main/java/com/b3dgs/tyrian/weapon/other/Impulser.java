@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.other;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.Impulse;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -52,6 +52,6 @@ public final class Impulser
         final int speed = 2;
         Sfx.WEAPON_PULSE.play();
         dmg = 60;
-        addProjectile(ProjectileType.IMPULSE, dmg, target, speed, 0, 0);
+        addProjectile(Impulse.class, dmg, target, speed, 0, 0);
     }
 }

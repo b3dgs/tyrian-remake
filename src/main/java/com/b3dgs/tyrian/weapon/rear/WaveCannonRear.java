@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.rear;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.Wave;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -59,61 +59,61 @@ public final class WaveCannonRear
         switch (level.getCurrent())
         {
             case 0:
-                addProjectile(ProjectileType.WAVE, dmg, -speed, 1.5, -10, 0).setFrame(39);
-                addProjectile(ProjectileType.WAVE, dmg, speed, 1.5, 10, 0).setFrame(54);
+                addProjectile(Wave.class, dmg, -speed, 1.5, -10, 0).setFrame(39);
+                addProjectile(Wave.class, dmg, speed, 1.5, 10, 0).setFrame(54);
                 break;
             case 1:
-                addProjectile(ProjectileType.WAVE, dmg, -speed, speed, -10, 0).setFrame(70);
-                addProjectile(ProjectileType.WAVE, dmg, speed, speed, 10, 0).setFrame(85);
+                addProjectile(Wave.class, dmg, -speed, speed, -10, 0).setFrame(70);
+                addProjectile(Wave.class, dmg, speed, speed, 10, 0).setFrame(85);
                 break;
             case 2:
-                addProjectile(ProjectileType.WAVE, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
-                addProjectile(ProjectileType.WAVE, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
+                addProjectile(Wave.class, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
+                addProjectile(Wave.class, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
-                addProjectile(ProjectileType.WAVE, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
+                addProjectile(Wave.class, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
+                addProjectile(Wave.class, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
                 break;
             case 3:
-                addProjectile(ProjectileType.WAVE, dmg, -speed, 1, -10, 0).setFrame(40);
-                addProjectile(ProjectileType.WAVE, dmg, speed, 1, 10, 0).setFrame(55);
+                addProjectile(Wave.class, dmg, -speed, 1, -10, 0).setFrame(40);
+                addProjectile(Wave.class, dmg, speed, 1, 10, 0).setFrame(55);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
-                addProjectile(ProjectileType.WAVE, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
+                addProjectile(Wave.class, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
+                addProjectile(Wave.class, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
-                addProjectile(ProjectileType.WAVE, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
+                addProjectile(Wave.class, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
+                addProjectile(Wave.class, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
 
-                addProjectile(ProjectileType.WAVE, dmg, 0, -speed, 0, -10).setFrame(24);
+                addProjectile(Wave.class, dmg, 0, -speed, 0, -10).setFrame(24);
                 break;
             case 4:
                 id1++;
-                addProjectile(ProjectileType.WAVE, id1, dmg, -speed, 1, -10, 6).setFrame(12);
-                addProjectile(ProjectileType.WAVE, id1, dmg, -speed, 1, -10, -6).setFrame(27);
+                addProjectile(Wave.class, id1, dmg, -speed, 1, -10, 6).setFrame(12);
+                addProjectile(Wave.class, id1, dmg, -speed, 1, -10, -6).setFrame(27);
 
                 id2++;
-                addProjectile(ProjectileType.WAVE, id2, dmg, speed, 1, 10, 6).setFrame(42);
-                addProjectile(ProjectileType.WAVE, id2, dmg, speed, 1, 10, -6).setFrame(57);
+                addProjectile(Wave.class, id2, dmg, speed, 1, 10, 6).setFrame(42);
+                addProjectile(Wave.class, id2, dmg, speed, 1, 10, -6).setFrame(57);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed * 0.25, -speed, -3, -5).setFrame(101);
-                addProjectile(ProjectileType.WAVE, dmg, speed * 0.25, -speed, 3, -5).setFrame(116);
+                addProjectile(Wave.class, dmg, -speed * 0.25, -speed, -3, -5).setFrame(101);
+                addProjectile(Wave.class, dmg, speed * 0.25, -speed, 3, -5).setFrame(116);
                 break;
             case 5:
-                addProjectile(ProjectileType.WAVE, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
-                addProjectile(ProjectileType.WAVE, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
+                addProjectile(Wave.class, dmg, -speed, speed * 0.4, -10, 5).setFrame(69);
+                addProjectile(Wave.class, dmg, speed, speed * 0.4, 10, 5).setFrame(84);
 
                 id1++;
-                addProjectile(ProjectileType.WAVE, id1, dmg, -speed, 1, -10, 6).setFrame(12);
-                addProjectile(ProjectileType.WAVE, id1, dmg, -speed, 1, -10, -6).setFrame(27);
+                addProjectile(Wave.class, id1, dmg, -speed, 1, -10, 6).setFrame(12);
+                addProjectile(Wave.class, id1, dmg, -speed, 1, -10, -6).setFrame(27);
 
                 id2++;
-                addProjectile(ProjectileType.WAVE, id2, dmg, speed, 1, 10, 6).setFrame(42);
-                addProjectile(ProjectileType.WAVE, id2, dmg, speed, 1, 10, -6).setFrame(57);
+                addProjectile(Wave.class, id2, dmg, speed, 1, 10, 6).setFrame(42);
+                addProjectile(Wave.class, id2, dmg, speed, 1, 10, -6).setFrame(57);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
-                addProjectile(ProjectileType.WAVE, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
+                addProjectile(Wave.class, dmg, -speed, -speed * 0.4, -10, -5).setFrame(99);
+                addProjectile(Wave.class, dmg, speed, -speed * 0.4, 10, -5).setFrame(114);
 
-                addProjectile(ProjectileType.WAVE, dmg, -speed * 0.25, -speed, -3, -5).setFrame(101);
-                addProjectile(ProjectileType.WAVE, dmg, speed * 0.25, -speed, 3, -5).setFrame(116);
+                addProjectile(Wave.class, dmg, -speed * 0.25, -speed, -3, -5).setFrame(101);
+                addProjectile(Wave.class, dmg, speed * 0.25, -speed, 3, -5).setFrame(116);
                 break;
             default:
                 break;

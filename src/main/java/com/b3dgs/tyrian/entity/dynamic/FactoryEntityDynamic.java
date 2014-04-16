@@ -32,7 +32,7 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityDynamic
-        extends FactoryObjectGame<EntityDynamicType, SetupEntity, Entity>
+        extends FactoryObjectGame<SetupEntity, Entity>
 {
     /** Factory effect. */
     private final FactoryEffect factoryEffect;
@@ -50,11 +50,10 @@ public final class FactoryEntityDynamic
      */
     public FactoryEntityDynamic(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(EntityDynamicType.class, AppTyrian.DYNAMICS_DIR);
+        super(AppTyrian.DYNAMICS_DIR);
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;
-        load();
     }
 
     /*
@@ -62,7 +61,7 @@ public final class FactoryEntityDynamic
      */
 
     @Override
-    protected SetupEntity createSetup(EntityDynamicType key, Media config)
+    protected SetupEntity createSetup(Class<? extends Entity> key, Media config)
     {
         return new SetupEntity(config, factoryEffect, handlerEffect, factoryWeapon);
     }

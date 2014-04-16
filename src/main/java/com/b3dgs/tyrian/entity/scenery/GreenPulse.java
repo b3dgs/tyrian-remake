@@ -21,7 +21,7 @@ import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.SetupEntity;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.weapon.Weapon;
-import com.b3dgs.tyrian.weapon.WeaponType;
+import com.b3dgs.tyrian.weapon.other.Impulser;
 
 /**
  * Green pulse implementation.
@@ -40,7 +40,7 @@ public final class GreenPulse
     public GreenPulse(SetupEntity setup)
     {
         super(setup);
-        weapon = setup.factoryWeapon.create(WeaponType.IMPULSER);
+        weapon = setup.factoryWeapon.create(Impulser.class);
         weapon.setRate(1000);
         weapon.setOwner(this);
     }

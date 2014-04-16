@@ -24,7 +24,8 @@ import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.SetupEntity;
 import com.b3dgs.tyrian.weapon.Weapon;
-import com.b3dgs.tyrian.weapon.WeaponType;
+import com.b3dgs.tyrian.weapon.front.PulseCannon;
+import com.b3dgs.tyrian.weapon.rear.MissileLauncherRear;
 
 /**
  * Ship base implementation.
@@ -48,9 +49,9 @@ public abstract class Ship
     {
         super(setup);
         energy = new Alterable(1000);
-        weaponFront = setup.factoryWeapon.create(WeaponType.PULSE_CANNON);
+        weaponFront = setup.factoryWeapon.create(PulseCannon.class);
         weaponFront.setOwner(this);
-        weaponRear = setup.factoryWeapon.create(WeaponType.MISSILE_LAUNCHER_REAR);
+        weaponRear = setup.factoryWeapon.create(MissileLauncherRear.class);
         weaponRear.setOwner(this);
         setSize(24, 28);
         setLocation(0, -216);

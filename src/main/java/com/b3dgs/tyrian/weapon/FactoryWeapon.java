@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.AppTyrian;
@@ -30,7 +31,7 @@ import com.b3dgs.tyrian.projectile.HandlerProjectile;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryWeapon
-        extends FactoryObjectGame<WeaponType, SetupGame, Weapon>
+        extends FactoryObjectGame<SetupGame, Weapon>
 {
     /** Factory projectile. */
     private final FactoryProjectile factory;
@@ -45,10 +46,9 @@ public final class FactoryWeapon
      */
     public FactoryWeapon(FactoryProjectile factory, HandlerProjectile handler)
     {
-        super(WeaponType.class, AppTyrian.WEAPONS_DIR);
+        super(AppTyrian.WEAPONS_DIR);
         this.factory = factory;
         this.handler = handler;
-        load();
     }
 
     /*
@@ -56,8 +56,8 @@ public final class FactoryWeapon
      */
 
     @Override
-    protected SetupGame createSetup(WeaponType type, Media config)
+    protected SetupGame createSetup(Class<? extends Weapon> type, Media config)
     {
-        return new SetupWeapon(config, factory, handler);
+        return new SetupWeapon(UtilityMedia.get("sprites", "Weapons.xml"), factory, handler);
     }
 }

@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.front;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.Pulse;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -55,57 +55,57 @@ public final class PulseCannon
         {
             case 0:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 3, 0);
                 break;
             case 1:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 3);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 3);
+                addProjectile(Pulse.class, dmg, 0, speed, 3, 0);
                 break;
             case 2:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -9, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 3, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 9, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -9, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 3, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 9, 0);
                 break;
             case 3:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -8, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -4, 2);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 4);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 4, 2);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 8, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -8, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -4, 2);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 4);
+                addProjectile(Pulse.class, dmg, 0, speed, 4, 2);
+                addProjectile(Pulse.class, dmg, 0, speed, 8, 0);
                 break;
             case 4:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -17, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -13, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -9, 1);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -4, 3);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 5);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 4, 3);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 9, 1);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 13, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 17, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -17, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -13, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -9, 1);
+                addProjectile(Pulse.class, dmg, 0, speed, -4, 3);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 5);
+                addProjectile(Pulse.class, dmg, 0, speed, 4, 3);
+                addProjectile(Pulse.class, dmg, 0, speed, 9, 1);
+                addProjectile(Pulse.class, dmg, 0, speed, 13, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 17, 0);
                 break;
             case 5:
                 dmg = 60;
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -19, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -16, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -13, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -10, 2);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -6, 3);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, -3, 5);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 0, 6);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 3, 5);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 6, 3);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 10, 2);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 13, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 16, 0);
-                addProjectile(ProjectileType.PULSE, dmg, 0, speed, 19, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -19, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -16, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -13, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, -10, 2);
+                addProjectile(Pulse.class, dmg, 0, speed, -6, 3);
+                addProjectile(Pulse.class, dmg, 0, speed, -3, 5);
+                addProjectile(Pulse.class, dmg, 0, speed, 0, 6);
+                addProjectile(Pulse.class, dmg, 0, speed, 3, 5);
+                addProjectile(Pulse.class, dmg, 0, speed, 6, 3);
+                addProjectile(Pulse.class, dmg, 0, speed, 10, 2);
+                addProjectile(Pulse.class, dmg, 0, speed, 13, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 16, 0);
+                addProjectile(Pulse.class, dmg, 0, speed, 19, 0);
                 break;
             default:
                 break;

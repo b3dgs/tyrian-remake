@@ -38,14 +38,21 @@ import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
-import com.b3dgs.tyrian.entity.bonus.EntityBonusType;
+import com.b3dgs.tyrian.entity.bonus.Bonus;
 import com.b3dgs.tyrian.entity.bonus.FactoryEntityBonus;
-import com.b3dgs.tyrian.entity.dynamic.EntityDynamicType;
+import com.b3dgs.tyrian.entity.bonus.HyperPulse;
+import com.b3dgs.tyrian.entity.bonus.MachineGun;
+import com.b3dgs.tyrian.entity.bonus.MissileLauncherFront;
+import com.b3dgs.tyrian.entity.bonus.MissileLauncherRear;
+import com.b3dgs.tyrian.entity.bonus.PowerUp;
+import com.b3dgs.tyrian.entity.bonus.PulseCannon;
+import com.b3dgs.tyrian.entity.bonus.WaveCannonRear;
 import com.b3dgs.tyrian.entity.dynamic.FactoryEntityDynamic;
+import com.b3dgs.tyrian.entity.dynamic.MeteorBig;
 import com.b3dgs.tyrian.entity.scenery.FactoryEntityScenery;
 import com.b3dgs.tyrian.entity.ship.FactoryShip;
+import com.b3dgs.tyrian.entity.ship.GencorePhoenix;
 import com.b3dgs.tyrian.entity.ship.Ship;
-import com.b3dgs.tyrian.entity.ship.ShipType;
 import com.b3dgs.tyrian.map.Map;
 import com.b3dgs.tyrian.map.Tile;
 import com.b3dgs.tyrian.projectile.FactoryProjectile;
@@ -171,7 +178,7 @@ final class World
         factoryEntityBonus = new FactoryEntityBonus(factoryEffect, handlerEffect, factoryWeapon);
 
         factoryShip = new FactoryShip(factoryEffect, handlerEffect, factoryWeapon);
-        ship = factoryShip.create(ShipType.GENCORE_PHOENIX);
+        ship = factoryShip.create(GencorePhoenix.class);
         handlerEntityScenery.setShip(ship);
         handlerEntityDynamic.setShip(ship);
         handlerEntityBonus.setShip(ship);
@@ -227,7 +234,7 @@ final class World
         {
             if (UtilityRandom.getRandomInteger(50) == 0)
             {
-                final EntityOpponent entity = factoryEntityDynamic.create(EntityDynamicType.METEOR_BIG);
+                final EntityOpponent entity = factoryEntityDynamic.create(MeteorBig.class);
                 entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                         camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
                 handlerEntityDynamic.add(entity);
@@ -236,29 +243,29 @@ final class World
         }
         if (timerBonus.elapsed(2000))
         {
-            final EntityBonusType bonus;
+            final Class<? extends Bonus> bonus;
             switch (UtilityRandom.getRandomInteger(30))
             {
                 case 0:
-                    bonus = EntityBonusType.PULSE_CANNON;
+                    bonus = PulseCannon.class;
                     break;
                 case 1:
-                    bonus = EntityBonusType.HYPER_PULSE;
+                    bonus = HyperPulse.class;
                     break;
                 case 2:
-                    bonus = EntityBonusType.MACHINE_GUN;
+                    bonus = MachineGun.class;
                     break;
                 case 3:
-                    bonus = EntityBonusType.MISSILE_LAUNCHER_FRONT;
+                    bonus = MissileLauncherFront.class;
                     break;
                 case 4:
-                    bonus = EntityBonusType.MISSILE_LAUNCHER_REAR;
+                    bonus = MissileLauncherRear.class;
                     break;
                 case 5:
-                    bonus = EntityBonusType.WAVE_CANNON_REAR;
+                    bonus = WaveCannonRear.class;
                     break;
                 default:
-                    bonus = EntityBonusType.POWER_UP;
+                    bonus = PowerUp.class;
                     break;
 
             }

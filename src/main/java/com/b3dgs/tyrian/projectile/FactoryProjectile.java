@@ -29,7 +29,7 @@ import com.b3dgs.tyrian.effect.HandlerEffect;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryProjectile
-        extends FactoryObjectGame<ProjectileType, SetupProjectile, Projectile>
+        extends FactoryObjectGame<SetupProjectile, Projectile>
 {
     /** Projectile setup. */
     private final SetupProjectile setup;
@@ -42,9 +42,8 @@ public final class FactoryProjectile
      */
     public FactoryProjectile(FactoryEffect factoryEffect, HandlerEffect handlerEffect)
     {
-        super(ProjectileType.class, "projectiles");
+        super("projectiles");
         setup = new SetupProjectile(UtilityMedia.get("sprites", "weapons.xml"), factoryEffect, handlerEffect);
-        load();
     }
 
     /*
@@ -52,7 +51,7 @@ public final class FactoryProjectile
      */
 
     @Override
-    protected SetupProjectile createSetup(ProjectileType type, Media config)
+    protected SetupProjectile createSetup(Class<? extends Projectile> type, Media config)
     {
         return setup;
     }

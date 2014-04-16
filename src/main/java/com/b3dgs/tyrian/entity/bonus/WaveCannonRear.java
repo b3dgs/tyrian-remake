@@ -30,6 +30,6 @@ public final class WaveCannonRear
      */
     public WaveCannonRear(SetupEntityBonus setup)
     {
-        super(setup, false);
+        super(setup, com.b3dgs.tyrian.weapon.rear.WaveCannonRear.class, false);
     }
 }

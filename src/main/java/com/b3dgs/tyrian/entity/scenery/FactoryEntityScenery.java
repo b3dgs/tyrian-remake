@@ -32,7 +32,7 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityScenery
-        extends FactoryObjectGame<EntitySceneryType, SetupEntity, Entity>
+        extends FactoryObjectGame<SetupEntity, Entity>
 {
     /** Factory effect. */
     private final FactoryEffect factoryEffect;
@@ -50,11 +50,10 @@ public final class FactoryEntityScenery
      */
     public FactoryEntityScenery(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(EntitySceneryType.class, AppTyrian.SCENERY_DIR);
+        super(AppTyrian.SCENERY_DIR);
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;
-        load();
     }
 
     /*
@@ -62,7 +61,7 @@ public final class FactoryEntityScenery
      */
 
     @Override
-    protected SetupEntity createSetup(EntitySceneryType key, Media config)
+    protected SetupEntity createSetup(Class<? extends Entity> key, Media config)
     {
         return new SetupEntity(config, factoryEffect, handlerEffect, factoryWeapon);
     }

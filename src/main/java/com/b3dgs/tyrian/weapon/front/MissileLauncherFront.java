@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.front;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.MissileFront;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -54,39 +54,39 @@ public final class MissileLauncherFront
         {
             case 0:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0, speed, 0, 0);
+                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0);
                 break;
             case 1:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.1, speed, -5, 0);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.1, speed, 5, 0);
+                addProjectile(MissileFront.class, dmg, -0.1, speed, -5, 0);
+                addProjectile(MissileFront.class, dmg, 0.1, speed, 5, 0);
                 break;
             case 2:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.2, speed, -6, -10);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0, speed, 0, 0);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.2, speed, 6, -10);
+                addProjectile(MissileFront.class, dmg, -0.2, speed, -6, -10);
+                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0);
+                addProjectile(MissileFront.class, dmg, 0.2, speed, 6, -10);
                 break;
             case 3:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.2, speed, -10, -10);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.05, speed, -5, 0);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.05, speed, 5, 0);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.2, speed, 10, -10);
+                addProjectile(MissileFront.class, dmg, -0.2, speed, -10, -10);
+                addProjectile(MissileFront.class, dmg, -0.05, speed, -5, 0);
+                addProjectile(MissileFront.class, dmg, 0.05, speed, 5, 0);
+                addProjectile(MissileFront.class, dmg, 0.2, speed, 10, -10);
                 break;
             case 4:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.25, speed, -10, -12);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0, speed, 0, 0).setFrame(135);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.25, speed, 10, -12);
+                addProjectile(MissileFront.class, dmg, -0.25, speed, -10, -12);
+                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0).setFrame(135);
+                addProjectile(MissileFront.class, dmg, 0.25, speed, 10, -12);
                 break;
             case 5:
                 dmg = 60;
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.2, speed, -15, -12);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, -0.05, speed, -7, -5);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0, speed, 0, 0).setFrame(135);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.05, speed, 7, -5);
-                addProjectile(ProjectileType.MISSILE_FRONT, dmg, 0.2, speed, 15, -12);
+                addProjectile(MissileFront.class, dmg, -0.2, speed, -15, -12);
+                addProjectile(MissileFront.class, dmg, -0.05, speed, -7, -5);
+                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0).setFrame(135);
+                addProjectile(MissileFront.class, dmg, 0.05, speed, 7, -5);
+                addProjectile(MissileFront.class, dmg, 0.2, speed, 15, -12);
                 break;
             default:
                 break;

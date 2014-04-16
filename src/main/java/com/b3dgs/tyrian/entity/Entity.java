@@ -26,7 +26,7 @@ import com.b3dgs.lionengine.game.CollisionData;
 import com.b3dgs.lionengine.game.entity.EntityGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
-import com.b3dgs.tyrian.effect.EffectType;
+import com.b3dgs.tyrian.effect.Explode2;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
 import com.b3dgs.tyrian.entity.ship.Ship;
@@ -89,7 +89,7 @@ public abstract class Entity
         int delay = 0;
         for (int i = 0; i < n; i++)
         {
-            final Effect explode = factoryEffect.create(EffectType.EXPLODE2);
+            final Effect explode = factoryEffect.create(Explode2.class);
             final int x = getLocationIntX() - explode.getWidth() / 2 + UtilityRandom.getRandomInteger(getWidth());
             final int y = getLocationIntY() + explode.getHeight() / 2 - UtilityRandom.getRandomInteger(getHeight());
             explode.start(x, y, i * 25);

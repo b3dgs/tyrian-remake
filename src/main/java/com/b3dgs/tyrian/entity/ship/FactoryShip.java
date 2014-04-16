@@ -31,7 +31,7 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryShip
-        extends FactoryObjectGame<ShipType, SetupEntity, Ship>
+        extends FactoryObjectGame<SetupEntity, Ship>
 {
     /** Factory effect. */
     private final FactoryEffect factoryEffect;
@@ -49,11 +49,10 @@ public final class FactoryShip
      */
     public FactoryShip(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(ShipType.class, AppTyrian.SHIPS_DIR);
+        super(AppTyrian.SHIPS_DIR);
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;
-        load();
     }
 
     /*
@@ -61,7 +60,7 @@ public final class FactoryShip
      */
 
     @Override
-    protected SetupEntity createSetup(ShipType type, Media config)
+    protected SetupEntity createSetup(Class<? extends Ship> type, Media config)
     {
         return new SetupEntity(config, factoryEffect, handlerEffect, factoryWeapon);
     }

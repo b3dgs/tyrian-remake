@@ -20,7 +20,6 @@ package com.b3dgs.tyrian.entity.bonus;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
-import com.b3dgs.tyrian.weapon.WeaponType;
 
 /**
  * Weapon bonus.
@@ -30,8 +29,8 @@ import com.b3dgs.tyrian.weapon.WeaponType;
 abstract class Weapon
         extends Bonus
 {
-    /** Type. */
-    private final EntityBonusType type;
+    /** Weapon target. */
+    private final Class<? extends com.b3dgs.tyrian.weapon.Weapon> target;
     /** Factory weapon. */
     private final FactoryWeapon factoryWeapon;
     /** Front. */
@@ -41,13 +40,14 @@ abstract class Weapon
      * Constructor.
      * 
      * @param setup The setup reference.
+     * @param target The target reference.
      * @param front <code>true</code> if front weapon, <code>false</code> if rear.
      */
-    protected Weapon(SetupEntityBonus setup, boolean front)
+    protected Weapon(SetupEntityBonus setup, Class<? extends com.b3dgs.tyrian.weapon.Weapon> target, boolean front)
     {
         super(setup);
-        type = setup.type;
         factoryWeapon = setup.factoryWeapon;
+        this.target = target;
         this.front = front;
     }
 
@@ -63,11 +63,11 @@ abstract class Weapon
         super.onHit(ship);
         if (front)
         {
-            ship.setWeaponFront(factoryWeapon.create(WeaponType.valueOf(type.name())));
+            ship.setWeaponFront(factoryWeapon.create(target));
         }
         else
         {
-            ship.setWeaponRear(factoryWeapon.create(WeaponType.valueOf(type.name())));
+            ship.setWeaponRear(factoryWeapon.create(target));
         }
     }
 }

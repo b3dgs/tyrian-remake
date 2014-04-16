@@ -20,8 +20,24 @@ package com.b3dgs.tyrian.map;
 import com.b3dgs.lionengine.game.map.MapTileGame;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
-import com.b3dgs.tyrian.entity.scenery.EntitySceneryType;
+import com.b3dgs.tyrian.entity.scenery.DoubleCanon;
+import com.b3dgs.tyrian.entity.scenery.DoublePulse;
 import com.b3dgs.tyrian.entity.scenery.FactoryEntityScenery;
+import com.b3dgs.tyrian.entity.scenery.Generator;
+import com.b3dgs.tyrian.entity.scenery.GreenPulse;
+import com.b3dgs.tyrian.entity.scenery.House812;
+import com.b3dgs.tyrian.entity.scenery.House92;
+import com.b3dgs.tyrian.entity.scenery.Lamp;
+import com.b3dgs.tyrian.entity.scenery.OpenablePulse;
+import com.b3dgs.tyrian.entity.scenery.Pump;
+import com.b3dgs.tyrian.entity.scenery.RedBox;
+import com.b3dgs.tyrian.entity.scenery.RedEngine;
+import com.b3dgs.tyrian.entity.scenery.Silo;
+import com.b3dgs.tyrian.entity.scenery.SingleCanon;
+import com.b3dgs.tyrian.entity.scenery.Spider;
+import com.b3dgs.tyrian.entity.scenery.SubSquare;
+import com.b3dgs.tyrian.entity.scenery.ThreeRedH;
+import com.b3dgs.tyrian.entity.scenery.ThreeRedV;
 
 /**
  * Map implementation.
@@ -43,39 +59,39 @@ public final class Map
         switch (n)
         {
             case 6:
-                return factory.create(EntitySceneryType.SINGLE_CANON);
+                return factory.create(SingleCanon.class);
             case 7:
-                return factory.create(EntitySceneryType.DOUBLE_CANON);
+                return factory.create(DoubleCanon.class);
             case 8:
-                return factory.create(EntitySceneryType.RED_ENGINE);
+                return factory.create(RedEngine.class);
             case 9:
-                return factory.create(EntitySceneryType.GREEN_PULSE);
+                return factory.create(GreenPulse.class);
             case 19:
-                return factory.create(EntitySceneryType.OPENABLE_PULSE);
+                return factory.create(OpenablePulse.class);
             case 13:
-                return factory.create(EntitySceneryType.GENERATOR);
+                return factory.create(Generator.class);
             case 26:
-                return factory.create(EntitySceneryType.DOUBLE_PULSE);
+                return factory.create(DoublePulse.class);
             case 18:
-                return factory.create(EntitySceneryType.LAMP);
+                return factory.create(Lamp.class);
             case 30:
-                return factory.create(EntitySceneryType.SPIDER);
+                return factory.create(Spider.class);
             case 32:
-                return factory.create(EntitySceneryType.SUB_SQUARE);
+                return factory.create(SubSquare.class);
             case 45:
-                return factory.create(EntitySceneryType.SILO);
+                return factory.create(Silo.class);
             case 46:
-                return factory.create(EntitySceneryType.RED_BOX);
+                return factory.create(RedBox.class);
             case 56:
-                return factory.create(EntitySceneryType.THREE_RED_V);
+                return factory.create(ThreeRedV.class);
             case 50:
-                return factory.create(EntitySceneryType.PUMP);
+                return factory.create(Pump.class);
             case 52:
-                return factory.create(EntitySceneryType.HOUSE92);
+                return factory.create(House92.class);
             case 54:
-                return factory.create(EntitySceneryType.HOUSE812);
+                return factory.create(House812.class);
             case 66:
-                return factory.create(EntitySceneryType.THREE_RED_H);
+                return factory.create(ThreeRedH.class);
             default:
                 return null;
         }

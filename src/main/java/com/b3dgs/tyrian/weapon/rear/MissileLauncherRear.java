@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.weapon.rear;
 
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.projectile.ProjectileType;
+import com.b3dgs.tyrian.projectile.MissileRear;
 import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 
@@ -58,57 +58,57 @@ public final class MissileLauncherRear
             case 0:
                 if (side)
                 {
-                    addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
+                    addProjectile(MissileRear.class, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
                 }
                 else
                 {
-                    addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
+                    addProjectile(MissileRear.class, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
                 }
                 side = !side;
                 break;
             case 1:
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
+                addProjectile(MissileRear.class, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
+                addProjectile(MissileRear.class, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
                 break;
             case 2:
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
+                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
+                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
 
-                addProjectile(ProjectileType.MISSILE_REAR, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(ProjectileType.MISSILE_REAR, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.class, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.class, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
                 break;
             case 3:
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
+                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
+                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
 
-                addProjectile(ProjectileType.MISSILE_REAR, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(ProjectileType.MISSILE_REAR, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.class, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.class, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
 
                 if (side)
                 {
-                    addProjectile(ProjectileType.MISSILE_REAR, 200L, dmg, -speed * 1.5, speed, -10, -20).setFrame(138);
+                    addProjectile(MissileRear.class, 200L, dmg, -speed * 1.5, speed, -10, -20).setFrame(138);
                 }
                 else
                 {
-                    addProjectile(ProjectileType.MISSILE_REAR, 200L, dmg, speed * 1.5, speed, 10, -20).setFrame(153);
+                    addProjectile(MissileRear.class, 200L, dmg, speed * 1.5, speed, 10, -20).setFrame(153);
                 }
                 side = !side;
                 break;
             case 4:
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.2, speed, -10, -5).setFrame(137);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.2, speed, 10, -5).setFrame(152);
+                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(137);
+                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(152);
 
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.class, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.class, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
                 break;
             case 5:
-                addProjectile(ProjectileType.MISSILE_REAR, 50L, dmg, -speed * 1.1, speed, -10, 0).setFrame(138);
-                addProjectile(ProjectileType.MISSILE_REAR, 25L, dmg, -speed * 1.2, speed, -10, -10).setFrame(138);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, -speed * 1.3, speed, -10, -20).setFrame(138);
+                addProjectile(MissileRear.class, 50L, dmg, -speed * 1.1, speed, -10, 0).setFrame(138);
+                addProjectile(MissileRear.class, 25L, dmg, -speed * 1.2, speed, -10, -10).setFrame(138);
+                addProjectile(MissileRear.class, dmg, -speed * 1.3, speed, -10, -20).setFrame(138);
 
-                addProjectile(ProjectileType.MISSILE_REAR, 50L, dmg, speed * 1.1, speed, 10, 0).setFrame(153);
-                addProjectile(ProjectileType.MISSILE_REAR, 25L, dmg, speed * 1.2, speed, 10, -10).setFrame(153);
-                addProjectile(ProjectileType.MISSILE_REAR, dmg, speed * 1.3, speed, 10, -20).setFrame(153);
+                addProjectile(MissileRear.class, 50L, dmg, speed * 1.1, speed, 10, 0).setFrame(153);
+                addProjectile(MissileRear.class, 25L, dmg, speed * 1.2, speed, 10, -10).setFrame(153);
+                addProjectile(MissileRear.class, dmg, speed * 1.3, speed, 10, -20).setFrame(153);
                 break;
             default:
                 break;
