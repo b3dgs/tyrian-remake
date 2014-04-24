@@ -19,13 +19,13 @@ package com.b3dgs.tyrian;
 
 import java.io.IOException;
 
-import com.b3dgs.lionengine.Graphic;
+import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilityRandom;
-import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.core.Core;
+import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
-import com.b3dgs.lionengine.core.UtilityMedia;
 import com.b3dgs.lionengine.core.Verbose;
 import com.b3dgs.lionengine.file.File;
 import com.b3dgs.lionengine.file.FileReading;
@@ -189,14 +189,14 @@ final class World
             final int index = UtilityRandom.getRandomInteger(20);
             if (i == 0)
             {
-                World.ripLevel(map, UtilityMedia.get("levels", "images", index + ".png"),
-                        UtilityMedia.get("tiles", "level1"), UtilityMedia.get("levels", "0.map"));
+                World.ripLevel(map, Core.MEDIA.create("levels", "images", index + ".png"),
+                        Core.MEDIA.create("tiles", "level1"), Core.MEDIA.create("levels", "0.map"));
             }
             else
             {
                 final Map newMap = new Map();
-                World.ripLevel(newMap, UtilityMedia.get("levels", "images", index + ".png"),
-                        UtilityMedia.get("tiles", "level1"), UtilityMedia.get("levels", i + ".map"));
+                World.ripLevel(newMap, Core.MEDIA.create("levels", "images", index + ".png"),
+                        Core.MEDIA.create("tiles", "level1"), Core.MEDIA.create("levels", i + ".map"));
                 map.append(newMap, 0, newMap.getHeightInTile() * i);
             }
         }

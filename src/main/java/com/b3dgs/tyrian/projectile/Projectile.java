@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.Graphic;
+import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;

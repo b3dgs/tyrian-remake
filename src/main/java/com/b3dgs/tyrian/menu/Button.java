@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.menu;
 
-import com.b3dgs.lionengine.Graphic;
+import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.tyrian.Sfx;

@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.effect;
 
-import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.AppTyrian;

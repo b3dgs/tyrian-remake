@@ -17,7 +17,8 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
-import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.UtilityFile;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.effect.FactoryEffect;
@@ -48,7 +49,7 @@ public final class FactoryEntityBonus
      */
     public FactoryEntityBonus(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(AppTyrian.BONUS_DIR);
+        super(UtilityFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.BONUS_DIR));
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;

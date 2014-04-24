@@ -17,12 +17,11 @@
  */
 package com.b3dgs.tyrian;
 
+import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.Version;
-import com.b3dgs.lionengine.core.Config;
 import com.b3dgs.lionengine.core.Engine;
 import com.b3dgs.lionengine.core.Loader;
-import com.b3dgs.lionengine.core.Media;
 
 /**
  * Program starts here.
@@ -38,11 +37,11 @@ public final class AppTyrian
     /** Entities directory. */
     public static final String ENTITIES_DIR = "entities";
     /** Dynamics directory. */
-    public static final String DYNAMICS_DIR = Media.getPath("entities", "dynamic");
+    public static final String DYNAMICS_DIR = "dynamic";
     /** Scenery directory. */
-    public static final String SCENERY_DIR = Media.getPath(AppTyrian.ENTITIES_DIR, "scenery");
+    public static final String SCENERY_DIR = "scenery";
     /** Bonus directory. */
-    public static final String BONUS_DIR = Media.getPath(AppTyrian.ENTITIES_DIR, "bonus");
+    public static final String BONUS_DIR = "bonus";
     /** Weapons directory. */
     public static final String WEAPONS_DIR = "weapons";
     /** Effects directory. */

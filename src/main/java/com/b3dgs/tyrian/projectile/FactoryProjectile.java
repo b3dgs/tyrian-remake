@@ -17,8 +17,8 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.lionengine.core.UtilityMedia;
+import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
@@ -43,7 +43,7 @@ public final class FactoryProjectile
     public FactoryProjectile(FactoryEffect factoryEffect, HandlerEffect handlerEffect)
     {
         super("projectiles");
-        setup = new SetupProjectile(UtilityMedia.get("sprites", "weapons.xml"), factoryEffect, handlerEffect);
+        setup = new SetupProjectile(Core.MEDIA.create("sprites", "weapons.xml"), factoryEffect, handlerEffect);
     }
 
     /*

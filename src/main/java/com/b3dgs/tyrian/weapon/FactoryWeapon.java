@@ -17,8 +17,8 @@
  */
 package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.lionengine.core.UtilityMedia;
+import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.AppTyrian;
@@ -58,6 +58,6 @@ public final class FactoryWeapon
     @Override
     protected SetupGame createSetup(Class<? extends Weapon> type, Media config)
     {
-        return new SetupWeapon(UtilityMedia.get("sprites", "Weapons.xml"), factory, handler);
+        return new SetupWeapon(Core.MEDIA.create("sprites", "Weapons.xml"), factory, handler);
     }
 }

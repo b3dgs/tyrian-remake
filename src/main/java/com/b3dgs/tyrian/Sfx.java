@@ -17,9 +17,9 @@
  */
 package com.b3dgs.tyrian;
 
+import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.AudioWav;
-import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.lionengine.core.UtilityMedia;
+import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Wav;
 
 /**
@@ -125,7 +125,7 @@ public enum Sfx
      */
     private Sfx(String sound, int count)
     {
-        final Media media = UtilityMedia.get(AppTyrian.SFX_DIR, sound + Sfx.AUDIO_FILE_EXTENSION);
+        final Media media = Core.MEDIA.create(AppTyrian.SFX_DIR, sound + Sfx.AUDIO_FILE_EXTENSION);
         this.sound = AudioWav.loadWav(media, count);
     }
 

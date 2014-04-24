@@ -17,7 +17,8 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
-import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.UtilityFile;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.effect.FactoryEffect;
@@ -50,7 +51,7 @@ public final class FactoryEntityScenery
      */
     public FactoryEntityScenery(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(AppTyrian.SCENERY_DIR);
+        super(UtilityFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.SCENERY_DIR));
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;
