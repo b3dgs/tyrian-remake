@@ -22,6 +22,7 @@ import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.Version;
 import com.b3dgs.lionengine.core.Engine;
 import com.b3dgs.lionengine.core.Loader;
+import com.b3dgs.lionengine.core.Verbose;
 
 /**
  * Program starts here.
@@ -62,7 +63,7 @@ public final class AppTyrian
      */
     public static void main(String[] args)
     {
-        Engine.start(AppTyrian.NAME, AppTyrian.VERSION, AppTyrian.RESOURCES);
+        Engine.start(AppTyrian.NAME, AppTyrian.VERSION, Verbose.CRITICAL, AppTyrian.RESOURCES);
         Sfx.setEnabled(AppTyrian.ENABLE_SOUND);
 
         final Resolution output = new Resolution(640, 400, 60);
