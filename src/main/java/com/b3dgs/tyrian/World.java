@@ -19,11 +19,11 @@ package com.b3dgs.tyrian;
 
 import java.io.IOException;
 
-import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilityRandom;
 import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.Verbose;

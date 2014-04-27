@@ -17,8 +17,8 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.Core;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;

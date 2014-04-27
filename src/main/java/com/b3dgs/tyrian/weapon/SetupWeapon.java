@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.projectile.FactoryProjectile;
 import com.b3dgs.tyrian.projectile.HandlerProjectile;

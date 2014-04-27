@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
-import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
 import com.b3dgs.tyrian.entity.SetupEntity;
