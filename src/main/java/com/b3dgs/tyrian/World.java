@@ -91,7 +91,7 @@ final class World
         else
         {
             final LevelRipConverter<Tile> rip = new LevelRipConverter<>();
-            rip.start(levelrip, map, tilesheet);
+            rip.start(levelrip, tilesheet, map);
             try (final FileWriting file = File.createFileWriting(output);)
             {
                 map.save(file);
