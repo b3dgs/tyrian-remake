@@ -19,8 +19,8 @@ package com.b3dgs.tyrian.background;
 
 import com.b3dgs.lionengine.ColorRgba;
 import com.b3dgs.lionengine.Timing;
-import com.b3dgs.lionengine.UtilityMath;
-import com.b3dgs.lionengine.UtilityRandom;
+import com.b3dgs.lionengine.UtilMath;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
@@ -72,9 +72,9 @@ public final class Background
         stars = new Star[256];
         for (int i = 0; i < stars.length; i++)
         {
-            final int id = UtilityRandom.getRandomInteger(0, 5);
-            stars[i] = new Star(UtilityRandom.getRandomInteger(-20, 340), UtilityRandom.getRandomInteger(-10, 200),
-                    0.0, UtilityRandom.getRandomInteger(20, 50) / 15.0 * 1.0, id);
+            final int id = UtilRandom.getRandomInteger(0, 5);
+            stars[i] = new Star(UtilRandom.getRandomInteger(-20, 340), UtilRandom.getRandomInteger(-10, 200), 0.0,
+                    UtilRandom.getRandomInteger(20, 50) / 15.0 * 1.0, id);
         }
         effectTime.start();
     }
@@ -86,14 +86,14 @@ public final class Background
      */
     public void update(double extrp)
     {
-        alphaReal = UtilityMath.curveValue(alphaReal, alphaDest, 120.0);
+        alphaReal = UtilMath.curveValue(alphaReal, alphaDest, 120.0);
         alpha = (int) Math.floor(alphaReal);
         for (final Star star : stars)
         {
             star.update(extrp);
         }
 
-        if (UtilityRandom.getRandomInteger(0, 1000) == 0 && effectTime.elapsed(5000))
+        if (UtilRandom.getRandomInteger(0, 1000) == 0 && effectTime.elapsed(5000))
         {
             startEffect();
             effectTime.start();

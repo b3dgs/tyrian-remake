@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity;
 
-import com.b3dgs.lionengine.UtilityRandom;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
@@ -90,8 +90,8 @@ public abstract class Entity
         for (int i = 0; i < n; i++)
         {
             final Effect explode = factoryEffect.create(Explode2.class);
-            final int x = getLocationIntX() - explode.getWidth() / 2 + UtilityRandom.getRandomInteger(getWidth());
-            final int y = getLocationIntY() + explode.getHeight() / 2 - UtilityRandom.getRandomInteger(getHeight());
+            final int x = getLocationIntX() - explode.getWidth() / 2 + UtilRandom.getRandomInteger(getWidth());
+            final int y = getLocationIntY() + explode.getHeight() / 2 - UtilRandom.getRandomInteger(getHeight());
             explode.start(x, y, i * 25);
             handlerEffect.add(explode);
             if (i % 10 == 0)

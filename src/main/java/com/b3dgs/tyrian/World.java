@@ -20,7 +20,7 @@ package com.b3dgs.tyrian;
 import java.io.IOException;
 
 import com.b3dgs.lionengine.Timing;
-import com.b3dgs.lionengine.UtilityRandom;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.core.Media;
@@ -186,7 +186,7 @@ final class World
         // Rip a level and store data in the map
         for (int i = 0; i < 21; i++)
         {
-            final int index = UtilityRandom.getRandomInteger(20);
+            final int index = UtilRandom.getRandomInteger(20);
             if (i == 0)
             {
                 World.ripLevel(map, Core.MEDIA.create("levels", "images", index + ".png"),
@@ -232,10 +232,10 @@ final class World
 
         if (timerMeteor.elapsed(500))
         {
-            if (UtilityRandom.getRandomInteger(50) == 0)
+            if (UtilRandom.getRandomInteger(50) == 0)
             {
                 final EntityOpponent entity = factoryEntityDynamic.create(MeteorBig.class);
-                entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
+                entity.teleport(UtilRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                         camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
                 handlerEntityDynamic.add(entity);
                 timerMeteor.start();
@@ -244,7 +244,7 @@ final class World
         if (timerBonus.elapsed(2000))
         {
             final Class<? extends Bonus> bonus;
-            switch (UtilityRandom.getRandomInteger(30))
+            switch (UtilRandom.getRandomInteger(30))
             {
                 case 0:
                     bonus = PulseCannon.class;
@@ -270,7 +270,7 @@ final class World
 
             }
             final EntityOpponent entity = factoryEntityBonus.create(bonus);
-            entity.teleport(UtilityRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
+            entity.teleport(UtilRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                     camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
             handlerEntityBonus.add(entity);
             timerBonus.restart();

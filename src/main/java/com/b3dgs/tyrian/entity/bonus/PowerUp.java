@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
-import com.b3dgs.lionengine.UtilityRandom;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
 import com.b3dgs.tyrian.Sfx;
@@ -68,6 +68,6 @@ public final class PowerUp
     protected void onHit(Ship ship)
     {
         super.onHit(ship);
-        ship.increaseWeaponLevel(UtilityRandom.getRandomBoolean());
+        ship.increaseWeaponLevel(UtilRandom.getRandomBoolean());
     }
 }

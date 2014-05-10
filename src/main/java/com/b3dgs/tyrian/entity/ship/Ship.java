@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.ship;
 
-import com.b3dgs.lionengine.UtilityMath;
+import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.CameraGame;
@@ -84,10 +84,10 @@ public abstract class Ship
         final double camY = camera.getLocationY();
         final double destX = mouse.getX() - getWidth() / 2 + camera.getLocationX();
         final double destY = screenHeight - mouse.getY() + camY;
-        final double x = UtilityMath.curveValue(getLocationX(), destX, 3.0);
-        final double y = UtilityMath.curveValue(getLocationY(), destY, 3.0);
-        final double ox = UtilityMath.fixBetween(x, 0, camera.getViewWidth());
-        final double oy = UtilityMath.fixBetween(y, getHeight() / 2 + camY, camera.getViewHeight() + camY);
+        final double x = UtilMath.curveValue(getLocationX(), destX, 3.0);
+        final double y = UtilMath.curveValue(getLocationY(), destY, 3.0);
+        final double ox = UtilMath.fixBetween(x, 0, camera.getViewWidth());
+        final double oy = UtilMath.fixBetween(y, getHeight() / 2 + camY, camera.getViewHeight() + camY);
 
         setLocation(ox, oy);
         updateTileOffset();

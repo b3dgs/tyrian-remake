@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.background;
 
-import com.b3dgs.lionengine.UtilityRandom;
+import com.b3dgs.lionengine.UtilRandom;
 
 /**
  * Star implementation.
@@ -67,7 +67,7 @@ final class Star
         if (y > 210)
         {
             y = -10;
-            x = UtilityRandom.getRandomInteger(-20, 340);
+            x = UtilRandom.getRandomInteger(-20, 340);
         }
     }
 

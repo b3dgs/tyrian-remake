@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.dynamic;
 
-import com.b3dgs.lionengine.UtilityFile;
+import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.tyrian.AppTyrian;
@@ -51,7 +51,7 @@ public final class FactoryEntityDynamic
      */
     public FactoryEntityDynamic(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super(UtilityFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.DYNAMICS_DIR));
+        super(UtilFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.DYNAMICS_DIR));
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;
