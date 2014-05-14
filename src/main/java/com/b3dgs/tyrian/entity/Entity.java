@@ -68,19 +68,6 @@ public abstract class Entity
     }
 
     /**
-     * Render the entity.
-     * 
-     * @param g The graphic output.
-     * @param camera The camera reference.
-     */
-    public void render(Graphic g, CameraGame camera)
-    {
-        final int x = camera.getViewpointX(getLocationIntX());
-        final int y = camera.getViewpointY(getLocationIntY());
-        sprite.render(g, tileOffset, x, y);
-    }
-
-    /**
      * Called when entity is destroyed.
      */
     protected void onDestroyed()
@@ -130,6 +117,14 @@ public abstract class Entity
     public void update(double extrp)
     {
         updateCollision();
+    }
+
+    @Override
+    public void render(Graphic g, CameraGame camera)
+    {
+        final int x = camera.getViewpointX(getLocationIntX());
+        final int y = camera.getViewpointY(getLocationIntY());
+        sprite.render(g, tileOffset, x, y);
     }
 
     @Override
