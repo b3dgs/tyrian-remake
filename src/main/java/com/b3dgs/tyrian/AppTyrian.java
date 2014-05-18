@@ -35,8 +35,14 @@ public final class AppTyrian
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
     public static final Version VERSION = Version.create(0, 1, 0);
+    /** Sprites directory. */
+    public static final String SPRITES_DIR = "sprite";
+    /** Backgrounds directory name. */
+    public static final String BACKGROUNDS_DIR = "background";
+    /** Levels directory. */
+    public static final String LEVELS_DIR = "level";
     /** Entities directory. */
-    public static final String ENTITIES_DIR = "entities";
+    public static final String ENTITIES_DIR = "entity";
     /** Dynamics directory. */
     public static final String DYNAMICS_DIR = "dynamic";
     /** Scenery directory. */
@@ -44,13 +50,21 @@ public final class AppTyrian
     /** Bonus directory. */
     public static final String BONUS_DIR = "bonus";
     /** Weapons directory. */
-    public static final String WEAPONS_DIR = "weapons";
+    public static final String WEAPONS_DIR = "weapon";
     /** Effects directory. */
-    public static final String EFFECTS_DIR = "effects";
+    public static final String EFFECTS_DIR = "effect";
     /** Ships directory. */
-    public static final String SHIPS_DIR = "ships";
+    public static final String SHIPS_DIR = "ship";
+    /** Sheets directory. */
+    public static final String TILES_DIR = "tile";
     /** Sfx directory. */
     public static final String SFX_DIR = "sfx";
+    /** Fonts directory. */
+    public static final String FONTS_DIR = "font";
+    /** Pictures directory. */
+    public static final String PICS_DIR = "pic";
+    /** Musics directory. */
+    public static final String MUSICS_DIR = "music";
     /** Enable sound. */
     private static final boolean ENABLE_SOUND = true;
     /** Resources directory. */

@@ -44,7 +44,7 @@ final class Hud
      */
     Hud()
     {
-        hud = Drawable.loadSprite(Core.MEDIA.create("sprites", "hud.png"));
+        hud = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "hud.png"));
         hud.load(false);
         weaponFront = new Bar(11, 96);
         weaponFront.setLocation(268, 11);

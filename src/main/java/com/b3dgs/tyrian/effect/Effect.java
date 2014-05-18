@@ -49,8 +49,8 @@ public abstract class Effect
     public Effect(SetupSurfaceGame setup)
     {
         super(setup);
-        final int horizontalFrames = getDataInteger("horizontal", "frames");
-        final int verticalFrames = getDataInteger("vertical", "frames");
+        final int horizontalFrames = getDataInteger("horizontal", "lionengine:frames");
+        final int verticalFrames = getDataInteger("vertical", "lionengine:frames");
         sprite = Drawable.loadSpriteAnimated(setup.surface, horizontalFrames, verticalFrames);
         timerDelay = new Timing();
         setSize(sprite.getFrameWidth(), sprite.getFrameHeight());

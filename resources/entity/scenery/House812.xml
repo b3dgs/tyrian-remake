@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:surface image="House812.png"/>
+	<lionengine:size width="48" height="84"/>
+	<lionengine:collision name="default" offsetX="4" offsetY="28" width="40" height="44" mirror="false" />
+	<lionengine:animation name="idle" start="1" end="1" speed="0.2" reversed="false" repeat="false"/>
+</lionengine:entity>

@@ -189,14 +189,16 @@ final class World
             final int index = UtilRandom.getRandomInteger(20);
             if (i == 0)
             {
-                World.ripLevel(map, Core.MEDIA.create("levels", "images", index + ".png"),
-                        Core.MEDIA.create("tiles", "level1"), Core.MEDIA.create("levels", "0.map"));
+                World.ripLevel(map, Core.MEDIA.create(AppTyrian.LEVELS_DIR, "images", index + ".png"),
+                        Core.MEDIA.create(AppTyrian.TILES_DIR, "level1"),
+                        Core.MEDIA.create(AppTyrian.LEVELS_DIR, "0.map"));
             }
             else
             {
                 final Map newMap = new Map();
-                World.ripLevel(newMap, Core.MEDIA.create("levels", "images", index + ".png"),
-                        Core.MEDIA.create("tiles", "level1"), Core.MEDIA.create("levels", i + ".map"));
+                World.ripLevel(newMap, Core.MEDIA.create(AppTyrian.LEVELS_DIR, "images", index + ".png"),
+                        Core.MEDIA.create(AppTyrian.TILES_DIR, "level1"),
+                        Core.MEDIA.create(AppTyrian.LEVELS_DIR, i + ".map"));
                 map.append(newMap, 0, newMap.getHeightInTile() * i);
             }
         }

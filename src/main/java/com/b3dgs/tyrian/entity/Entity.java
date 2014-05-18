@@ -58,8 +58,8 @@ public abstract class Entity
         super(setup);
         factoryEffect = setup.factoryEffect;
         handlerEffect = setup.handlerEffect;
-        final int width = setup.configurable.getDataInteger("width", "size");
-        final int height = setup.configurable.getDataInteger("height", "size");
+        final int width = setup.configurable.getDataInteger("width", "lionengine:size");
+        final int height = setup.configurable.getDataInteger("height", "lionengine:size");
         sprite = Drawable.loadSpriteTiled(setup.surface, width, height);
         setSize(width, height);
         final CollisionData data = getDataCollision("default");

@@ -103,24 +103,24 @@ public final class Menu
             colorGreen[i] = new ColorRgba(0, 255, 0, i);
         }
 
-        buttonsSurfaces = Drawable.loadSpriteTiled(Core.MEDIA.create("fonts", "buttons.png"), 96, 16);
-        font = Drawable.loadSpriteFont(Core.MEDIA.create("fonts", "font.png"), Core.MEDIA.create("fonts", "font.xml"),
-                8, 9);
-        font2 = Drawable.loadSpriteFont(Core.MEDIA.create("fonts", "font2.png"),
-                Core.MEDIA.create("fonts", "font2.xml"), 6, 6);
+        buttonsSurfaces = Drawable.loadSpriteTiled(Core.MEDIA.create(AppTyrian.FONTS_DIR, "buttons.png"), 96, 16);
+        font = Drawable.loadSpriteFont(Core.MEDIA.create(AppTyrian.FONTS_DIR, "font.png"),
+                Core.MEDIA.create(AppTyrian.FONTS_DIR, "font.xml"), 8, 9);
+        font2 = Drawable.loadSpriteFont(Core.MEDIA.create(AppTyrian.FONTS_DIR, "font2.png"),
+                Core.MEDIA.create(AppTyrian.FONTS_DIR, "font2.xml"), 6, 6);
 
         surfaces = new Sprite[5];
-        surfaces[0] = Drawable.loadSprite(Core.MEDIA.create("pics", "background.png"));
-        surfaces[1] = Drawable.loadSprite(Core.MEDIA.create("fonts", "tyrian.png"));
-        surfaces[2] = Drawable.loadSprite(Core.MEDIA.create("fonts", "remake.png"));
-        surfaces[3] = Drawable.loadSprite(Core.MEDIA.create("pics", "start.png"));
-        surfaces[4] = Drawable.loadSprite(Core.MEDIA.create("pics", "howto.png"));
+        surfaces[0] = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.PICS_DIR, "background.png"));
+        surfaces[1] = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.FONTS_DIR, "tyrian.png"));
+        surfaces[2] = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.FONTS_DIR, "remake.png"));
+        surfaces[3] = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.PICS_DIR, "start.png"));
+        surfaces[4] = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.PICS_DIR, "howto.png"));
 
-        cursor = Drawable.loadSprite(Core.MEDIA.create("sprites", "cursor.png"));
-        armory = Drawable.loadSprite(Core.MEDIA.create("sprites", "armory.png"));
-        ship = Drawable.loadSpriteTiled(Core.MEDIA.create("ships", "usp_fang.png"), 24, 28);
+        cursor = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "cursor.png"));
+        armory = Drawable.loadSprite(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "armory.png"));
+        ship = Drawable.loadSpriteTiled(Core.MEDIA.create(AppTyrian.SHIPS_DIR, "usp_fang.png"), 24, 28);
 
-        midi = AudioMidi.loadMidi(Core.MEDIA.create("musics", "menu.mid"));
+        midi = AudioMidi.loadMidi(Core.MEDIA.create(AppTyrian.MUSICS_DIR, "menu.mid"));
         buttons = new Button[3];
     }
 

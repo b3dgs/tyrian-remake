@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:surface image="MissileLauncherFront.png"/>
+	<lionengine:size width="24" height="28"/>
+	<lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false" />
+	<lionengine:animation name="idle" start="1" end="1" speed="0.2" reversed="false" repeat="false"/>
+</lionengine:entity>

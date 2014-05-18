@@ -26,6 +26,7 @@ import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
+import com.b3dgs.tyrian.AppTyrian;
 
 /**
  * Background implementation.
@@ -67,7 +68,7 @@ public final class Background
         alpha = normal;
         alphaDest = alpha;
         alphaReal = alphaDest;
-        surface = Drawable.loadSpriteTiled(Core.MEDIA.create("backgrounds", "stars.png"), 3, 6);
+        surface = Drawable.loadSpriteTiled(Core.MEDIA.create(AppTyrian.BACKGROUNDS_DIR, "stars.png"), 3, 6);
         surface.load(false);
         stars = new Star[256];
         for (int i = 0; i < stars.length; i++)

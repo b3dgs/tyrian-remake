@@ -58,6 +58,6 @@ public final class FactoryWeapon
     @Override
     protected SetupGame createSetup(Class<? extends Weapon> type, Media config)
     {
-        return new SetupWeapon(Core.MEDIA.create("sprites", "Weapons.xml"), factory, handler);
+        return new SetupWeapon(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "Weapons.xml"), factory, handler);
     }
 }
