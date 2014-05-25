@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.entity.bonus;
 
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
+import com.b3dgs.lionengine.game.purview.Configurable;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
 
@@ -42,7 +43,8 @@ abstract class Coin
     {
         super(setup);
         animator = Anim.createAnimator();
-        animator.play(getDataAnimation("idle"));
+        final Configurable configurable = setup.getConfigurable();
+        animator.play(configurable.getAnimation("idle"));
     }
 
     /*

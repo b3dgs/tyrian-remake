@@ -19,12 +19,14 @@ package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.anim.AnimState;
+import com.b3dgs.lionengine.anim.Animation;
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.effect.EffectGame;
+import com.b3dgs.lionengine.game.purview.Configurable;
 
 /**
  * Effect base implementation.
@@ -38,6 +40,8 @@ public abstract class Effect
     private final SpriteAnimated sprite;
     /** Delay. */
     private final Timing timerDelay;
+    /** Start animation. */
+    private final Animation animStart;
     /** Delay to wait. */
     private int delay;
 
@@ -49,9 +53,11 @@ public abstract class Effect
     public Effect(SetupSurfaceGame setup)
     {
         super(setup);
-        final int horizontalFrames = getDataInteger("horizontal", "lionengine:frames");
-        final int verticalFrames = getDataInteger("vertical", "lionengine:frames");
+        final Configurable configurable = setup.getConfigurable();
+        final int horizontalFrames = configurable.getInteger("horizontal", "lionengine:frames");
+        final int verticalFrames = configurable.getInteger("vertical", "lionengine:frames");
         sprite = Drawable.loadSpriteAnimated(setup.surface, horizontalFrames, verticalFrames);
+        animStart = configurable.getAnimation("start");
         timerDelay = new Timing();
         setSize(sprite.getFrameWidth(), sprite.getFrameHeight());
     }
@@ -79,7 +85,7 @@ public abstract class Effect
     {
         if (timerDelay.isStarted() && timerDelay.elapsed(delay))
         {
-            sprite.play(getDataAnimation("start"));
+            sprite.play(animStart);
             timerDelay.stop();
         }
         if (!timerDelay.isStarted())

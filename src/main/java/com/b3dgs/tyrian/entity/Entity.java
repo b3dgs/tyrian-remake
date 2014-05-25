@@ -24,6 +24,7 @@ import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.CollisionData;
 import com.b3dgs.lionengine.game.entity.EntityGame;
+import com.b3dgs.lionengine.game.purview.Configurable;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode2;
@@ -58,11 +59,12 @@ public abstract class Entity
         super(setup);
         factoryEffect = setup.factoryEffect;
         handlerEffect = setup.handlerEffect;
-        final int width = setup.configurable.getDataInteger("width", "lionengine:size");
-        final int height = setup.configurable.getDataInteger("height", "lionengine:size");
+        final Configurable configurable = setup.getConfigurable();
+        final int width = configurable.getInteger("width", "lionengine:size");
+        final int height = configurable.getInteger("height", "lionengine:size");
         sprite = Drawable.loadSpriteTiled(setup.surface, width, height);
         setSize(width, height);
-        final CollisionData data = getDataCollision("default");
+        final CollisionData data = configurable.getCollision("default");
         setCollision(new CollisionData(getWidth() / 2 + data.getOffsetX(), -data.getOffsetY() - data.getHeight(),
                 data.getWidth(), data.getHeight(), false));
     }
