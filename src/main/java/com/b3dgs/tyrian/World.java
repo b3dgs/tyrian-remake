@@ -27,11 +27,11 @@ import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.Verbose;
-import com.b3dgs.lionengine.file.File;
-import com.b3dgs.lionengine.file.FileReading;
-import com.b3dgs.lionengine.file.FileWriting;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.WorldGame;
+import com.b3dgs.lionengine.stream.FileReading;
+import com.b3dgs.lionengine.stream.FileWriting;
+import com.b3dgs.lionengine.stream.Stream;
 import com.b3dgs.lionengine.utility.LevelRipConverter;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.effect.FactoryEffect;
@@ -79,7 +79,7 @@ final class World
     {
         if (output.getFile().exists())
         {
-            try (final FileReading file = File.createFileReading(output);)
+            try (final FileReading file = Stream.createFileReading(output);)
             {
                 map.load(file);
             }
@@ -92,7 +92,7 @@ final class World
         {
             final LevelRipConverter<Tile> rip = new LevelRipConverter<>();
             rip.start(levelrip, tilesheet, map);
-            try (final FileWriting file = File.createFileWriting(output);)
+            try (final FileWriting file = Stream.createFileWriting(output);)
             {
                 map.save(file);
             }

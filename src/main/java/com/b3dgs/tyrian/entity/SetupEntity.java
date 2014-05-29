@@ -49,7 +49,7 @@ public class SetupEntity
     public SetupEntity(Media config, FactoryEffect factoryEffect, HandlerEffect handlerEffect,
             FactoryWeapon factoryWeapon)
     {
-        super(config);
+        super(config, false);
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
         this.factoryWeapon = factoryWeapon;

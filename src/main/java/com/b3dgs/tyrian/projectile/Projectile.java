@@ -21,7 +21,7 @@ import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
-import com.b3dgs.lionengine.game.CollisionData;
+import com.b3dgs.lionengine.game.Collision;
 import com.b3dgs.lionengine.game.projectile.ProjectileGame;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
@@ -36,7 +36,7 @@ public abstract class Projectile
         extends ProjectileGame<Entity, Entity>
 {
     /** Default collision. */
-    private static final CollisionData COLLISION = new CollisionData(10, -4, 4, 4, false);
+    private static final Collision COLLISION = new Collision(10, -4, 4, 4, false);
 
     /** Factory effect. */
     protected final FactoryEffect factoryEffect;

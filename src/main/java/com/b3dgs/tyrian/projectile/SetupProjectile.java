@@ -44,7 +44,7 @@ public class SetupProjectile
      */
     public SetupProjectile(Media config, FactoryEffect factoryEffect, HandlerEffect handlerEffect)
     {
-        super(config);
+        super(config, false);
         this.factoryEffect = factoryEffect;
         this.handlerEffect = handlerEffect;
     }
