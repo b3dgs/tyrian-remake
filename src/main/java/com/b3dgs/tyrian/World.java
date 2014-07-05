@@ -29,6 +29,7 @@ import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.Verbose;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.WorldGame;
+import com.b3dgs.lionengine.game.map.TileGame;
 import com.b3dgs.lionengine.stream.FileReading;
 import com.b3dgs.lionengine.stream.FileWriting;
 import com.b3dgs.lionengine.stream.Stream;
@@ -54,7 +55,6 @@ import com.b3dgs.tyrian.entity.ship.FactoryShip;
 import com.b3dgs.tyrian.entity.ship.GencorePhoenix;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.map.Map;
-import com.b3dgs.tyrian.map.Tile;
 import com.b3dgs.tyrian.projectile.FactoryProjectile;
 import com.b3dgs.tyrian.projectile.HandlerProjectile;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
@@ -90,7 +90,7 @@ final class World
         }
         else
         {
-            final LevelRipConverter<Tile> rip = new LevelRipConverter<>();
+            final LevelRipConverter<TileGame> rip = new LevelRipConverter<>();
             rip.start(levelrip, tilesheet, map);
             try (final FileWriting file = Stream.createFileWriting(output);)
             {

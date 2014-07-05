@@ -17,7 +17,9 @@
  */
 package com.b3dgs.tyrian.map;
 
+import com.b3dgs.lionengine.game.map.CollisionTile;
 import com.b3dgs.lionengine.game.map.MapTileGame;
+import com.b3dgs.lionengine.game.map.TileGame;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
 import com.b3dgs.tyrian.entity.scenery.DoubleCanon;
@@ -45,7 +47,7 @@ import com.b3dgs.tyrian.entity.scenery.ThreeRedV;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class Map
-        extends MapTileGame<TileCollision, Tile>
+        extends MapTileGame<TileGame>
 {
     /**
      * Create the entity from the tile number.
@@ -102,7 +104,7 @@ public final class Map
      */
     public Map()
     {
-        super(24, 28);
+        super(24, 28, TileCollision.values());
     }
 
     /**
@@ -117,7 +119,7 @@ public final class Map
         {
             for (int ty = 0; ty < heightInTile; ty++)
             {
-                final Tile tile = getTile(tx, ty);
+                final TileGame tile = getTile(tx, ty);
                 if (tile != null)
                 {
                     final int n = tile.getNumber();
@@ -133,17 +135,17 @@ public final class Map
     }
 
     /*
-     * MapTileShmup
+     * MapTileGame
      */
 
     @Override
-    public Tile createTile(int width, int height, Integer pattern, int number, TileCollision collision)
+    public TileGame createTile(int width, int height, Integer pattern, int number, CollisionTile collision)
     {
-        return new Tile(width, height, pattern, number, collision);
+        return new TileGame(width, height, pattern, number, collision);
     }
 
     @Override
-    public TileCollision getCollisionFrom(String collision)
+    public CollisionTile getCollisionFrom(String collision)
     {
         return TileCollision.NONE;
     }
