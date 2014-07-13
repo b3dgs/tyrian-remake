@@ -58,20 +58,27 @@
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-core</artifactId>
-			<version>6.2.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>${lionengine.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-core-awt</artifactId>
-			<version>6.2.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>${lionengine.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.b3dgs.lionengine</groupId>
+			<artifactId>lionengine-audio-wav</artifactId>
+			<version>${lionengine.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.b3dgs.lionengine</groupId>
+			<artifactId>lionengine-audio-midi</artifactId>
+			<version>${lionengine.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-game</artifactId>
-			<version>6.2.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>${lionengine.version}</version>
 		</dependency>
 	</dependencies>
 
