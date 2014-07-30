@@ -19,9 +19,6 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.tyrian.effect.FactoryEffect;
-import com.b3dgs.tyrian.effect.HandlerEffect;
-import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
 /**
  * Setup entity implementation.
@@ -31,27 +28,14 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
 public class SetupEntity
         extends SetupSurfaceGame
 {
-    /** Factory weapon. */
-    public final FactoryWeapon factoryWeapon;
-    /** Factory effect. */
-    final FactoryEffect factoryEffect;
-    /** Handler effect. */
-    final HandlerEffect handlerEffect;
-
     /**
      * Constructor.
      * 
      * @param config The config file.
-     * @param factoryEffect The factory effect reference.
-     * @param handlerEffect The handler effect reference.
-     * @param factoryWeapon The weapon factory reference.
+     * @param context The context reference.
      */
-    public SetupEntity(Media config, FactoryEffect factoryEffect, HandlerEffect handlerEffect,
-            FactoryWeapon factoryWeapon)
+    public SetupEntity(Media config, ContextEntity context)
     {
-        super(config, false);
-        this.factoryEffect = factoryEffect;
-        this.handlerEffect = handlerEffect;
-        this.factoryWeapon = factoryWeapon;
+        super(config, context, false);
     }
 }

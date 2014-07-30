@@ -21,6 +21,7 @@ import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.CameraGame;
+import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.SetupEntity;
 import com.b3dgs.tyrian.weapon.Weapon;
@@ -49,9 +50,10 @@ public abstract class Ship
     {
         super(setup);
         energy = new Alterable(1000);
-        weaponFront = setup.factoryWeapon.create(PulseCannon.class);
+        final ContextEntity context = setup.getContext(ContextEntity.class);
+        weaponFront = context.factoryWeapon.create(PulseCannon.class);
         weaponFront.setOwner(this);
-        weaponRear = setup.factoryWeapon.create(MissileLauncherRear.class);
+        weaponRear = context.factoryWeapon.create(MissileLauncherRear.class);
         weaponRear.setOwner(this);
         setSize(24, 28);
         setLocation(0, -216);

@@ -15,46 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.effect;
+package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.core.Graphic;
-import com.b3dgs.lionengine.game.CameraGame;
-import com.b3dgs.lionengine.game.HandlerGame;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.tyrian.projectile.FactoryProjectile;
+import com.b3dgs.tyrian.projectile.HandlerProjectile;
 
 /**
- * Handler effect implementation.
+ * Represents the context related to weapons.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-public final class HandlerEffect
-        extends HandlerGame<Effect>
+public class ContextWeapon
+        implements ContextGame
 {
-    /** Camera reference. */
-    private final CameraGame camera;
+    /** Factory projectile. */
+    final FactoryProjectile factory;
+    /** Handler projectile. */
+    final HandlerProjectile handler;
 
     /**
      * Constructor.
      * 
-     * @param camera The camera reference.
+     * @param factory The factory reference.
+     * @param handler The handler reference.
      */
-    public HandlerEffect(CameraGame camera)
+    public ContextWeapon(FactoryProjectile factory, HandlerProjectile handler)
     {
-        super();
-        this.camera = camera;
-    }
-
-    @Override
-    protected void update(double extrp, Effect handlable)
-    {
-        handlable.update(extrp);
-    }
-
-    @Override
-    protected void render(Graphic g, Effect handlable)
-    {
-        if (camera.isVisible(handlable))
-        {
-            handlable.render(g, camera);
-        }
+        this.factory = factory;
+        this.handler = handler;
     }
 }

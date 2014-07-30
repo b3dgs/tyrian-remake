@@ -19,8 +19,6 @@ package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupGame;
-import com.b3dgs.tyrian.projectile.FactoryProjectile;
-import com.b3dgs.tyrian.projectile.HandlerProjectile;
 
 /**
  * Setup weapon implementation.
@@ -30,22 +28,14 @@ import com.b3dgs.tyrian.projectile.HandlerProjectile;
 public class SetupWeapon
         extends SetupGame
 {
-    /** Factory projectile. */
-    final FactoryProjectile factory;
-    /** Handler projectile. */
-    final HandlerProjectile handler;
-
     /**
      * Constructor.
      * 
      * @param config The config file.
-     * @param factory The factory reference.
-     * @param handler The handler reference.
+     * @param context The context reference.
      */
-    public SetupWeapon(Media config, FactoryProjectile factory, HandlerProjectile handler)
+    public SetupWeapon(Media config, ContextWeapon context)
     {
-        super(config);
-        this.factory = factory;
-        this.handler = handler;
+        super(config, context);
     }
 }

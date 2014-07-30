@@ -20,12 +20,10 @@ package com.b3dgs.tyrian.entity.scenery;
 import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
+import com.b3dgs.lionengine.game.purview.Fabricable;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.effect.FactoryEffect;
-import com.b3dgs.tyrian.effect.HandlerEffect;
-import com.b3dgs.tyrian.entity.Entity;
+import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.SetupEntity;
-import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
 /**
  * Factory entity scenery.
@@ -33,28 +31,27 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityScenery
-        extends FactoryObjectGame<SetupEntity, Entity>
+        extends FactoryObjectGame<SetupEntity>
 {
-    /** Factory effect. */
-    private final FactoryEffect factoryEffect;
-    /** Handler effect. */
-    private final HandlerEffect handlerEffect;
-    /** Factory weapon. */
-    private final FactoryWeapon factoryWeapon;
+    /** Context reference. */
+    private ContextEntity context;
 
     /**
      * Constructor.
-     * 
-     * @param factoryEffect The effect factory reference.
-     * @param handlerEffect The handler effect reference.
-     * @param factoryWeapon The weapon factory reference.
      */
-    public FactoryEntityScenery(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
+    public FactoryEntityScenery()
     {
         super(UtilFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.SCENERY_DIR));
-        this.factoryEffect = factoryEffect;
-        this.handlerEffect = handlerEffect;
-        this.factoryWeapon = factoryWeapon;
+    }
+
+    /**
+     * Set the factory context.
+     * 
+     * @param context The factory context.
+     */
+    public void setContext(ContextEntity context)
+    {
+        this.context = context;
     }
 
     /*
@@ -62,8 +59,8 @@ public final class FactoryEntityScenery
      */
 
     @Override
-    protected SetupEntity createSetup(Class<? extends Entity> key, Media config)
+    protected SetupEntity createSetup(Class<? extends Fabricable> key, Media config)
     {
-        return new SetupEntity(config, factoryEffect, handlerEffect, factoryWeapon);
+        return new SetupEntity(config, context);
     }
 }

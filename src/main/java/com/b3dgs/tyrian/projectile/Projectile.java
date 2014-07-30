@@ -57,8 +57,9 @@ public abstract class Projectile
     {
         super(setup);
         this.frame = frame;
-        factoryEffect = setup.factoryEffect;
-        handlerEffect = setup.handlerEffect;
+        final ContextProjectile context = setup.getContext(ContextProjectile.class);
+        factoryEffect = context.factoryEffect;
+        handlerEffect = context.handlerEffect;
         sprite = Drawable.loadSpriteTiled(setup.surface, 12, 14);
         sprite.load(false);
         setCollision(Projectile.COLLISION);

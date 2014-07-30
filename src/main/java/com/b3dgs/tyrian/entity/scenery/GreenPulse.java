@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
+import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.SetupEntity;
 import com.b3dgs.tyrian.entity.ship.Ship;
@@ -40,7 +41,7 @@ public final class GreenPulse
     public GreenPulse(SetupEntity setup)
     {
         super(setup);
-        weapon = setup.factoryWeapon.create(Impulser.class);
+        weapon = setup.getContext(ContextEntity.class).factoryWeapon.create(Impulser.class);
         weapon.setRate(1000);
         weapon.setOwner(this);
     }

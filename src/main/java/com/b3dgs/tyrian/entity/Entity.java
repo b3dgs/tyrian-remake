@@ -23,9 +23,9 @@ import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.Collision;
+import com.b3dgs.lionengine.game.EntityGame;
 import com.b3dgs.lionengine.game.configurable.Configurable;
 import com.b3dgs.lionengine.game.configurable.SizeData;
-import com.b3dgs.lionengine.game.entity.EntityGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode2;
@@ -58,8 +58,9 @@ public abstract class Entity
     protected Entity(SetupEntity setup)
     {
         super(setup);
-        factoryEffect = setup.factoryEffect;
-        handlerEffect = setup.handlerEffect;
+        final ContextEntity context = setup.getContext(ContextEntity.class);
+        factoryEffect = context.factoryEffect;
+        handlerEffect = context.handlerEffect;
         final Configurable configurable = setup.getConfigurable();
         final SizeData sizeData = configurable.getSize();
         final int width = sizeData.getWidth();

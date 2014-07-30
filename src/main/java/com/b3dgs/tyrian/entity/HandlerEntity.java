@@ -19,7 +19,7 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.game.CameraGame;
-import com.b3dgs.lionengine.game.entity.HandlerEntityGame;
+import com.b3dgs.lionengine.game.HandlerGame;
 import com.b3dgs.tyrian.entity.ship.Ship;
 
 /**
@@ -28,7 +28,7 @@ import com.b3dgs.tyrian.entity.ship.Ship;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class HandlerEntity
-        extends HandlerEntityGame<EntityOpponent>
+        extends HandlerGame<EntityOpponent>
 {
     /** Camera reference. */
     private final CameraGame camera;
@@ -63,7 +63,7 @@ public final class HandlerEntity
     @Override
     protected void update(double extrp, EntityOpponent entity)
     {
-        super.update(extrp, entity);
+        entity.update(extrp);
         entity.update(ship);
         if (ship != null && entity.collide(ship))
         {

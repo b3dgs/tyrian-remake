@@ -37,6 +37,7 @@ import com.b3dgs.lionengine.utility.LevelRipConverter;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
+import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
 import com.b3dgs.tyrian.entity.bonus.Bonus;
@@ -55,8 +56,10 @@ import com.b3dgs.tyrian.entity.ship.FactoryShip;
 import com.b3dgs.tyrian.entity.ship.GencorePhoenix;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.map.Map;
+import com.b3dgs.tyrian.projectile.ContextProjectile;
 import com.b3dgs.tyrian.projectile.FactoryProjectile;
 import com.b3dgs.tyrian.projectile.HandlerProjectile;
+import com.b3dgs.tyrian.weapon.ContextWeapon;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
 /**
@@ -165,19 +168,20 @@ final class World
         handlerEntityDynamic = new HandlerEntity(camera);
         handlerEntityBonus = new HandlerEntity(camera);
 
-        factoryProjectile = new FactoryProjectile(factoryEffect, handlerEffect);
+        factoryProjectile = new FactoryProjectile();
         final HandlerEntity[] handlers = new HandlerEntity[]
         {
                 handlerEntityScenery, handlerEntityDynamic
         };
         handlerProjectile = new HandlerProjectile(camera, handlers);
-        factoryWeapon = new FactoryWeapon(factoryProjectile, handlerProjectile);
+        factoryWeapon = new FactoryWeapon();
+        factoryEntityScenery = new FactoryEntityScenery();
+        factoryEntityDynamic = new FactoryEntityDynamic();
+        factoryEntityBonus = new FactoryEntityBonus();
+        factoryShip = new FactoryShip();
 
-        factoryEntityScenery = new FactoryEntityScenery(factoryEffect, handlerEffect, factoryWeapon);
-        factoryEntityDynamic = new FactoryEntityDynamic(factoryEffect, handlerEffect, factoryWeapon);
-        factoryEntityBonus = new FactoryEntityBonus(factoryEffect, handlerEffect, factoryWeapon);
+        setContexts();
 
-        factoryShip = new FactoryShip(factoryEffect, handlerEffect, factoryWeapon);
         ship = factoryShip.create(GencorePhoenix.class);
         handlerEntityScenery.setShip(ship);
         handlerEntityDynamic.setShip(ship);
@@ -208,6 +212,23 @@ final class World
         camera.setView(0, 0, 263, 184);
         timerMeteor.start();
         timerBonus.start();
+    }
+
+    /**
+     * Set the contexts.
+     */
+    private void setContexts()
+    {
+        final ContextEntity contextEntity = new ContextEntity(factoryEffect, handlerEffect, factoryWeapon);
+        final ContextProjectile contextProjectile = new ContextProjectile(factoryEffect, handlerEffect);
+        final ContextWeapon contextWeapon = new ContextWeapon(factoryProjectile, handlerProjectile);
+
+        factoryShip.setContext(contextEntity);
+        factoryEntityScenery.setContext(contextEntity);
+        factoryEntityDynamic.setContext(contextEntity);
+        factoryEntityBonus.setContext(contextEntity);
+        factoryProjectile.setContext(contextProjectile);
+        factoryWeapon.setContext(contextWeapon);
     }
 
     /*

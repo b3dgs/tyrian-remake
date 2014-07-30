@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.entity.bonus;
 
 import com.b3dgs.tyrian.Sfx;
+import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
@@ -46,7 +47,7 @@ abstract class Weapon
     protected Weapon(SetupEntityBonus setup, Class<? extends com.b3dgs.tyrian.weapon.Weapon> target, boolean front)
     {
         super(setup);
-        factoryWeapon = setup.factoryWeapon;
+        factoryWeapon = setup.getContext(ContextEntity.class).factoryWeapon;
         this.target = target;
         this.front = front;
     }

@@ -20,10 +20,9 @@ package com.b3dgs.tyrian.entity.bonus;
 import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
+import com.b3dgs.lionengine.game.purview.Fabricable;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.effect.FactoryEffect;
-import com.b3dgs.tyrian.effect.HandlerEffect;
-import com.b3dgs.tyrian.weapon.FactoryWeapon;
+import com.b3dgs.tyrian.entity.ContextEntity;
 
 /**
  * Factory entity bonus.
@@ -31,28 +30,27 @@ import com.b3dgs.tyrian.weapon.FactoryWeapon;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityBonus
-        extends FactoryObjectGame<SetupEntityBonus, Bonus>
+        extends FactoryObjectGame<SetupEntityBonus>
 {
-    /** Factory effect. */
-    private final FactoryEffect factoryEffect;
-    /** factory weapon. */
-    private final FactoryWeapon factoryWeapon;
-    /** Handler effect. */
-    private final HandlerEffect handlerEffect;
+    /** Context reference. */
+    private ContextEntity context;
 
     /**
      * Constructor.
-     * 
-     * @param factoryEffect The effect factory reference.
-     * @param factoryWeapon The weapon factory reference.
-     * @param handlerEffect The handler effect reference.
      */
-    public FactoryEntityBonus(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
+    public FactoryEntityBonus()
     {
         super(UtilFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.BONUS_DIR));
-        this.factoryEffect = factoryEffect;
-        this.handlerEffect = handlerEffect;
-        this.factoryWeapon = factoryWeapon;
+    }
+
+    /**
+     * Set the factory context.
+     * 
+     * @param context The factory context.
+     */
+    public void setContext(ContextEntity context)
+    {
+        this.context = context;
     }
 
     /*
@@ -60,8 +58,8 @@ public final class FactoryEntityBonus
      */
 
     @Override
-    protected SetupEntityBonus createSetup(Class<? extends Bonus> type, Media config)
+    protected SetupEntityBonus createSetup(Class<? extends Fabricable> type, Media config)
     {
-        return new SetupEntityBonus(config, factoryEffect, handlerEffect, factoryWeapon);
+        return new SetupEntityBonus(config, context);
     }
 }

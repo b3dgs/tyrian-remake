@@ -21,9 +21,8 @@ import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupGame;
+import com.b3dgs.lionengine.game.purview.Fabricable;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.projectile.FactoryProjectile;
-import com.b3dgs.tyrian.projectile.HandlerProjectile;
 
 /**
  * Weapon factory.
@@ -31,24 +30,27 @@ import com.b3dgs.tyrian.projectile.HandlerProjectile;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryWeapon
-        extends FactoryObjectGame<SetupGame, Weapon>
+        extends FactoryObjectGame<SetupGame>
 {
-    /** Factory projectile. */
-    private final FactoryProjectile factory;
-    /** Handler projectile. */
-    private final HandlerProjectile handler;
+    /** Context reference. */
+    private ContextWeapon context;
 
     /**
      * Constructor.
-     * 
-     * @param factory The factory reference.
-     * @param handler The handler reference.
      */
-    public FactoryWeapon(FactoryProjectile factory, HandlerProjectile handler)
+    public FactoryWeapon()
     {
         super(AppTyrian.WEAPONS_DIR);
-        this.factory = factory;
-        this.handler = handler;
+    }
+
+    /**
+     * Set the factory context.
+     * 
+     * @param context The factory context.
+     */
+    public void setContext(ContextWeapon context)
+    {
+        this.context = context;
     }
 
     /*
@@ -56,8 +58,8 @@ public final class FactoryWeapon
      */
 
     @Override
-    protected SetupGame createSetup(Class<? extends Weapon> type, Media config)
+    protected SetupGame createSetup(Class<? extends Fabricable> type, Media config)
     {
-        return new SetupWeapon(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "Weapons.xml"), factory, handler);
+        return new SetupWeapon(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "Weapons.xml"), context);
     }
 }

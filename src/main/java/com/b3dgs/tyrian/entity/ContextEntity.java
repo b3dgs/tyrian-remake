@@ -15,46 +15,39 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.effect;
+package com.b3dgs.tyrian.entity;
 
-import com.b3dgs.lionengine.core.Graphic;
-import com.b3dgs.lionengine.game.CameraGame;
-import com.b3dgs.lionengine.game.HandlerGame;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.tyrian.effect.FactoryEffect;
+import com.b3dgs.tyrian.effect.HandlerEffect;
+import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
 /**
- * Handler effect implementation.
+ * Represents the context related to entities.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-public final class HandlerEffect
-        extends HandlerGame<Effect>
+public class ContextEntity
+        implements ContextGame
 {
-    /** Camera reference. */
-    private final CameraGame camera;
+    /** Factory weapon. */
+    public final FactoryWeapon factoryWeapon;
+    /** Factory effect. */
+    final FactoryEffect factoryEffect;
+    /** Handler effect. */
+    final HandlerEffect handlerEffect;
 
     /**
      * Constructor.
      * 
-     * @param camera The camera reference.
+     * @param factoryEffect The factory effect reference.
+     * @param handlerEffect The handler effect reference.
+     * @param factoryWeapon The weapon factory reference.
      */
-    public HandlerEffect(CameraGame camera)
+    public ContextEntity(FactoryEffect factoryEffect, HandlerEffect handlerEffect, FactoryWeapon factoryWeapon)
     {
-        super();
-        this.camera = camera;
-    }
-
-    @Override
-    protected void update(double extrp, Effect handlable)
-    {
-        handlable.update(extrp);
-    }
-
-    @Override
-    protected void render(Graphic g, Effect handlable)
-    {
-        if (camera.isVisible(handlable))
-        {
-            handlable.render(g, camera);
-        }
+        this.factoryEffect = factoryEffect;
+        this.handlerEffect = handlerEffect;
+        this.factoryWeapon = factoryWeapon;
     }
 }

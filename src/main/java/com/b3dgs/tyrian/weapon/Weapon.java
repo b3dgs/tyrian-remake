@@ -40,7 +40,7 @@ public abstract class Weapon
      */
     protected Weapon(SetupWeapon setup)
     {
-        super(setup, setup.factory, setup.handler);
+        super(setup, setup.getContext(ContextWeapon.class).factory, setup.getContext(ContextWeapon.class).handler);
         level.setMax(5);
         consume = 300;
     }

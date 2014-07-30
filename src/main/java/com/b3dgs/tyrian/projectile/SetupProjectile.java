@@ -19,8 +19,6 @@ package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.tyrian.effect.FactoryEffect;
-import com.b3dgs.tyrian.effect.HandlerEffect;
 
 /**
  * Setup projectile implementation.
@@ -30,22 +28,14 @@ import com.b3dgs.tyrian.effect.HandlerEffect;
 public class SetupProjectile
         extends SetupSurfaceGame
 {
-    /** Factory effect. */
-    final FactoryEffect factoryEffect;
-    /** Handler effect. */
-    final HandlerEffect handlerEffect;
-
     /**
      * Constructor.
      * 
      * @param config The config file.
-     * @param factoryEffect The factory effect reference.
-     * @param handlerEffect The handler effect reference.
+     * @param context The context reference.
      */
-    public SetupProjectile(Media config, FactoryEffect factoryEffect, HandlerEffect handlerEffect)
+    public SetupProjectile(Media config, ContextProjectile context)
     {
-        super(config, false);
-        this.factoryEffect = factoryEffect;
-        this.handlerEffect = handlerEffect;
+        super(config, context, false);
     }
 }
