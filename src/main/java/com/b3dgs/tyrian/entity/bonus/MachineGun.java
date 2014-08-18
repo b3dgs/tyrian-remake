@@ -17,19 +17,27 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
+
 /**
  * Machine gun bonus.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class MachineGun
-        extends Weapon
+        extends WeaponBonus
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, MachineGun.class);
+
     /**
-     * {@link Bonus#Bonus(SetupEntityBonus)}
+     * {@link Bonus#Bonus(SetupSurfaceGame)}
      */
-    public MachineGun(SetupEntityBonus setup)
+    public MachineGun(SetupSurfaceGame setup)
     {
-        super(setup, com.b3dgs.tyrian.weapon.front.MachineGun.class, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.MachineGun.MEDIA, true);
     }
 }

@@ -19,10 +19,8 @@ package com.b3dgs.tyrian.entity.ship;
 
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.entity.ContextEntity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Factory ship.
@@ -30,11 +28,8 @@ import com.b3dgs.tyrian.entity.SetupEntity;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryShip
-        extends FactoryObjectGame<SetupEntity>
+        extends FactoryObjectGame<SetupSurfaceGame>
 {
-    /** Context reference. */
-    private ContextEntity context;
-
     /**
      * Constructor
      */
@@ -43,23 +38,13 @@ public final class FactoryShip
         super(AppTyrian.SHIPS_DIR);
     }
 
-    /**
-     * Set the factory context.
-     * 
-     * @param context The factory context.
-     */
-    public void setContext(ContextEntity context)
-    {
-        this.context = context;
-    }
-
     /*
      * FactoryObjectGame
      */
 
     @Override
-    protected SetupEntity createSetup(Class<? extends Fabricable> type, Media config)
+    protected SetupSurfaceGame createSetup(Media config)
     {
-        return new SetupEntity(config, context);
+        return new SetupSurfaceGame(config);
     }
 }

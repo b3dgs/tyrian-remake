@@ -28,6 +28,7 @@ import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.Verbose;
 import com.b3dgs.lionengine.game.CameraGame;
+import com.b3dgs.lionengine.game.ContextGame;
 import com.b3dgs.lionengine.game.WorldGame;
 import com.b3dgs.lionengine.game.map.TileGame;
 import com.b3dgs.lionengine.stream.FileReading;
@@ -37,10 +38,8 @@ import com.b3dgs.lionengine.utility.LevelRipConverter;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
-import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.HandlerEntity;
-import com.b3dgs.tyrian.entity.bonus.Bonus;
 import com.b3dgs.tyrian.entity.bonus.FactoryEntityBonus;
 import com.b3dgs.tyrian.entity.bonus.HyperPulse;
 import com.b3dgs.tyrian.entity.bonus.MachineGun;
@@ -56,10 +55,8 @@ import com.b3dgs.tyrian.entity.ship.FactoryShip;
 import com.b3dgs.tyrian.entity.ship.GencorePhoenix;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.map.Map;
-import com.b3dgs.tyrian.projectile.ContextProjectile;
 import com.b3dgs.tyrian.projectile.FactoryProjectile;
 import com.b3dgs.tyrian.projectile.HandlerProjectile;
-import com.b3dgs.tyrian.weapon.ContextWeapon;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
 
 /**
@@ -180,9 +177,9 @@ final class World
         factoryEntityBonus = new FactoryEntityBonus();
         factoryShip = new FactoryShip();
 
-        setContexts();
+        createContextsAndPreparators();
 
-        ship = factoryShip.create(GencorePhoenix.class);
+        ship = factoryShip.create(GencorePhoenix.MEDIA);
         handlerEntityScenery.setShip(ship);
         handlerEntityDynamic.setShip(ship);
         handlerEntityBonus.setShip(ship);
@@ -215,18 +212,28 @@ final class World
     }
 
     /**
-     * Set the contexts.
+     * Create the contexts and assign them.
      */
-    private void setContexts()
+    private void createContextsAndPreparators()
     {
-        final ContextEntity contextEntity = new ContextEntity(factoryEffect, handlerEffect, factoryWeapon);
-        final ContextProjectile contextProjectile = new ContextProjectile(factoryEffect, handlerEffect);
-        final ContextWeapon contextWeapon = new ContextWeapon(factoryProjectile, handlerProjectile);
+        final ContextGame contextEntity = new ContextGame();
+        contextEntity.addService(factoryEffect);
+        contextEntity.addService(handlerEffect);
+        contextEntity.addService(factoryWeapon);
+
+        final ContextGame contextProjectile = new ContextGame();
+        contextProjectile.addService(factoryEffect);
+        contextProjectile.addService(handlerEffect);
+
+        final ContextGame contextWeapon = new ContextGame();
+        contextWeapon.addService(factoryProjectile);
+        contextWeapon.addService(handlerProjectile);
 
         factoryShip.setContext(contextEntity);
         factoryEntityScenery.setContext(contextEntity);
         factoryEntityDynamic.setContext(contextEntity);
         factoryEntityBonus.setContext(contextEntity);
+
         factoryProjectile.setContext(contextProjectile);
         factoryWeapon.setContext(contextWeapon);
     }
@@ -257,7 +264,7 @@ final class World
         {
             if (UtilRandom.getRandomInteger(50) == 0)
             {
-                final EntityOpponent entity = factoryEntityDynamic.create(MeteorBig.class);
+                final EntityOpponent entity = factoryEntityDynamic.create(MeteorBig.MEDIA);
                 entity.teleport(UtilRandom.getRandomInteger(camera.getViewWidth()) - entity.getWidth() / 2,
                         camera.getLocationY() + camera.getViewHeight() + entity.getHeight());
                 handlerEntityDynamic.add(entity);
@@ -266,29 +273,29 @@ final class World
         }
         if (timerBonus.elapsed(2000))
         {
-            final Class<? extends Bonus> bonus;
+            final Media bonus;
             switch (UtilRandom.getRandomInteger(30))
             {
                 case 0:
-                    bonus = PulseCannon.class;
+                    bonus = PulseCannon.MEDIA;
                     break;
                 case 1:
-                    bonus = HyperPulse.class;
+                    bonus = HyperPulse.MEDIA;
                     break;
                 case 2:
-                    bonus = MachineGun.class;
+                    bonus = MachineGun.MEDIA;
                     break;
                 case 3:
-                    bonus = MissileLauncherFront.class;
+                    bonus = MissileLauncherFront.MEDIA;
                     break;
                 case 4:
-                    bonus = MissileLauncherRear.class;
+                    bonus = MissileLauncherRear.MEDIA;
                     break;
                 case 5:
-                    bonus = WaveCannonRear.class;
+                    bonus = WaveCannonRear.MEDIA;
                     break;
                 default:
-                    bonus = PowerUp.class;
+                    bonus = PowerUp.MEDIA;
                     break;
 
             }

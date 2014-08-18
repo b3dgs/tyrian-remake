@@ -17,10 +17,9 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.AppTyrian;
 
 /**
@@ -29,27 +28,14 @@ import com.b3dgs.tyrian.AppTyrian;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryProjectile
-        extends FactoryObjectGame<SetupProjectile>
+        extends FactoryObjectGame<SetupSurfaceGame>
 {
-    /** Projectile setup. */
-    private SetupProjectile setup;
-
     /**
      * Constructor.
      */
     public FactoryProjectile()
     {
-        super("projectiles");
-    }
-
-    /**
-     * Set the factory context.
-     * 
-     * @param context The factory context.
-     */
-    public void setContext(ContextProjectile context)
-    {
-        setup = new SetupProjectile(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "weapons.xml"), context);
+        super(AppTyrian.PROJECTILES_DIR);
     }
 
     /*
@@ -57,8 +43,8 @@ public final class FactoryProjectile
      */
 
     @Override
-    protected SetupProjectile createSetup(Class<? extends Fabricable> type, Media config)
+    protected SetupSurfaceGame createSetup(Media config)
     {
-        return setup;
+        return new SetupSurfaceGame(config);
     }
 }

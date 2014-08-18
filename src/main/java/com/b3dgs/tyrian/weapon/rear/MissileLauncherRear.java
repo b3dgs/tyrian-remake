@@ -17,11 +17,13 @@
  */
 package com.b3dgs.tyrian.weapon.rear;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.MissileRear;
-import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponCategory;
 
 /**
  * Missile rear implementation.
@@ -31,13 +33,16 @@ import com.b3dgs.tyrian.weapon.Weapon;
 public final class MissileLauncherRear
         extends Weapon
 {
+    /** Class media. */
+    public static final Media MEDIA = Weapon.getConfig(WeaponCategory.REAR, MissileLauncherRear.class);
+
     /** Side. */
     private boolean side;
 
     /**
-     * {@link Weapon#Weapon(SetupWeapon)}
+     * {@link Weapon#Weapon(SetupGame)}
      */
-    public MissileLauncherRear(SetupWeapon setup)
+    public MissileLauncherRear(SetupGame setup)
     {
         super(setup);
         setRate(400);
@@ -58,57 +63,57 @@ public final class MissileLauncherRear
             case 0:
                 if (side)
                 {
-                    addProjectile(MissileRear.class, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
+                    addProjectile(MissileRear.MEDIA, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
                 }
                 else
                 {
-                    addProjectile(MissileRear.class, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
+                    addProjectile(MissileRear.MEDIA, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
                 }
                 side = !side;
                 break;
             case 1:
-                addProjectile(MissileRear.class, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
-                addProjectile(MissileRear.class, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.25, speed, -10, -10).setFrame(136);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.25, speed, 10, -10).setFrame(151);
                 break;
             case 2:
-                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
-                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
 
-                addProjectile(MissileRear.class, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(MissileRear.class, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.MEDIA, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.MEDIA, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
                 break;
             case 3:
-                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
-                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.2, speed, -10, -5).setFrame(136);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.2, speed, 10, -5).setFrame(151);
 
-                addProjectile(MissileRear.class, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(MissileRear.class, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.MEDIA, 100L, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.MEDIA, 100L, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
 
                 if (side)
                 {
-                    addProjectile(MissileRear.class, 200L, dmg, -speed * 1.5, speed, -10, -20).setFrame(138);
+                    addProjectile(MissileRear.MEDIA, 200L, dmg, -speed * 1.5, speed, -10, -20).setFrame(138);
                 }
                 else
                 {
-                    addProjectile(MissileRear.class, 200L, dmg, speed * 1.5, speed, 10, -20).setFrame(153);
+                    addProjectile(MissileRear.MEDIA, 200L, dmg, speed * 1.5, speed, 10, -20).setFrame(153);
                 }
                 side = !side;
                 break;
             case 4:
-                addProjectile(MissileRear.class, dmg, -speed * 1.2, speed, -10, -5).setFrame(137);
-                addProjectile(MissileRear.class, dmg, speed * 1.2, speed, 10, -5).setFrame(152);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.2, speed, -10, -5).setFrame(137);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.2, speed, 10, -5).setFrame(152);
 
-                addProjectile(MissileRear.class, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
-                addProjectile(MissileRear.class, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.4, speed, -10, -15).setFrame(137);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.4, speed, 10, -15).setFrame(152);
                 break;
             case 5:
-                addProjectile(MissileRear.class, 50L, dmg, -speed * 1.1, speed, -10, 0).setFrame(138);
-                addProjectile(MissileRear.class, 25L, dmg, -speed * 1.2, speed, -10, -10).setFrame(138);
-                addProjectile(MissileRear.class, dmg, -speed * 1.3, speed, -10, -20).setFrame(138);
+                addProjectile(MissileRear.MEDIA, 50L, dmg, -speed * 1.1, speed, -10, 0).setFrame(138);
+                addProjectile(MissileRear.MEDIA, 25L, dmg, -speed * 1.2, speed, -10, -10).setFrame(138);
+                addProjectile(MissileRear.MEDIA, dmg, -speed * 1.3, speed, -10, -20).setFrame(138);
 
-                addProjectile(MissileRear.class, 50L, dmg, speed * 1.1, speed, 10, 0).setFrame(153);
-                addProjectile(MissileRear.class, 25L, dmg, speed * 1.2, speed, 10, -10).setFrame(153);
-                addProjectile(MissileRear.class, dmg, speed * 1.3, speed, 10, -20).setFrame(153);
+                addProjectile(MissileRear.MEDIA, 50L, dmg, speed * 1.1, speed, 10, 0).setFrame(153);
+                addProjectile(MissileRear.MEDIA, 25L, dmg, speed * 1.2, speed, 10, -10).setFrame(153);
+                addProjectile(MissileRear.MEDIA, dmg, speed * 1.3, speed, 10, -20).setFrame(153);
                 break;
             default:
                 break;

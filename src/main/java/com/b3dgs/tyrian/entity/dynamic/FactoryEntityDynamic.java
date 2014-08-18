@@ -17,13 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.dynamic;
 
-import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.entity.ContextEntity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Factory entity dynamic.
@@ -31,27 +28,14 @@ import com.b3dgs.tyrian.entity.SetupEntity;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityDynamic
-        extends FactoryObjectGame<SetupEntity>
+        extends FactoryObjectGame<SetupSurfaceGame>
 {
-    /** Context reference. */
-    private ContextEntity context;
-
     /**
      * Constructor.
      */
     public FactoryEntityDynamic()
     {
-        super(UtilFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.DYNAMICS_DIR));
-    }
-
-    /**
-     * Set the factory context.
-     * 
-     * @param context The factory context.
-     */
-    public void setContext(ContextEntity context)
-    {
-        this.context = context;
+        super(AppTyrian.DYNAMICS_DIR);
     }
 
     /*
@@ -59,8 +43,8 @@ public final class FactoryEntityDynamic
      */
 
     @Override
-    protected SetupEntity createSetup(Class<? extends Fabricable> key, Media config)
+    protected SetupSurfaceGame createSetup(Media config)
     {
-        return new SetupEntity(config, context);
+        return new SetupSurfaceGame(config);
     }
 }

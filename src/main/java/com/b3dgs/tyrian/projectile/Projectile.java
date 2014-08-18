@@ -17,12 +17,18 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.Collision;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.lionengine.game.FactoryObjectGame;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.projectile.ProjectileGame;
+import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
 import com.b3dgs.tyrian.entity.Entity;
@@ -38,10 +44,22 @@ public abstract class Projectile
     /** Default collision. */
     private static final Collision COLLISION = new Collision(10, -4, 4, 4, false);
 
+    /**
+     * Get a projectile configuration file.
+     * 
+     * @param type The config associated class.
+     * @return The media config.
+     */
+    public static Media getConfig(Class<?> type)
+    {
+        return Core.MEDIA.create(AppTyrian.PROJECTILES_DIR, type.getSimpleName() + "."
+                + FactoryObjectGame.FILE_DATA_EXTENSION);
+    }
+
     /** Factory effect. */
-    protected final FactoryEffect factoryEffect;
+    protected FactoryEffect factoryEffect;
     /** Handler effect. */
-    protected final HandlerEffect handlerEffect;
+    protected HandlerEffect handlerEffect;
     /** Projectile surface. */
     private final SpriteTiled sprite;
     /** Surface id. */
@@ -53,13 +71,10 @@ public abstract class Projectile
      * @param setup The setup reference.
      * @param frame The frame number.
      */
-    protected Projectile(SetupProjectile setup, int frame)
+    protected Projectile(SetupSurfaceGame setup, int frame)
     {
         super(setup);
         this.frame = frame;
-        final ContextProjectile context = setup.getContext(ContextProjectile.class);
-        factoryEffect = context.factoryEffect;
-        handlerEffect = context.handlerEffect;
         sprite = Drawable.loadSpriteTiled(setup.surface, 12, 14);
         sprite.load(false);
         setCollision(Projectile.COLLISION);
@@ -78,6 +93,13 @@ public abstract class Projectile
     /*
      * ProjectileGame
      */
+
+    @Override
+    public void prepare(ContextGame context)
+    {
+        factoryEffect = context.getService(FactoryEffect.class);
+        handlerEffect = context.getService(HandlerEffect.class);
+    }
 
     @Override
     public void render(Graphic g, CameraGame camera)

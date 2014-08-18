@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode2;
 import com.b3dgs.tyrian.effect.Smoke;
@@ -44,7 +45,7 @@ public abstract class Missile
      * @param setup The setup reference.
      * @param frame The missile frame.
      */
-    protected Missile(SetupProjectile setup, int frame)
+    protected Missile(SetupSurfaceGame setup, int frame)
     {
         super(setup, frame);
         timerEffect = new Timing();
@@ -59,7 +60,7 @@ public abstract class Missile
      */
     public void addEffect(int x, int y)
     {
-        final Effect effect = factoryEffect.create(Smoke.class);
+        final Effect effect = factoryEffect.create(Smoke.MEDIA);
         effect.start(x, y, 0);
         handlerEffect.add(effect);
     }
@@ -89,8 +90,8 @@ public abstract class Missile
         final int y = getLocationIntY() + getHeight();
         for (int i = 0; i < size; i++)
         {
-            final Effect effect1 = factoryEffect.create(Explode2.class);
-            final Effect effect2 = factoryEffect.create(Explode2.class);
+            final Effect effect1 = factoryEffect.create(Explode2.MEDIA);
+            final Effect effect2 = factoryEffect.create(Explode2.MEDIA);
 
             effect1.start(x - i * effect1.getWidth() / 2, y, i * 20);
             effect2.start(x + i * effect2.getWidth() / 2, y, i * 20);
@@ -100,8 +101,8 @@ public abstract class Missile
         }
         for (int i = 0; i < size; i++)
         {
-            final Effect effect1 = factoryEffect.create(Explode2.class);
-            final Effect effect2 = factoryEffect.create(Explode2.class);
+            final Effect effect1 = factoryEffect.create(Explode2.MEDIA);
+            final Effect effect2 = factoryEffect.create(Explode2.MEDIA);
 
             effect1.start(x, y - i * effect1.getHeight() / 2, i * 20);
             effect2.start(x, y + i * effect2.getHeight() / 2, i * 20);

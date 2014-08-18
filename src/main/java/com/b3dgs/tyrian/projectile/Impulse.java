@@ -17,6 +17,9 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+
 /**
  * Impulse projectile.
  * 
@@ -25,12 +28,15 @@ package com.b3dgs.tyrian.projectile;
 public final class Impulse
         extends Projectile
 {
+    /** Class media. */
+    public static final Media MEDIA = Projectile.getConfig(Impulse.class);
+
     /**
      * Constructor.
      * 
      * @param setup The setup reference.
      */
-    public Impulse(SetupProjectile setup)
+    public Impulse(SetupSurfaceGame setup)
     {
         super(setup, 196);
     }

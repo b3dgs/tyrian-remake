@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.scenery.Head</lionengine:class>
     <lionengine:surface image="Head.png"/>
 	<lionengine:size width="48" height="56"/>
 	<lionengine:collision name="default" offsetX="9" offsetY="3" width="30" height="50" mirror="false" />

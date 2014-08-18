@@ -17,8 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Generator implementation.
@@ -28,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class Spider
         extends EntityScenery
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SCENERY, Spider.class);
+
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    public Spider(SetupEntity setup)
+    public Spider(SetupSurfaceGame setup)
     {
         super(setup);
     }

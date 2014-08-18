@@ -17,11 +17,13 @@
  */
 package com.b3dgs.tyrian.weapon.other;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.Impulse;
-import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponCategory;
 
 /**
  * Impulser implementation.
@@ -31,10 +33,13 @@ import com.b3dgs.tyrian.weapon.Weapon;
 public final class Impulser
         extends Weapon
 {
+    /** Class media. */
+    public static final Media MEDIA = Weapon.getConfig(WeaponCategory.OTHER, Impulser.class);
+
     /**
-     * @see Weapon#Weapon(SetupWeapon)
+     * @see Weapon#Weapon(SetupGame)
      */
-    public Impulser(SetupWeapon setup)
+    public Impulser(SetupGame setup)
     {
         super(setup);
         setOffsetY(-5);
@@ -52,6 +57,6 @@ public final class Impulser
         final int speed = 2;
         Sfx.WEAPON_PULSE.play();
         dmg = 60;
-        addProjectile(Impulse.class, dmg, target, speed, 0, 0);
+        addProjectile(Impulse.MEDIA, dmg, target, speed, 0, 0);
     }
 }

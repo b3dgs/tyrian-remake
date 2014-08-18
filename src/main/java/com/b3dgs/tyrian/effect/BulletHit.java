@@ -17,7 +17,11 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.core.Core;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.AppTyrian;
 
 /**
  * Bullet hit effect.
@@ -27,6 +31,10 @@ import com.b3dgs.lionengine.game.SetupSurfaceGame;
 public final class BulletHit
         extends Effect
 {
+    /** Class media. */
+    public static final Media MEDIA = Core.MEDIA.create(AppTyrian.EFFECTS_DIR, BulletHit.class.getSimpleName() + "."
+            + FactoryObjectGame.FILE_DATA_EXTENSION);
+
     /**
      * Constructor.
      * 

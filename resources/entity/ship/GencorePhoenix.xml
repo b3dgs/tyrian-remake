@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.ship.GencorePhoenix</lionengine:class>
     <lionengine:surface image="GencorePhoenix.png"/>
 	<lionengine:size width="24" height="28"/>
 	<lionengine:collision name="default" offsetX="4" offsetY="2" width="14" height="20" mirror="false" />

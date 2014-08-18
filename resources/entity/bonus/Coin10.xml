@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.bonus.Coin10</lionengine:class>
     <lionengine:surface image="Coin10.png"/>
 	<lionengine:size width="12" height="14"/>
 	<lionengine:collision name="default" offsetX="0" offsetY="0" width="12" height="14" mirror="false" />

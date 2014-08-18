@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.scenery.Spider</lionengine:class>
     <lionengine:surface image="Spider.png"/>
 	<lionengine:size width="48" height="56"/>
 	<lionengine:collision name="default" offsetX="4" offsetY="4" width="36" height="40" mirror="false" />

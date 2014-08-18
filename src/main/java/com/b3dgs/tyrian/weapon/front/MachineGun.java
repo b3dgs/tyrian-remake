@@ -18,11 +18,13 @@
 package com.b3dgs.tyrian.weapon.front;
 
 import com.b3dgs.lionengine.UtilMath;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.Bullet;
-import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponCategory;
 
 /**
  * Machine gun implementation.
@@ -32,13 +34,16 @@ import com.b3dgs.tyrian.weapon.Weapon;
 public final class MachineGun
         extends Weapon
 {
+    /** Class media. */
+    public static final Media MEDIA = Weapon.getConfig(WeaponCategory.FRONT, MachineGun.class);
+
     /** Offset x. */
     private int offsetX;
 
     /**
-     * @see Weapon#Weapon(SetupWeapon)
+     * @see Weapon#Weapon(SetupGame)
      */
-    public MachineGun(SetupWeapon setup)
+    public MachineGun(SetupGame setup)
     {
         super(setup);
         setOffsetY(-5);
@@ -60,37 +65,37 @@ public final class MachineGun
                 dmg = 60;
                 offsetX += 80.0;
                 setRate(100);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 3), 0);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 3), 0);
                 break;
             case 1:
                 dmg = 60;
                 offsetX += 90.0;
                 setRate(90);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 4), 0);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 4), 0);
                 break;
             case 2:
                 dmg = 60;
                 offsetX += 100.0;
                 setRate(80);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 5), 0);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 5), 0);
                 break;
             case 3:
                 dmg = 60;
                 offsetX += 110.0;
                 setRate(70);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 4), 0).setFrame(125);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 4), 0).setFrame(125);
                 break;
             case 4:
                 dmg = 60;
                 offsetX += 120.0;
                 setRate(60);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 6), 0).setFrame(125);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 6), 0).setFrame(125);
                 break;
             case 5:
                 dmg = 60;
                 offsetX += 60.0;
                 setRate(50);
-                addProjectile(Bullet.class, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 8), 0).setFrame(125);
+                addProjectile(Bullet.MEDIA, dmg, 0, speed, (int) (UtilMath.sin(offsetX) * 8), 0).setFrame(125);
                 break;
             default:
                 break;

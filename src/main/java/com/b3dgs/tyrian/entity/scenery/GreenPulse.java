@@ -17,10 +17,13 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
-import com.b3dgs.tyrian.entity.ContextEntity;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 import com.b3dgs.tyrian.entity.ship.Ship;
+import com.b3dgs.tyrian.weapon.FactoryWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 import com.b3dgs.tyrian.weapon.other.Impulser;
 
@@ -32,23 +35,32 @@ import com.b3dgs.tyrian.weapon.other.Impulser;
 public final class GreenPulse
         extends EntityScenery
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SCENERY, GreenPulse.class);
+
     /** Weapon. */
-    private final Weapon weapon;
+    private Weapon weapon;
 
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    public GreenPulse(SetupEntity setup)
+    public GreenPulse(SetupSurfaceGame setup)
     {
         super(setup);
-        weapon = setup.getContext(ContextEntity.class).factoryWeapon.create(Impulser.class);
-        weapon.setRate(1000);
-        weapon.setOwner(this);
     }
 
     /*
      * EntityScenery
      */
+
+    @Override
+    public void prepare(ContextGame context)
+    {
+        super.prepare(context);
+        weapon = context.getService(FactoryWeapon.class).create(Impulser.MEDIA);
+        weapon.setRate(1000);
+        weapon.setOwner(this);
+    }
 
     @Override
     public void update(Ship ship)

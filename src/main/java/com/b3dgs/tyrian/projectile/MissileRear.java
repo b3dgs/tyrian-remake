@@ -17,6 +17,9 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+
 /**
  * Missile rear left projectile.
  * 
@@ -25,12 +28,15 @@ package com.b3dgs.tyrian.projectile;
 public final class MissileRear
         extends Missile
 {
+    /** Class media. */
+    public static final Media MEDIA = Projectile.getConfig(MissileRear.class);
+
     /**
      * Constructor.
      * 
      * @param setup The setup reference.
      */
-    public MissileRear(SetupProjectile setup)
+    public MissileRear(SetupSurfaceGame setup)
     {
         super(setup, 136);
     }

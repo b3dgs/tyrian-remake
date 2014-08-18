@@ -17,19 +17,27 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
+
 /**
  * Wave cannon rear bonus.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class WaveCannonRear
-        extends Weapon
+        extends WeaponBonus
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, WaveCannonRear.class);
+
     /**
-     * {@link Bonus#Bonus(SetupEntityBonus)}
+     * {@link Bonus#Bonus(SetupSurfaceGame)}
      */
-    public WaveCannonRear(SetupEntityBonus setup)
+    public WaveCannonRear(SetupSurfaceGame setup)
     {
-        super(setup, com.b3dgs.tyrian.weapon.rear.WaveCannonRear.class, false);
+        super(setup, com.b3dgs.tyrian.weapon.rear.WaveCannonRear.MEDIA, false);
     }
 }

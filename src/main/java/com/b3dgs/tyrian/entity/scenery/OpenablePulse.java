@@ -17,8 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Three red horizontal implementation.
@@ -28,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class OpenablePulse
         extends EntityScenery
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SCENERY, OpenablePulse.class);
+
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    public OpenablePulse(SetupEntity setup)
+    public OpenablePulse(SetupSurfaceGame setup)
     {
         super(setup);
     }

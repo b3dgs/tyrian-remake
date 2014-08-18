@@ -17,8 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Single pulse implementation.
@@ -28,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class SinglePulse
         extends EntityScenery
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SCENERY, SinglePulse.class);
+
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    public SinglePulse(SetupEntity setup)
+    public SinglePulse(SetupSurfaceGame setup)
     {
         super(setup);
     }

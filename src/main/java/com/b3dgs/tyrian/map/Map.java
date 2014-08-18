@@ -61,39 +61,39 @@ public final class Map
         switch (n)
         {
             case 6:
-                return factory.create(SingleCanon.class);
+                return factory.create(SingleCanon.MEDIA);
             case 7:
-                return factory.create(DoubleCanon.class);
+                return factory.create(DoubleCanon.MEDIA);
             case 8:
-                return factory.create(RedEngine.class);
+                return factory.create(RedEngine.MEDIA);
             case 9:
-                return factory.create(GreenPulse.class);
+                return factory.create(GreenPulse.MEDIA);
             case 19:
-                return factory.create(OpenablePulse.class);
+                return factory.create(OpenablePulse.MEDIA);
             case 13:
-                return factory.create(Generator.class);
+                return factory.create(Generator.MEDIA);
             case 26:
-                return factory.create(DoublePulse.class);
+                return factory.create(DoublePulse.MEDIA);
             case 18:
-                return factory.create(Lamp.class);
+                return factory.create(Lamp.MEDIA);
             case 30:
-                return factory.create(Spider.class);
+                return factory.create(Spider.MEDIA);
             case 32:
-                return factory.create(SubSquare.class);
+                return factory.create(SubSquare.MEDIA);
             case 45:
-                return factory.create(Silo.class);
+                return factory.create(Silo.MEDIA);
             case 46:
-                return factory.create(RedBox.class);
+                return factory.create(RedBox.MEDIA);
             case 56:
-                return factory.create(ThreeRedV.class);
+                return factory.create(ThreeRedV.MEDIA);
             case 50:
-                return factory.create(Pump.class);
+                return factory.create(Pump.MEDIA);
             case 52:
-                return factory.create(House92.class);
+                return factory.create(House92.MEDIA);
             case 54:
-                return factory.create(House812.class);
+                return factory.create(House812.MEDIA);
             case 66:
-                return factory.create(ThreeRedH.class);
+                return factory.create(ThreeRedH.MEDIA);
             default:
                 return null;
         }

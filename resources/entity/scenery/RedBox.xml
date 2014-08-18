@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.scenery.RedBox</lionengine:class>
     <lionengine:surface image="RedBox.png"/>
 	<lionengine:size width="24" height="28"/>
 	<lionengine:collision name="default" offsetX="5" offsetY="5" width="14" height="18" mirror="false" />

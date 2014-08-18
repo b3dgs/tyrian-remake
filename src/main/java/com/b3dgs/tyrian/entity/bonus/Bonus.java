@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.entity.EntityOpponent;
 import com.b3dgs.tyrian.entity.ship.Ship;
 
@@ -33,7 +34,7 @@ public abstract class Bonus
      * 
      * @param setup The setup entity.
      */
-    public Bonus(SetupEntityBonus setup)
+    public Bonus(SetupSurfaceGame setup)
     {
         super(setup);
     }

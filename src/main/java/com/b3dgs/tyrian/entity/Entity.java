@@ -18,14 +18,20 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.UtilRandom;
+import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.Collision;
+import com.b3dgs.lionengine.game.ContextGame;
 import com.b3dgs.lionengine.game.EntityGame;
+import com.b3dgs.lionengine.game.FactoryObjectGame;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.configurable.Configurable;
 import com.b3dgs.lionengine.game.configurable.SizeData;
+import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode2;
@@ -41,10 +47,23 @@ import com.b3dgs.tyrian.entity.ship.Ship;
 public abstract class Entity
         extends EntityGame
 {
+    /**
+     * Get an entity configuration file.
+     * 
+     * @param category The category type.
+     * @param type The config associated class.
+     * @return The media config.
+     */
+    protected static Media getConfig(CategoryType category, Class<? extends Entity> type)
+    {
+        return Core.MEDIA.create(AppTyrian.ENTITIES_DIR, category.getPath(), type.getSimpleName() + "."
+                + FactoryObjectGame.FILE_DATA_EXTENSION);
+    }
+
     /** Factory effect. */
-    protected final FactoryEffect factoryEffect;
+    protected FactoryEffect factoryEffect;
     /** Handler effect. */
-    protected final HandlerEffect handlerEffect;
+    protected HandlerEffect handlerEffect;
     /** Entity surface. */
     private final SpriteTiled sprite;
     /** Tile offset. */
@@ -55,12 +74,9 @@ public abstract class Entity
      * 
      * @param setup The setup reference.
      */
-    protected Entity(SetupEntity setup)
+    protected Entity(SetupSurfaceGame setup)
     {
         super(setup);
-        final ContextEntity context = setup.getContext(ContextEntity.class);
-        factoryEffect = context.factoryEffect;
-        handlerEffect = context.handlerEffect;
         final Configurable configurable = setup.getConfigurable();
         final SizeData sizeData = configurable.getSize();
         final int width = sizeData.getWidth();
@@ -81,7 +97,7 @@ public abstract class Entity
         int delay = 0;
         for (int i = 0; i < n; i++)
         {
-            final Effect explode = factoryEffect.create(Explode2.class);
+            final Effect explode = factoryEffect.create(Explode2.MEDIA);
             final int x = getLocationIntX() - explode.getWidth() / 2 + UtilRandom.getRandomInteger(getWidth());
             final int y = getLocationIntY() + explode.getHeight() / 2 - UtilRandom.getRandomInteger(getHeight());
             explode.start(x, y, i * 25);
@@ -117,6 +133,13 @@ public abstract class Entity
     /*
      * EntityGame
      */
+
+    @Override
+    public void prepare(ContextGame context)
+    {
+        factoryEffect = context.getService(FactoryEffect.class);
+        handlerEffect = context.getService(HandlerEffect.class);
+    }
 
     @Override
     public void update(double extrp)

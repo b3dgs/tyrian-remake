@@ -20,7 +20,6 @@ package com.b3dgs.tyrian.effect;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
 import com.b3dgs.tyrian.AppTyrian;
 
 /**
@@ -44,7 +43,7 @@ public final class FactoryEffect
      */
 
     @Override
-    protected SetupSurfaceGame createSetup(Class<? extends Fabricable> type, Media config)
+    protected SetupSurfaceGame createSetup(Media config)
     {
         return new SetupSurfaceGame(config);
     }

@@ -17,11 +17,13 @@
  */
 package com.b3dgs.tyrian.weapon.front;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.MissileFront;
-import com.b3dgs.tyrian.weapon.SetupWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponCategory;
 
 /**
  * Missile front implementation.
@@ -31,10 +33,13 @@ import com.b3dgs.tyrian.weapon.Weapon;
 public final class MissileLauncherFront
         extends Weapon
 {
+    /** Class media. */
+    public static final Media MEDIA = Weapon.getConfig(WeaponCategory.FRONT, MissileLauncherFront.class);
+
     /**
-     * {@link Weapon#Weapon(SetupWeapon)}
+     * {@link Weapon#Weapon(SetupGame)}
      */
-    public MissileLauncherFront(SetupWeapon setup)
+    public MissileLauncherFront(SetupGame setup)
     {
         super(setup);
         setRate(400);
@@ -54,39 +59,39 @@ public final class MissileLauncherFront
         {
             case 0:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0);
+                addProjectile(MissileFront.MEDIA, dmg, 0, speed, 0, 0);
                 break;
             case 1:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, -0.1, speed, -5, 0);
-                addProjectile(MissileFront.class, dmg, 0.1, speed, 5, 0);
+                addProjectile(MissileFront.MEDIA, dmg, -0.1, speed, -5, 0);
+                addProjectile(MissileFront.MEDIA, dmg, 0.1, speed, 5, 0);
                 break;
             case 2:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, -0.2, speed, -6, -10);
-                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0);
-                addProjectile(MissileFront.class, dmg, 0.2, speed, 6, -10);
+                addProjectile(MissileFront.MEDIA, dmg, -0.2, speed, -6, -10);
+                addProjectile(MissileFront.MEDIA, dmg, 0, speed, 0, 0);
+                addProjectile(MissileFront.MEDIA, dmg, 0.2, speed, 6, -10);
                 break;
             case 3:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, -0.2, speed, -10, -10);
-                addProjectile(MissileFront.class, dmg, -0.05, speed, -5, 0);
-                addProjectile(MissileFront.class, dmg, 0.05, speed, 5, 0);
-                addProjectile(MissileFront.class, dmg, 0.2, speed, 10, -10);
+                addProjectile(MissileFront.MEDIA, dmg, -0.2, speed, -10, -10);
+                addProjectile(MissileFront.MEDIA, dmg, -0.05, speed, -5, 0);
+                addProjectile(MissileFront.MEDIA, dmg, 0.05, speed, 5, 0);
+                addProjectile(MissileFront.MEDIA, dmg, 0.2, speed, 10, -10);
                 break;
             case 4:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, -0.25, speed, -10, -12);
-                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0).setFrame(135);
-                addProjectile(MissileFront.class, dmg, 0.25, speed, 10, -12);
+                addProjectile(MissileFront.MEDIA, dmg, -0.25, speed, -10, -12);
+                addProjectile(MissileFront.MEDIA, dmg, 0, speed, 0, 0).setFrame(135);
+                addProjectile(MissileFront.MEDIA, dmg, 0.25, speed, 10, -12);
                 break;
             case 5:
                 dmg = 60;
-                addProjectile(MissileFront.class, dmg, -0.2, speed, -15, -12);
-                addProjectile(MissileFront.class, dmg, -0.05, speed, -7, -5);
-                addProjectile(MissileFront.class, dmg, 0, speed, 0, 0).setFrame(135);
-                addProjectile(MissileFront.class, dmg, 0.05, speed, 7, -5);
-                addProjectile(MissileFront.class, dmg, 0.2, speed, 15, -12);
+                addProjectile(MissileFront.MEDIA, dmg, -0.2, speed, -15, -12);
+                addProjectile(MissileFront.MEDIA, dmg, -0.05, speed, -7, -5);
+                addProjectile(MissileFront.MEDIA, dmg, 0, speed, 0, 0).setFrame(135);
+                addProjectile(MissileFront.MEDIA, dmg, 0.05, speed, 7, -5);
+                addProjectile(MissileFront.MEDIA, dmg, 0.2, speed, 15, -12);
                 break;
             default:
                 break;

@@ -17,8 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.scenery;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Three red vertical implementation.
@@ -28,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class ThreeRedV
         extends EntityScenery
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SCENERY, ThreeRedV.class);
+
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    public ThreeRedV(SetupEntity setup)
+    public ThreeRedV(SetupSurfaceGame setup)
     {
         super(setup);
     }

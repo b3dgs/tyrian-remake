@@ -17,25 +17,29 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.Sfx;
-import com.b3dgs.tyrian.entity.ContextEntity;
 import com.b3dgs.tyrian.entity.ship.Ship;
 import com.b3dgs.tyrian.weapon.FactoryWeapon;
+import com.b3dgs.tyrian.weapon.Weapon;
 
 /**
  * Weapon bonus.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-abstract class Weapon
+abstract class WeaponBonus
         extends Bonus
 {
     /** Weapon target. */
-    private final Class<? extends com.b3dgs.tyrian.weapon.Weapon> target;
-    /** Factory weapon. */
-    private final FactoryWeapon factoryWeapon;
+    private final Media target;
     /** Front. */
     private final boolean front;
+
+    /** Factory weapon. */
+    private FactoryWeapon factoryWeapon;
 
     /**
      * Constructor.
@@ -44,12 +48,22 @@ abstract class Weapon
      * @param target The target reference.
      * @param front <code>true</code> if front weapon, <code>false</code> if rear.
      */
-    protected Weapon(SetupEntityBonus setup, Class<? extends com.b3dgs.tyrian.weapon.Weapon> target, boolean front)
+    protected WeaponBonus(SetupSurfaceGame setup, Media target, boolean front)
     {
         super(setup);
-        factoryWeapon = setup.getContext(ContextEntity.class).factoryWeapon;
         this.target = target;
         this.front = front;
+    }
+
+    /*
+     * Entity
+     */
+
+    @Override
+    public void prepare(ContextGame context)
+    {
+        super.prepare(context);
+        factoryWeapon = context.getService(FactoryWeapon.class);
     }
 
     @Override
@@ -64,11 +78,13 @@ abstract class Weapon
         super.onHit(ship);
         if (front)
         {
-            ship.setWeaponFront(factoryWeapon.create(target));
+            final Weapon weapon = factoryWeapon.create(target);
+            ship.setWeaponFront(weapon);
         }
         else
         {
-            ship.setWeaponRear(factoryWeapon.create(target));
+            final Weapon weapon = factoryWeapon.create(target);
+            ship.setWeaponRear(weapon);
         }
     }
 }

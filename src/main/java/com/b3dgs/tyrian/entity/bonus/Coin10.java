@@ -17,6 +17,11 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
+
 /**
  * Coin10 implementation.
  * 
@@ -25,10 +30,13 @@ package com.b3dgs.tyrian.entity.bonus;
 public final class Coin10
         extends Coin
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, Coin10.class);
+
     /**
-     * {@link Bonus#Bonus(SetupEntityBonus)}
+     * {@link Bonus#Bonus(SetupSurfaceGame)}
      */
-    public Coin10(SetupEntityBonus setup)
+    public Coin10(SetupSurfaceGame setup)
     {
         super(setup);
     }

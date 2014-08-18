@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.scenery.SubSquare</lionengine:class>
     <lionengine:surface image="SubSquare.png"/>
 	<lionengine:size width="48" height="56"/>
 	<lionengine:collision name="default" offsetX="4" offsetY="0" width="40" height="44" mirror="false" />

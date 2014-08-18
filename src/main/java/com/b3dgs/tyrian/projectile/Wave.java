@@ -17,6 +17,8 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode3;
 import com.b3dgs.tyrian.entity.Entity;
@@ -29,12 +31,15 @@ import com.b3dgs.tyrian.entity.Entity;
 public final class Wave
         extends Projectile
 {
+    /** Class media. */
+    public static final Media MEDIA = Projectile.getConfig(Wave.class);
+
     /**
      * Constructor.
      * 
      * @param setup The setup reference.
      */
-    public Wave(SetupProjectile setup)
+    public Wave(SetupSurfaceGame setup)
     {
         super(setup, 9);
     }
@@ -47,7 +52,7 @@ public final class Wave
     public void onHit(Entity entity, int damages)
     {
         super.onHit(entity, damages);
-        final Effect effect = factoryEffect.create(Explode3.class);
+        final Effect effect = factoryEffect.create(Explode3.MEDIA);
         effect.start(getLocationIntX(), getLocationIntY() + effect.getHeight() / 2, 0);
         handlerEffect.add(effect);
     }

@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
 
 /**
@@ -27,6 +28,9 @@ import com.b3dgs.lionengine.game.SetupSurfaceGame;
 public final class Coin10
         extends Effect
 {
+    /** Class media. */
+    public static final Media MEDIA = Effect.getConfig(Coin10.class);
+
     /**
      * Constructor.
      * 

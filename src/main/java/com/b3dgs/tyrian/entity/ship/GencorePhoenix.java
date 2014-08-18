@@ -17,7 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.ship;
 
-import com.b3dgs.tyrian.entity.SetupEntity;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
 
 /**
  * GencorePhoenix implementation.
@@ -27,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class GencorePhoenix
         extends Ship
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.SHIP, GencorePhoenix.class);
+
     /**
-     * @see Ship#Ship(SetupEntity)
+     * @see Ship#Ship(SetupSurfaceGame)
      */
-    public GencorePhoenix(SetupEntity setup)
+    public GencorePhoenix(SetupSurfaceGame setup)
     {
         super(setup);
     }

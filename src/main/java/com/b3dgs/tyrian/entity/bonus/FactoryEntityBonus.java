@@ -17,12 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
-import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.AppTyrian;
-import com.b3dgs.tyrian.entity.ContextEntity;
 
 /**
  * Factory entity bonus.
@@ -30,27 +28,14 @@ import com.b3dgs.tyrian.entity.ContextEntity;
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class FactoryEntityBonus
-        extends FactoryObjectGame<SetupEntityBonus>
+        extends FactoryObjectGame<SetupSurfaceGame>
 {
-    /** Context reference. */
-    private ContextEntity context;
-
     /**
      * Constructor.
      */
     public FactoryEntityBonus()
     {
-        super(UtilFile.getPath(AppTyrian.ENTITIES_DIR, AppTyrian.BONUS_DIR));
-    }
-
-    /**
-     * Set the factory context.
-     * 
-     * @param context The factory context.
-     */
-    public void setContext(ContextEntity context)
-    {
-        this.context = context;
+        super(AppTyrian.BONUS_DIR);
     }
 
     /*
@@ -58,8 +43,8 @@ public final class FactoryEntityBonus
      */
 
     @Override
-    protected SetupEntityBonus createSetup(Class<? extends Fabricable> type, Media config)
+    protected SetupSurfaceGame createSetup(Media config)
     {
-        return new SetupEntityBonus(config, context);
+        return new SetupSurfaceGame(config);
     }
 }

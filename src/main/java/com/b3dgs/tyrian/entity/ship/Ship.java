@@ -21,9 +21,10 @@ import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.core.Mouse;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.CameraGame;
-import com.b3dgs.tyrian.entity.ContextEntity;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.entity.SetupEntity;
+import com.b3dgs.tyrian.weapon.FactoryWeapon;
 import com.b3dgs.tyrian.weapon.Weapon;
 import com.b3dgs.tyrian.weapon.front.PulseCannon;
 import com.b3dgs.tyrian.weapon.rear.MissileLauncherRear;
@@ -46,15 +47,10 @@ public abstract class Ship
     /**
      * @param setup The setup reference.
      */
-    protected Ship(SetupEntity setup)
+    protected Ship(SetupSurfaceGame setup)
     {
         super(setup);
         energy = new Alterable(1000);
-        final ContextEntity context = setup.getContext(ContextEntity.class);
-        weaponFront = context.factoryWeapon.create(PulseCannon.class);
-        weaponFront.setOwner(this);
-        weaponRear = context.factoryWeapon.create(MissileLauncherRear.class);
-        weaponRear.setOwner(this);
         setSize(24, 28);
         setLocation(0, -216);
     }
@@ -178,5 +174,20 @@ public abstract class Ship
         {
             setTileOffset(4);
         }
+    }
+
+    /*
+     * Entity
+     */
+
+    @Override
+    public void prepare(ContextGame context)
+    {
+        super.prepare(context);
+        final FactoryWeapon factoryWeapon = context.getService(FactoryWeapon.class);
+        weaponFront = factoryWeapon.create(PulseCannon.MEDIA);
+        weaponFront.setOwner(this);
+        weaponRear = factoryWeapon.create(MissileLauncherRear.MEDIA);
+        weaponRear.setOwner(this);
     }
 }

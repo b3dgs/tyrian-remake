@@ -20,8 +20,12 @@ package com.b3dgs.tyrian.entity.bonus;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.configurable.Configurable;
 import com.b3dgs.tyrian.Sfx;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.ship.Ship;
 
 /**
@@ -32,6 +36,9 @@ import com.b3dgs.tyrian.entity.ship.Ship;
 public final class PowerUp
         extends Bonus
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, PowerUp.class);
+
     /** Animator. */
     private final Animator animator;
 
@@ -40,7 +47,7 @@ public final class PowerUp
      * 
      * @param setup The setup reference.
      */
-    public PowerUp(SetupEntityBonus setup)
+    public PowerUp(SetupSurfaceGame setup)
     {
         super(setup);
         animator = Anim.createAnimator();

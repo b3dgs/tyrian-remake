@@ -17,19 +17,27 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
+
 /**
  * Pulse cannon bonus.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class HyperPulse
-        extends Weapon
+        extends WeaponBonus
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, HyperPulse.class);
+
     /**
-     * {@link Bonus#Bonus(SetupEntityBonus)}
+     * {@link Bonus#Bonus(SetupSurfaceGame)}
      */
-    public HyperPulse(SetupEntityBonus setup)
+    public HyperPulse(SetupSurfaceGame setup)
     {
-        super(setup, com.b3dgs.tyrian.weapon.front.HyperPulse.class, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.HyperPulse.MEDIA, true);
     }
 }

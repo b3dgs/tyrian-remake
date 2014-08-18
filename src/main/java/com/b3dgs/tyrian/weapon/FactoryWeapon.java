@@ -17,11 +17,9 @@
  */
 package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupGame;
-import com.b3dgs.lionengine.game.purview.Fabricable;
 import com.b3dgs.tyrian.AppTyrian;
 
 /**
@@ -32,9 +30,6 @@ import com.b3dgs.tyrian.AppTyrian;
 public final class FactoryWeapon
         extends FactoryObjectGame<SetupGame>
 {
-    /** Context reference. */
-    private ContextWeapon context;
-
     /**
      * Constructor.
      */
@@ -43,23 +38,13 @@ public final class FactoryWeapon
         super(AppTyrian.WEAPONS_DIR);
     }
 
-    /**
-     * Set the factory context.
-     * 
-     * @param context The factory context.
-     */
-    public void setContext(ContextWeapon context)
-    {
-        this.context = context;
-    }
-
     /*
      * FactoryObjectGame
      */
 
     @Override
-    protected SetupGame createSetup(Class<? extends Fabricable> type, Media config)
+    protected SetupGame createSetup(Media config)
     {
-        return new SetupWeapon(Core.MEDIA.create(AppTyrian.SPRITES_DIR, "Weapons.xml"), context);
+        return new SetupGame(config);
     }
 }

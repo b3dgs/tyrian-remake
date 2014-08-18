@@ -17,8 +17,14 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import com.b3dgs.lionengine.core.Core;
+import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.ContextGame;
+import com.b3dgs.lionengine.game.FactoryObjectGame;
+import com.b3dgs.lionengine.game.SetupGame;
 import com.b3dgs.lionengine.game.projectile.LauncherProjectileGame;
+import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.projectile.Projectile;
 
@@ -30,6 +36,19 @@ import com.b3dgs.tyrian.projectile.Projectile;
 public abstract class Weapon
         extends LauncherProjectileGame<Entity, Entity, Projectile>
 {
+    /**
+     * Get a weapon configuration file.
+     * 
+     * @param category The category type.
+     * @param type The config associated class.
+     * @return The media config.
+     */
+    public static Media getConfig(WeaponCategory category, Class<? extends Weapon> type)
+    {
+        return Core.MEDIA.create(AppTyrian.WEAPONS_DIR, category.getPath(), type.getSimpleName() + "."
+                + FactoryObjectGame.FILE_DATA_EXTENSION);
+    }
+
     /** Energy to consume. */
     private int consume;
 
@@ -38,9 +57,9 @@ public abstract class Weapon
      * 
      * @param setup The setup reference.
      */
-    protected Weapon(SetupWeapon setup)
+    protected Weapon(SetupGame setup)
     {
-        super(setup, setup.getContext(ContextWeapon.class).factory, setup.getContext(ContextWeapon.class).handler);
+        super(setup);
         level.setMax(5);
         consume = 300;
     }
@@ -74,6 +93,12 @@ public abstract class Weapon
     /*
      * LauncherProjectileGame
      */
+
+    @Override
+    protected void prepareProjectile(ContextGame context)
+    {
+        // Nothing to do
+    }
 
     @Override
     protected void launchProjectile(Entity owner)

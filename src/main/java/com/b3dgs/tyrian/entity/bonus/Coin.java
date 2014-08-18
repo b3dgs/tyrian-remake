@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.entity.bonus;
 
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.configurable.Configurable;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
@@ -39,7 +40,7 @@ abstract class Coin
      * 
      * @param setup The setup reference.
      */
-    protected Coin(SetupEntityBonus setup)
+    protected Coin(SetupSurfaceGame setup)
     {
         super(setup);
         animator = Anim.createAnimator();
@@ -62,7 +63,7 @@ abstract class Coin
     @Override
     protected void onDestroyed()
     {
-        final Effect taken = factoryEffect.create(com.b3dgs.tyrian.effect.Coin10.class);
+        final Effect taken = factoryEffect.create(com.b3dgs.tyrian.effect.Coin10.MEDIA);
         taken.start(getLocationIntX() + getWidth() / 2 - taken.getWidth() / 2, getLocationIntY() + getHeight() / 2
                 - taken.getHeight() / 2, 0);
         handlerEffect.add(taken);

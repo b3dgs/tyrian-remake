@@ -17,6 +17,8 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import java.util.Locale;
+
 /**
  * List of weapon categories.
  * 
@@ -30,4 +32,14 @@ public enum WeaponCategory
     REAR,
     /** Other weapon. */
     OTHER;
+
+    /**
+     * Get the category path.
+     * 
+     * @return The category path.
+     */
+    public String getPath()
+    {
+        return name().toLowerCase(Locale.ENGLISH);
+    }
 }

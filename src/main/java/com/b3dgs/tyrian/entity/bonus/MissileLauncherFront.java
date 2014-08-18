@@ -17,19 +17,27 @@
  */
 package com.b3dgs.tyrian.entity.bonus;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
+
 /**
  * Missile launcher front bonus.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
 public final class MissileLauncherFront
-        extends Weapon
+        extends WeaponBonus
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.BONUS, MissileLauncherFront.class);
+
     /**
-     * {@link Bonus#Bonus(SetupEntityBonus)}
+     * {@link Bonus#Bonus(SetupSurfaceGame)}
      */
-    public MissileLauncherFront(SetupEntityBonus setup)
+    public MissileLauncherFront(SetupSurfaceGame setup)
     {
-        super(setup, com.b3dgs.tyrian.weapon.front.MissileLauncherFront.class, true);
+        super(setup, com.b3dgs.tyrian.weapon.front.MissileLauncherFront.MEDIA, true);
     }
 }

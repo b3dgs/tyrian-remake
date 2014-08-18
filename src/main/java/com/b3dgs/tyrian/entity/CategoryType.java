@@ -15,27 +15,33 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.projectile;
+package com.b3dgs.tyrian.entity;
 
-import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import java.util.Locale;
 
 /**
- * Setup projectile implementation.
+ * List of category types.
  * 
  * @author Pierre-Alexandre (contact@b3dgs.com)
  */
-public class SetupProjectile
-        extends SetupSurfaceGame
+public enum CategoryType
 {
+    /** Bonus. */
+    BONUS,
+    /** Dynamic. */
+    DYNAMIC,
+    /** Scenery. */
+    SCENERY,
+    /** Ship. */
+    SHIP;
+
     /**
-     * Constructor.
+     * Get the category path.
      * 
-     * @param config The config file.
-     * @param context The context reference.
+     * @return The category path.
      */
-    public SetupProjectile(Media config, ContextProjectile context)
+    public String getPath()
     {
-        super(config, context, false);
+        return name().toLowerCase(Locale.ENGLISH);
     }
 }

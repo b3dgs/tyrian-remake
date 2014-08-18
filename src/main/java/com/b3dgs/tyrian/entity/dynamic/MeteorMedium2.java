@@ -17,7 +17,10 @@
  */
 package com.b3dgs.tyrian.entity.dynamic;
 
-import com.b3dgs.tyrian.entity.SetupEntity;
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.tyrian.entity.CategoryType;
+import com.b3dgs.tyrian.entity.Entity;
 
 /**
  * Meteor medium 2 implementation.
@@ -27,10 +30,13 @@ import com.b3dgs.tyrian.entity.SetupEntity;
 public final class MeteorMedium2
         extends Meteor
 {
+    /** Class media. */
+    public static final Media MEDIA = Entity.getConfig(CategoryType.DYNAMIC, MeteorMedium2.class);
+
     /**
-     * {@link Meteor#Meteor(SetupEntity)}
+     * {@link Meteor#Meteor(SetupSurfaceGame)}
      */
-    public MeteorMedium2(SetupEntity setup)
+    public MeteorMedium2(SetupSurfaceGame setup)
     {
         super(setup);
     }

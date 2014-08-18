@@ -17,8 +17,8 @@
  */
 package com.b3dgs.tyrian.entity.dynamic;
 
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.entity.EntityOpponent;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Meteor implementation.
@@ -33,7 +33,7 @@ abstract class Meteor
      * 
      * @param setup The setup reference.
      */
-    protected Meteor(SetupEntity setup)
+    protected Meteor(SetupSurfaceGame setup)
     {
         super(setup);
     }

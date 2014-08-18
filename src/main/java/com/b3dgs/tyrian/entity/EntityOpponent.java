@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity;
 
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.entity.ship.Ship;
 
 /**
@@ -32,7 +33,7 @@ public abstract class EntityOpponent
      * 
      * @param setup The setup reference.
      */
-    protected EntityOpponent(SetupEntity setup)
+    protected EntityOpponent(SetupSurfaceGame setup)
     {
         super(setup);
     }

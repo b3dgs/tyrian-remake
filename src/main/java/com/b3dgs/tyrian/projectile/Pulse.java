@@ -17,6 +17,8 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.tyrian.effect.BulletHit;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.entity.Entity;
@@ -29,12 +31,15 @@ import com.b3dgs.tyrian.entity.Entity;
 public final class Pulse
         extends Projectile
 {
+    /** Class media. */
+    public static final Media MEDIA = Projectile.getConfig(Pulse.class);
+
     /**
      * Constructor.
      * 
      * @param setup The setup reference.
      */
-    public Pulse(SetupProjectile setup)
+    public Pulse(SetupSurfaceGame setup)
     {
         super(setup, 0);
     }
@@ -47,7 +52,7 @@ public final class Pulse
     public void onHit(Entity entity, int damages)
     {
         super.onHit(entity, damages);
-        final Effect effect = factoryEffect.create(BulletHit.class);
+        final Effect effect = factoryEffect.create(BulletHit.MEDIA);
         effect.start(getLocationIntX(), getLocationIntY() + effect.getHeight() / 2, 0);
         handlerEffect.add(effect);
     }

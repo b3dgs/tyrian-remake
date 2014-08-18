@@ -17,6 +17,9 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.core.Media;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
+
 /**
  * Missile front projectile.
  * 
@@ -25,12 +28,15 @@ package com.b3dgs.tyrian.projectile;
 public final class MissileFront
         extends Missile
 {
+    /** Class media. */
+    public static final Media MEDIA = Projectile.getConfig(MissileFront.class);
+
     /**
      * Constructor.
      * 
      * @param setup The setup reference.
      */
-    public MissileFront(SetupProjectile setup)
+    public MissileFront(SetupSurfaceGame setup)
     {
         super(setup, 120);
     }

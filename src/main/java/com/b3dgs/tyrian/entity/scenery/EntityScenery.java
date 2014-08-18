@@ -19,10 +19,10 @@ package com.b3dgs.tyrian.entity.scenery;
 
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
+import com.b3dgs.lionengine.game.SetupSurfaceGame;
 import com.b3dgs.lionengine.game.configurable.Configurable;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.EntityOpponent;
-import com.b3dgs.tyrian.entity.SetupEntity;
 
 /**
  * Entity scenery base implementation.
@@ -36,9 +36,9 @@ abstract class EntityScenery
     private final Animator animator;
 
     /**
-     * {@link Entity#Entity(SetupEntity)}
+     * {@link Entity#Entity(SetupSurfaceGame)}
      */
-    protected EntityScenery(SetupEntity setup)
+    protected EntityScenery(SetupSurfaceGame setup)
     {
         super(setup);
         animator = Anim.createAnimator();
