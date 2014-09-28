@@ -79,7 +79,7 @@ final class World
     {
         if (output.getFile().exists())
         {
-            try (final FileReading file = Stream.createFileReading(output))
+            try (FileReading file = Stream.createFileReading(output))
             {
                 map.load(file);
             }
@@ -92,7 +92,7 @@ final class World
         {
             final LevelRipConverter<TileGame> rip = new LevelRipConverter<>();
             rip.start(levelrip, tilesheet, map);
-            try (final FileWriting file = Stream.createFileWriting(output))
+            try (FileWriting file = Stream.createFileWriting(output))
             {
                 map.save(file);
             }
