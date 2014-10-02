@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
 import com.b3dgs.lionengine.core.Media;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.lionengine.game.configurable.Configurable;
+import com.b3dgs.lionengine.game.configurer.Configurer;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.entity.CategoryType;
 import com.b3dgs.tyrian.entity.Entity;
@@ -51,8 +51,8 @@ public final class PowerUp
     {
         super(setup);
         animator = Anim.createAnimator();
-        final Configurable configurable = setup.getConfigurable();
-        animator.play(configurable.getAnimation("idle"));
+        final Configurer configurer = setup.getConfigurer();
+        animator.play(configurer.getAnimation("idle"));
     }
 
     /*

@@ -30,8 +30,8 @@ import com.b3dgs.lionengine.game.ContextGame;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.ObjectGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.lionengine.game.configurable.Configurable;
-import com.b3dgs.lionengine.game.configurable.FramesData;
+import com.b3dgs.lionengine.game.configurer.ConfigFrames;
+import com.b3dgs.lionengine.game.configurer.Configurer;
 import com.b3dgs.tyrian.AppTyrian;
 
 /**
@@ -71,10 +71,10 @@ public abstract class Effect
     public Effect(SetupSurfaceGame setup)
     {
         super(setup);
-        final Configurable configurable = setup.getConfigurable();
-        final FramesData framesData = configurable.getFrames();
+        final Configurer configurer = setup.getConfigurer();
+        final ConfigFrames framesData = ConfigFrames.create(configurer);
         sprite = Drawable.loadSpriteAnimated(setup.surface, framesData.getHorizontal(), framesData.getVertical());
-        animStart = configurable.getAnimation("start");
+        animStart = configurer.getAnimation("start");
         timerDelay = new Timing();
         setSize(sprite.getFrameWidth(), sprite.getFrameHeight());
     }

@@ -29,8 +29,8 @@ import com.b3dgs.lionengine.game.ContextGame;
 import com.b3dgs.lionengine.game.EntityGame;
 import com.b3dgs.lionengine.game.FactoryObjectGame;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
-import com.b3dgs.lionengine.game.configurable.Configurable;
-import com.b3dgs.lionengine.game.configurable.SizeData;
+import com.b3dgs.lionengine.game.configurer.ConfigSize;
+import com.b3dgs.lionengine.game.configurer.Configurer;
 import com.b3dgs.tyrian.AppTyrian;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
@@ -77,13 +77,13 @@ public abstract class Entity
     protected Entity(SetupSurfaceGame setup)
     {
         super(setup);
-        final Configurable configurable = setup.getConfigurable();
-        final SizeData sizeData = configurable.getSize();
+        final Configurer configurer = setup.getConfigurer();
+        final ConfigSize sizeData = ConfigSize.create(configurer);
         final int width = sizeData.getWidth();
         final int height = sizeData.getHeight();
         sprite = Drawable.loadSpriteTiled(setup.surface, width, height);
         setSize(width, height);
-        final Collision data = configurable.getCollision("default");
+        final Collision data = configurer.getCollision("default");
         setCollision(new Collision(getWidth() / 2 + data.getOffsetX(), -data.getOffsetY() - data.getHeight(),
                 data.getWidth(), data.getHeight(), false));
     }
