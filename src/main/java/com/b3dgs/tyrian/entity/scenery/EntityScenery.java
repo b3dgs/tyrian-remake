@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.entity.scenery;
 import com.b3dgs.lionengine.anim.Anim;
 import com.b3dgs.lionengine.anim.Animator;
 import com.b3dgs.lionengine.game.SetupSurfaceGame;
+import com.b3dgs.lionengine.game.configurer.ConfigAnimations;
 import com.b3dgs.lionengine.game.configurer.Configurer;
 import com.b3dgs.tyrian.entity.Entity;
 import com.b3dgs.tyrian.entity.EntityOpponent;
@@ -43,7 +44,8 @@ abstract class EntityScenery
         super(setup);
         animator = Anim.createAnimator();
         final Configurer configurer = setup.getConfigurer();
-        animator.play(configurer.getAnimation("idle"));
+        final ConfigAnimations configAnimations = ConfigAnimations.create(configurer);
+        animator.play(configAnimations.getAnimation("idle"));
     }
 
     /*
