@@ -8,21 +8,24 @@
 		<jna.version>3.0.9</jna.version>
 		<swt.version>3.7.2</swt.version>
 		<android.version>2.3.3</android.version>
-		<lionengine.version>6.2.0-SNAPSHOT</lionengine.version>
+		<lionengine.version>7.0.0-SNAPSHOT</lionengine.version>
 	</properties>
 
 	<groupId>com.b3dgs</groupId>
 	<artifactId>tyrian-remake</artifactId>
-	<packaging>jar</packaging>
 	<version>0.1.0-SNAPSHOT</version>
+
+	<packaging>jar</packaging>
 
 	<name>Tyrian Remake</name>
 	<description>Remake of the original Tyrian on the DOS by Epic Games</description>
 	<url>https://github.com/DjThunder/tyrian-remake</url>
+
 	<organization>
 		<name>Byron 3D Games Studio</name>
 		<url>www.b3dgs.com</url>
 	</organization>
+
 	<scm>
 		<url>https://github.com/DjThunder/tyrian-remake.git</url>
 	</scm>
@@ -55,37 +58,44 @@
 	</prerequisites>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-core</artifactId>
 			<version>${lionengine.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-core-awt</artifactId>
 			<version>${lionengine.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-audio-wav</artifactId>
 			<version>${lionengine.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-audio-midi</artifactId>
 			<version>${lionengine.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.b3dgs.lionengine</groupId>
 			<artifactId>lionengine-game</artifactId>
 			<version>${lionengine.version}</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<pluginManagement>
 			<plugins>
+
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-checkstyle-plugin</artifactId>
@@ -248,8 +258,8 @@
 						</execution>
 					</executions>
 				</plugin>
+
 			</plugins>
 		</pluginManagement>
 	</build>
-
 </project>

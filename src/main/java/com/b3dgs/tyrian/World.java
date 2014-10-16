@@ -19,22 +19,22 @@ package com.b3dgs.tyrian;
 
 import java.io.IOException;
 
+import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.core.Core;
 import com.b3dgs.lionengine.core.Graphic;
 import com.b3dgs.lionengine.core.Media;
-import com.b3dgs.lionengine.core.Mouse;
-import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.core.Verbose;
+import com.b3dgs.lionengine.core.awt.Mouse;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.ContextGame;
 import com.b3dgs.lionengine.game.WorldGame;
 import com.b3dgs.lionengine.game.map.TileGame;
+import com.b3dgs.lionengine.game.utility.LevelRipConverter;
 import com.b3dgs.lionengine.stream.FileReading;
 import com.b3dgs.lionengine.stream.FileWriting;
 import com.b3dgs.lionengine.stream.Stream;
-import com.b3dgs.lionengine.utility.LevelRipConverter;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.effect.FactoryEffect;
 import com.b3dgs.tyrian.effect.HandlerEffect;
@@ -145,12 +145,16 @@ final class World
     private final Timing timerBonus;
 
     /**
-     * @see WorldGame#WorldGame(Sequence)
+     * Constructor.
+     * 
+     * @param config The config reference.
+     * @param mouse The mouse reference.
      */
-    World(Sequence sequence)
+    World(Config config, Mouse mouse)
     {
-        super(sequence);
-        mouse = sequence.getInputDevice(Mouse.class);
+        super(config);
+
+        this.mouse = mouse;
         mouse.setConfig(config);
         hud = new Hud();
         map = new Map();

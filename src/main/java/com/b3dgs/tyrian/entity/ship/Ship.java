@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.entity.ship;
 
 import com.b3dgs.lionengine.UtilMath;
-import com.b3dgs.lionengine.core.Mouse;
+import com.b3dgs.lionengine.core.awt.Mouse;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.CameraGame;
 import com.b3dgs.lionengine.game.ContextGame;

@@ -19,9 +19,10 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.core.Graphic;
-import com.b3dgs.lionengine.core.Keyboard;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Sequence;
+import com.b3dgs.lionengine.core.awt.Keyboard;
+import com.b3dgs.lionengine.core.awt.Mouse;
 import com.b3dgs.tyrian.menu.Menu;
 
 /**
@@ -49,7 +50,7 @@ public final class Scene
     {
         super(loader, Scene.NATIVE);
         keyboard = getInputDevice(Keyboard.class);
-        world = new World(this);
+        world = new World(getConfig(), getInputDevice(Mouse.class));
         setSystemCursorVisible(false);
     }
 
