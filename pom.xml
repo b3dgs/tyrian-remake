@@ -8,7 +8,7 @@
 		<jna.version>3.0.9</jna.version>
 		<swt.version>3.7.2</swt.version>
 		<android.version>2.3.3</android.version>
-		<lionengine.version>7.0.0-SNAPSHOT</lionengine.version>
+		<lionengine.version>7.0.1-SNAPSHOT</lionengine.version>
 	</properties>
 
 	<groupId>com.b3dgs</groupId>
