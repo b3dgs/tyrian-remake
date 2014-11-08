@@ -63,7 +63,7 @@ abstract class Coin
     }
 
     @Override
-    protected void onDestroyed()
+    protected void onDestroy()
     {
         final Effect taken = factoryEffect.create(com.b3dgs.tyrian.effect.Coin10.MEDIA);
         taken.start(getLocationIntX() + getWidth() / 2 - taken.getWidth() / 2, getLocationIntY() + getHeight() / 2

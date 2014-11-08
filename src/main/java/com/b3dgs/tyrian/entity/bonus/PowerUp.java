@@ -70,7 +70,7 @@ public final class PowerUp
     }
 
     @Override
-    protected void onDestroyed()
+    protected void onDestroy()
     {
         Sfx.POWER_UP.play();
     }

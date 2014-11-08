@@ -90,8 +90,8 @@ final class World
         }
         else
         {
-            final LevelRipConverter<TileGame> rip = new LevelRipConverter<>();
-            rip.start(levelrip, tilesheet, map);
+            final LevelRipConverter<TileGame> rip = new LevelRipConverter<>(levelrip, tilesheet, map);
+            rip.start();
             try (FileWriting file = Stream.createFileWriting(output))
             {
                 map.save(file);

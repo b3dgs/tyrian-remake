@@ -67,7 +67,7 @@ abstract class WeaponBonus
     }
 
     @Override
-    protected void onDestroyed()
+    protected void onDestroy()
     {
         Sfx.POWER_UP.play();
     }

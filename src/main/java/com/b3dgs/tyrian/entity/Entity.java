@@ -91,28 +91,6 @@ public abstract class Entity
     }
 
     /**
-     * Called when entity is destroyed.
-     */
-    protected void onDestroyed()
-    {
-        final int n = getWidth() * getHeight() / 200;
-        int delay = 0;
-        for (int i = 0; i < n; i++)
-        {
-            final Effect explode = factoryEffect.create(Explode2.MEDIA);
-            final int x = getLocationIntX() - explode.getWidth() / 2 + UtilRandom.getRandomInteger(getWidth());
-            final int y = getLocationIntY() + explode.getHeight() / 2 - UtilRandom.getRandomInteger(getHeight());
-            explode.start(x, y, i * 25);
-            handlerEffect.add(explode);
-            if (i % 10 == 0)
-            {
-                Sfx.EXPLODE_LARGE.play(delay * 400);
-                delay++;
-            }
-        }
-    }
-
-    /**
      * The ship hit.
      * 
      * @param ship The ship hit.
@@ -158,9 +136,22 @@ public abstract class Entity
     }
 
     @Override
-    public void destroy()
+    protected void onDestroy()
     {
-        super.destroy();
-        onDestroyed();
+        final int n = getWidth() * getHeight() / 200;
+        int delay = 0;
+        for (int i = 0; i < n; i++)
+        {
+            final Effect explode = factoryEffect.create(Explode2.MEDIA);
+            final int x = getLocationIntX() - explode.getWidth() / 2 + UtilRandom.getRandomInteger(getWidth());
+            final int y = getLocationIntY() + explode.getHeight() / 2 - UtilRandom.getRandomInteger(getHeight());
+            explode.start(x, y, i * 25);
+            handlerEffect.add(explode);
+            if (i % 10 == 0)
+            {
+                Sfx.EXPLODE_LARGE.play(delay * 400);
+                delay++;
+            }
+        }
     }
 }
