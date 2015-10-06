@@ -23,6 +23,8 @@
 
 Note: A tribute to Tyrian from Epic Megagames. Copyright goes to Epic Megagames (c), due to original idea, gfx, sfx, and music uses (but the game was officially released as freeware in 2004). 
 
+**Note: This project is prototype, a use case for the [__LionEngine__](https://github.com/b3dgs/lionengine).**
+
 ## General features
 
 * #### __Target__
