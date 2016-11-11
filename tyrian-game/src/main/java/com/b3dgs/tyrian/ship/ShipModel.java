@@ -1,0 +1,80 @@
+/*
+ * Copyright (C) 2013-2016 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+package com.b3dgs.tyrian.ship;
+
+import com.b3dgs.lionengine.Origin;
+import com.b3dgs.lionengine.core.Medias;
+import com.b3dgs.lionengine.drawable.Drawable;
+import com.b3dgs.lionengine.drawable.Sprite;
+import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.SetupSurface;
+import com.b3dgs.lionengine.game.feature.SizeConfig;
+import com.b3dgs.tyrian.Constant;
+
+/**
+ * Ship model implementation.
+ */
+final class ShipModel extends FeatureModel
+{
+    private static final int OFFSET_Y = 8;
+
+    private final SpriteTiled surface;
+    private final SpriteAnimated hit;
+
+    /**
+     * Create a ship.
+     * 
+     * @param setup The setup reference.
+     */
+    ShipModel(SetupSurface setup)
+    {
+        super();
+
+        final SizeConfig config = SizeConfig.imports(setup);
+        surface = Drawable.loadSpriteTiled(setup.getSurface(), config.getWidth(), config.getHeight());
+        surface.setOrigin(Origin.MIDDLE);
+
+        hit = Drawable.loadSpriteAnimated(Medias.create(Constant.FOLDER_EFFECT, "Hit.png"), 1, 1);
+        hit.load();
+        hit.prepare();
+        hit.setOrigin(Origin.CENTER_BOTTOM);
+        hit.setFrameOffsets(1, OFFSET_Y);
+    }
+
+    /**
+     * Get the surface representation.
+     * 
+     * @return The surface representation.
+     */
+    public SpriteTiled getSurface()
+    {
+        return surface;
+    }
+
+    /**
+     * Get the hit sprite.
+     * 
+     * @return The hit sprite.
+     */
+    public Sprite getHit()
+    {
+        return hit;
+    }
+}

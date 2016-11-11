@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:tile sheet="0" number="7">DoubleCanon</lionengine:tile>
+    <lionengine:tile sheet="0" number="26">DoublePulse</lionengine:tile>
+    <lionengine:tile sheet="0" number="13">Generator</lionengine:tile>
+    <lionengine:tile sheet="0" number="9">GreenPulse</lionengine:tile>
+    <lionengine:tile sheet="0" number="54">House812</lionengine:tile>
+    <lionengine:tile sheet="0" number="52">House92</lionengine:tile>
+    <lionengine:tile sheet="0" number="18">Lamp</lionengine:tile>
+    <lionengine:tile sheet="0" number="19">OpenablePulse</lionengine:tile>
+    <lionengine:tile sheet="0" number="50">Pump</lionengine:tile>
+    <lionengine:tile sheet="0" number="46">RedBox</lionengine:tile>
+    <lionengine:tile sheet="0" number="8">RedEngine</lionengine:tile>
+    <lionengine:tile sheet="0" number="45">Silo</lionengine:tile>
+    <lionengine:tile sheet="0" number="6">SingleCanon</lionengine:tile>
+    <lionengine:tile sheet="0" number="30">Spider</lionengine:tile>
+    <lionengine:tile sheet="0" number="32">SubSquare</lionengine:tile>
+    <lionengine:tile sheet="0" number="66">ThreeRedH</lionengine:tile>
+    <lionengine:tile sheet="0" number="56">ThreeRedV</lionengine:tile>
+</lionengine:entity>

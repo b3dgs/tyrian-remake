@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<lionengine:entity xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:class>com.b3dgs.tyrian.entity.scenery.RedEngine</lionengine:class>
-    <lionengine:surface image="RedEngine.png"/>
-	<lionengine:size width="24" height="28"/>
-	<lionengine:collision name="default" offsetX="3" offsetY="1" width="14" height="24" mirror="false" />
-	<lionengine:animation name="idle" start="1" end="4" speed="0.1" reversed="true" repeat="true"/>
-</lionengine:entity>

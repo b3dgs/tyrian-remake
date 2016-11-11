@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.weapon.Weapon</lionengine:class>
+    <lionengine:fire>weapon_missile</lionengine:fire>
+    <lionengine:surface image="missile_heavy_launcher.png"/>
+    <lionengine:size width="24" height="28"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false"/>
+    <lionengine:launcher level="0" rate="500">
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="0" ox="-2">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="4"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="250" ox="2">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="4"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+    <lionengine:launcher level="1" rate="500">
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="0" ox="-2" oy="0">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="5"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="250" ox="-4" oy="-5">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="3"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="125" ox="2" oy="0">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="5"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="375" ox="4" oy="-5">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="3"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+    <lionengine:launcher level="2" rate="500">
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="0" ox="-2" oy="0">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="5"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="125" ox="-4" oy="-5">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="4"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="250" ox="-6" oy="-10">
+            <lionengine:force velocity="8" sensibility="0" vx="-8" vy="3"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="0" ox="2" oy="0">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="5"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="125" ox="4" oy="-5">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="4"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/missile_heavy_right_1.xml" delay="250" ox="6" oy="-10">
+            <lionengine:force velocity="8" sensibility="0" vx="8" vy="3"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+</lionengine:featurable>

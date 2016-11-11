@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.Entity</lionengine:class>
+    <lionengine:surface image="MeteorBig.png"/>
+	<lionengine:size width="72" height="84"/>
+	<lionengine:collision name="default" offsetX="9" offsetY="8" width="54" height="68" mirror="false" />
+</lionengine:featurable>
