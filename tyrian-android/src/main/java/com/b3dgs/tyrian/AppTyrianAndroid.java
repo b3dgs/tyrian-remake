@@ -37,7 +37,7 @@ public final class AppTyrianAndroid extends Activity
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = Version.create(0, 1, 0);
+    public static final Version VERSION = Version.create(0, 2, 0);
 
     /**
      * Private constructor.
@@ -48,14 +48,14 @@ public final class AppTyrianAndroid extends Activity
     }
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState)
+    protected void onCreate(Bundle savedInstanceState)
     {
-        super.onPostCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         EngineAndroid.start(NAME, VERSION, this);
         AudioFactory.addFormat(new WavFormat(), new AudioVoidFormat("lds"));
 
-        final Config config = new Config(Scene.NATIVE, 32, true);
+        final Config config = new Config(Constant.NATIVE, 32, true);
         final Loader loader = new Loader();
         loader.start(config, Scene.class);
     }

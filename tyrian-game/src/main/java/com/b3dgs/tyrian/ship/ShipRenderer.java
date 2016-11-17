@@ -22,7 +22,9 @@ import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.displayable.Displayable;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Viewer;
@@ -34,37 +36,46 @@ final class ShipRenderer extends FeatureModel implements Displayable
 {
     private static final long HIT_TIME = 25L;
 
-    private final SpriteTiled surface;
-    private final Sprite hit;
+    private Sprite hit;
     private final Timing hitTiming = new Timing();
+    private SpriteTiled surface;
+
+    @Service private ShipModel model;
 
     @Service private Viewer viewer;
 
     /**
      * Create a ship renderer.
-     * 
-     * @param model The model reference.
      */
-    ShipRenderer(ShipModel model)
+    ShipRenderer()
     {
         super();
-
-        surface = model.getSurface();
-        hit = model.getHit();
     }
 
     /**
      * Show hit effect.
      * 
      * @param localizable The localizable reference.
+     * @return <code>true</code> if hit effective, <code>false</code> else.
      */
-    public void showHit(Localizable localizable)
+    public boolean showHit(Localizable localizable)
     {
         if (!hitTiming.isStarted() || hitTiming.elapsed(HIT_TIME * 2))
         {
             hit.setLocation(viewer, localizable);
             hitTiming.restart();
+            return true;
         }
+        return false;
+    }
+
+    @Override
+    public void prepare(FeatureProvider provider, Services services)
+    {
+        super.prepare(provider, services);
+
+        surface = model.getSurface();
+        hit = model.getHit();
     }
 
     @Override

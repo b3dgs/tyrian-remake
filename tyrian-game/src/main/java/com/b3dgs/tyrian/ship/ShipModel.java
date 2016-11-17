@@ -23,20 +23,30 @@ import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.FeatureProvider;
+import com.b3dgs.lionengine.game.feature.Service;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
 import com.b3dgs.lionengine.game.feature.SizeConfig;
 import com.b3dgs.tyrian.Constant;
+import com.b3dgs.tyrian.Hud;
 
 /**
  * Ship model implementation.
  */
-final class ShipModel extends FeatureModel
+public final class ShipModel extends FeatureModel
 {
     private static final int OFFSET_Y = 8;
 
+    private final Alterable shield = new Alterable(15);
+    private final Alterable armor = new Alterable(10);
+    private final Alterable energy = new Alterable(200);
     private final SpriteTiled surface;
     private final SpriteAnimated hit;
+
+    @Service private Hud hud;
 
     /**
      * Create a ship.
@@ -56,6 +66,18 @@ final class ShipModel extends FeatureModel
         hit.prepare();
         hit.setOrigin(Origin.CENTER_BOTTOM);
         hit.setFrameOffsets(1, OFFSET_Y);
+
+        shield.fill();
+        armor.fill();
+        energy.fill();
+    }
+
+    @Override
+    public void prepare(FeatureProvider provider, Services services)
+    {
+        super.prepare(provider, services);
+
+        hud.setShip(this);
     }
 
     /**
@@ -76,5 +98,35 @@ final class ShipModel extends FeatureModel
     public Sprite getHit()
     {
         return hit;
+    }
+
+    /**
+     * Get the shield.
+     * 
+     * @return The shield.
+     */
+    public Alterable getShield()
+    {
+        return shield;
+    }
+
+    /**
+     * Get the armor.
+     * 
+     * @return The armor.
+     */
+    public Alterable getArmor()
+    {
+        return armor;
+    }
+
+    /**
+     * Get the energy fire.
+     * 
+     * @return The energy fire.
+     */
+    public Alterable getEnergy()
+    {
+        return energy;
     }
 }

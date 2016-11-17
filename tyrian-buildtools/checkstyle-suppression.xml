@@ -4,8 +4,11 @@
 
 <suppressions>
     <suppress checks="UncommentedMain" files="com.b3dgs.tyrian.AppTyrianPc" />
-    
+
     <suppress checks="MagicNumber" files="[\\/]com.b3dgs.tyrian.editor[\\/]"/>
+    <suppress checks="MagicNumber" files="com.b3dgs.tyrian.Hud"/>
+    <suppress checks="MagicNumber" files="com.b3dgs.tyrian.ship.ShipUpdater"/>
+    <suppress checks="FanOutComplexity" files="com.b3dgs.tyrian.ship.ShipUpdater"/>
     <suppress checks="JavadocPackage" files="[\\/]com.b3dgs.tyrian[\\/]"/>
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]com.b3dgs.tyrian.editor[\\/]"/>
     <suppress checks="ModifiedControlVariable" files="com.b3dgs.tyrian.editor.ApplicationConfiguration" lines="94"/>

@@ -12,7 +12,7 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.0-SNAPSHOT</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-android</artifactId>
@@ -99,6 +99,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>

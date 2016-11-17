@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:setup>com.b3dgs.lionengine.game.feature.SetupSurface</lionengine:setup>
-    <lionengine:class>com.b3dgs.tyrian.Entity</lionengine:class>
-    <lionengine:surface image="MeteorLittle2.png"/>
-	<lionengine:size width="24" height="28"/>
-	<lionengine:collision name="default" offsetX="2" offsetY="4" width="20" height="22" mirror="false" />
-</lionengine:featurable>

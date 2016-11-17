@@ -37,6 +37,10 @@ public enum Sfx
     ACCEPT("accept"),
     /** Bullet hit. */
     BULLET_HIT("bullet_hit"),
+    /** Player shield. */
+    PLAYER_SHIELD("player_shield"),
+    /** Player life. */
+    PLAYER_LIFE("player_life"),
     /** Weapon pulse. */
     WEAPON_PULSE("weapon_pulse"),
     /** Weapon missile. */

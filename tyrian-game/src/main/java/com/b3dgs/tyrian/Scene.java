@@ -20,7 +20,6 @@ package com.b3dgs.tyrian;
 import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.Engine;
 import com.b3dgs.lionengine.core.Graphics;
-import com.b3dgs.lionengine.core.Resolution;
 import com.b3dgs.lionengine.core.Sequence;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Text;
@@ -31,9 +30,6 @@ import com.b3dgs.lionengine.graphic.TextStyle;
  */
 public final class Scene extends Sequence
 {
-    /** Native resolution. */
-    public static final Resolution NATIVE = new Resolution(240, 400, 60);
-
     /** World reference. */
     private final World world;
     /** Text reference. */
@@ -46,7 +42,7 @@ public final class Scene extends Sequence
      */
     public Scene(Context context)
     {
-        super(context, NATIVE);
+        super(context, Constant.NATIVE);
 
         world = new World(context);
         setSystemCursorVisible(false);
@@ -60,6 +56,7 @@ public final class Scene extends Sequence
     @Override
     public void load()
     {
+        world.setSequence(this);
         Music.ASTEROID_2.play();
     }
 

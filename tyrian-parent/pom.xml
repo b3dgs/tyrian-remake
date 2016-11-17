@@ -19,6 +19,7 @@
         <junit.version>4.12</junit.version>
         <maven-bundle.version>3.2.0</maven-bundle.version>
         <maven-compiler.version>3.5.1</maven-compiler.version>
+        <maven-resources-plugin>3.0.1</maven-resources-plugin>
         <maven-osgi-packaging.version>0.11.1</maven-osgi-packaging.version>
         <maven-jar.version>3.0.2</maven-jar.version>
         <maven-clean.version>3.0.0</maven-clean.version>
@@ -33,7 +34,7 @@
     <groupId>com.b3dgs.tyrian</groupId>
     <artifactId>tyrian-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <name>Tyrian Remake</name>
     <description>Remake of the original Tyrian on the DOS by Epic Games</description>
     <url>https://github.com/b3dgs/tyrian-remake</url>
@@ -90,8 +91,9 @@
         <profile>
             <id>target</id>
             <modules>
+                <module>../tyrian-buildtools</module>
+                <module>../tyrian-game</module>
                 <module>../tyrian-pc</module>
-                <module>../tyrian-android</module>
             </modules>
         </profile>
     </profiles>
@@ -259,7 +261,7 @@
                             <Bundle-RequiredExecutionEnvironment>JavaSE-${jdk.version}</Bundle-RequiredExecutionEnvironment>
                             <_removeheaders>
                                 Build-Jdk,Built-By,Bnd-LastModified,Created-By,Private-Package,Tool,Require-Capability,
-                                JDK_6_HOME,JDK_8_HOME,ANDROID_HOME
+                                JDK_6_HOME,JDK_8_HOME,ANDROID_HOME 
                             </_removeheaders>
                         </instructions>
                     </configuration>

@@ -23,6 +23,7 @@ import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.camera.Camera;
 import com.b3dgs.lionengine.game.collision.object.Collidable;
 import com.b3dgs.lionengine.game.collision.object.CollidableListener;
@@ -31,10 +32,13 @@ import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
+import com.b3dgs.lionengine.game.feature.layerable.Layerable;
 import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.handler.Handler;
+import com.b3dgs.lionengine.stream.XmlNode;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
@@ -46,30 +50,47 @@ import com.b3dgs.tyrian.projectile.ProjectileModel;
  */
 public class EntityUpdater extends FeatureModel implements Refreshable, CollidableListener
 {
-    private final Alterable life;
-    private final Direction direction;
-    private final SpriteAnimated surface;
-    private final Media media;
+    /**
+     * Get the entity layer.
+     * 
+     * @param setup The setup reference.
+     * @return The entity layer.
+     */
+    private static int getLayer(Setup setup)
+    {
+        final XmlNode root = setup.getRoot();
+        if (root.hasChild(ForceConfig.NODE_FORCE))
+        {
+            return Constant.LAYER_ENTITIES_MOVING;
+        }
+        return Constant.LAYER_ENTITIES_STATIC;
+    }
+
+    private final int layer;
+    private Alterable life;
+    private Direction direction;
+    private SpriteAnimated surface;
+    private Media media;
 
     @Service private Factory factory;
     @Service private Handler handler;
     @Service private Camera camera;
+
+    @Service private Layerable layerable;
     @Service private Transformable transformable;
     @Service private Collidable collidable;
+    @Service private EntityModel model;
 
     /**
      * Create an entity updater.
      * 
-     * @param model The model reference.
+     * @param setup The setup reference.
      */
-    EntityUpdater(EntityModel model)
+    EntityUpdater(Setup setup)
     {
         super();
 
-        life = model.getLife();
-        direction = model.getDirection();
-        surface = model.getSurface();
-        media = model.getExplode();
+        layer = getLayer(setup);
     }
 
     /**
@@ -97,7 +118,12 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     {
         super.prepare(provider, services);
 
+        layerable.setLayer(layer);
         collidable.setOrigin(Origin.MIDDLE);
+        life = model.getLife();
+        direction = model.getDirection();
+        surface = model.getSurface();
+        media = model.getExplode();
     }
 
     @Override

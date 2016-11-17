@@ -19,12 +19,11 @@ package com.b3dgs.tyrian.bonus.action;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.feature.Configurer;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Service;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
-import com.b3dgs.lionengine.stream.XmlNode;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 import com.b3dgs.tyrian.weapon.Weapon;
@@ -45,24 +44,23 @@ public class ChangeWeapon extends FeatureModel implements Action
     /**
      * Create power up action.
      * 
-     * @param configurer The configurer reference.
+     * @param setup The setup reference.
      */
-    public ChangeWeapon(Configurer configurer)
+    public ChangeWeapon(Setup setup)
     {
         super();
 
-        final XmlNode root = configurer.getRoot();
-        if (root.hasChild(NODE_WEAPON_FRONT))
+        if (setup.hasNode(NODE_WEAPON_FRONT))
         {
             media = Medias.create(Constant.FOLDER_WEAPON,
                                   Constant.FOLDER_FRONT,
-                                  configurer.getText(NODE_WEAPON_FRONT) + Factory.FILE_DATA_DOT_EXTENSION);
+                                  setup.getText(NODE_WEAPON_FRONT) + Factory.FILE_DATA_DOT_EXTENSION);
         }
-        else if (root.hasChild(NODE_WEAPON_REAR))
+        else if (setup.hasNode(NODE_WEAPON_REAR))
         {
             media = Medias.create(Constant.FOLDER_WEAPON,
                                   Constant.FOLDER_REAR,
-                                  configurer.getText(NODE_WEAPON_REAR) + Factory.FILE_DATA_DOT_EXTENSION);
+                                  setup.getText(NODE_WEAPON_REAR) + Factory.FILE_DATA_DOT_EXTENSION);
         }
         else
         {

@@ -50,6 +50,7 @@ public class Explode extends FeaturableModel
     private final Rectangle area = Geom.createRectangle();
     private final Media media;
     private final int countMax;
+    private PostAction action;
     private int count = -1;
 
     @Service private Factory factory;
@@ -61,7 +62,7 @@ public class Explode extends FeaturableModel
      * 
      * @param setup The setup reference.
      */
-    public Explode(final Setup setup)
+    public Explode(Setup setup)
     {
         super();
 
@@ -79,6 +80,19 @@ public class Explode extends FeaturableModel
     public void start(Transformable transformable)
     {
         area.set(transformable.getX(), transformable.getY(), transformable.getWidth(), transformable.getHeight());
+        count++;
+    }
+
+    /**
+     * Start the explode.
+     * 
+     * @param rectangle The rectangle reference.
+     * @param action Action called once effect ended.
+     */
+    public void start(Rectangle rectangle, PostAction action)
+    {
+        this.action = action;
+        area.set(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
         count++;
     }
 
@@ -115,10 +129,7 @@ public class Explode extends FeaturableModel
                 count++;
                 timing.restart();
 
-                if (count > countMax)
-                {
-                    getFeature(Identifiable.class).destroy();
-                }
+                checkEnd();
             }
         }
 
@@ -136,5 +147,31 @@ public class Explode extends FeaturableModel
                 timingSfx.restart();
             }
         }
+
+        /**
+         * Check when effect ended.
+         */
+        private void checkEnd()
+        {
+            if (count > countMax)
+            {
+                if (action != null)
+                {
+                    action.execute();
+                }
+                getFeature(Identifiable.class).destroy();
+            }
+        }
+    }
+
+    /**
+     * Post action interface.
+     */
+    public interface PostAction
+    {
+        /**
+         * Execute post action.
+         */
+        void execute();
     }
 }

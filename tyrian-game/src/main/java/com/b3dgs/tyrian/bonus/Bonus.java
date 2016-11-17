@@ -68,6 +68,6 @@ public class Bonus extends FeaturableModel
         addFeature(new BonusUpdater(model));
         addFeature(new BonusRenderer(model));
 
-        addFeatures(setup.getFeatures());
+        addFeatures(setup);
     }
 }

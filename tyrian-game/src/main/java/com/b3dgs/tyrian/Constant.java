@@ -18,12 +18,21 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.LionEngineException;
+import com.b3dgs.lionengine.core.Resolution;
+import com.b3dgs.lionengine.core.Version;
 
 /**
  * Game constants.
  */
 public final class Constant
 {
+    /** Application name. */
+    public static final String NAME = "Tyrian Remake";
+    /** Application version. */
+    public static final Version VERSION = Version.create(0, 2, 0);
+    /** Native resolution. */
+    public static final Resolution NATIVE = new Resolution(240, 400, 60);
+
     /** Ships folder. */
     public static final String FOLDER_SHIP = "ship";
     /** Entity folder. */
@@ -48,6 +57,10 @@ public final class Constant
     public static final String FOLDER_EFFECT = "effect";
     /** Sound FX folder. */
     public static final String FOLDER_SFX = "sfx";
+    /** Sprite folder. */
+    public static final String FOLDER_SPRITE = "sprite";
+    /** Pictures folder. */
+    public static final String FOLDER_PIC = "pic";
     /** Tiles folder. */
     public static final String FOLDER_TILE = "tile";
     /** Levels folder. */

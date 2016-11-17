@@ -18,12 +18,16 @@
 package com.b3dgs.tyrian;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.InputDevicePointer;
+import com.b3dgs.lionengine.core.Medias;
+import com.b3dgs.lionengine.core.Sequencable;
 import com.b3dgs.lionengine.game.collision.object.ComponentCollision;
+import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.layerable.Layerable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
@@ -37,25 +41,32 @@ import com.b3dgs.lionengine.stream.FileReading;
 import com.b3dgs.lionengine.stream.FileWriting;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.background.Background;
-import com.b3dgs.tyrian.bonus.Bonus;
-import com.b3dgs.tyrian.entity.Entity;
-import com.b3dgs.tyrian.ship.Ship;
 
 /**
  * World game representation.
  */
 public class World extends WorldGame
 {
+    /** Stalker media. */
+    public static final Media STALKER = Medias.create(Constant.FOLDER_SHIP, "stalker.xml");
+
     private static final long SPAWN_DELAY = 1000L;
-    private static final int SPAWN_BONUS_CHANCE = 10;
-    private static final Media[] SPAWN_ENTITIES = new Media[]
+    private static final int SPAWN_BONUS_CHANCE = 12;
+    private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
+    private static final List<Media> SPAWN_BONUS = getMedias(Constant.FOLDER_ENTITY,
+                                                             Constant.FOLDER_BONUS,
+                                                             Constant.FOLDER_WEAPON);
+
+    /**
+     * Get medias in path.
+     * 
+     * @param path The path.
+     * @return The medias found
+     */
+    private static List<Media> getMedias(String... path)
     {
-        Entity.METEOR_MEDIUM_1, Entity.METEOR_LITTLE_1
-    };
-    private static final Media[] SPAWN_BONUS = new Media[]
-    {
-        Bonus.PULSE_CANNON, Bonus.SONIC_WAVE, Bonus.POWER_UP
-    };
+        return Medias.getByExtension(Factory.FILE_DATA_EXTENSION, Medias.create(path));
+    }
 
     /**
      * Get a random media from array.
@@ -63,13 +74,14 @@ public class World extends WorldGame
      * @param medias The medias array.
      * @return The random media.
      */
-    private static Media getRandomMedia(Media[] medias)
+    private static Media getRandomMedia(List<Media> medias)
     {
-        return medias[UtilRandom.getRandomInteger(medias.length - 1)];
+        return medias.get(UtilRandom.getRandomInteger(medias.size() - 1));
     }
 
     private final InputDevicePointer mouse = services.add(getInputDevice(InputDevicePointer.class));
     private final MapTile map = services.add(Map.generate(services, "level1"));
+    private final Hud hud = services.create(Hud.class);
     private final Background background = new Background(camera);
     private final Timing timing = new Timing();
 
@@ -87,8 +99,23 @@ public class World extends WorldGame
         map.addFeature(new MapTileViewerModel());
         map.addFeature(new MapTilePersisterModel());
         camera.setLimits(map);
+        camera.setView(0,
+                       0,
+                       source.getWidth(),
+                       source.getHeight() - hud.getHeight(),
+                       source.getHeight() - hud.getHeight());
+    }
 
-        handler.add(factory.create(Ship.STALKER));
+    /**
+     * Set the current sequence.
+     * 
+     * @param sequence The current sequence.
+     */
+    public void setSequence(Sequencable sequence)
+    {
+        services.add(sequence);
+
+        handler.add(factory.create(STALKER));
         handler.add(map);
 
         timing.start();
@@ -100,15 +127,18 @@ public class World extends WorldGame
      * @param medias The medias array.
      * @param layer The associated layer.
      */
-    private void spawn(Media[] medias, int layer)
+    private void spawn(List<Media> medias, int layer)
     {
-        final Media media = getRandomMedia(medias);
-        final Featurable featurable = factory.create(media);
-        featurable.getFeature(Layerable.class).setLayer(layer);
-        handler.add(featurable);
-        final Transformable transformable = featurable.getFeature(Transformable.class);
-        transformable.teleport(UtilRandom.getRandomInteger(camera.getWidth()),
-                               (int) camera.getY() + camera.getHeight() + transformable.getHeight());
+        if (!medias.isEmpty())
+        {
+            final Media media = getRandomMedia(medias);
+            final Featurable featurable = factory.create(media);
+            featurable.getFeature(Layerable.class).setLayer(layer);
+            handler.add(featurable);
+            final Transformable transformable = featurable.getFeature(Transformable.class);
+            transformable.teleport(UtilRandom.getRandomInteger(camera.getWidth()),
+                                   (int) camera.getY() + camera.getHeight() + transformable.getHeight());
+        }
     }
 
     @Override
@@ -142,6 +172,8 @@ public class World extends WorldGame
         }
 
         super.update(extrp);
+
+        hud.update(extrp);
     }
 
     @Override
@@ -150,5 +182,7 @@ public class World extends WorldGame
         background.render(g);
 
         super.render(g);
+
+        hud.render(g);
     }
 }

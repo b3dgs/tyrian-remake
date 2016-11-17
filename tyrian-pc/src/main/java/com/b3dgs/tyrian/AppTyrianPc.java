@@ -24,7 +24,6 @@ import com.b3dgs.lionengine.core.AudioFactory;
 import com.b3dgs.lionengine.core.Config;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Resolution;
-import com.b3dgs.lionengine.core.Version;
 import com.b3dgs.lionengine.core.awt.EngineAwt;
 
 /**
@@ -32,11 +31,6 @@ import com.b3dgs.lionengine.core.awt.EngineAwt;
  */
 public final class AppTyrianPc
 {
-    /** Application name. */
-    public static final String NAME = "Tyrian Remake";
-    /** Application version. */
-    public static final Version VERSION = Version.create(0, 1, 0);
-
     /**
      * Main function.
      * 
@@ -44,7 +38,7 @@ public final class AppTyrianPc
      */
     public static void main(String[] args)
     {
-        EngineAwt.start(NAME, VERSION, AppTyrianPc.class);
+        EngineAwt.start(Constant.NAME, Constant.VERSION, AppTyrianPc.class);
         AudioFactory.addFormat(new WavFormat(), AdPlugFormat.getFailsafe());
 
         final Resolution output = new Resolution(480, 800, 60);

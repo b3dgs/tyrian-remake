@@ -20,7 +20,9 @@ package com.b3dgs.tyrian.entity;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.collision.object.Collidable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.displayable.Displayable;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Viewer;
@@ -30,20 +32,25 @@ import com.b3dgs.lionengine.graphic.Viewer;
  */
 final class EntityRenderer extends FeatureModel implements Displayable
 {
-    private final SpriteAnimated surface;
+    private SpriteAnimated surface;
 
     @Service private Collidable collidable;
 
     @Service private Viewer viewer;
+    @Service private EntityModel model;
 
     /**
      * Create an entity renderer.
-     * 
-     * @param model The model reference.
      */
-    EntityRenderer(EntityModel model)
+    EntityRenderer()
     {
         super();
+    }
+
+    @Override
+    public void prepare(FeatureProvider provider, Services services)
+    {
+        super.prepare(provider, services);
 
         surface = model.getSurface();
     }
