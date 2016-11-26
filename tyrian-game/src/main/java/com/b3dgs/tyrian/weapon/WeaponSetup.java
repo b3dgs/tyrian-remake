@@ -47,9 +47,17 @@ public class WeaponSetup extends Setup
     {
         super(config);
 
-        final String sfxFile = getText(NODE_FIRE);
-        sfxFire = AudioFactory.loadAudio(Medias.create(Constant.FOLDER_SFX,
-                                                       UtilFile.normalizeExtension(sfxFile, Sfx.AUDIO_FILE_EXTENSION)));
+        if (hasNode(NODE_FIRE))
+        {
+            final String sfxFile = getText(NODE_FIRE);
+            sfxFire = AudioFactory.loadAudio(Medias.create(Constant.FOLDER_SFX,
+                                                           UtilFile.normalizeExtension(sfxFile,
+                                                                                       Sfx.AUDIO_FILE_EXTENSION)));
+        }
+        else
+        {
+            sfxFire = null;
+        }
     }
 
     /**

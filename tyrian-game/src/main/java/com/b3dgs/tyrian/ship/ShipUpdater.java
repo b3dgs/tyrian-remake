@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.core.InputDevicePointer;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.Sequencable;
+import com.b3dgs.lionengine.core.Sequencer;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.Direction;
@@ -66,7 +66,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     /** Speed. */
     private static final Direction SPEED = new Force(0.0, 1.0);
     /** Default energy. */
-    private static final int ENERGY = 13;
+    private static final int ENERGY = 8;
     /** Turning max. */
     private static final double TURNING_HIGH = 1.5;
     /** Turning max. */
@@ -129,7 +129,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     @Service private ShipModel model;
     @Service private ShipController controller;
 
-    @Service private Sequencable sequence;
+    @Service private Sequencer sequence;
     @Service private InputDevicePointer pointer;
     @Service private Factory factory;
     @Service private Handler handler;
@@ -182,7 +182,8 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     public void powerUp()
     {
         final WeaponUpdater weapon;
-        if (UtilRandom.getRandomBoolean())
+        if (UtilRandom.getRandomBoolean() && front.getLevel() < Constant.WEAPON_LEVEL_MAX
+            || rear.getLevel() == Constant.WEAPON_LEVEL_MAX)
         {
             weapon = front;
         }
@@ -194,6 +195,16 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     }
 
     /**
+     * Get the speed.
+     * 
+     * @return The speed.
+     */
+    public Direction getSpeed()
+    {
+        return SPEED;
+    }
+
+    /**
      * Get the hit force.
      * 
      * @return The hit force.
@@ -201,6 +212,26 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     public Force getHitForce()
     {
         return force;
+    }
+
+    /**
+     * Get the front weapon level.
+     * 
+     * @return The front weapon level.
+     */
+    public int getLevelPercentFront()
+    {
+        return (int) Math.max(1, Math.floor(front.getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
+    }
+
+    /**
+     * Get the rear weapon level.
+     * 
+     * @return The rear weapon level.
+     */
+    public int getLevelPercentRear()
+    {
+        return (int) Math.max(1, Math.floor(rear.getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
     }
 
     /**
@@ -223,7 +254,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
             @Override
             public void notifyFired(Launchable launchable)
             {
-                collidable.addIgnore(launchable.getFeature(Collidable.class));
+                launchable.getFeature(Collidable.class).addIgnore(Constant.COLLISION_GROUP_SHIP);
             }
         });
     }
@@ -252,16 +283,18 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         force.setDirection(0.0, dir * 2 - SPEED.getDirectionVertical() * 2);
         if (getFeature(ShipRenderer.class).showHit(transformable))
         {
-            onHurt();
+            onHurt(1);
         }
     }
 
     /**
      * Update hurt case.
+     * 
+     * @param damages The damages value
      */
-    private void onHurt()
+    private void onHurt(int damages)
     {
-        if (shield.decrease(1) == 0)
+        if (shield.decrease(damages) == 0)
         {
             if (armor.decrease(1) == 0)
             {
@@ -274,7 +307,11 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
                         sequence.end();
                     }
                 };
-                explode.start(Geom.createRectangle(transformable.getX() - 10, transformable.getY() + 10, 50, 50),
+                explode.start(Geom.createRectangle(transformable.getX()
+                                                   - transformable.getWidth() / 2,
+                                                   transformable.getY() + -transformable.getHeight() / 2,
+                                                   50,
+                                                   50),
                               action);
                 handler.add(explode);
                 energy.set(0);
@@ -293,14 +330,21 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     {
         super.prepare(provider, services);
 
+        services.add(this);
+
         shield = model.getShield();
         armor = model.getArmor();
         energy = model.getEnergy();
         surface = model.getSurface();
         layerable.setLayer(Constant.LAYER_SHIP_UPDATE, Constant.LAYER_SHIP);
+        collidable.setGroup(Constant.COLLISION_GROUP_SHIP);
         collidable.setOrigin(Origin.MIDDLE);
         front = createWeapon(Weapon.PULSE_CANNON);
         rear = createWeapon(Weapon.SONIC_WAVE);
+
+        final double startX = (camera.getWidth() + Constant.MARGIN_H + transformable.getWidth()) / 2;
+        final double startY = camera.getY() + camera.getHeight() / 4 - transformable.getHeight();
+        transformable.teleport(startX, startY);
     }
 
     @Override
@@ -310,14 +354,15 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         collidable.update(extrp);
 
         force.update(extrp);
+
         camera.setLocation(transformable.getX()
-                           / Constant.MARGIN_H,
+                           / (camera.getWidth() / Constant.MARGIN_H),
                            camera.getY() + SPEED.getDirectionVertical() * extrp);
 
         surface.setTile(getTile(transformable.getX() - transformable.getOldX()));
         surface.setLocation(camera, transformable);
 
-        energy.increase((int) Math.ceil(1 * extrp));
+        energy.increase(extrp, 1);
         if (!shield.isFull() && shieldIncTiming.elapsed(SHIELD_INC_DELAY))
         {
             shieldIncTiming.restart();
@@ -336,6 +381,14 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
             {
                 onHit(dir);
             }
+        }
+        if (collidable.hasFeature(Launchable.class))
+        {
+            if (getFeature(ShipRenderer.class).showHit(transformable))
+            {
+                onHurt(3);
+            }
+            collidable.getFeature(Identifiable.class).destroy();
         }
         if (collidable.hasFeature(Action.class))
         {

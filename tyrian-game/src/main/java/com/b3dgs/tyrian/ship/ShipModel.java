@@ -25,13 +25,9 @@ import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
 import com.b3dgs.lionengine.game.feature.SizeConfig;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.Hud;
 
 /**
  * Ship model implementation.
@@ -45,8 +41,6 @@ public final class ShipModel extends FeatureModel
     private final Alterable energy = new Alterable(200);
     private final SpriteTiled surface;
     private final SpriteAnimated hit;
-
-    @Service private Hud hud;
 
     /**
      * Create a ship.
@@ -70,14 +64,6 @@ public final class ShipModel extends FeatureModel
         shield.fill();
         armor.fill();
         energy.fill();
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider, Services services)
-    {
-        super.prepare(provider, services);
-
-        hud.setShip(this);
     }
 
     /**

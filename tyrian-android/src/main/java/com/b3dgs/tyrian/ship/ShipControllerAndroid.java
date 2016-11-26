@@ -23,14 +23,13 @@ import com.b3dgs.lionengine.game.camera.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.tyrian.Constant;
 
 /**
  * Ship control implementation.
  */
 public final class ShipControllerAndroid extends FeatureModel implements ShipController
 {
-    private static final double SPEED_DIVISOR = 5.0;
+    private static final double SPEED_DIVISOR = 10.0;
 
     private final Force force = new Force();
 
@@ -58,7 +57,7 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
         transformable.moveLocation(extrp, force, updater.getHitForce());
 
         final double width = transformable.getWidth() / 2.0;
-        final double maxX = camera.getWidth() + camera.getWidth() / Constant.MARGIN_H - width + 4;
+        final double maxX = camera.getWidth() + camera.getWidth() - width + 4;
         if (transformable.getX() < width)
         {
             transformable.teleportX(width);
@@ -84,8 +83,8 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
         {
             final Force f = Force.fromVector(transformable.getX(),
                                              transformable.getY(),
-                                             camera.getViewpointX(mouse.getX()),
-                                             camera.getViewpointY(mouse.getY()));
+                                             mouse.getX() + camera.getX(),
+                                             camera.getViewpointY(mouse.getY() - transformable.getHeight() * 1.5));
 
             force.setDirection(f.getDirectionHorizontal()
                                * f.getVelocity()

@@ -21,6 +21,7 @@ import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
@@ -36,9 +37,10 @@ final class ShipRenderer extends FeatureModel implements Displayable
 {
     private static final long HIT_TIME = 25L;
 
-    private Sprite hit;
     private final Timing hitTiming = new Timing();
+    private Sprite hit;
     private SpriteTiled surface;
+    private Alterable shield;
 
     @Service private ShipModel model;
 
@@ -63,7 +65,10 @@ final class ShipRenderer extends FeatureModel implements Displayable
         if (!hitTiming.isStarted() || hitTiming.elapsed(HIT_TIME * 2))
         {
             hit.setLocation(viewer, localizable);
-            hitTiming.restart();
+            if (!shield.isEmpty())
+            {
+                hitTiming.restart();
+            }
             return true;
         }
         return false;
@@ -76,12 +81,14 @@ final class ShipRenderer extends FeatureModel implements Displayable
 
         surface = model.getSurface();
         hit = model.getHit();
+        shield = model.getShield();
     }
 
     @Override
     public void render(Graphic g)
     {
         surface.render(g);
+
         if (hitTiming.isStarted() && !hitTiming.elapsed(HIT_TIME))
         {
             hit.render(g);

@@ -3,8 +3,6 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <properties>
-        <jdk.version>1.6</jdk.version>
-        <jdk.home>${JDK_6_HOME}</jdk.home>
         <android.version>4.1.1.4</android.version>
         <android.sdk>19</android.sdk>
         <android.maven.version>4.0.0-rc.2</android.maven.version>
@@ -12,7 +10,7 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.2.0-SNAPSHOT</version>
+        <version>0.3.0</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-android</artifactId>
@@ -39,12 +37,14 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <executable>${jdk.home}/bin/javac</executable>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.android</Bundle-SymbolicName>
+                        <Import-Package>*</Import-Package>
+                        <Require-Bundle>${project.groupId}.game</Require-Bundle>
+                    </instructions>
                 </configuration>
             </plugin>
             <plugin>
@@ -64,42 +64,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>org.apache.maven.plugins</groupId>
-                                    <artifactId>maven-dependency-plugin</artifactId>
-                                    <versionRange>[2.6,)</versionRange>
-                                    <goals>
-                                        <goal>unpack</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <ignore></ignore>
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>lt.velykis.maven</groupId>
-                <artifactId>pde-target-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>pde-target</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>

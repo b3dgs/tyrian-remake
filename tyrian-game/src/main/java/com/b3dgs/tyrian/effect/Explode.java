@@ -50,7 +50,14 @@ public class Explode extends FeaturableModel
     private final Rectangle area = Geom.createRectangle();
     private final Media media;
     private final int countMax;
-    private PostAction action;
+    private PostAction action = new PostAction()
+    {
+        @Override
+        public void execute()
+        {
+            // Nothing to do
+        }
+    };
     private int count = -1;
 
     @Service private Factory factory;
@@ -101,8 +108,12 @@ public class Explode extends FeaturableModel
      */
     private class ExplodeUpdater extends FeatureModel implements Refreshable
     {
+        private static final long EXTRA_DELAY = 1000L;
+
         private final Timing timing = new Timing();
         private final Timing timingSfx = new Timing();
+        private final Timing extraDelay = new Timing();
+        private Effect effect;
 
         /**
          * Create explode medium updater.
@@ -115,12 +126,12 @@ public class Explode extends FeaturableModel
         @Override
         public void update(double extrp)
         {
-            if (count == 0 || timing.elapsed(DELAY))
+            if (count == 0 || timing.elapsed(DELAY) && count <= countMax)
             {
                 final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
                 final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight());
 
-                final Effect effect = factory.create(media);
+                effect = factory.create(media);
                 effect.start(Geom.createLocalizable(x, y));
                 handler.add(effect);
 
@@ -128,9 +139,8 @@ public class Explode extends FeaturableModel
 
                 count++;
                 timing.restart();
-
-                checkEnd();
             }
+            checkEnd();
         }
 
         /**
@@ -153,13 +163,16 @@ public class Explode extends FeaturableModel
          */
         private void checkEnd()
         {
-            if (count > countMax)
+            if (count > countMax && effect != null && effect.getFeature(EffectUpdater.class).isFinished())
             {
-                if (action != null)
+                extraDelay.start();
+                if (extraDelay.elapsed(EXTRA_DELAY))
                 {
                     action.execute();
+                    getFeature(Identifiable.class).destroy();
+                    effect = null;
+                    action = null;
                 }
-                getFeature(Identifiable.class).destroy();
             }
         }
     }

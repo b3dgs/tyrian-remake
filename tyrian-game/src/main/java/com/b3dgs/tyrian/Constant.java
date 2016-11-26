@@ -29,9 +29,9 @@ public final class Constant
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = Version.create(0, 2, 0);
+    public static final Version VERSION = Version.create(0, 3, 0);
     /** Native resolution. */
-    public static final Resolution NATIVE = new Resolution(240, 400, 60);
+    public static final Resolution NATIVE = new Resolution(200, 355, 60);
 
     /** Ships folder. */
     public static final String FOLDER_SHIP = "ship";
@@ -61,6 +61,8 @@ public final class Constant
     public static final String FOLDER_SPRITE = "sprite";
     /** Pictures folder. */
     public static final String FOLDER_PIC = "pic";
+    /** Font folder. */
+    public static final String FOLDER_FONT = "font";
     /** Tiles folder. */
     public static final String FOLDER_TILE = "tile";
     /** Levels folder. */
@@ -83,8 +85,18 @@ public final class Constant
     /** Ship layer. */
     public static final int LAYER_SHIP = LAYER_EFFECT + 1;
 
+    /** Collision group ship. */
+    public static final int COLLISION_GROUP_SHIP = 0;
+    /** Collision group projectiles. */
+    public static final int COLLISION_GROUP_PROJECTILES = COLLISION_GROUP_SHIP + 1;
+    /** Collision group entities. */
+    public static final int COLLISION_GROUP_ENTITIES = COLLISION_GROUP_PROJECTILES + 1;
+
     /** Horizontal movement margin. */
-    public static final double MARGIN_H = 10.0;
+    public static final double MARGIN_H = 60.0;
+
+    /** Maximum weapon level. */
+    public static final int WEAPON_LEVEL_MAX = 2;
 
     /**
      * Private constructor.

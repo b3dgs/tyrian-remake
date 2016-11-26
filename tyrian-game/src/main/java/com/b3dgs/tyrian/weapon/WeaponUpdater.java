@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.Localizable;
+import com.b3dgs.lionengine.core.Audio;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.FeatureProvider;
@@ -29,17 +30,14 @@ import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.graphic.Viewer;
 import com.b3dgs.lionengine.util.UtilMath;
+import com.b3dgs.tyrian.Constant;
 
 /**
  * Weapon updater implementation.
  */
 public class WeaponUpdater extends FeatureModel implements Refreshable
 {
-    private static final int LEVEL_MAX = 2;
-
     private final WeaponModel model;
-
-    private int level;
 
     @Service private Transformable transformable;
     @Service private Launcher launcher;
@@ -68,7 +66,11 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
             @Override
             public void notifyFired()
             {
-                model.getSfxFire().play();
+                final Audio audio = model.getSfxFire();
+                if (audio != null)
+                {
+                    audio.play();
+                }
             }
         });
     }
@@ -86,12 +88,33 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     }
 
     /**
+     * Fire weapon.
+     * 
+     * @param from The fire source.
+     * @param target The fire target.
+     */
+    public void fire(Localizable from, Localizable target)
+    {
+        transformable.setLocation(from.getX(), from.getY());
+        launcher.fire(target);
+    }
+
+    /**
      * Increase weapon level.
      */
     public void increaseLevel()
     {
-        level = UtilMath.clamp(level + 1, 0, LEVEL_MAX);
-        launcher.setLevel(level);
+        launcher.setLevel(UtilMath.clamp(launcher.getLevel() + 1, 0, Constant.WEAPON_LEVEL_MAX));
+    }
+
+    /**
+     * Get the weapon level.
+     * 
+     * @return The weapon level.
+     */
+    public int getLevel()
+    {
+        return launcher.getLevel();
     }
 
     @Override

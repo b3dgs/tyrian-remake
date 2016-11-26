@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.awt.Mouse;
 import com.b3dgs.lionengine.game.Cursor;
 import com.b3dgs.lionengine.game.camera.Camera;
@@ -25,22 +26,24 @@ import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.tyrian.Constant;
 
 /**
  * Ship control implementation.
  */
 public final class ShipControllerPc extends FeatureModel implements ShipController
 {
-    private static final double SENSIBILITY = 3.0;
+    private static final double SENSIBILITY = 1.0;
 
     private final Cursor cursor = new Cursor();
     private double oldX;
     private double oldY;
 
+    private int count;
+
     @Service private Transformable transformable;
     @Service private ShipUpdater updater;
 
+    @Service private Context context;
     @Service private Mouse mouse;
     @Service private Camera camera;
 
@@ -59,12 +62,18 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
      */
     private void updatePosition(double extrp)
     {
-        transformable.moveLocation(extrp,
-                                   cursor.getX() - oldX,
-                                   cursor.getY() - oldY + updater.getHitForce().getDirectionVertical());
-
+        if (count > 1)
+        {
+            transformable.moveLocation(extrp,
+                                       cursor.getX() - oldX,
+                                       cursor.getY() - oldY + updater.getHitForce().getDirectionVertical());
+        }
+        else
+        {
+            count++;
+        }
         final double width = transformable.getWidth() / 2.0;
-        final double maxX = camera.getWidth() + camera.getWidth() / Constant.MARGIN_H - width + 4;
+        final double maxX = camera.getWidth() + camera.getWidth() / 2 - width * 2;
         if (transformable.getX() < width)
         {
             transformable.teleportX(width);
@@ -87,6 +96,10 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
     public void prepare(FeatureProvider provider, Services services)
     {
         super.prepare(provider, services);
+
+        mouse.setCenter(context.getX()
+                        + context.getConfig().getOutput().getWidth() / 2,
+                        context.getY() + context.getConfig().getOutput().getHeight() / 2);
 
         cursor.setInputDevice(mouse);
         cursor.setSyncMode(false);

@@ -24,6 +24,7 @@ import com.b3dgs.lionengine.game.feature.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.displayable.Displayable;
+import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Viewer;
 
@@ -34,6 +35,7 @@ final class EntityRenderer extends FeatureModel implements Displayable
 {
     private SpriteAnimated surface;
 
+    @Service private Transformable transformable;
     @Service private Collidable collidable;
 
     @Service private Viewer viewer;
@@ -58,7 +60,7 @@ final class EntityRenderer extends FeatureModel implements Displayable
     @Override
     public void render(Graphic g)
     {
-        if (surface.getY() > -surface.getHeight() && surface.getY() < viewer.getHeight() + surface.getHeight())
+        if (viewer.isViewable(transformable, 0, 0))
         {
             surface.render(g);
             collidable.render(g);

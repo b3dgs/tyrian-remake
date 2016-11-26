@@ -23,12 +23,15 @@ import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.game.Bar;
+import com.b3dgs.lionengine.game.camera.Camera;
 import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.map.MapTile;
 import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Renderable;
 import com.b3dgs.lionengine.graphic.Viewer;
 import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.ship.ShipUpdater;
 
 /**
  * HUD representation.
@@ -37,12 +40,19 @@ public class Hud implements Updatable, Renderable
 {
     /** Stalker media. */
     public static final Media HUD = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
+    private static final ColorRgba BROWN = new ColorRgba(90, 45, 0);
 
     private final Bar shield = new Bar(60, 9);
     private final Bar armor = new Bar(60, 9);
     private final Bar energy = new Bar(96, 11);
-    private final Sprite surface;
-    private ShipModel ship;
+    private final Bar levelFront = new Bar(4, 12);
+    private final Bar levelRear = new Bar(4, 12);
+    private final Bar progress = new Bar(12, 49);
+    private final Sprite surface = Drawable.loadSprite(HUD);
+    private final ShipModel ship;
+    private final ShipUpdater shipUpdater;
+    private final Camera camera;
+    private final MapTile map;
 
     /**
      * Create HUD.
@@ -53,42 +63,36 @@ public class Hud implements Updatable, Renderable
     {
         super();
 
-        surface = Drawable.loadSprite(HUD);
+        camera = services.get(Camera.class);
+        map = services.get(MapTile.class);
+
         surface.load();
         surface.prepare();
         surface.setLocation(0.0, services.get(Viewer.class).getHeight() - surface.getHeight());
 
-        shield.setLocation(4, 350);
-        shield.setColorBackground(ColorRgba.BLACK);
-        shield.setColorForeground(ColorRgba.BLUE);
+        shipUpdater = services.get(ShipUpdater.class);
+        ship = shipUpdater.getFeature(ShipModel.class);
 
-        armor.setLocation(4, 387);
-        armor.setColorBackground(ColorRgba.BLACK);
-        armor.setColorForeground(new ColorRgba(90, 45, 0));
+        shield.setLocation(4, 305);
+        shield.setColor(ColorRgba.BLACK, ColorRgba.BLUE);
 
-        energy.setLocation(140, 348);
+        armor.setLocation(4, 342);
+        armor.setColor(ColorRgba.BLACK, BROWN);
+
+        energy.setLocation(100, 303);
         energy.setColorBackground(ColorRgba.BLACK);
-        energy.setColorGradient(140, 348, ColorRgba.RED, 237, 359, ColorRgba.YELLOW);
-    }
+        energy.setColorGradient(ColorRgba.RED, ColorRgba.YELLOW);
 
-    /**
-     * Set the ship data to display.
-     * 
-     * @param ship The ship data to display.
-     */
-    public void setShip(ShipModel ship)
-    {
-        this.ship = ship;
-    }
+        levelFront.setLocation(190, 319);
+        levelFront.setColorBackground(ColorRgba.BLACK);
+        levelFront.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
 
-    /**
-     * Get the HUD height.
-     * 
-     * @return The height.
-     */
-    public int getHeight()
-    {
-        return surface.getHeight();
+        levelRear.setLocation(190, 335);
+        levelRear.setColorBackground(ColorRgba.BLACK);
+        levelRear.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
+
+        progress.setLocation(73, 302);
+        progress.setColorGradient(ColorRgba.GREEN, ColorRgba.RED);
     }
 
     @Override
@@ -97,6 +101,11 @@ public class Hud implements Updatable, Renderable
         shield.setWidthPercent(ship.getShield().getPercent());
         armor.setWidthPercent(ship.getArmor().getPercent());
         energy.setWidthPercent(ship.getEnergy().getPercent());
+
+        levelFront.setHeightPercent(shipUpdater.getLevelPercentFront());
+        levelRear.setHeightPercent(shipUpdater.getLevelPercentRear());
+
+        progress.setHeightPercent((int) ((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
     }
 
     @Override
@@ -107,5 +116,20 @@ public class Hud implements Updatable, Renderable
         energy.render(g);
 
         surface.render(g);
+
+        levelFront.render(g);
+        levelRear.render(g);
+
+        progress.render(g);
+    }
+
+    /**
+     * Get the HUD height.
+     * 
+     * @return The height.
+     */
+    public int getHeight()
+    {
+        return surface.getHeight();
     }
 }

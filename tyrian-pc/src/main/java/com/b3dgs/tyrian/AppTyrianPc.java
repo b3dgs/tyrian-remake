@@ -40,11 +40,12 @@ public final class AppTyrianPc
     {
         EngineAwt.start(Constant.NAME, Constant.VERSION, AppTyrianPc.class);
         AudioFactory.addFormat(new WavFormat(), AdPlugFormat.getFailsafe());
+        Sfx.setEnabled(true);
 
-        final Resolution output = new Resolution(480, 800, 60);
-        final Config config = new Config(output, 16, true);
+        final Resolution output = new Resolution(400, 720, 60);
+        final Config config = new Config(output, 32, true);
         final Loader loader = new Loader();
-        loader.start(config, Scene.class);
+        loader.start(config, Loading.class);
     }
 
     /**

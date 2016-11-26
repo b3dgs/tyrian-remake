@@ -18,23 +18,15 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.core.Context;
-import com.b3dgs.lionengine.core.Engine;
-import com.b3dgs.lionengine.core.Graphics;
-import com.b3dgs.lionengine.core.Sequence;
-import com.b3dgs.lionengine.graphic.Graphic;
-import com.b3dgs.lionengine.graphic.Text;
-import com.b3dgs.lionengine.graphic.TextStyle;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.handler.SequenceGame;
+import com.b3dgs.lionengine.game.handler.WorldGame;
 
 /**
  * Game loop designed to handle our little world.
  */
-public final class Scene extends Sequence
+public final class Scene extends SequenceGame
 {
-    /** World reference. */
-    private final World world;
-    /** Text reference. */
-    private final Text text = Graphics.createText("Times", 12, TextStyle.NORMAL);
-
     /**
      * Constructor.
      * 
@@ -43,44 +35,28 @@ public final class Scene extends Sequence
     public Scene(Context context)
     {
         super(context, Constant.NATIVE);
-
-        world = new World(context);
-        setSystemCursorVisible(false);
-        setExtrapolated(true);
     }
 
-    /*
-     * Sequence
-     */
+    @Override
+    protected WorldGame createWorld(Context context, Services services)
+    {
+        return new World(context, services);
+    }
 
     @Override
     public void load()
     {
-        world.setSequence(this);
         Music.ASTEROID_2.play();
-    }
-
-    @Override
-    public void update(double extrp)
-    {
-        world.update(extrp);
-    }
-
-    @Override
-    public void render(Graphic g)
-    {
-        world.render(g);
-        text.draw(g, 0, 0, String.valueOf(getFps()));
     }
 
     @Override
     public void onTerminated(boolean hasNextSequence)
     {
+        super.onTerminated(hasNextSequence);
         if (!hasNextSequence)
         {
             Sfx.stopAll();
             Music.stop();
-            Engine.terminate();
         }
     }
 }

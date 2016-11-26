@@ -46,6 +46,16 @@ final class EffectUpdater extends FeatureModel implements Refreshable
         surface = model.getSurface();
     }
 
+    /**
+     * Get the effect finished state.
+     * 
+     * @return <code>true</code> if animation finished, <code>false</code> else.
+     */
+    public boolean isFinished()
+    {
+        return surface.getAnimState() == AnimState.FINISHED;
+    }
+
     @Override
     public void update(double extrp)
     {

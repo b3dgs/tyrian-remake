@@ -35,7 +35,7 @@ public class Entity extends FeaturableModel
      */
     public Entity(SetupSurface setup)
     {
-        super();
+        super(setup);
 
         addFeature(new TransformableModel(setup));
         addFeature(new CollidableModel(setup));

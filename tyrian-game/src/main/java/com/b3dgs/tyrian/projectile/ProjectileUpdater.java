@@ -37,6 +37,7 @@ import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.handler.Handler;
 import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.effect.Effect;
 
 /**
@@ -89,6 +90,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
                 {
                     startEffect(transformable);
                 }
+                launchable.getFeature(Collidable.class).addIgnore(Constant.COLLISION_GROUP_PROJECTILES);
             }
         });
     }

@@ -119,6 +119,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
         super.prepare(provider, services);
 
         layerable.setLayer(layer);
+        collidable.setGroup(Constant.COLLISION_GROUP_ENTITIES);
         collidable.setOrigin(Origin.MIDDLE);
         life = model.getLife();
         direction = model.getDirection();
@@ -133,6 +134,14 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
         collidable.update(extrp);
         surface.setLocation(camera, transformable);
         surface.update(extrp);
+        if (hasFeature(Shooter.class))
+        {
+            getFeature(Shooter.class).update(extrp);
+        }
+        if (hasFeature(Ship.class))
+        {
+            getFeature(Ship.class).update(extrp);
+        }
 
         if (transformable.getY() < camera.getY() - transformable.getHeight())
         {

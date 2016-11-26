@@ -27,7 +27,6 @@ import com.b3dgs.lionengine.core.Engine;
 import com.b3dgs.lionengine.core.Loader;
 import com.b3dgs.lionengine.core.Version;
 import com.b3dgs.lionengine.core.android.EngineAndroid;
-import com.b3dgs.lionengine.core.android.WavFormat;
 
 /**
  * Android entry point.
@@ -37,7 +36,7 @@ public final class AppTyrianAndroid extends Activity
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = Version.create(0, 2, 0);
+    public static final Version VERSION = Version.create(0, 3, 0);
 
     /**
      * Private constructor.
@@ -53,11 +52,12 @@ public final class AppTyrianAndroid extends Activity
         super.onCreate(savedInstanceState);
 
         EngineAndroid.start(NAME, VERSION, this);
-        AudioFactory.addFormat(new WavFormat(), new AudioVoidFormat("lds"));
+        AudioFactory.addFormat(new AudioVoidFormat("wav"), new AudioVoidFormat("lds"));
+        Sfx.setEnabled(true);
 
-        final Config config = new Config(Constant.NATIVE, 32, true);
+        final Config config = new Config(Constant.NATIVE, 32, false);
         final Loader loader = new Loader();
-        loader.start(config, Scene.class);
+        loader.start(config, Loading.class);
     }
 
     @Override

@@ -25,10 +25,10 @@ import com.b3dgs.lionengine.Timing;
 import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.InputDevicePointer;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.Sequencable;
 import com.b3dgs.lionengine.game.collision.object.ComponentCollision;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.layerable.Layerable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.handler.WorldGame;
@@ -41,6 +41,7 @@ import com.b3dgs.lionengine.stream.FileReading;
 import com.b3dgs.lionengine.stream.FileWriting;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.background.Background;
+import com.b3dgs.tyrian.ship.ShipUpdater;
 
 /**
  * World game representation.
@@ -50,12 +51,10 @@ public class World extends WorldGame
     /** Stalker media. */
     public static final Media STALKER = Medias.create(Constant.FOLDER_SHIP, "stalker.xml");
 
-    private static final long SPAWN_DELAY = 1000L;
-    private static final int SPAWN_BONUS_CHANCE = 12;
+    private static final long SPAWN_DELAY = 1500L;
+    private static final int SPAWN_BONUS_CHANCE = 1;
     private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
-    private static final List<Media> SPAWN_BONUS = getMedias(Constant.FOLDER_ENTITY,
-                                                             Constant.FOLDER_BONUS,
-                                                             Constant.FOLDER_WEAPON);
+    private static final List<Media> SPAWN_BONUS = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS);
 
     /**
      * Get medias in path.
@@ -80,43 +79,42 @@ public class World extends WorldGame
     }
 
     private final InputDevicePointer mouse = services.add(getInputDevice(InputDevicePointer.class));
-    private final MapTile map = services.add(Map.generate(services, "level1"));
-    private final Hud hud = services.create(Hud.class);
     private final Background background = new Background(camera);
     private final Timing timing = new Timing();
+    private final Hud hud;
+    private final MapTile map;
 
     /**
      * Create the world.
      * 
      * @param context The context reference.
+     * @param services The services reference.
      */
-    public World(Context context)
+    public World(Context context, Services services)
     {
-        super(context);
+        super(context, services);
+
+        final double underMapHeight = -camera.getHeight() * 1.5;
+        camera.teleport(0, underMapHeight);
 
         handler.addComponent(new ComponentCollision());
 
+        final Featurable ship = factory.create(STALKER);
+        handler.add(ship);
+        services.add(ship.getFeature(ShipUpdater.class));
+
+        map = Map.generate(services, "level1");
         map.addFeature(new MapTileViewerModel());
         map.addFeature(new MapTilePersisterModel());
-        camera.setLimits(map);
+        handler.add(map);
+
+        hud = new Hud(services);
+
         camera.setView(0,
                        0,
                        source.getWidth(),
                        source.getHeight() - hud.getHeight(),
                        source.getHeight() - hud.getHeight());
-    }
-
-    /**
-     * Set the current sequence.
-     * 
-     * @param sequence The current sequence.
-     */
-    public void setSequence(Sequencable sequence)
-    {
-        services.add(sequence);
-
-        handler.add(factory.create(STALKER));
-        handler.add(map);
 
         timing.start();
     }

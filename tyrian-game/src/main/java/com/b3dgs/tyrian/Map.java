@@ -17,14 +17,16 @@
  */
 package com.b3dgs.tyrian;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.camera.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.layerable.LayerableModel;
@@ -34,9 +36,13 @@ import com.b3dgs.lionengine.game.map.MapTile;
 import com.b3dgs.lionengine.game.map.MapTileGame;
 import com.b3dgs.lionengine.game.map.TileSetListener;
 import com.b3dgs.lionengine.game.map.TileSheetsConfig;
+import com.b3dgs.lionengine.game.map.feature.persister.MapTilePersister;
+import com.b3dgs.lionengine.game.map.feature.persister.MapTilePersisterModel;
 import com.b3dgs.lionengine.game.tile.Tile;
 import com.b3dgs.lionengine.game.tile.TileConfig;
 import com.b3dgs.lionengine.game.tile.TileRef;
+import com.b3dgs.lionengine.stream.FileReading;
+import com.b3dgs.lionengine.stream.Stream;
 import com.b3dgs.lionengine.stream.Xml;
 import com.b3dgs.lionengine.stream.XmlNode;
 import com.b3dgs.lionengine.util.UtilRandom;
@@ -48,9 +54,8 @@ import com.b3dgs.tyrian.entity.Entity;
 public final class Map
 {
     private static final String FILE_ENTITIES_TABLE = "entity.xml";
-    private static final int TILE_WIDTH = 24;
-    private static final int TILE_HEIGHT = 28;
-    private static final int MAX_LEVELS = 15;
+    private static final int MAX_LEVELS = 14;
+    private static final int MAX_LEVEL_INTERVAL_HEIGHT_IN_TILE = 6;
 
     /**
      * Generate a map.
@@ -61,24 +66,23 @@ public final class Map
      */
     public static MapTile generate(Services services, String theme)
     {
-        final MapTile map = new MapTileGame();
+        final MapTile map = services.create(MapTileGame.class);
         map.addFeature(new LayerableModel(Constant.LAYER_MAP));
-        map.create(TILE_WIDTH, TILE_HEIGHT, 1, 1);
         map.loadSheets(Medias.create(Constant.FOLDER_TILE, theme, TileSheetsConfig.FILENAME));
 
         final java.util.Map<TileRef, Media> entities = getEntities(theme);
         final TileSetListener listener = createListener(entities, map, services);
         map.addListener(listener);
 
-        int offsetY = services.get(Camera.class).getScreenHeight() / map.getTileHeight() + 2;
         final List<MapTile> maps = getMaps(theme, MAX_LEVELS);
 
+        final Collection<MapTile> levels = new ArrayList<MapTile>();
         for (int i = 0; i < MAX_LEVELS; i++)
         {
             final MapTile current = maps.get(UtilRandom.getRandomInteger(maps.size() - 1));
-            map.append(current, 0, offsetY);
-            offsetY += current.getInTileHeight() + UtilRandom.getRandomInteger(current.getInTileHeight());
+            levels.add(current);
         }
+        map.append(levels, 0, 1, 0, MAX_LEVEL_INTERVAL_HEIGHT_IN_TILE);
 
         map.removeListener(listener);
         entities.clear();
@@ -131,11 +135,23 @@ public final class Map
     private static List<MapTile> getMaps(String theme, int count)
     {
         final List<MapTile> maps = new ArrayList<MapTile>();
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i <= count; i++)
         {
-            final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".png");
-            final MapTile map = new MapTileGame();
-            map.create(level, Medias.create(Constant.FOLDER_TILE, theme, TileSheetsConfig.FILENAME));
+            final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".map");
+            final Services services = new Services();
+            final MapTile map = services.create(MapTileGame.class);
+            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel());
+            map.prepareFeatures(services);
+            try
+            {
+                final FileReading reading = Stream.createFileReading(level);
+                persister.load(reading);
+                reading.close();
+            }
+            catch (final IOException exception)
+            {
+                Verbose.exception(exception);
+            }
             maps.add(map);
         }
         return maps;
