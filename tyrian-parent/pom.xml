@@ -24,9 +24,9 @@
         <url>www.b3dgs.com</url>
     </organization>
     <scm>
-        <url>https://github.com/b3dgs/tyrian</url>
-        <connection>scm:git:git@github.com:b3dgs/tyrian.git</connection>
-        <developerConnection>scm:git:git@github.com:b3dgs/tyrian.git</developerConnection>
+        <url>https://github.com/b3dgs/tyrian-remake</url>
+        <connection>scm:git:git@github.com:b3dgs/tyrian-remake.git</connection>
+        <developerConnection>scm:git:git@github.com:b3dgs/tyrian-remake.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <profiles>
