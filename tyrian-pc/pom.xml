@@ -30,7 +30,6 @@
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>
             <artifactId>tyrian-game</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -81,12 +80,6 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
                     <execution>
                         <id>copy-dependencies</id>
                         <phase>prepare-package</phase>

@@ -5,7 +5,6 @@
     <properties>
         <android.version>4.1.1.4</android.version>
         <android.sdk>19</android.sdk>
-        <android.maven.version>4.0.0-rc.2</android.maven.version>
     </properties>
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
@@ -20,8 +19,6 @@
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>${android.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>
@@ -31,7 +28,6 @@
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>
             <artifactId>tyrian-game</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -50,7 +46,6 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>${android.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <assetsDirectory>assets</assetsDirectory>

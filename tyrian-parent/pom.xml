@@ -81,9 +81,9 @@
                 <version>${lionengine.version}</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>com.b3dgs.tyrian</groupId>
+                <artifactId>tyrian-game</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

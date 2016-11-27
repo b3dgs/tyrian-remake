@@ -8,20 +8,6 @@
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-buildtools</artifactId>
-    <name>Tyrian Build Tools</name>
-    <packaging>pom</packaging>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>bundle-manifest</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <name>Tyrian Remake Build Tools</name>
+    <packaging>jar</packaging>
 </project>

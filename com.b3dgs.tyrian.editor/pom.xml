@@ -12,7 +12,7 @@
     <packaging>eclipse-plugin</packaging>
     <repositories>
         <repository>
-            <id>mars</id>
+            <id>neon</id>
             <url>http://download.eclipse.org/releases/neon</url>
             <layout>p2</layout>
         </repository>
@@ -21,7 +21,6 @@
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>
             <artifactId>tyrian-game</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
