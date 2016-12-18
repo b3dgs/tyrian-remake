@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Origin;
+import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.Sprite;
@@ -39,6 +40,7 @@ public final class ShipModel extends FeatureModel
     private final Alterable shield = new Alterable(15);
     private final Alterable armor = new Alterable(10);
     private final Alterable energy = new Alterable(200);
+    private final Tick hitTick = new Tick();
     private final SpriteTiled surface;
     private final SpriteAnimated hit;
 
@@ -84,6 +86,16 @@ public final class ShipModel extends FeatureModel
     public Sprite getHit()
     {
         return hit;
+    }
+
+    /**
+     * Get the hit tick.
+     * 
+     * @return The hit tick.
+     */
+    public Tick getHitTick()
+    {
+        return hitTick;
     }
 
     /**

@@ -20,7 +20,8 @@ package com.b3dgs.tyrian.projectile;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.Tick;
+import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.Force;
@@ -37,7 +38,6 @@ import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.handler.Handler;
 import com.b3dgs.lionengine.graphic.Viewer;
-import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.effect.Effect;
 
 /**
@@ -45,7 +45,7 @@ import com.b3dgs.tyrian.effect.Effect;
  */
 final class ProjectileUpdater extends FeatureModel implements Refreshable
 {
-    private final Timing timing = new Timing();
+    private final Tick tick = new Tick();
     private final Force force = new Force();
     private final SpriteAnimated surface;
     private final long effectRate;
@@ -56,6 +56,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
     @Service private Launchable launchable;
     @Service private Collidable collidable;
 
+    @Service private Context context;
     @Service private Factory factory;
     @Service private Handler handler;
     @Service private Viewer viewer;
@@ -90,7 +91,6 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
                 {
                     startEffect(transformable);
                 }
-                launchable.getFeature(Collidable.class).addIgnore(Constant.COLLISION_GROUP_PROJECTILES);
             }
         });
     }
@@ -102,14 +102,15 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
         force.addDirection(extrp, acceleration);
 
         launchable.update(extrp);
-        collidable.update(extrp);
 
         surface.setLocation(viewer, transformable);
-        if (timing.elapsed(effectRate))
+
+        tick.update(extrp);
+        if (tick.elapsedTime(context, effectRate))
         {
             startEffect(transformable);
         }
-        if (!viewer.isViewable(transformable, -transformable.getWidth(), -transformable.getHeight()))
+        if (!viewer.isViewable(transformable, 0, 0))
         {
             getFeature(Identifiable.class).destroy();
         }
@@ -125,6 +126,6 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
         final Effect effect = factory.create(effectMedia);
         handler.add(effect);
         effect.start(localizable);
-        timing.restart();
+        tick.restart();
     }
 }

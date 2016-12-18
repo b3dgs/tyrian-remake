@@ -75,6 +75,16 @@ public enum Sfx
     }
 
     /**
+     * Check if sound is enabled.
+     * 
+     * @return <code>true</code> if enabled, <code>false</code> else.
+     */
+    public static boolean isEnabled()
+    {
+        return enabled;
+    }
+
+    /**
      * Stop all sounds.
      */
     public static void stopAll()

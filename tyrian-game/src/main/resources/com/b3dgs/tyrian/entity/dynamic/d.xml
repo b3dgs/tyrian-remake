@@ -3,6 +3,7 @@
     <lionengine:class>com.b3dgs.tyrian.entity.Entity</lionengine:class>
     <lionengine:feature>com.b3dgs.tyrian.entity.Ship</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.entity.Shooter</lionengine:feature>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.Recycler</lionengine:feature>
     <lionengine:surface image="h.png"/>
     <lionengine:size width="24" height="28"/>
     <lionengine:explode>explode_medium</lionengine:explode>

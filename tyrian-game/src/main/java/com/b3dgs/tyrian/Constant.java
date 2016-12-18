@@ -88,9 +88,13 @@ public final class Constant
     /** Collision group ship. */
     public static final int COLLISION_GROUP_SHIP = 0;
     /** Collision group projectiles. */
-    public static final int COLLISION_GROUP_PROJECTILES = COLLISION_GROUP_SHIP + 1;
+    public static final int COLLISION_GROUP_PROJECTILES_SHIP = COLLISION_GROUP_SHIP + 1;
+    /** Collision group projectiles. */
+    public static final int COLLISION_GROUP_PROJECTILES_ENTITIES = COLLISION_GROUP_PROJECTILES_SHIP + 1;
     /** Collision group entities. */
-    public static final int COLLISION_GROUP_ENTITIES = COLLISION_GROUP_PROJECTILES + 1;
+    public static final int COLLISION_GROUP_ENTITIES = COLLISION_GROUP_PROJECTILES_ENTITIES + 1;
+    /** Collision group bonus. */
+    public static final int COLLISION_GROUP_BONUS = COLLISION_GROUP_ENTITIES + 1;
 
     /** Horizontal movement margin. */
     public static final double MARGIN_H = 60.0;

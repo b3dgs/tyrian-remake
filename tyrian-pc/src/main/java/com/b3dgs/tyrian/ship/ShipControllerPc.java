@@ -113,7 +113,7 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
         oldX = cursor.getX();
         oldY = cursor.getY();
         cursor.update(extrp);
-        mouse.lock();
+        // mouse.lock();
         updatePosition(extrp);
         if (mouse.getClick() > 0)
         {

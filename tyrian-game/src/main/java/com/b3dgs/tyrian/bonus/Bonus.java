@@ -58,7 +58,7 @@ public class Bonus extends FeaturableModel
      */
     public Bonus(SetupSurface setup)
     {
-        super();
+        super(setup);
 
         addFeature(new TransformableModel(setup));
         addFeature(new CollidableModel(setup));

@@ -18,7 +18,8 @@
 package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Media;
-import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.Tick;
+import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
@@ -46,11 +47,8 @@ public class Explode extends FeaturableModel
     private static final long DELAY = 40L;
     /** Explode sound delay in millisecond. */
     private static final long DELAY_SFX = 300L;
-
-    private final Rectangle area = Geom.createRectangle();
-    private final Media media;
-    private final int countMax;
-    private PostAction action = new PostAction()
+    /** Empty action. */
+    private static final PostAction EMPTY_ACTION = new PostAction()
     {
         @Override
         public void execute()
@@ -58,8 +56,14 @@ public class Explode extends FeaturableModel
             // Nothing to do
         }
     };
+
+    private final Rectangle area = Geom.createRectangle();
+    private final Media media;
+    private final int countMax;
+    private PostAction action = EMPTY_ACTION;
     private int count = -1;
 
+    @Service private Context context;
     @Service private Factory factory;
     @Service private Handler handler;
     @Service private Viewer viewer;
@@ -71,7 +75,7 @@ public class Explode extends FeaturableModel
      */
     public Explode(Setup setup)
     {
-        super();
+        super(setup);
 
         media = Medias.create(setup.getText(Effect.NODE_EXPLODE));
         countMax = setup.getInteger(ATT_COUNT, Effect.NODE_EXPLODE);
@@ -110,9 +114,9 @@ public class Explode extends FeaturableModel
     {
         private static final long EXTRA_DELAY = 1000L;
 
-        private final Timing timing = new Timing();
-        private final Timing timingSfx = new Timing();
-        private final Timing extraDelay = new Timing();
+        private final Tick tick = new Tick();
+        private final Tick tickSfx = new Tick();
+        private final Tick extraDelay = new Tick();
         private Effect effect;
 
         /**
@@ -126,7 +130,11 @@ public class Explode extends FeaturableModel
         @Override
         public void update(double extrp)
         {
-            if (count == 0 || timing.elapsed(DELAY) && count <= countMax)
+            tick.update(extrp);
+            tickSfx.update(extrp);
+            extraDelay.update(extrp);
+
+            if (count == 0 || tick.elapsedTime(context, DELAY) && count <= countMax)
             {
                 final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
                 final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight());
@@ -138,7 +146,7 @@ public class Explode extends FeaturableModel
                 checkSfx();
 
                 count++;
-                timing.restart();
+                tick.restart();
             }
             checkEnd();
         }
@@ -148,13 +156,13 @@ public class Explode extends FeaturableModel
          */
         private void checkSfx()
         {
-            if (count == 0 || timingSfx.elapsed(DELAY_SFX))
+            if (count == 0 || tickSfx.elapsedTime(context, DELAY_SFX))
             {
                 if (count % 2 == 0)
                 {
                     Sfx.EXPLODE_LARGE.play();
                 }
-                timingSfx.restart();
+                tickSfx.restart();
             }
         }
 
@@ -166,12 +174,13 @@ public class Explode extends FeaturableModel
             if (count > countMax && effect != null && effect.getFeature(EffectUpdater.class).isFinished())
             {
                 extraDelay.start();
-                if (extraDelay.elapsed(EXTRA_DELAY))
+                if (extraDelay.elapsedTime(context, EXTRA_DELAY))
                 {
                     action.execute();
                     getFeature(Identifiable.class).destroy();
+                    count = 0;
                     effect = null;
-                    action = null;
+                    action = EMPTY_ACTION;
                 }
             }
         }

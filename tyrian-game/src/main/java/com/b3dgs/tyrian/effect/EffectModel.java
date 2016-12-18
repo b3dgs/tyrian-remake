@@ -23,7 +23,6 @@ import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.FramesConfig;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
-import com.b3dgs.lionengine.game.state.AnimationConfig;
 
 /**
  * Effect model implementation.
@@ -44,7 +43,6 @@ final class EffectModel extends FeatureModel
         final FramesConfig config = FramesConfig.imports(setup);
         surface = Drawable.loadSpriteAnimated(setup.getSurface(), config.getHorizontal(), config.getVertical());
         surface.setOrigin(Origin.MIDDLE);
-        surface.play(AnimationConfig.imports(setup).getAnimation("start"));
     }
 
     /**

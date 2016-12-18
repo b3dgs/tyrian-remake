@@ -43,7 +43,6 @@ import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
 import com.b3dgs.tyrian.effect.Explode;
-import com.b3dgs.tyrian.projectile.ProjectileModel;
 
 /**
  * Entity updater implementation.
@@ -120,6 +119,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
 
         layerable.setLayer(layer);
         collidable.setGroup(Constant.COLLISION_GROUP_ENTITIES);
+        collidable.addAccept(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
         collidable.setOrigin(Origin.MIDDLE);
         life = model.getLife();
         direction = model.getDirection();
@@ -131,7 +131,6 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     public void update(double extrp)
     {
         transformable.moveLocation(extrp, direction);
-        collidable.update(extrp);
         surface.setLocation(camera, transformable);
         surface.update(extrp);
         if (hasFeature(Shooter.class))
@@ -152,19 +151,16 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     @Override
     public void notifyCollided(Collidable collidable)
     {
-        if (collidable.hasFeature(ProjectileModel.class))
+        Sfx.BULLET_HIT.play();
+        spawnEffectHit();
+
+        life.decrease(1);
+        if (life.getCurrent() == 0)
         {
-            Sfx.BULLET_HIT.play();
-            spawnEffectHit();
-
-            life.decrease(1);
-            if (life.getCurrent() == 0)
-            {
-                spawnEffectExplode();
-                getFeature(Identifiable.class).destroy();
-            }
-
-            collidable.getFeature(Identifiable.class).destroy();
+            spawnEffectExplode();
+            getFeature(Identifiable.class).destroy();
         }
+
+        collidable.getFeature(Identifiable.class).destroy();
     }
 }

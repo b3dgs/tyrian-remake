@@ -3,5 +3,5 @@
 org.eclipse.core.resources.prefs
 org.eclipse.m2e.core.prefs
 org.sonar.ide.eclipse.core.prefs
-org.eclipse.pde.core.prefs
+org.eclipse.jdt.core.prefs
 com.b3dgs.tyrian.platform.target

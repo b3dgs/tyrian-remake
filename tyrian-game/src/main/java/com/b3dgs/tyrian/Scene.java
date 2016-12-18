@@ -34,13 +34,14 @@ public final class Scene extends SequenceGame
      */
     public Scene(Context context)
     {
-        super(context, Constant.NATIVE);
-    }
-
-    @Override
-    protected WorldGame createWorld(Context context, Services services)
-    {
-        return new World(context, services);
+        super(context, Constant.NATIVE, new WorldCreator()
+        {
+            @Override
+            public WorldGame createWorld(Context context, Services services)
+            {
+                return new World(context, services);
+            }
+        });
     }
 
     @Override

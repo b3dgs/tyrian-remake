@@ -24,6 +24,7 @@ import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
 import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
+import com.b3dgs.lionengine.graphic.Viewer;
 
 /**
  * Effect updater implementation.
@@ -33,6 +34,8 @@ final class EffectUpdater extends FeatureModel implements Refreshable
     private final SpriteAnimated surface;
 
     @Service private Transformable transformable;
+
+    @Service private Viewer viewer;
 
     /**
      * Create an effect updater.
@@ -60,8 +63,9 @@ final class EffectUpdater extends FeatureModel implements Refreshable
     public void update(double extrp)
     {
         surface.update(extrp);
+        surface.setLocation(viewer, transformable);
 
-        if (AnimState.FINISHED == surface.getAnimState())
+        if (isFinished())
         {
             getFeature(Identifiable.class).destroy();
         }

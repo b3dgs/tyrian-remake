@@ -86,7 +86,7 @@ public class Shooter extends FeatureModel implements Refreshable
             @Override
             public void notifyFired(Launchable launchable)
             {
-                launchable.getFeature(Collidable.class).addIgnore(Constant.COLLISION_GROUP_ENTITIES);
+                launchable.getFeature(Collidable.class).setGroup(Constant.COLLISION_GROUP_PROJECTILES_ENTITIES);
             }
         });
     }

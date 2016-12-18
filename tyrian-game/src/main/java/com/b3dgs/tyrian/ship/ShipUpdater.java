@@ -19,7 +19,8 @@ package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.Tick;
+import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.InputDevicePointer;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.core.Sequencer;
@@ -115,13 +116,14 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     }
 
     private final Force force = new Force(0.0, 0.0, 1, 0.1);
-    private final Timing shieldIncTiming = new Timing();
+    private final Tick shieldIncTick = new Tick();
     private Alterable shield;
     private Alterable armor;
     private Alterable energy;
     private SpriteTiled surface;
     private WeaponUpdater front;
     private WeaponUpdater rear;
+    private Tick hitTick;
 
     @Service private Layerable layerable;
     @Service private Transformable transformable;
@@ -129,6 +131,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     @Service private ShipModel model;
     @Service private ShipController controller;
 
+    @Service private Context context;
     @Service private Sequencer sequence;
     @Service private InputDevicePointer pointer;
     @Service private Factory factory;
@@ -142,7 +145,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     {
         super();
 
-        shieldIncTiming.start();
+        shieldIncTick.start();
     }
 
     /**
@@ -254,7 +257,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
             @Override
             public void notifyFired(Launchable launchable)
             {
-                launchable.getFeature(Collidable.class).addIgnore(Constant.COLLISION_GROUP_SHIP);
+                launchable.getFeature(Collidable.class).setGroup(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
             }
         });
     }
@@ -339,8 +342,12 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         layerable.setLayer(Constant.LAYER_SHIP_UPDATE, Constant.LAYER_SHIP);
         collidable.setGroup(Constant.COLLISION_GROUP_SHIP);
         collidable.setOrigin(Origin.MIDDLE);
+        collidable.addAccept(Constant.COLLISION_GROUP_BONUS);
+        collidable.addAccept(Constant.COLLISION_GROUP_ENTITIES);
+        collidable.addAccept(Constant.COLLISION_GROUP_PROJECTILES_ENTITIES);
         front = createWeapon(Weapon.PULSE_CANNON);
         rear = createWeapon(Weapon.SONIC_WAVE);
+        hitTick = model.getHitTick();
 
         final double startX = (camera.getWidth() + Constant.MARGIN_H + transformable.getWidth()) / 2;
         final double startY = camera.getY() + camera.getHeight() / 4 - transformable.getHeight();
@@ -351,7 +358,6 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     public void update(double extrp)
     {
         controller.update(extrp);
-        collidable.update(extrp);
 
         force.update(extrp);
 
@@ -363,9 +369,12 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         surface.setLocation(camera, transformable);
 
         energy.increase(extrp, 1);
-        if (!shield.isFull() && shieldIncTiming.elapsed(SHIELD_INC_DELAY))
+        shieldIncTick.update(extrp);
+        hitTick.update(extrp);
+
+        if (!shield.isFull() && shieldIncTick.elapsedTime(context, SHIELD_INC_DELAY))
         {
-            shieldIncTiming.restart();
+            shieldIncTick.restart();
             shield.increase(1);
             energy.decrease(ENERGY * 2);
         }

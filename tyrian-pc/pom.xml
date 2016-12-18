@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.0</version>
+        <version>0.3.1</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-pc</artifactId>

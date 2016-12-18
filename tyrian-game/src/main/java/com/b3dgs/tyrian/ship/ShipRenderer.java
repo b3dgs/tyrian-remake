@@ -18,7 +18,8 @@
 package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Localizable;
-import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.Tick;
+import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.drawable.Sprite;
 import com.b3dgs.lionengine.drawable.SpriteTiled;
 import com.b3dgs.lionengine.game.Alterable;
@@ -37,13 +38,14 @@ final class ShipRenderer extends FeatureModel implements Displayable
 {
     private static final long HIT_TIME = 25L;
 
-    private final Timing hitTiming = new Timing();
     private Sprite hit;
+    private Tick hitTick;
     private SpriteTiled surface;
     private Alterable shield;
 
     @Service private ShipModel model;
 
+    @Service private Context context;
     @Service private Viewer viewer;
 
     /**
@@ -62,12 +64,12 @@ final class ShipRenderer extends FeatureModel implements Displayable
      */
     public boolean showHit(Localizable localizable)
     {
-        if (!hitTiming.isStarted() || hitTiming.elapsed(HIT_TIME * 2))
+        if (!hitTick.isStarted() || hitTick.elapsedTime(context, HIT_TIME * 2))
         {
             hit.setLocation(viewer, localizable);
             if (!shield.isEmpty())
             {
-                hitTiming.restart();
+                hitTick.restart();
             }
             return true;
         }
@@ -81,6 +83,7 @@ final class ShipRenderer extends FeatureModel implements Displayable
 
         surface = model.getSurface();
         hit = model.getHit();
+        hitTick = model.getHitTick();
         shield = model.getShield();
     }
 
@@ -89,7 +92,7 @@ final class ShipRenderer extends FeatureModel implements Displayable
     {
         surface.render(g);
 
-        if (hitTiming.isStarted() && !hitTiming.elapsed(HIT_TIME))
+        if (hitTick.isStarted() && !hitTick.elapsedTime(context, HIT_TIME))
         {
             hit.render(g);
         }

@@ -31,6 +31,7 @@ import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.graphic.Viewer;
 import com.b3dgs.lionengine.util.UtilMath;
 import com.b3dgs.tyrian.Constant;
+import com.b3dgs.tyrian.Sfx;
 
 /**
  * Weapon updater implementation.
@@ -67,7 +68,7 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
             public void notifyFired()
             {
                 final Audio audio = model.getSfxFire();
-                if (audio != null)
+                if (audio != null && Sfx.isEnabled())
                 {
                     audio.play();
                 }

@@ -30,6 +30,7 @@ import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
 import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
 import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.handler.Handler;
+import com.b3dgs.tyrian.Constant;
 
 /**
  * Bonus updater implementation.
@@ -64,13 +65,13 @@ public class BonusUpdater extends FeatureModel implements Refreshable
         super.prepare(provider, services);
 
         collidable.setOrigin(Origin.MIDDLE);
+        collidable.setGroup(Constant.COLLISION_GROUP_BONUS);
     }
 
     @Override
     public void update(double extrp)
     {
         transformable.moveLocation(extrp, 0.0, FALLING_SPEED);
-        collidable.update(extrp);
         surface.setLocation(camera, transformable);
         surface.update(extrp);
 

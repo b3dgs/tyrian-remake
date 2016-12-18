@@ -52,7 +52,6 @@ public final class Loading extends Sequence
         super(context, Constant.NATIVE);
 
         setSystemCursorVisible(false);
-        setExtrapolated(true);
     }
 
     @Override

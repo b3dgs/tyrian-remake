@@ -56,7 +56,7 @@ public class Weapon extends FeaturableModel
      */
     public Weapon(WeaponSetup setup)
     {
-        super();
+        super(setup);
 
         addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
         addFeatureAndGet(new TransformableModel(setup));

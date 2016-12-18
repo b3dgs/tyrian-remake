@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.b3dgs.lionengine.Media;
-import com.b3dgs.lionengine.Timing;
+import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.core.Context;
 import com.b3dgs.lionengine.core.InputDevicePointer;
 import com.b3dgs.lionengine.core.Medias;
@@ -80,7 +80,7 @@ public class World extends WorldGame
 
     private final InputDevicePointer mouse = services.add(getInputDevice(InputDevicePointer.class));
     private final Background background = new Background(camera);
-    private final Timing timing = new Timing();
+    private final Tick tick = new Tick();
     private final Hud hud;
     private final MapTile map;
 
@@ -116,7 +116,7 @@ public class World extends WorldGame
                        source.getHeight() - hud.getHeight(),
                        source.getHeight() - hud.getHeight());
 
-        timing.start();
+        tick.start();
     }
 
     /**
@@ -134,8 +134,10 @@ public class World extends WorldGame
             featurable.getFeature(Layerable.class).setLayer(layer);
             handler.add(featurable);
             final Transformable transformable = featurable.getFeature(Transformable.class);
-            transformable.teleport(UtilRandom.getRandomInteger(camera.getWidth()),
-                                   (int) camera.getY() + camera.getHeight() + transformable.getHeight());
+            final double x = UtilRandom.getRandomInteger(camera.getWidth() - transformable.getWidth() * 2)
+                             + transformable.getWidth();
+            final double y = (int) camera.getY() + camera.getHeight() + transformable.getHeight();
+            transformable.teleport(x, y);
         }
     }
 
@@ -156,8 +158,9 @@ public class World extends WorldGame
     {
         mouse.update(extrp);
         background.update(extrp);
+        tick.update(extrp);
 
-        if (timing.elapsed(SPAWN_DELAY))
+        if (tick.elapsedTime(context, SPAWN_DELAY))
         {
             spawn(SPAWN_ENTITIES, Constant.LAYER_ENTITIES_MOVING);
 
@@ -166,7 +169,7 @@ public class World extends WorldGame
                 spawn(SPAWN_BONUS, Constant.LAYER_BONUS);
             }
 
-            timing.restart();
+            tick.restart();
         }
 
         super.update(extrp);

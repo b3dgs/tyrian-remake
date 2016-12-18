@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
+import com.b3dgs.lionengine.anim.Animation;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.drawable.Drawable;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
@@ -27,6 +28,7 @@ import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
 import com.b3dgs.lionengine.game.feature.SizeConfig;
 import com.b3dgs.lionengine.game.state.AnimationConfig;
@@ -38,7 +40,7 @@ import com.b3dgs.tyrian.effect.Effect;
 /**
  * Entity model implementation.
  */
-public final class EntityModel extends FeatureModel
+public final class EntityModel extends FeatureModel implements Recyclable
 {
     private static final String ANIM_IDLE = "idle";
 
@@ -46,6 +48,7 @@ public final class EntityModel extends FeatureModel
     private final Direction direction;
     private final SpriteAnimated surface;
     private final Media explode;
+    private final Animation anim;
 
     /**
      * Create an entity model.
@@ -67,7 +70,6 @@ public final class EntityModel extends FeatureModel
         }
         explode = Medias.create(Constant.FOLDER_EFFECT,
                                 setup.getText(Effect.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);
-        life.fill();
 
         final SizeConfig sizeConfig = SizeConfig.imports(setup);
         final ImageBuffer buffer = setup.getSurface();
@@ -79,8 +81,14 @@ public final class EntityModel extends FeatureModel
         final AnimationConfig animConfig = AnimationConfig.imports(setup);
         if (animConfig.hasAnimation(ANIM_IDLE))
         {
-            surface.play(animConfig.getAnimation(ANIM_IDLE));
+            anim = animConfig.getAnimation(ANIM_IDLE);
         }
+        else
+        {
+            anim = null;
+        }
+
+        recycle();
     }
 
     /**
@@ -121,5 +129,25 @@ public final class EntityModel extends FeatureModel
     public Media getExplode()
     {
         return explode;
+    }
+
+    /**
+     * Get the associated animation.
+     * 
+     * @return The associated animation, <code>null</code> if none.
+     */
+    public Animation getAnim()
+    {
+        return anim;
+    }
+
+    @Override
+    public void recycle()
+    {
+        life.fill();
+        if (anim != null)
+        {
+            surface.play(anim);
+        }
     }
 }

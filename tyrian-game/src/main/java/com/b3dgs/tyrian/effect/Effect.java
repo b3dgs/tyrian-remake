@@ -18,12 +18,16 @@
 package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Localizable;
+import com.b3dgs.lionengine.anim.Animation;
 import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
+import com.b3dgs.lionengine.game.feature.Recycler;
 import com.b3dgs.lionengine.game.feature.Service;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
 import com.b3dgs.lionengine.game.feature.layerable.LayerableModel;
+import com.b3dgs.lionengine.game.feature.transformable.Transformable;
 import com.b3dgs.lionengine.game.feature.transformable.TransformableModel;
+import com.b3dgs.lionengine.game.state.AnimationConfig;
 import com.b3dgs.lionengine.graphic.Viewer;
 import com.b3dgs.tyrian.Constant;
 
@@ -35,7 +39,10 @@ public class Effect extends FeaturableModel
     /** Explode node name. */
     public static final String NODE_EXPLODE = com.b3dgs.lionengine.Constant.XML_PREFIX + "explode";
 
+    private final Animation anim;
     private final SpriteAnimated surface;
+
+    @Service private Transformable transformable;
 
     @Service private Viewer viewer;
 
@@ -46,8 +53,9 @@ public class Effect extends FeaturableModel
      */
     public Effect(SetupSurface setup)
     {
-        super();
+        super(setup);
 
+        addFeature(new Recycler());
         addFeature(new LayerableModel(Constant.LAYER_EFFECT));
         addFeature(new TransformableModel(setup));
 
@@ -55,6 +63,7 @@ public class Effect extends FeaturableModel
         addFeature(new EffectUpdater(model));
         addFeature(new EffectRenderer(model));
 
+        anim = AnimationConfig.imports(setup).getAnimation("start");
         surface = model.getSurface();
     }
 
@@ -65,6 +74,8 @@ public class Effect extends FeaturableModel
      */
     public void start(Localizable localizable)
     {
-        surface.setLocation(viewer, localizable);
+        transformable.setLocation(localizable.getX(), localizable.getY());
+        surface.setLocation(viewer, transformable);
+        surface.play(anim);
     }
 }

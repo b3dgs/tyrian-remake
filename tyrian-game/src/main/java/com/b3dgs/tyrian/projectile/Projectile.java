@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.game.collision.object.CollidableModel;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
+import com.b3dgs.lionengine.game.feature.Recycler;
 import com.b3dgs.lionengine.game.feature.SetupSurface;
 import com.b3dgs.lionengine.game.feature.launchable.LaunchableModel;
 import com.b3dgs.lionengine.game.feature.layerable.LayerableModel;
@@ -37,8 +38,9 @@ public class Projectile extends FeaturableModel
      */
     public Projectile(SetupSurface setup)
     {
-        super();
+        super(setup);
 
+        addFeature(new Recycler());
         addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
         addFeature(new TransformableModel(setup));
         addFeature(new LaunchableModel());

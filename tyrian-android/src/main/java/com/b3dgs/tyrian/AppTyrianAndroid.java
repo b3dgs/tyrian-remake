@@ -53,7 +53,7 @@ public final class AppTyrianAndroid extends Activity
 
         EngineAndroid.start(NAME, VERSION, this);
         AudioFactory.addFormat(new AudioVoidFormat("wav"), new AudioVoidFormat("lds"));
-        Sfx.setEnabled(true);
+        Sfx.setEnabled(false);
 
         final Config config = new Config(Constant.NATIVE, 32, false);
         final Loader loader = new Loader();
