@@ -17,10 +17,10 @@
  */
 package com.b3dgs.tyrian;
 
-import com.b3dgs.lionengine.core.Context;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.handler.SequenceGame;
-import com.b3dgs.lionengine.game.handler.WorldGame;
+import com.b3dgs.lionengine.Context;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.feature.SequenceGame;
+import com.b3dgs.lionengine.game.feature.WorldGame;
 
 /**
  * Game loop designed to handle our little world.

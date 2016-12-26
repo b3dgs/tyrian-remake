@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.core.Audio;
+import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;

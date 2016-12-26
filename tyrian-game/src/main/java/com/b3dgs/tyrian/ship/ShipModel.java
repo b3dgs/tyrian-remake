@@ -20,14 +20,14 @@ package com.b3dgs.tyrian.ship;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.Sprite;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
-import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.SetupSurface;
-import com.b3dgs.lionengine.game.feature.SizeConfig;
+import com.b3dgs.lionengine.graphic.Sprite;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
+import com.b3dgs.lionengine.graphic.SpriteTiled;
 import com.b3dgs.tyrian.Constant;
 
 /**
@@ -49,7 +49,7 @@ public final class ShipModel extends FeatureModel
      * 
      * @param setup The setup reference.
      */
-    ShipModel(SetupSurface setup)
+    ShipModel(Setup setup)
     {
         super();
 

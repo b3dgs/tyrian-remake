@@ -17,14 +17,14 @@
  */
 package com.b3dgs.tyrian.effect;
 
-import com.b3dgs.lionengine.anim.AnimState;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.AnimState;
+import com.b3dgs.lionengine.Viewer;
+import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
-import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 
 /**
  * Effect updater implementation.

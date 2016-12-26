@@ -18,18 +18,18 @@
 package com.b3dgs.tyrian.bonus;
 
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
-import com.b3dgs.lionengine.game.camera.Camera;
-import com.b3dgs.lionengine.game.collision.object.Collidable;
+import com.b3dgs.lionengine.game.Camera;
+import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
-import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.handler.Handler;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 import com.b3dgs.tyrian.Constant;
 
 /**

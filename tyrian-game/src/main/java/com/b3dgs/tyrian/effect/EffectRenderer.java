@@ -17,10 +17,10 @@
  */
 package com.b3dgs.tyrian.effect;
 
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.displayable.Displayable;
 import com.b3dgs.lionengine.graphic.Graphic;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 
 /**
  * Effect renderer implementation.

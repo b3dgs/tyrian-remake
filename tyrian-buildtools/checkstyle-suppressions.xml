@@ -13,6 +13,7 @@
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]com.b3dgs.tyrian.editor[\\/]"/>
     <suppress checks="ModifiedControlVariable" files="com.b3dgs.tyrian.editor.ApplicationConfiguration" lines="94"/>
     <suppress checks="ClassDataAbstractionCoupling" files="com.b3dgs.tyrian.projectile.Projectile"/>
+    <suppress checks="ClassDataAbstractionCoupling" files="com.b3dgs.tyrian.Map"/>
 
 	<suppress checks="[a-zA-Z0-9]*" files="[\\/]test[\\/]" />
 	<suppress checks="[a-zA-Z0-9]*" files="[\\/]resources[\\/]" />

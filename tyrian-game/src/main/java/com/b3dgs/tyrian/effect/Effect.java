@@ -17,18 +17,18 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.Localizable;
-import com.b3dgs.lionengine.anim.Animation;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
-import com.b3dgs.lionengine.game.feature.FeaturableModel;
+import com.b3dgs.lionengine.Viewer;
+import com.b3dgs.lionengine.game.AnimationConfig;
+import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Recycler;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.SetupSurface;
-import com.b3dgs.lionengine.game.feature.layerable.LayerableModel;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.feature.transformable.TransformableModel;
-import com.b3dgs.lionengine.game.state.AnimationConfig;
-import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.TransformableModel;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 import com.b3dgs.tyrian.Constant;
 
 /**
@@ -51,7 +51,7 @@ public class Effect extends FeaturableModel
      * 
      * @param setup The setup reference.
      */
-    public Effect(SetupSurface setup)
+    public Effect(Setup setup)
     {
         super(setup);
 

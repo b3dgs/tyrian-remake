@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Updatable;
-import com.b3dgs.lionengine.game.feature.Feature;
+import com.b3dgs.lionengine.game.Feature;
 
 /**
  * Describes how ship is controlled by input.

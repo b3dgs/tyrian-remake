@@ -20,25 +20,25 @@ package com.b3dgs.tyrian.entity;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.ForceConfig;
-import com.b3dgs.lionengine.game.camera.Camera;
-import com.b3dgs.lionengine.game.collision.object.Collidable;
-import com.b3dgs.lionengine.game.collision.object.CollidableListener;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
-import com.b3dgs.lionengine.game.feature.layerable.Layerable;
-import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.handler.Handler;
-import com.b3dgs.lionengine.stream.XmlNode;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Layerable;
+import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
+import com.b3dgs.lionengine.io.Xml;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.effect.Effect;
@@ -57,7 +57,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
      */
     private static int getLayer(Setup setup)
     {
-        final XmlNode root = setup.getRoot();
+        final Xml root = setup.getRoot();
         if (root.hasChild(ForceConfig.NODE_FORCE))
         {
             return Constant.LAYER_ENTITIES_MOVING;

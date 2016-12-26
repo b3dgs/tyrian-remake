@@ -18,16 +18,16 @@
 package com.b3dgs.tyrian.bonus;
 
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.game.AnimationConfig;
+import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.SetupSurface;
-import com.b3dgs.lionengine.game.feature.SizeConfig;
-import com.b3dgs.lionengine.game.feature.layerable.Layerable;
-import com.b3dgs.lionengine.game.state.AnimationConfig;
+import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 import com.b3dgs.tyrian.Constant;
 
 /**
@@ -44,7 +44,7 @@ public final class BonusModel extends FeatureModel
      * 
      * @param setup The setup reference.
      */
-    BonusModel(SetupSurface setup)
+    BonusModel(Setup setup)
     {
         super();
 

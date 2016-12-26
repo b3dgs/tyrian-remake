@@ -20,13 +20,13 @@ package com.b3dgs.tyrian;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.b3dgs.lionengine.core.AudioFactory;
-import com.b3dgs.lionengine.core.AudioVoidFormat;
-import com.b3dgs.lionengine.core.Config;
+import com.b3dgs.lionengine.Config;
+import com.b3dgs.lionengine.Version;
+import com.b3dgs.lionengine.audio.AudioFactory;
+import com.b3dgs.lionengine.audio.AudioVoidFormat;
 import com.b3dgs.lionengine.core.Engine;
-import com.b3dgs.lionengine.core.Loader;
-import com.b3dgs.lionengine.core.Version;
-import com.b3dgs.lionengine.core.android.EngineAndroid;
+import com.b3dgs.lionengine.core.EngineAndroid;
+import com.b3dgs.lionengine.core.sequence.Loader;
 
 /**
  * Android entry point.

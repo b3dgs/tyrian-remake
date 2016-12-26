@@ -27,24 +27,22 @@ import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.core.Medias;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Factory;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.layerable.LayerableModel;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.handler.Handler;
-import com.b3dgs.lionengine.game.map.MapTile;
-import com.b3dgs.lionengine.game.map.MapTileGame;
-import com.b3dgs.lionengine.game.map.TileSetListener;
-import com.b3dgs.lionengine.game.map.TileSheetsConfig;
-import com.b3dgs.lionengine.game.map.feature.persister.MapTilePersister;
-import com.b3dgs.lionengine.game.map.feature.persister.MapTilePersisterModel;
-import com.b3dgs.lionengine.game.tile.Tile;
-import com.b3dgs.lionengine.game.tile.TileConfig;
-import com.b3dgs.lionengine.game.tile.TileRef;
-import com.b3dgs.lionengine.stream.FileReading;
-import com.b3dgs.lionengine.stream.Stream;
-import com.b3dgs.lionengine.stream.Xml;
-import com.b3dgs.lionengine.stream.XmlNode;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.LayerableModel;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.tile.Tile;
+import com.b3dgs.lionengine.game.feature.tile.TileConfig;
+import com.b3dgs.lionengine.game.feature.tile.TileRef;
+import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
+import com.b3dgs.lionengine.game.feature.tile.map.MapTileGame;
+import com.b3dgs.lionengine.game.feature.tile.map.TileSetListener;
+import com.b3dgs.lionengine.game.feature.tile.map.TileSheetsConfig;
+import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersister;
+import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersisterModel;
+import com.b3dgs.lionengine.io.FileReading;
+import com.b3dgs.lionengine.io.Xml;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.entity.Entity;
 
@@ -144,7 +142,7 @@ public final class Map
             map.prepareFeatures(services);
             try
             {
-                final FileReading reading = Stream.createFileReading(level);
+                final FileReading reading = new FileReading(level);
                 persister.load(reading);
                 reading.close();
             }
@@ -166,8 +164,8 @@ public final class Map
     private static java.util.Map<TileRef, Media> getEntities(String theme)
     {
         final java.util.Map<TileRef, Media> entities = new HashMap<TileRef, Media>();
-        final XmlNode config = Xml.load(Medias.create(Constant.FOLDER_TILE, theme, FILE_ENTITIES_TABLE));
-        for (final XmlNode nodeTile : config.getChildren(TileConfig.NODE_TILE))
+        final Xml config = new Xml(Medias.create(Constant.FOLDER_TILE, theme, FILE_ENTITIES_TABLE));
+        for (final Xml nodeTile : config.getChildren(TileConfig.NODE_TILE))
         {
             final TileRef tile = TileConfig.create(nodeTile);
             final String file = nodeTile.getText() + Factory.FILE_DATA_DOT_EXTENSION;

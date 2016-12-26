@@ -19,17 +19,17 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Updatable;
+import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.Sprite;
+import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.game.Bar;
-import com.b3dgs.lionengine.game.camera.Camera;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.map.MapTile;
+import com.b3dgs.lionengine.game.Camera;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
 import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Renderable;
-import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.lionengine.graphic.Sprite;
 import com.b3dgs.tyrian.ship.ShipModel;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 

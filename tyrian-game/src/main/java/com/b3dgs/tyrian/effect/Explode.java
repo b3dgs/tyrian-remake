@@ -17,22 +17,22 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Context;
+import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.core.Medias;
+import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
-import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
-import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.handler.Handler;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.geom.Geom;
 import com.b3dgs.lionengine.geom.Rectangle;
-import com.b3dgs.lionengine.graphic.Viewer;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.Sfx;
 
@@ -57,7 +57,7 @@ public class Explode extends FeaturableModel
         }
     };
 
-    private final Rectangle area = Geom.createRectangle();
+    private final Rectangle area = new Rectangle();
     private final Media media;
     private final int countMax;
     private PostAction action = EMPTY_ACTION;

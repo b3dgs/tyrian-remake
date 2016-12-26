@@ -20,8 +20,8 @@ package com.b3dgs.tyrian;
 import java.io.IOException;
 import java.util.Locale;
 
-import com.b3dgs.lionengine.stream.FileReading;
-import com.b3dgs.lionengine.stream.FileWriting;
+import com.b3dgs.lionengine.io.FileReading;
+import com.b3dgs.lionengine.io.FileWriting;
 
 /**
  * List of world types.

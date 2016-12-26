@@ -17,35 +17,35 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Context;
-import com.b3dgs.lionengine.core.InputDevicePointer;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.Sequencer;
-import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.core.sequence.Sequencer;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.camera.Camera;
-import com.b3dgs.lionengine.game.collision.object.Collidable;
-import com.b3dgs.lionengine.game.collision.object.CollidableListener;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Layerable;
+import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
 import com.b3dgs.lionengine.game.feature.launchable.LaunchableListener;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.lionengine.game.feature.launchable.LauncherListener;
-import com.b3dgs.lionengine.game.feature.layerable.Layerable;
-import com.b3dgs.lionengine.game.feature.refreshable.Refreshable;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.game.handler.Handler;
-import com.b3dgs.lionengine.geom.Geom;
+import com.b3dgs.lionengine.geom.Rectangle;
+import com.b3dgs.lionengine.graphic.SpriteTiled;
+import com.b3dgs.lionengine.io.InputDevicePointer;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
@@ -310,7 +310,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
                         sequence.end();
                     }
                 };
-                explode.start(Geom.createRectangle(transformable.getX()
+                explode.start(new Rectangle(transformable.getX()
                                                    - transformable.getWidth() / 2,
                                                    transformable.getY() + -transformable.getHeight() / 2,
                                                    50,

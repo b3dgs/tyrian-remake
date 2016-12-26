@@ -18,11 +18,11 @@
 package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.game.FramesConfig;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FramesConfig;
-import com.b3dgs.lionengine.game.feature.SetupSurface;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 
 /**
  * Effect model implementation.
@@ -36,7 +36,7 @@ final class EffectModel extends FeatureModel
      * 
      * @param setup The setup reference.
      */
-    EffectModel(SetupSurface setup)
+    EffectModel(Setup setup)
     {
         super();
 

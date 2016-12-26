@@ -18,13 +18,13 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Align;
-import com.b3dgs.lionengine.core.Context;
+import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.Sequence;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.Image;
-import com.b3dgs.lionengine.drawable.SpriteFont;
+import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.core.sequence.Sequence;
 import com.b3dgs.lionengine.graphic.Graphic;
+import com.b3dgs.lionengine.graphic.Image;
+import com.b3dgs.lionengine.graphic.SpriteFont;
 
 /**
  * Loading screen.

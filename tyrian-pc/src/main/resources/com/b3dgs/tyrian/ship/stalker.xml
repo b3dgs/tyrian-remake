@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:setup>com.b3dgs.lionengine.game.feature.SetupSurface</lionengine:setup>
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.layerable.LayerableModel</lionengine:feature>
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.transformable.TransformableModel</lionengine:feature>
-    <lionengine:feature>com.b3dgs.lionengine.game.collision.object.CollidableModel</lionengine:feature>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.LayerableModel</lionengine:feature>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.collidable.CollidableModel</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipModel</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipUpdater</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipRenderer</lionengine:feature>

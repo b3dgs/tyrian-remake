@@ -21,16 +21,16 @@ import com.b3dgs.lionengine.Constant;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.drawable.Drawable;
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.ForceConfig;
+import com.b3dgs.lionengine.game.FramesConfig;
+import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.game.SurfaceConfig;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FramesConfig;
-import com.b3dgs.lionengine.game.feature.SetupSurface;
-import com.b3dgs.lionengine.game.feature.SurfaceConfig;
-import com.b3dgs.lionengine.stream.XmlNode;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
+import com.b3dgs.lionengine.io.Xml;
 
 /**
  * Projectile model implementation.
@@ -51,7 +51,7 @@ public final class ProjectileModel extends FeatureModel
      * 
      * @param setup The setup reference.
      */
-    ProjectileModel(SetupSurface setup)
+    ProjectileModel(Setup setup)
     {
         super();
 
@@ -70,7 +70,7 @@ public final class ProjectileModel extends FeatureModel
             effectMedia = null;
         }
 
-        final XmlNode root = setup.getRoot();
+        final Xml root = setup.getRoot();
         if (root.hasChild(ForceConfig.NODE_FORCE))
         {
             acceleration = ForceConfig.imports(root);

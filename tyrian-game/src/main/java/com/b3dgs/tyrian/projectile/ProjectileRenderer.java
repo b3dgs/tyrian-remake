@@ -17,12 +17,12 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.drawable.SpriteAnimated;
-import com.b3dgs.lionengine.game.collision.object.Collidable;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.displayable.Displayable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.graphic.Graphic;
+import com.b3dgs.lionengine.graphic.SpriteAnimated;
 
 /**
  * Projectile renderer implementation.

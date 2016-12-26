@@ -17,15 +17,15 @@
  */
 package com.b3dgs.tyrian.ship;
 
-import com.b3dgs.lionengine.core.Context;
-import com.b3dgs.lionengine.core.awt.Mouse;
+import com.b3dgs.lionengine.Context;
+import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Cursor;
-import com.b3dgs.lionengine.game.camera.Camera;
+import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.io.Mouse;
 
 /**
  * Ship control implementation.

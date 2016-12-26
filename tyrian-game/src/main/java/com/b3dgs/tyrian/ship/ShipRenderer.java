@@ -17,19 +17,19 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Context;
-import com.b3dgs.lionengine.drawable.Sprite;
-import com.b3dgs.lionengine.drawable.SpriteTiled;
+import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.displayable.Displayable;
 import com.b3dgs.lionengine.graphic.Graphic;
-import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.lionengine.graphic.Sprite;
+import com.b3dgs.lionengine.graphic.SpriteTiled;
 
 /**
  * Ship renderer implementation.

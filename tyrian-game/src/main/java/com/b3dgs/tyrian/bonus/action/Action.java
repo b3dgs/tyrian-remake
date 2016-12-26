@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.bonus.action;
 
-import com.b3dgs.lionengine.game.feature.Feature;
+import com.b3dgs.lionengine.game.Feature;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 
 /**

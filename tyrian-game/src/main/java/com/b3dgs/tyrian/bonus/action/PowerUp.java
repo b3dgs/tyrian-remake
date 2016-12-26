@@ -18,7 +18,7 @@
 package com.b3dgs.tyrian.bonus.action;
 
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.identifiable.Identifiable;
+import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 

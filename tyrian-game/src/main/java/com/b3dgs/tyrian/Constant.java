@@ -18,8 +18,8 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.LionEngineException;
-import com.b3dgs.lionengine.core.Resolution;
-import com.b3dgs.lionengine.core.Version;
+import com.b3dgs.lionengine.Resolution;
+import com.b3dgs.lionengine.Version;
 
 /**
  * Game constants.
@@ -29,7 +29,7 @@ public final class Constant
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = Version.create(0, 3, 0);
+    public static final Version VERSION = Version.create(0, 3, 1);
     /** Native resolution. */
     public static final Resolution NATIVE = new Resolution(200, 355, 60);
 

@@ -18,13 +18,13 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Updatable;
+import com.b3dgs.lionengine.Viewer;
+import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
+import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.Service;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.transformable.Transformable;
-import com.b3dgs.lionengine.graphic.Viewer;
+import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 
