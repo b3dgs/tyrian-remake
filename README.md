@@ -28,9 +28,8 @@ Note: A tribute to Tyrian from Epic Megagames. Copyright goes to Epic Megagames 
 ## General features
 
 * #### __Target__
->  * Requires Java 7
->  * Multiplatform (tested on Windows, Linux, Mac, Android)
->  * Can be played from a browser (Firefox, IE...)
+>  * Requires Java 6
+>  * Multiplatform (tested on Windows, Linux, Android)
 >  * Need at least 32MB of RAM
 >  * Need at least 6MB of free disk space
 
