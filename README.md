@@ -28,6 +28,7 @@ Note: A tribute to Tyrian from Epic Megagames. Copyright goes to Epic Megagames 
 ## General features
 
 * #### __Target__
+>  * Uses the [__LionEngine__](http://www.b3dgs.com/v7/page.php?lang=en&section=lionengine)
 >  * Requires Java 6
 >  * Multiplatform (tested on Windows, Linux, Android)
 >  * Need at least 32MB of RAM
