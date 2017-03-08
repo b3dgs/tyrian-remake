@@ -17,21 +17,20 @@
  */
 package com.b3dgs.tyrian;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.Version;
 import com.b3dgs.lionengine.audio.AudioFactory;
 import com.b3dgs.lionengine.audio.AudioVoidFormat;
-import com.b3dgs.lionengine.core.Engine;
-import com.b3dgs.lionengine.core.EngineAndroid;
+import com.b3dgs.lionengine.core.android.ActivityGame;
+import com.b3dgs.lionengine.core.android.EngineAndroid;
 import com.b3dgs.lionengine.core.sequence.Loader;
 
 /**
  * Android entry point.
  */
-public final class AppTyrianAndroid extends Activity
+public final class AppTyrianAndroid extends ActivityGame
 {
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
@@ -39,7 +38,7 @@ public final class AppTyrianAndroid extends Activity
     public static final Version VERSION = Version.create(0, 3, 0);
 
     /**
-     * Private constructor.
+     * Constructor.
      */
     public AppTyrianAndroid()
     {
@@ -47,10 +46,8 @@ public final class AppTyrianAndroid extends Activity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    protected void start(Bundle bundle)
     {
-        super.onCreate(savedInstanceState);
-
         EngineAndroid.start(NAME, VERSION, this);
         AudioFactory.addFormat(new AudioVoidFormat("wav"), new AudioVoidFormat("lds"));
         Sfx.setEnabled(false);
@@ -58,12 +55,5 @@ public final class AppTyrianAndroid extends Activity
         final Config config = new Config(Constant.NATIVE, 32, false);
         final Loader loader = new Loader();
         loader.start(config, Loading.class);
-    }
-
-    @Override
-    public void finish()
-    {
-        super.finish();
-        Engine.terminate();
     }
 }
