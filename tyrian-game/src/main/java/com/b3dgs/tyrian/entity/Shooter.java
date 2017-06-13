@@ -19,8 +19,8 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.core.Medias;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
@@ -43,25 +43,29 @@ public class Shooter extends FeatureModel implements Refreshable
     private WeaponUpdater weapon;
     private Localizable target;
 
-    @Service private Transformable transformable;
+    private final Factory factory;
+    private final ShipUpdater ship;
 
-    @Service private Factory factory;
-    @Service private ShipUpdater ship;
+    @FeatureGet private Transformable transformable;
 
     /**
      * Create a shooter.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    Shooter(Setup setup)
+    Shooter(Services services, Setup setup)
     {
         super();
+
+        factory = services.get(Factory.class);
+        ship = services.get(ShipUpdater.class);
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         weapon = factory.create(Medias.create(Constant.FOLDER_WEAPON, "pulser.xml")).getFeature(WeaponUpdater.class);
 

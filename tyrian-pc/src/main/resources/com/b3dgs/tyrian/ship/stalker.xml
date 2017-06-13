@@ -4,9 +4,9 @@
     <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
     <lionengine:feature>com.b3dgs.lionengine.game.feature.collidable.CollidableModel</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipModel</lionengine:feature>
+    <lionengine:feature>com.b3dgs.tyrian.pc.ship.ShipControllerPc</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipUpdater</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.ship.ShipRenderer</lionengine:feature>
-    <lionengine:feature>com.b3dgs.tyrian.ship.ShipControllerPc</lionengine:feature>
     <lionengine:surface image="stalker.png"/>
     <lionengine:size width="24" height="28"/>
     <lionengine:collision name="default" offsetX="0" offsetY="0" width="14" height="20" mirror="false"/>

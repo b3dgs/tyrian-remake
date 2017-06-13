@@ -20,7 +20,7 @@ package com.b3dgs.tyrian.bonus.action;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.tyrian.Sfx;
-import com.b3dgs.tyrian.ship.ShipUpdater;
+import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * Power up action.
@@ -36,7 +36,7 @@ public class PowerUp extends FeatureModel implements Action
     }
 
     @Override
-    public void action(ShipUpdater ship)
+    public void action(ShipModel ship)
     {
         Sfx.POWER_UP.play();
         ship.powerUp();

@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Recycler;
@@ -34,20 +35,21 @@ public class Projectile extends FeaturableModel
     /**
      * Create a projectile.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Projectile(Setup setup)
+    public Projectile(Services services, Setup setup)
     {
-        super(setup);
+        super(services, setup);
 
         addFeature(new Recycler());
         addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
         addFeature(new TransformableModel(setup));
         addFeature(new LaunchableModel());
-        addFeature(new CollidableModel(setup));
+        addFeature(new CollidableModel(services, setup));
 
         final ProjectileModel model = addFeatureAndGet(new ProjectileModel(setup));
-        addFeature(new ProjectileUpdater(model));
+        addFeature(new ProjectileUpdater(services, model));
         addFeature(new ProjectileRenderer(model));
     }
 }

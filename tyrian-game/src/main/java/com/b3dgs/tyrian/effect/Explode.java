@@ -20,10 +20,9 @@ package com.b3dgs.tyrian.effect;
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.game.FeaturableModel;
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
@@ -63,19 +62,23 @@ public class Explode extends FeaturableModel
     private PostAction action = EMPTY_ACTION;
     private int count = -1;
 
-    @Service private Context context;
-    @Service private Factory factory;
-    @Service private Handler handler;
-    @Service private Viewer viewer;
+    private final Context context;
+    private final Factory factory;
+    private final Handler handler;
 
     /**
      * Create an explode effect.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Explode(Setup setup)
+    public Explode(Services services, Setup setup)
     {
-        super(setup);
+        super(services, setup);
+
+        context = services.get(Context.class);
+        factory = services.get(Factory.class);
+        handler = services.get(Handler.class);
 
         media = Medias.create(setup.getText(Effect.NODE_EXPLODE));
         countMax = setup.getInteger(ATT_COUNT, Effect.NODE_EXPLODE);

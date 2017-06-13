@@ -15,17 +15,20 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.ship;
+package com.b3dgs.tyrian.pc.ship;
 
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Cursor;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.io.awt.Mouse;
+import com.b3dgs.tyrian.ship.ShipController;
+import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * Ship control implementation.
@@ -40,19 +43,26 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
 
     private int count;
 
-    @Service private Transformable transformable;
-    @Service private ShipUpdater updater;
+    private final Context context;
+    private final Mouse mouse;
+    private final Camera camera;
 
-    @Service private Context context;
-    @Service private Mouse mouse;
-    @Service private Camera camera;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private ShipModel model;
 
     /**
      * Create a PC ship controller.
+     * 
+     * @param services The services reference.
+     * @param setup The setup reference.
      */
-    public ShipControllerPc()
+    public ShipControllerPc(Services services, Setup setup)
     {
         super();
+
+        context = services.get(Context.class);
+        mouse = services.get(Mouse.class);
+        camera = services.get(Camera.class);
     }
 
     /**
@@ -66,7 +76,7 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
         {
             transformable.moveLocation(extrp,
                                        cursor.getX() - oldX,
-                                       cursor.getY() - oldY + updater.getHitForce().getDirectionVertical());
+                                       cursor.getY() - oldY + model.getHitForce().getDirectionVertical());
         }
         else
         {
@@ -93,9 +103,9 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         mouse.setCenter(context.getX()
                         + context.getConfig().getOutput().getWidth() / 2,
@@ -117,7 +127,7 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
         updatePosition(extrp);
         if (mouse.getClick() > 0)
         {
-            updater.fire();
+            model.fire();
         }
     }
 }

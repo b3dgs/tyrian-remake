@@ -19,9 +19,9 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.LionEngineException;
-import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.audio.AudioFactory;
-import com.b3dgs.lionengine.audio.AudioVoidFormat;
+import com.b3dgs.lionengine.audio.adplug.AdPlugFormat;
+import com.b3dgs.lionengine.audio.wav.WavFormat;
 import com.b3dgs.lionengine.core.awt.EngineAwt;
 import com.b3dgs.lionengine.core.sequence.Loader;
 
@@ -38,13 +38,9 @@ public final class AppTyrianPc
     public static void main(String[] args)
     {
         EngineAwt.start(Constant.NAME, Constant.VERSION, AppTyrianPc.class);
-        AudioFactory.addFormat(new AudioVoidFormat("wav"), new AudioVoidFormat("lds"));
-        Sfx.setEnabled(false);
-
-        final Resolution output = new Resolution(400, 720, 60);
-        final Config config = new Config(output, 32, true);
-        final Loader loader = new Loader();
-        loader.start(config, Loading.class);
+        AudioFactory.addFormat(new WavFormat(), AdPlugFormat.getFailsafe());
+        Sfx.setEnabled(true);
+        Loader.start(Config.windowed(Constant.NATIVE.get2x()), Loading.class);
     }
 
     /**

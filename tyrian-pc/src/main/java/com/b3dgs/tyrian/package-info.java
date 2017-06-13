@@ -17,6 +17,6 @@
  */
 
 /**
- * PC package base.
+ * Ship PC specific package.
  */
 package com.b3dgs.tyrian;

@@ -23,9 +23,9 @@ import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.ForceConfig;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
@@ -71,23 +71,28 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     private SpriteAnimated surface;
     private Media media;
 
-    @Service private Factory factory;
-    @Service private Handler handler;
-    @Service private Camera camera;
+    private final Factory factory;
+    private final Handler handler;
+    private final Camera camera;
 
-    @Service private Layerable layerable;
-    @Service private Transformable transformable;
-    @Service private Collidable collidable;
-    @Service private EntityModel model;
+    @FeatureGet private Layerable layerable;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Collidable collidable;
+    @FeatureGet private EntityModel model;
 
     /**
      * Create an entity updater.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    EntityUpdater(Setup setup)
+    EntityUpdater(Services services, Setup setup)
     {
         super();
+
+        factory = services.get(Factory.class);
+        handler = services.get(Handler.class);
+        camera = services.get(Camera.class);
 
         layer = getLayer(setup);
     }
@@ -113,14 +118,15 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         layerable.setLayer(layer);
         collidable.setGroup(Constant.COLLISION_GROUP_ENTITIES);
         collidable.addAccept(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
         collidable.setOrigin(Origin.MIDDLE);
+        collidable.setCollisionVisibility(false);
         life = model.getLife();
         direction = model.getDirection();
         surface = model.getSurface();

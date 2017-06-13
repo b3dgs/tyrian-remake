@@ -15,14 +15,18 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.ship;
+package com.b3dgs.tyrian.android.ship;
 
 import com.b3dgs.lionengine.game.Camera;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.io.android.Mouse;
+import com.b3dgs.tyrian.ship.ShipController;
+import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * Ship control implementation.
@@ -33,18 +37,24 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
 
     private final Force force = new Force();
 
-    @Service private Transformable transformable;
-    @Service private ShipUpdater updater;
+    private final Mouse mouse;
+    private final Camera camera;
 
-    @Service private Mouse mouse;
-    @Service private Camera camera;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private ShipModel model;
 
     /**
      * Create an Android ship controller.
+     * 
+     * @param services The services reference.
+     * @param setup The setup reference.
      */
-    public ShipControllerAndroid()
+    public ShipControllerAndroid(Services services, Setup setup)
     {
         super();
+
+        mouse = services.get(Mouse.class);
+        camera = services.get(Camera.class);
     }
 
     /**
@@ -54,7 +64,7 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
      */
     private void updatePosition(double extrp)
     {
-        transformable.moveLocation(extrp, force, updater.getHitForce());
+        transformable.moveLocation(extrp, force, model.getHitForce());
 
         final double width = transformable.getWidth() / 2.0;
         final double maxX = camera.getWidth() + camera.getWidth() - width + 4;
@@ -97,9 +107,9 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
         }
 
         updatePosition(extrp);
-        if (mouse.getClick() > 0)
+        if (mouse.getClick() > 1)
         {
-            updater.fire();
+            model.fire();
         }
     }
 }

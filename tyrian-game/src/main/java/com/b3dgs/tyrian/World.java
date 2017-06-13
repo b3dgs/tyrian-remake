@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.b3dgs.lionengine.Context;
@@ -54,7 +55,13 @@ public class World extends WorldGame
     private static final long SPAWN_DELAY = 1500L;
     private static final int SPAWN_BONUS_CHANCE = 1;
     private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
-    private static final List<Media> SPAWN_BONUS = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS);
+    private static final List<Media> SPAWN_BONUS = new ArrayList<Media>();
+
+    static
+    {
+        SPAWN_BONUS.addAll(getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS));
+        SPAWN_BONUS.addAll(getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS, Constant.FOLDER_WEAPON));
+    }
 
     /**
      * Get medias in path.
@@ -104,8 +111,8 @@ public class World extends WorldGame
         services.add(ship.getFeature(ShipUpdater.class));
 
         map = Map.generate(services, "level1");
-        map.addFeature(new MapTileViewerModel());
-        map.addFeature(new MapTilePersisterModel());
+        map.addFeature(new MapTileViewerModel(services));
+        map.addFeature(new MapTilePersisterModel(services));
         handler.add(map);
 
         hud = new Hud(services);

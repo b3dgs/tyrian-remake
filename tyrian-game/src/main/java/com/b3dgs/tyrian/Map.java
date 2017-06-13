@@ -138,8 +138,7 @@ public final class Map
             final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".map");
             final Services services = new Services();
             final MapTile map = services.create(MapTileGame.class);
-            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel());
-            map.prepareFeatures(services);
+            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel(services));
             try
             {
                 final FileReading reading = new FileReading(level);

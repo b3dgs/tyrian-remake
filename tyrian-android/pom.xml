@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.1</version>
+        <version>0.3.2</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-android</artifactId>
@@ -23,6 +23,11 @@
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>
             <artifactId>lionengine-core-android</artifactId>
+            <version>${lionengine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.b3dgs.lionengine</groupId>
+            <artifactId>lionengine-audio-adplug</artifactId>
             <version>${lionengine.version}</version>
         </dependency>
         <dependency>
@@ -72,7 +77,6 @@
                             <resources>
                                 <resource>
                                     <directory>src/main/resources</directory>
-                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>

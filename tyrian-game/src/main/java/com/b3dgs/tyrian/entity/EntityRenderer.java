@@ -18,13 +18,14 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Viewer;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.SpriteAnimated;
 
@@ -33,26 +34,30 @@ import com.b3dgs.lionengine.graphic.SpriteAnimated;
  */
 final class EntityRenderer extends FeatureModel implements Displayable
 {
+    private final Viewer viewer;
+
     private SpriteAnimated surface;
 
-    @Service private Transformable transformable;
-    @Service private Collidable collidable;
-
-    @Service private Viewer viewer;
-    @Service private EntityModel model;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Collidable collidable;
+    @FeatureGet private EntityModel model;
 
     /**
      * Create an entity renderer.
+     * 
+     * @param services The services reference.
      */
-    EntityRenderer()
+    EntityRenderer(Services services)
     {
         super();
+
+        viewer = services.get(Viewer.class);
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         surface = model.getSurface();
     }
@@ -63,6 +68,7 @@ final class EntityRenderer extends FeatureModel implements Displayable
         if (viewer.isViewable(transformable, 0, 0))
         {
             surface.render(g);
+            g.setColor(ColorRgba.RED);
             collidable.render(g);
         }
     }

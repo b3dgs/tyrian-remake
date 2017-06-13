@@ -19,7 +19,8 @@ package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.AnimState;
 import com.b3dgs.lionengine.Viewer;
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.FeatureGet;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
@@ -33,19 +34,21 @@ final class EffectUpdater extends FeatureModel implements Refreshable
 {
     private final SpriteAnimated surface;
 
-    @Service private Transformable transformable;
+    private final Viewer viewer;
 
-    @Service private Viewer viewer;
+    @FeatureGet private Transformable transformable;
 
     /**
      * Create an effect updater.
      * 
+     * @param services The services reference.
      * @param model The model reference.
      */
-    EffectUpdater(EffectModel model)
+    EffectUpdater(Services services, EffectModel model)
     {
         super();
 
+        viewer = services.get(Viewer.class);
         surface = model.getSurface();
     }
 

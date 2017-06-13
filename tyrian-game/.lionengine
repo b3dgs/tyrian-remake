@@ -1,0 +1,5 @@
+#LionEngine project properties
+#Sun Jul 26 21:14:00 CEST 2015
+LibrariesFolder=target\\classes
+ClassesFolder=target\\tyrian-game-0.3.2.jar
+ResourcesFolder=src\\main\\resources\\com\\b3dgs\\tyrian

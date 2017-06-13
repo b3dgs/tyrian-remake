@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.FeaturableModel;
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Recycler;
@@ -42,25 +42,28 @@ public class Effect extends FeaturableModel
     private final Animation anim;
     private final SpriteAnimated surface;
 
-    @Service private Transformable transformable;
+    private final Transformable transformable;
 
-    @Service private Viewer viewer;
+    private final Viewer viewer;
 
     /**
      * Create an effect.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Effect(Setup setup)
+    public Effect(Services services, Setup setup)
     {
-        super(setup);
+        super(services, setup);
+
+        viewer = services.get(Viewer.class);
 
         addFeature(new Recycler());
         addFeature(new LayerableModel(Constant.LAYER_EFFECT));
-        addFeature(new TransformableModel(setup));
+        transformable = addFeatureAndGet(new TransformableModel(setup));
 
         final EffectModel model = addFeatureAndGet(new EffectModel(setup));
-        addFeature(new EffectUpdater(model));
+        addFeature(new EffectUpdater(services, model));
         addFeature(new EffectRenderer(model));
 
         anim = AnimationConfig.imports(setup).getAnimation("start");

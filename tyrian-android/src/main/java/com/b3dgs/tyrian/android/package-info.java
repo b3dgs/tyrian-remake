@@ -17,6 +17,6 @@
  */
 
 /**
- * Ship platform specific package.
+ * Android package base.
  */
-package com.b3dgs.tyrian.ship;
+package com.b3dgs.tyrian.android;

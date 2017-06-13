@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.bonus;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.TransformableModel;
@@ -54,20 +55,19 @@ public class Bonus extends FeaturableModel
     /**
      * Create an entity.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Bonus(Setup setup)
+    public Bonus(Services services, Setup setup)
     {
-        super(setup);
+        super(services, setup);
 
         addFeature(new TransformableModel(setup));
-        addFeature(new CollidableModel(setup));
+        addFeature(new CollidableModel(services, setup));
         addFeature(new LayerableModel());
 
         final BonusModel model = addFeatureAndGet(new BonusModel(setup));
-        addFeature(new BonusUpdater(model));
+        addFeature(new BonusUpdater(services, model));
         addFeature(new BonusRenderer(model));
-
-        addFeatures(setup);
     }
 }

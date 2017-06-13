@@ -17,7 +17,7 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
@@ -31,7 +31,7 @@ final class ProjectileRenderer extends FeatureModel implements Displayable
 {
     private final SpriteAnimated surface;
 
-    @Service private Collidable collidable;
+    @FeatureGet private Collidable collidable;
 
     /**
      * Create a projectile renderer.

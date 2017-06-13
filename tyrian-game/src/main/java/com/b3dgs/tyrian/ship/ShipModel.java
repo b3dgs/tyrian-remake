@@ -17,41 +17,74 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureGet;
+import com.b3dgs.lionengine.game.Force;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.SizeConfig;
+import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.game.feature.launchable.Launchable;
+import com.b3dgs.lionengine.game.feature.launchable.LaunchableListener;
+import com.b3dgs.lionengine.game.feature.launchable.Launcher;
+import com.b3dgs.lionengine.game.feature.launchable.LauncherListener;
 import com.b3dgs.lionengine.graphic.Sprite;
 import com.b3dgs.lionengine.graphic.SpriteAnimated;
 import com.b3dgs.lionengine.graphic.SpriteTiled;
+import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.Constant;
+import com.b3dgs.tyrian.weapon.Weapon;
+import com.b3dgs.tyrian.weapon.WeaponModel;
+import com.b3dgs.tyrian.weapon.WeaponUpdater;
 
 /**
  * Ship model implementation.
  */
 public final class ShipModel extends FeatureModel
 {
+    /** Default energy. */
+    static final int ENERGY = 8;
+    /** Speed. */
+    static final Direction SPEED = new Force(0.0, 1.0);
     private static final int OFFSET_Y = 8;
 
     private final Alterable shield = new Alterable(15);
     private final Alterable armor = new Alterable(10);
     private final Alterable energy = new Alterable(200);
+    private final Force hitForce = new Force(0.0, 0.0, 1, 0.1);
     private final Tick hitTick = new Tick();
     private final SpriteTiled surface;
     private final SpriteAnimated hit;
+    private final Factory factory;
+    private final Handler handler;
+
+    private WeaponUpdater front;
+    private WeaponUpdater rear;
+
+    @FeatureGet private Transformable transformable;
 
     /**
      * Create a ship.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    ShipModel(Setup setup)
+    ShipModel(Services services, Setup setup)
     {
         super();
+
+        factory = services.get(Factory.class);
+        handler = services.get(Handler.class);
 
         final SizeConfig config = SizeConfig.imports(setup);
         surface = Drawable.loadSpriteTiled(setup.getSurface(), config.getWidth(), config.getHeight());
@@ -66,6 +99,97 @@ public final class ShipModel extends FeatureModel
         shield.fill();
         armor.fill();
         energy.fill();
+
+        front = createWeapon(Weapon.PULSE_CANNON);
+        rear = createWeapon(Weapon.SONIC_WAVE);
+    }
+
+    /**
+     * Take weapon.
+     * 
+     * @param weapon The weapon to take.
+     */
+    public void takeWeapon(WeaponModel weapon)
+    {
+        if (weapon.isFront())
+        {
+            front = weapon.take(true);
+            ignoreProjectileCollision(front.getFeature(Launcher.class));
+        }
+        else
+        {
+            rear = weapon.take(true);
+            ignoreProjectileCollision(rear.getFeature(Launcher.class));
+        }
+    }
+
+    /**
+     * Perform a power up for front or rear weapon (random).
+     */
+    public void powerUp()
+    {
+        final WeaponUpdater weapon;
+        if (UtilRandom.getRandomBoolean() && front.getLevel() < Constant.WEAPON_LEVEL_MAX
+            || rear.getLevel() == Constant.WEAPON_LEVEL_MAX)
+        {
+            weapon = front;
+        }
+        else
+        {
+            weapon = rear;
+        }
+        weapon.increaseLevel();
+    }
+
+    /**
+     * Perform a fire.
+     */
+    public void fire()
+    {
+        if (energy.isEnough(ShipModel.ENERGY * 2))
+        {
+            front.fire(transformable, SPEED);
+            rear.fire(transformable, SPEED);
+        }
+    }
+
+    /**
+     * Ignore weapon projectiles collision.
+     * 
+     * @param launcher The launcher to ignore.
+     */
+    private void ignoreProjectileCollision(Launcher launcher)
+    {
+        launcher.addListener(new LauncherListener()
+        {
+            @Override
+            public void notifyFired()
+            {
+                energy.decrease(ENERGY);
+            }
+        });
+        launcher.addListener(new LaunchableListener()
+        {
+            @Override
+            public void notifyFired(Launchable launchable)
+            {
+                launchable.getFeature(Collidable.class).setGroup(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
+            }
+        });
+    }
+
+    /**
+     * Create a weapon from its media.
+     * 
+     * @param media The weapon media.
+     * @return The created weapon.
+     */
+    private WeaponUpdater createWeapon(Media media)
+    {
+        final Weapon weapon = factory.create(media);
+        handler.add(weapon);
+        ignoreProjectileCollision(weapon.getFeature(Launcher.class));
+        return weapon.getFeature(WeaponModel.class).take(false);
     }
 
     /**
@@ -126,5 +250,35 @@ public final class ShipModel extends FeatureModel
     public Alterable getEnergy()
     {
         return energy;
+    }
+
+    /**
+     * Get the hit force.
+     * 
+     * @return The hit force.
+     */
+    public Force getHitForce()
+    {
+        return hitForce;
+    }
+
+    /**
+     * Get the weapon front.
+     * 
+     * @return The front weapon.
+     */
+    public WeaponUpdater getFront()
+    {
+        return front;
+    }
+
+    /**
+     * Get the weapon rear.
+     * 
+     * @return The rear weapon.
+     */
+    public WeaponUpdater getRear()
+    {
+        return rear;
     }
 }

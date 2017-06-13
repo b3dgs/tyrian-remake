@@ -18,9 +18,9 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
-import com.b3dgs.lionengine.game.feature.TransformableModel;
 import com.b3dgs.lionengine.game.feature.collidable.CollidableModel;
 
 /**
@@ -31,18 +31,18 @@ public class Entity extends FeaturableModel
     /**
      * Create an entity.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Entity(Setup setup)
+    public Entity(Services services, Setup setup)
     {
-        super(setup);
+        super(services, setup);
 
-        addFeature(new TransformableModel(setup));
-        addFeature(new CollidableModel(setup));
+        addFeature(new CollidableModel(services, setup));
         addFeature(new LayerableModel());
 
         addFeature(new EntityModel(setup));
-        addFeature(new EntityUpdater(setup));
-        addFeature(new EntityRenderer());
+        addFeature(new EntityUpdater(services, setup));
+        addFeature(new EntityRenderer(services));
     }
 }

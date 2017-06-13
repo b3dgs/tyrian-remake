@@ -24,14 +24,15 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
@@ -43,7 +44,7 @@ import com.b3dgs.tyrian.effect.Effect;
 /**
  * Projectile updater implementation.
  */
-final class ProjectileUpdater extends FeatureModel implements Refreshable
+final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyclable
 {
     private final Tick tick = new Tick();
     private final Force force = new Force();
@@ -52,23 +53,29 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
     private final Media effectMedia;
     private final Direction acceleration;
 
-    @Service private Transformable transformable;
-    @Service private Launchable launchable;
-    @Service private Collidable collidable;
+    private final Context context;
+    private final Factory factory;
+    private final Handler handler;
+    private final Viewer viewer;
 
-    @Service private Context context;
-    @Service private Factory factory;
-    @Service private Handler handler;
-    @Service private Viewer viewer;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Launchable launchable;
+    @FeatureGet private Collidable collidable;
 
     /**
      * Create a projectile updater.
      * 
+     * @param services The services reference.
      * @param model The model reference.
      */
-    ProjectileUpdater(ProjectileModel model)
+    ProjectileUpdater(Services services, ProjectileModel model)
     {
         super();
+
+        context = services.get(Context.class);
+        factory = services.get(Factory.class);
+        handler = services.get(Handler.class);
+        viewer = services.get(Viewer.class);
 
         surface = model.getSurface();
         effectRate = model.getEffectRate();
@@ -76,10 +83,23 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
         acceleration = model.getAcceleration();
     }
 
-    @Override
-    public void prepare(FeatureProvider provider, Services services)
+    /**
+     * Start effect.
+     * 
+     * @param localizable The localizable reference.
+     */
+    private void startEffect(Localizable localizable)
     {
-        super.prepare(provider, services);
+        final Effect effect = factory.create(effectMedia);
+        handler.add(effect);
+        effect.start(localizable);
+        tick.restart();
+    }
+
+    @Override
+    public void prepare(FeatureProvider provider)
+    {
+        super.prepare(provider);
 
         collidable.setOrigin(Origin.MIDDLE);
         launchable.addListener(new LaunchableListener()
@@ -116,16 +136,9 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable
         }
     }
 
-    /**
-     * Start effect.
-     * 
-     * @param localizable The localizable reference.
-     */
-    private void startEffect(Localizable localizable)
+    @Override
+    public void recycle()
     {
-        final Effect effect = factory.create(effectMedia);
-        handler.add(effect);
-        effect.start(localizable);
-        tick.restart();
+        force.setDirection(Direction.ZERO);
     }
 }

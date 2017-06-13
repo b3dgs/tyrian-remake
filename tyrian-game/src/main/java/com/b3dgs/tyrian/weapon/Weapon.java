@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.weapon;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.Medias;
 import com.b3dgs.lionengine.game.FeaturableModel;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.TransformableModel;
 import com.b3dgs.lionengine.game.feature.launchable.LauncherModel;
@@ -52,15 +53,16 @@ public class Weapon extends FeaturableModel
     /**
      * Create a weapon.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public Weapon(WeaponSetup setup)
+    public Weapon(Services services, WeaponSetup setup)
     {
-        super(setup);
+        super(services, setup);
 
         addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
         addFeatureAndGet(new TransformableModel(setup));
-        addFeature(new LauncherModel(setup));
+        addFeature(new LauncherModel(services, setup));
 
         final WeaponModel model = addFeatureAndGet(new WeaponModel(setup));
         addFeature(new WeaponUpdater(model));

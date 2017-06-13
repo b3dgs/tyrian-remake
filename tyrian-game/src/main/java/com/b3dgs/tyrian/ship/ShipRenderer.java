@@ -22,11 +22,14 @@ import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Alterable;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Sprite;
 import com.b3dgs.lionengine.graphic.SpriteTiled;
@@ -38,22 +41,29 @@ final class ShipRenderer extends FeatureModel implements Displayable
 {
     private static final long HIT_TIME = 25L;
 
+    private final Context context;
+    private final Viewer viewer;
+
     private Sprite hit;
     private Tick hitTick;
     private SpriteTiled surface;
     private Alterable shield;
 
-    @Service private ShipModel model;
-
-    @Service private Context context;
-    @Service private Viewer viewer;
+    @FeatureGet private ShipModel model;
+    @FeatureGet private Collidable collidable;
 
     /**
      * Create a ship renderer.
+     * 
+     * @param services The services reference.
+     * @param setup The setup reference.
      */
-    ShipRenderer()
+    ShipRenderer(Services services, Setup setup)
     {
         super();
+
+        context = services.get(Context.class);
+        viewer = services.get(Viewer.class);
     }
 
     /**
@@ -77,9 +87,9 @@ final class ShipRenderer extends FeatureModel implements Displayable
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         surface = model.getSurface();
         hit = model.getHit();
@@ -96,5 +106,7 @@ final class ShipRenderer extends FeatureModel implements Displayable
         {
             hit.render(g);
         }
+        g.setColor(ColorRgba.RED);
+        collidable.render(g);
     }
 }

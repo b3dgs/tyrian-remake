@@ -19,12 +19,10 @@ package com.b3dgs.tyrian.bonus;
 
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.Camera;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
 import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -41,28 +39,29 @@ public class BonusUpdater extends FeatureModel implements Refreshable
 
     private final SpriteAnimated surface;
 
-    @Service private Factory factory;
-    @Service private Handler handler;
-    @Service private Camera camera;
-    @Service private Transformable transformable;
-    @Service private Collidable collidable;
+    private final Camera camera;
+
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Collidable collidable;
 
     /**
      * Create a bonus updater.
      * 
+     * @param services The services reference.
      * @param model The model reference.
      */
-    BonusUpdater(BonusModel model)
+    BonusUpdater(Services services, BonusModel model)
     {
         super();
 
+        camera = services.get(Camera.class);
         surface = model.getSurface();
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         collidable.setOrigin(Origin.MIDDLE);
         collidable.setGroup(Constant.COLLISION_GROUP_BONUS);

@@ -18,12 +18,10 @@
 package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.Localizable;
-import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Service;
-import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -40,10 +38,8 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
 {
     private final WeaponModel model;
 
-    @Service private Transformable transformable;
-    @Service private Launcher launcher;
-
-    @Service private Viewer viewer;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Launcher launcher;
 
     /**
      * Create a weapon updater.
@@ -58,9 +54,9 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         launcher.addListener(new LauncherListener()
         {
@@ -121,6 +117,6 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     @Override
     public void update(double extrp)
     {
-        // Nothing to do
+        launcher.update(extrp);
     }
 }

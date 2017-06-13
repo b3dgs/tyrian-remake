@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.b3dgs.tyrian"
-    android:versionCode="031"
-    android:versionName="0.3.1" >
+    android:versionCode="032"
+    android:versionName="0.3.2" >
 
     <uses-sdk
         android:minSdkVersion="19"
@@ -13,8 +13,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="Tyrian Remake"
         android:largeHeap="true"
+        android:allowBackup="false"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        <activity android:name="AppTyrianAndroid" >
+        <activity android:name=".android.ActivityTyrian" android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

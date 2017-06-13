@@ -21,7 +21,6 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
@@ -63,9 +62,9 @@ public final class BonusModel extends FeatureModel
     }
 
     @Override
-    public void prepare(FeatureProvider provider, Services services)
+    public void prepare(FeatureProvider provider)
     {
-        super.prepare(provider, services);
+        super.prepare(provider);
 
         getFeature(Layerable.class).setLayer(Constant.LAYER_ENTITIES_MOVING);
     }

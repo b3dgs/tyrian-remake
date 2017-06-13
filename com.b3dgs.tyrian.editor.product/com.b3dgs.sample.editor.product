@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Tyrian Editor" uid="com.b3dgs.tyrian.editor.product" id="com.b3dgs.tyrian.editor.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.3.1" useFeatures="false" includeLaunchers="true">
+<product name="Tyrian Editor" uid="com.b3dgs.tyrian.editor.product" id="com.b3dgs.tyrian.editor.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.3.2" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-clearPersistedState -import C:\Users\DjThunder\git\lionengine\tyrian-project\tyrian-game
+      <programArgs>-clearPersistedState -import C:\Users\DjThunder\git\tyrian-remake\tyrian-game
       </programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
@@ -23,12 +23,14 @@
    </launcher>
 
    <vm>
+      <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</linux>
+      <macos include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</macos>
+      <solaris include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</solaris>
+      <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
    </vm>
 
    <plugins>
-      <plugin id="com.b3dgs.lionengine.audio.sc68"/>
       <plugin id="com.b3dgs.lionengine.core"/>
-      <plugin id="com.b3dgs.lionengine.core.awt"/>
       <plugin id="com.b3dgs.lionengine.core.swt"/>
       <plugin id="com.b3dgs.lionengine.editor"/>
       <plugin id="com.b3dgs.lionengine.game"/>

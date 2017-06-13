@@ -102,8 +102,8 @@ public class Hud implements Updatable, Renderable
         armor.setWidthPercent(ship.getArmor().getPercent());
         energy.setWidthPercent(ship.getEnergy().getPercent());
 
-        levelFront.setHeightPercent(shipUpdater.getLevelPercentFront());
-        levelRear.setHeightPercent(shipUpdater.getLevelPercentRear());
+        levelFront.setHeightPercent(getLevelPercentFront());
+        levelRear.setHeightPercent(getLevelPercentRear());
 
         progress.setHeightPercent((int) ((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
     }
@@ -131,5 +131,25 @@ public class Hud implements Updatable, Renderable
     public int getHeight()
     {
         return surface.getHeight();
+    }
+
+    /**
+     * Get the front weapon level.
+     * 
+     * @return The front weapon level.
+     */
+    public int getLevelPercentFront()
+    {
+        return (int) Math.max(1, Math.floor(ship.getFront().getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
+    }
+
+    /**
+     * Get the rear weapon level.
+     * 
+     * @return The rear weapon level.
+     */
+    public int getLevelPercentRear()
+    {
+        return (int) Math.max(1, Math.floor(ship.getRear().getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
     }
 }

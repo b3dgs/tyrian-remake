@@ -28,7 +28,6 @@ import com.b3dgs.lionengine.graphic.Graphics;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
 import com.b3dgs.lionengine.graphic.Renderable;
 import com.b3dgs.lionengine.graphic.SpriteTiled;
-import com.b3dgs.lionengine.graphic.Transparency;
 import com.b3dgs.lionengine.util.UtilMath;
 import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.Constant;
@@ -96,7 +95,7 @@ public final class Background implements Updatable, Renderable
             final ImageBuffer buffer = Graphics.createImageBuffer(maxX
                                                                   - minX,
                                                                   viewer.getHeight(),
-                                                                  Transparency.TRANSLUCENT);
+                                                                  ColorRgba.TRANSPARENT);
             layers[i] = buffer;
             speed[i] = layersNumber - i * factor;
             final Graphic g = buffer.createGraphic();

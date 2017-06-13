@@ -19,13 +19,13 @@ package com.b3dgs.tyrian.bonus.action;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.Service;
+import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.ship.ShipUpdater;
+import com.b3dgs.tyrian.ship.ShipModel;
 import com.b3dgs.tyrian.weapon.Weapon;
 import com.b3dgs.tyrian.weapon.WeaponModel;
 
@@ -38,17 +38,19 @@ public class ChangeWeapon extends FeatureModel implements Action
     private static final String NODE_WEAPON_REAR = com.b3dgs.lionengine.Constant.XML_PREFIX + "weaponRear";
 
     private final Media media;
-
-    @Service private Factory factory;
+    private final Factory factory;
 
     /**
      * Create power up action.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    public ChangeWeapon(Setup setup)
+    public ChangeWeapon(Services services, Setup setup)
     {
         super();
+
+        factory = services.get(Factory.class);
 
         if (setup.hasNode(NODE_WEAPON_FRONT))
         {
@@ -69,7 +71,7 @@ public class ChangeWeapon extends FeatureModel implements Action
     }
 
     @Override
-    public void action(ShipUpdater ship)
+    public void action(ShipModel ship)
     {
         if (media != null)
         {

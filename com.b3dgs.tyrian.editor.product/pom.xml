@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.1</version>
+        <version>0.3.2</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>com.b3dgs.tyrian.editor.product</artifactId>
@@ -37,7 +37,6 @@
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-p2-repository-plugin</artifactId>
-                <version>${tycho.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
