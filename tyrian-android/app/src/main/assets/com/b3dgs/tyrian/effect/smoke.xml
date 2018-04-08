@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:effect xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.effect.Effect</lionengine:class>
+    <lionengine:surface image="smoke.png"/>
+	<lionengine:frames horizontal="4" vertical="2"/>
+	<lionengine:animation name="start" start="1" end="8" speed="0.5" reversed="false" repeat="false"/>
+</lionengine:effect>

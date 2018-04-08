@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.projectile.Projectile</lionengine:class>
+    <lionengine:surface image="projectiles.png" frame="1"/>
+	<lionengine:frames horizontal="15" vertical="16"/>
+	<lionengine:size width="12" height="14"/>
+	<lionengine:offset x="0" y="0"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="0" width="2" height="10" mirror="false" />
+</lionengine:featurable>

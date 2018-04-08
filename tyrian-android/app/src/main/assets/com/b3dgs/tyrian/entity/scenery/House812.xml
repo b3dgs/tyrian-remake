@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.Entity</lionengine:class>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
+    <lionengine:explode>explode_little</lionengine:explode>
+    <lionengine:surface image="House812.png"/>
+	<lionengine:size width="48" height="84"/>
+	<lionengine:collision name="default" offsetX="0" offsetY="0" width="40" height="44" mirror="false" />
+	<lionengine:animation name="idle" start="1" end="1" speed="0.2" reversed="false" repeat="false"/>
+</lionengine:featurable>

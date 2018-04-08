@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.entity.Entity</lionengine:class>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.Recycler</lionengine:feature>
+    <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
+    <lionengine:surface image="meteor_medium_1.png"/>
+	<lionengine:size width="48" height="56"/>
+    <lionengine:explode>explode_medium</lionengine:explode>
+    <lionengine:force vx="0.0" vy="-0.75" />
+	<lionengine:collision name="default" offsetX="0" offsetY="0" width="36" height="38" mirror="false" />
+</lionengine:featurable>

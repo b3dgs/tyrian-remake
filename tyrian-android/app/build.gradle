@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    defaultConfig {
+        applicationId "com.b3dgs.tyrian"
+        minSdkVersion 24
+        targetSdkVersion 24
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'com.b3dgs.lionengine:lionengine-core:9.0.0-SNAPSHOT'
+    implementation 'com.b3dgs.lionengine:lionengine-audio-adplug:9.0.0-SNAPSHOT'
+    implementation 'com.b3dgs.lionengine:lionengine-core-android:9.0.0-SNAPSHOT'
+    implementation 'com.b3dgs.tyrian:tyrian-game:0.4.0'
+}

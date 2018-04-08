@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
+    <lionengine:class>com.b3dgs.tyrian.weapon.Weapon</lionengine:class>
+    <lionengine:fire>weapon_pulse</lionengine:fire>
+    <lionengine:launcher level="0" rate="200">
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="-3">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="3">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+    <lionengine:launcher level="1" rate="200">
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="-4">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="0" oy="2">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="4">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+    <lionengine:launcher level="2" rate="200">
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="-9">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="-3">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="3">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+        <lionengine:launchable media="projectile/pulse.xml" delay="0" ox="9">
+            <lionengine:force velocity="8" sensibility="0" vx="0" vy="8"/>
+        </lionengine:launchable>
+    </lionengine:launcher>
+</lionengine:featurable>
