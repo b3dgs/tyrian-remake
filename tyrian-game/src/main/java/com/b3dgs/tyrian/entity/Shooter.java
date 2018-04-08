@@ -18,18 +18,16 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Localizable;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.FeatureGet;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
-import com.b3dgs.lionengine.game.feature.launchable.Launchable;
-import com.b3dgs.lionengine.game.feature.launchable.LaunchableListener;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.ship.ShipUpdater;
@@ -85,14 +83,9 @@ public class Shooter extends FeatureModel implements Refreshable
             }
         };
 
-        weapon.getFeature(Launcher.class).addListener(new LaunchableListener()
-        {
-            @Override
-            public void notifyFired(Launchable launchable)
-            {
-                launchable.getFeature(Collidable.class).setGroup(Constant.COLLISION_GROUP_PROJECTILES_ENTITIES);
-            }
-        });
+        weapon.getFeature(Launcher.class)
+              .addListener(launchable -> launchable.getFeature(Collidable.class)
+                                                   .setGroup(Constant.COLLISION_GROUP_PROJECTILES_ENTITIES));
     }
 
     @Override

@@ -17,19 +17,19 @@
  */
 package com.b3dgs.tyrian.background;
 
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Range;
 import com.b3dgs.lionengine.Updatable;
+import com.b3dgs.lionengine.UtilMath;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Viewer;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Graphics;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
 import com.b3dgs.lionengine.graphic.Renderable;
-import com.b3dgs.lionengine.graphic.SpriteTiled;
-import com.b3dgs.lionengine.util.UtilMath;
-import com.b3dgs.lionengine.util.UtilRandom;
+import com.b3dgs.lionengine.graphic.drawable.Drawable;
+import com.b3dgs.lionengine.graphic.drawable.SpriteTiled;
 import com.b3dgs.tyrian.Constant;
 
 /**
@@ -92,8 +92,7 @@ public final class Background implements Updatable, Renderable
         final double factor = 0.5;
         for (int i = 0; i < layersNumber; i++)
         {
-            final ImageBuffer buffer = Graphics.createImageBuffer(maxX
-                                                                  - minX,
+            final ImageBuffer buffer = Graphics.createImageBuffer(maxX - minX,
                                                                   viewer.getHeight(),
                                                                   ColorRgba.TRANSPARENT);
             layers[i] = buffer;

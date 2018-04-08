@@ -18,16 +18,16 @@
 package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.Localizable;
+import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.lionengine.game.feature.launchable.LauncherListener;
-import com.b3dgs.lionengine.util.UtilMath;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 
@@ -58,16 +58,12 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     {
         super.prepare(provider);
 
-        launcher.addListener(new LauncherListener()
+        launcher.addListener((LauncherListener) () ->
         {
-            @Override
-            public void notifyFired()
+            final Audio audio = model.getSfxFire();
+            if (audio != null && Sfx.isEnabled())
             {
-                final Audio audio = model.getSfxFire();
-                if (audio != null && Sfx.isEnabled())
-                {
-                    audio.play();
-                }
+                audio.play();
             }
         });
     }

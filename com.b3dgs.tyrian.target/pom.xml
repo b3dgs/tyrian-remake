@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.2</version>
+        <version>0.4.0</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>com.b3dgs.tyrian.platform</artifactId>
-    <name>Tyrian Target Platform</name>
     <packaging>eclipse-target-definition</packaging>
+    <name>Tyrian Target Platform</name>
     <build>
         <plugins>
             <plugin>

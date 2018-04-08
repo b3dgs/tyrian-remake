@@ -24,21 +24,21 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureGet;
+import com.b3dgs.lionengine.game.DirectionNone;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
-import com.b3dgs.lionengine.game.feature.launchable.LaunchableListener;
-import com.b3dgs.lionengine.graphic.SpriteAnimated;
+import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 import com.b3dgs.tyrian.effect.Effect;
 
 /**
@@ -102,15 +102,11 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
         super.prepare(provider);
 
         collidable.setOrigin(Origin.MIDDLE);
-        launchable.addListener(new LaunchableListener()
+        launchable.addListener(launchable ->
         {
-            @Override
-            public void notifyFired(Launchable launchable)
+            if (effectMedia != null)
             {
-                if (effectMedia != null)
-                {
-                    startEffect(transformable);
-                }
+                startEffect(transformable);
             }
         });
     }
@@ -139,6 +135,6 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     @Override
     public void recycle()
     {
-        force.setDirection(Direction.ZERO);
+        force.setDirection(DirectionNone.INSTANCE);
     }
 }

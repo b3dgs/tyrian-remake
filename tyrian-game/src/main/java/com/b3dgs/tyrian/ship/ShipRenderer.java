@@ -22,17 +22,17 @@ import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Alterable;
-import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.feature.Displayable;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.graphic.ColorRgba;
 import com.b3dgs.lionengine.graphic.Graphic;
-import com.b3dgs.lionengine.graphic.Sprite;
-import com.b3dgs.lionengine.graphic.SpriteTiled;
+import com.b3dgs.lionengine.graphic.drawable.Sprite;
+import com.b3dgs.lionengine.graphic.drawable.SpriteTiled;
 
 /**
  * Ship renderer implementation.

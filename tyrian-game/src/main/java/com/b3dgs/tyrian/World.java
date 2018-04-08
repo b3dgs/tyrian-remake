@@ -23,12 +23,13 @@ import java.util.List;
 
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.Featurable;
-import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.Layerable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.WorldGame;
 import com.b3dgs.lionengine.game.feature.collidable.ComponentCollision;
@@ -40,7 +41,6 @@ import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.io.FileReading;
 import com.b3dgs.lionengine.io.FileWriting;
 import com.b3dgs.lionengine.io.InputDevicePointer;
-import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.ship.ShipUpdater;
 
@@ -55,7 +55,7 @@ public class World extends WorldGame
     private static final long SPAWN_DELAY = 1500L;
     private static final int SPAWN_BONUS_CHANCE = 1;
     private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
-    private static final List<Media> SPAWN_BONUS = new ArrayList<Media>();
+    private static final List<Media> SPAWN_BONUS = new ArrayList<>();
 
     static
     {
@@ -109,12 +109,10 @@ public class World extends WorldGame
         final Featurable ship = factory.create(STALKER);
         handler.add(ship);
         services.add(ship.getFeature(ShipUpdater.class));
-
         map = Map.generate(services, "level1");
         map.addFeature(new MapTileViewerModel(services));
         map.addFeature(new MapTilePersisterModel(services));
         handler.add(map);
-
         hud = new Hud(services);
 
         camera.setView(0,

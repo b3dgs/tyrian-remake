@@ -20,7 +20,7 @@ package com.b3dgs.tyrian.background;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Range;
 import com.b3dgs.lionengine.Updatable;
-import com.b3dgs.lionengine.util.UtilRandom;
+import com.b3dgs.lionengine.UtilRandom;
 
 /**
  * Star implementation.

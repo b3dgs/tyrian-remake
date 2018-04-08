@@ -18,9 +18,7 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Context;
-import com.b3dgs.lionengine.game.Services;
 import com.b3dgs.lionengine.game.feature.SequenceGame;
-import com.b3dgs.lionengine.game.feature.WorldGame;
 
 /**
  * Game loop designed to handle our little world.
@@ -34,14 +32,7 @@ public final class Scene extends SequenceGame
      */
     public Scene(Context context)
     {
-        super(context, Constant.NATIVE, new WorldCreator()
-        {
-            @Override
-            public WorldGame createWorld(Context context, Services services)
-            {
-                return new World(context, services);
-            }
-        });
+        super(context, Constant.NATIVE, (context1, services) -> new World(context1, services));
     }
 
     @Override

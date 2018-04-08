@@ -19,18 +19,18 @@ package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.Constant;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.FramesConfig;
-import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.SurfaceConfig;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.graphic.SpriteAnimated;
-import com.b3dgs.lionengine.io.Xml;
+import com.b3dgs.lionengine.game.feature.Setup;
+import com.b3dgs.lionengine.graphic.drawable.Drawable;
+import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 
 /**
  * Projectile model implementation.

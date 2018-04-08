@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.2</version>
+        <version>0.4.0</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>tyrian-pc</artifactId>
-    <name>Tyrian PC</name>
     <packaging>jar</packaging>
+    <name>Tyrian PC</name>
     <dependencies>
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>4.1.0</version>
+            <version>4.5.1</version>
         </dependency>
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>

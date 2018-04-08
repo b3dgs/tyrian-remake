@@ -18,30 +18,28 @@
 package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
-import com.b3dgs.lionengine.game.feature.launchable.Launchable;
-import com.b3dgs.lionengine.game.feature.launchable.LaunchableListener;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.lionengine.game.feature.launchable.LauncherListener;
-import com.b3dgs.lionengine.graphic.Sprite;
-import com.b3dgs.lionengine.graphic.SpriteAnimated;
-import com.b3dgs.lionengine.graphic.SpriteTiled;
-import com.b3dgs.lionengine.util.UtilRandom;
+import com.b3dgs.lionengine.graphic.drawable.Drawable;
+import com.b3dgs.lionengine.graphic.drawable.Sprite;
+import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.graphic.drawable.SpriteTiled;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.weapon.Weapon;
 import com.b3dgs.tyrian.weapon.WeaponModel;
@@ -100,7 +98,7 @@ public final class ShipModel extends FeatureModel
         armor.fill();
         energy.fill();
 
-        front = createWeapon(Weapon.PULSE_CANNON);
+        front = createWeapon(Weapon.MISSILE_LAUNCHER);
         rear = createWeapon(Weapon.SONIC_WAVE);
     }
 
@@ -160,22 +158,9 @@ public final class ShipModel extends FeatureModel
      */
     private void ignoreProjectileCollision(Launcher launcher)
     {
-        launcher.addListener(new LauncherListener()
-        {
-            @Override
-            public void notifyFired()
-            {
-                energy.decrease(ENERGY);
-            }
-        });
-        launcher.addListener(new LaunchableListener()
-        {
-            @Override
-            public void notifyFired(Launchable launchable)
-            {
-                launchable.getFeature(Collidable.class).setGroup(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
-            }
-        });
+        launcher.addListener((LauncherListener) () -> energy.decrease(ENERGY));
+        launcher.addListener(launchable -> launchable.getFeature(Collidable.class)
+                                                     .setGroup(Constant.COLLISION_GROUP_PROJECTILES_SHIP));
     }
 
     /**

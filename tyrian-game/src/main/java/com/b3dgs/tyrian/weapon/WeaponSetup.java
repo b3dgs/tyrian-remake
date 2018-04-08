@@ -19,11 +19,11 @@ package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
+import com.b3dgs.lionengine.UtilFile;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.audio.AudioFactory;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.Setup;
-import com.b3dgs.lionengine.util.UtilFile;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 

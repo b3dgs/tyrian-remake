@@ -4,25 +4,25 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.2</version>
+        <version>0.4.0</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>com.b3dgs.tyrian.editor</artifactId>
-    <name>Tyrian Editor</name>
     <packaging>eclipse-plugin</packaging>
-    <repositories>
-        <repository>
-            <id>neon</id>
-            <url>http://download.eclipse.org/releases/neon</url>
-            <layout>p2</layout>
-        </repository>
-    </repositories>
+    <name>Tyrian Editor</name>
     <dependencies>
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>
             <artifactId>tyrian-game</artifactId>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>neon</id>
+            <url>http://download.eclipse.org/releases/oxygen</url>
+            <layout>p2</layout>
+        </repository>
+    </repositories>
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>

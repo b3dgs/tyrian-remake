@@ -18,9 +18,9 @@
 package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.audio.AudioFactory;
-import com.b3dgs.lionengine.core.Medias;
 
 /**
  * Handle the sound effect.

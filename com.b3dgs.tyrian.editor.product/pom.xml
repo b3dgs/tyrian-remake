@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
-        <version>0.3.2</version>
+        <version>0.4.0</version>
         <relativePath>../tyrian-parent</relativePath>
     </parent>
     <artifactId>com.b3dgs.tyrian.editor.product</artifactId>
-    <name>Tyrian Editor Product</name>
     <packaging>eclipse-repository</packaging>
+    <name>Tyrian Editor Product</name>
     <dependencies>
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>

@@ -25,25 +25,26 @@ import java.util.List;
 
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Verbose;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.Services;
+import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.lionengine.game.feature.tile.Tile;
 import com.b3dgs.lionengine.game.feature.tile.TileConfig;
 import com.b3dgs.lionengine.game.feature.tile.TileRef;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
+import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppender;
+import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppenderModel;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTileGame;
 import com.b3dgs.lionengine.game.feature.tile.map.TileSetListener;
 import com.b3dgs.lionengine.game.feature.tile.map.TileSheetsConfig;
 import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersister;
 import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersisterModel;
 import com.b3dgs.lionengine.io.FileReading;
-import com.b3dgs.lionengine.io.Xml;
-import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.entity.Entity;
 
 /**
@@ -65,6 +66,7 @@ public final class Map
     public static MapTile generate(Services services, String theme)
     {
         final MapTile map = services.create(MapTileGame.class);
+        final MapTileAppender appender = map.addFeatureAndGet(new MapTileAppenderModel(services));
         map.addFeature(new LayerableModel(Constant.LAYER_MAP));
         map.loadSheets(Medias.create(Constant.FOLDER_TILE, theme, TileSheetsConfig.FILENAME));
 
@@ -74,13 +76,13 @@ public final class Map
 
         final List<MapTile> maps = getMaps(theme, MAX_LEVELS);
 
-        final Collection<MapTile> levels = new ArrayList<MapTile>();
+        final Collection<MapTile> levels = new ArrayList<>();
         for (int i = 0; i < MAX_LEVELS; i++)
         {
             final MapTile current = maps.get(UtilRandom.getRandomInteger(maps.size() - 1));
             levels.add(current);
         }
-        map.append(levels, 0, 1, 0, MAX_LEVEL_INTERVAL_HEIGHT_IN_TILE);
+        appender.append(levels, 0, 1, 0, MAX_LEVEL_INTERVAL_HEIGHT_IN_TILE);
 
         map.removeListener(listener);
         entities.clear();
@@ -103,22 +105,18 @@ public final class Map
         final Factory factory = services.get(Factory.class);
         final Handler handler = services.get(Handler.class);
 
-        return new TileSetListener()
+        return tile ->
         {
-            @Override
-            public void onTileSet(Tile tile)
+            final TileRef tileRef = new TileRef(tile);
+            if (entities.containsKey(tileRef))
             {
-                final TileRef tileRef = new TileRef(tile);
-                if (entities.containsKey(tileRef))
-                {
-                    final Media media = entities.get(tileRef);
-                    final Entity entity = factory.create(media);
-                    final Transformable transformable = entity.getFeature(Transformable.class);
-                    final int x = (int) (tile.getX() + transformable.getWidth() / 2);
-                    final int y = (int) (tile.getY() + map.getTileHeight() - transformable.getHeight() / 2);
-                    transformable.teleport(x, y);
-                    handler.add(entity);
-                }
+                final Media media = entities.get(tileRef);
+                final Entity entity = factory.create(media);
+                final Transformable transformable = entity.getFeature(Transformable.class);
+                final int x = (int) (tile.getX() + transformable.getWidth() / 2);
+                final int y = (int) (tile.getY() + map.getTileHeight() - transformable.getHeight() / 2);
+                transformable.teleport(x, y);
+                handler.add(entity);
             }
         };
     }
@@ -132,18 +130,16 @@ public final class Map
      */
     private static List<MapTile> getMaps(String theme, int count)
     {
-        final List<MapTile> maps = new ArrayList<MapTile>();
+        final List<MapTile> maps = new ArrayList<>();
         for (int i = 0; i <= count; i++)
         {
             final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".map");
             final Services services = new Services();
             final MapTile map = services.create(MapTileGame.class);
             final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel(services));
-            try
+            try (FileReading reading = new FileReading(level))
             {
-                final FileReading reading = new FileReading(level);
                 persister.load(reading);
-                reading.close();
             }
             catch (final IOException exception)
             {
@@ -162,11 +158,11 @@ public final class Map
      */
     private static java.util.Map<TileRef, Media> getEntities(String theme)
     {
-        final java.util.Map<TileRef, Media> entities = new HashMap<TileRef, Media>();
+        final java.util.Map<TileRef, Media> entities = new HashMap<>();
         final Xml config = new Xml(Medias.create(Constant.FOLDER_TILE, theme, FILE_ENTITIES_TABLE));
         for (final Xml nodeTile : config.getChildren(TileConfig.NODE_TILE))
         {
-            final TileRef tile = TileConfig.create(nodeTile);
+            final TileRef tile = TileConfig.imports(nodeTile);
             final String file = nodeTile.getText() + Factory.FILE_DATA_DOT_EXTENSION;
             final Media entity = Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_SCENERY, file);
             entities.put(tile, entity);

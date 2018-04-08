@@ -19,21 +19,22 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.drawable.Drawable;
+import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.Direction;
+import com.b3dgs.lionengine.game.DirectionNone;
 import com.b3dgs.lionengine.game.ForceConfig;
-import com.b3dgs.lionengine.game.Setup;
 import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Recyclable;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
-import com.b3dgs.lionengine.graphic.SpriteAnimated;
-import com.b3dgs.lionengine.io.Xml;
+import com.b3dgs.lionengine.graphic.drawable.Drawable;
+import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.effect.Effect;
 
@@ -66,7 +67,7 @@ public final class EntityModel extends FeatureModel implements Recyclable
         }
         else
         {
-            direction = Direction.ZERO;
+            direction = DirectionNone.INSTANCE;
         }
         explode = Medias.create(Constant.FOLDER_EFFECT,
                                 setup.getText(Effect.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);

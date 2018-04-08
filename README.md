@@ -1,3 +1,5 @@
+# Tyrian Remake
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 <table>
     <tr>
         <td>
@@ -29,7 +31,7 @@ Note: A tribute to Tyrian from Epic Megagames. Copyright goes to Epic Megagames 
 
 * #### __Target__
 >  * Uses the [__LionEngine__](http://www.b3dgs.com/v7/page.php?lang=en&section=lionengine)
->  * Requires Java 6
+>  * Requires Java 8
 >  * Multiplatform (tested on Windows, Linux, Android)
 >  * Need at least 32MB of RAM
 >  * Need at least 6MB of free disk space

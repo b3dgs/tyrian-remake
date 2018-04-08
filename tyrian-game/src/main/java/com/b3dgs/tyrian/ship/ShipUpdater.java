@@ -18,30 +18,30 @@
 package com.b3dgs.tyrian.ship;
 
 import com.b3dgs.lionengine.Context;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.core.sequence.Sequencer;
 import com.b3dgs.lionengine.game.Alterable;
-import com.b3dgs.lionengine.game.Camera;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureGet;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
 import com.b3dgs.lionengine.geom.Rectangle;
-import com.b3dgs.lionengine.graphic.SpriteTiled;
+import com.b3dgs.lionengine.graphic.drawable.SpriteTiled;
+import com.b3dgs.lionengine.graphic.engine.Sequencer;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.bonus.action.Action;
@@ -178,16 +178,8 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
             if (armor.decrease(1) == 0)
             {
                 final Explode explode = factory.create(Medias.create(Constant.FOLDER_EFFECT, "explode_big.xml"));
-                final PostAction action = new PostAction()
-                {
-                    @Override
-                    public void execute()
-                    {
-                        sequence.end();
-                    }
-                };
-                explode.start(new Rectangle(transformable.getX()
-                                            - transformable.getWidth() / 2,
+                final PostAction action = () -> sequence.end();
+                explode.start(new Rectangle(transformable.getX() - transformable.getWidth() / 2,
                                             transformable.getY() + -transformable.getHeight() / 2,
                                             50,
                                             50),
@@ -235,8 +227,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
 
         hitForce.update(extrp);
 
-        camera.setLocation(transformable.getX()
-                           / (camera.getWidth() / Constant.MARGIN_H),
+        camera.setLocation(transformable.getX() / (camera.getWidth() / Constant.MARGIN_H),
                            camera.getY() + ShipModel.SPEED.getDirectionVertical() * extrp);
 
         surface.setTile(getTile(transformable.getX() - transformable.getOldX()));

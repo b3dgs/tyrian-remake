@@ -19,20 +19,20 @@ package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
+import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
-import com.b3dgs.lionengine.core.Medias;
-import com.b3dgs.lionengine.game.FeaturableModel;
-import com.b3dgs.lionengine.game.Services;
-import com.b3dgs.lionengine.game.Setup;
+import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.geom.Geom;
 import com.b3dgs.lionengine.geom.Rectangle;
-import com.b3dgs.lionengine.util.UtilRandom;
 import com.b3dgs.tyrian.Sfx;
 
 /**
@@ -47,13 +47,9 @@ public class Explode extends FeaturableModel
     /** Explode sound delay in millisecond. */
     private static final long DELAY_SFX = 300L;
     /** Empty action. */
-    private static final PostAction EMPTY_ACTION = new PostAction()
+    private static final PostAction EMPTY_ACTION = () ->
     {
-        @Override
-        public void execute()
-        {
-            // Nothing to do
-        }
+        // Nothing to do
     };
 
     private final Rectangle area = new Rectangle();

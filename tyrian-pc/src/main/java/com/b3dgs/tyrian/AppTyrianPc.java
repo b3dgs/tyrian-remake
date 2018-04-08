@@ -22,8 +22,8 @@ import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.audio.AudioFactory;
 import com.b3dgs.lionengine.audio.adplug.AdPlugFormat;
 import com.b3dgs.lionengine.audio.wav.WavFormat;
-import com.b3dgs.lionengine.core.awt.EngineAwt;
-import com.b3dgs.lionengine.core.sequence.Loader;
+import com.b3dgs.lionengine.awt.graphic.EngineAwt;
+import com.b3dgs.lionengine.graphic.engine.Loader;
 
 /**
  * Program starts here.
@@ -35,10 +35,11 @@ public final class AppTyrianPc
      * 
      * @param args The arguments.
      */
-    public static void main(String[] args)
+    public static void main(String[] args) // CHECKSTYLE IGNORE LINE: TrailingComment|UncommentedMain
     {
         EngineAwt.start(Constant.NAME, Constant.VERSION, AppTyrianPc.class);
-        AudioFactory.addFormat(new WavFormat(), AdPlugFormat.getFailsafe());
+        AudioFactory.addFormat(new WavFormat());
+        AudioFactory.addFormat(AdPlugFormat.getFailsafe());
         Sfx.setEnabled(true);
         Loader.start(Config.windowed(Constant.NATIVE.get2x()), Loading.class);
     }

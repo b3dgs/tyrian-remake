@@ -91,7 +91,7 @@ public class ApplicationConfiguration
             {
                 if (ApplicationConfiguration.ARG_IMPORT.equals(args[i]))
                 {
-                    i++;
+                    i++; // CHECKSTYLE IGNORE LINE: TrailingComment|ModifiedControlVariable
                     if (i < args.length)
                     {
                         importProject(args[i]);
