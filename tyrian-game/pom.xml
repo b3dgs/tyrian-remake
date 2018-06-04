@@ -11,6 +11,9 @@
     <artifactId>tyrian-game</artifactId>
     <packaging>jar</packaging>
     <name>Tyrian Game</name>
+    <properties>
+        <checkstyle.skip>true</checkstyle.skip>
+    </properties>
     <build>
         <plugins>
             <plugin>

@@ -20,7 +20,6 @@ package com.b3dgs.tyrian;
 import com.b3dgs.lionengine.Align;
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Medias;
-import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.drawable.Image;
@@ -72,13 +71,11 @@ public final class Loading extends Sequence
     @Override
     public void update(double extrp)
     {
-        Verbose.info("Updated");
         if (loaded)
         {
             end(Scene.class);
         }
         loaded = true;
-        Verbose.info("Updated 2");
     }
 
     @Override
@@ -91,12 +88,9 @@ public final class Loading extends Sequence
     @Override
     public void onTerminated(boolean hasNextSequence)
     {
-        Verbose.info("Loaded start");
         super.onTerminated(hasNextSequence);
 
         loading.dispose();
         font.dispose();
-
-        Verbose.info("Loaded end");
     }
 }
