@@ -17,7 +17,6 @@
  */
 package com.b3dgs.tyrian.projectile;
 
-import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
@@ -39,6 +38,7 @@ import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
 import com.b3dgs.tyrian.effect.Effect;
 
 /**
@@ -53,7 +53,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     private final Media effectMedia;
     private final Direction acceleration;
 
-    private final Context context;
+    private final SourceResolutionProvider source;
     private final Factory factory;
     private final Handler handler;
     private final Viewer viewer;
@@ -72,7 +72,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     {
         super();
 
-        context = services.get(Context.class);
+        source = services.get(SourceResolutionProvider.class);
         factory = services.get(Factory.class);
         handler = services.get(Handler.class);
         viewer = services.get(Viewer.class);
@@ -122,7 +122,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
         surface.setLocation(viewer, transformable);
 
         tick.update(extrp);
-        if (tick.elapsedTime(context, effectRate))
+        if (tick.elapsedTime(source.getRate(), effectRate))
         {
             startEffect(transformable);
         }

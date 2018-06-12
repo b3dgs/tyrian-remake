@@ -17,7 +17,6 @@
  */
 package com.b3dgs.tyrian.effect;
 
-import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
@@ -33,6 +32,7 @@ import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.geom.Geom;
 import com.b3dgs.lionengine.geom.Rectangle;
+import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
 import com.b3dgs.tyrian.Sfx;
 
 /**
@@ -58,7 +58,7 @@ public class Explode extends FeaturableModel
     private PostAction action = EMPTY_ACTION;
     private int count = -1;
 
-    private final Context context;
+    private final SourceResolutionProvider source;
     private final Factory factory;
     private final Handler handler;
 
@@ -72,7 +72,7 @@ public class Explode extends FeaturableModel
     {
         super(services, setup);
 
-        context = services.get(Context.class);
+        source = services.get(SourceResolutionProvider.class);
         factory = services.get(Factory.class);
         handler = services.get(Handler.class);
 
@@ -133,7 +133,7 @@ public class Explode extends FeaturableModel
             tickSfx.update(extrp);
             extraDelay.update(extrp);
 
-            if (count == 0 || tick.elapsedTime(context, DELAY) && count <= countMax)
+            if (count == 0 || tick.elapsedTime(source.getRate(), DELAY) && count <= countMax)
             {
                 final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
                 final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight());
@@ -155,7 +155,7 @@ public class Explode extends FeaturableModel
          */
         private void checkSfx()
         {
-            if (count == 0 || tickSfx.elapsedTime(context, DELAY_SFX))
+            if (count == 0 || tickSfx.elapsedTime(source.getRate(), DELAY_SFX))
             {
                 if (count % 2 == 0)
                 {
@@ -173,7 +173,7 @@ public class Explode extends FeaturableModel
             if (count > countMax && effect != null && effect.getFeature(EffectUpdater.class).isFinished())
             {
                 extraDelay.start();
-                if (extraDelay.elapsedTime(context, EXTRA_DELAY))
+                if (extraDelay.elapsedTime(source.getRate(), EXTRA_DELAY))
                 {
                     action.execute();
                     getFeature(Identifiable.class).destroy();

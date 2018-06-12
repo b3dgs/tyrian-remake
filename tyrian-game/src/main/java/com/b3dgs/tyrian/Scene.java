@@ -32,7 +32,7 @@ public final class Scene extends SequenceGame
      */
     public Scene(Context context)
     {
-        super(context, Constant.NATIVE, (context1, services) -> new World(context1, services));
+        super(context, Constant.NATIVE, services -> new World(services));
     }
 
     @Override

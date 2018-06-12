@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
@@ -94,12 +93,11 @@ public class World extends WorldGame
     /**
      * Create the world.
      * 
-     * @param context The context reference.
      * @param services The services reference.
      */
-    public World(Context context, Services services)
+    public World(Services services)
     {
-        super(context, services);
+        super(services);
 
         final double underMapHeight = -camera.getHeight() * 1.5;
         camera.teleport(0, underMapHeight);
@@ -165,7 +163,7 @@ public class World extends WorldGame
         background.update(extrp);
         tick.update(extrp);
 
-        if (tick.elapsedTime(context, SPAWN_DELAY))
+        if (tick.elapsedTime(source.getRate(), SPAWN_DELAY))
         {
             spawn(SPAWN_ENTITIES, Constant.LAYER_ENTITIES_MOVING);
 

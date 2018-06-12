@@ -17,7 +17,6 @@
  */
 package com.b3dgs.tyrian.ship;
 
-import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
@@ -42,6 +41,7 @@ import com.b3dgs.lionengine.game.feature.launchable.Launchable;
 import com.b3dgs.lionengine.geom.Rectangle;
 import com.b3dgs.lionengine.graphic.drawable.SpriteTiled;
 import com.b3dgs.lionengine.graphic.engine.Sequencer;
+import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.bonus.action.Action;
@@ -111,7 +111,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     private Force hitForce;
     private Tick hitTick;
 
-    private final Context context;
+    private final SourceResolutionProvider source;
     private final Sequencer sequence;
     private final Factory factory;
     private final Handler handler;
@@ -133,7 +133,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     {
         super();
 
-        context = services.get(Context.class);
+        source = services.get(SourceResolutionProvider.class);
         sequence = services.get(Sequencer.class);
         factory = services.get(Factory.class);
         handler = services.get(Handler.class);
@@ -237,7 +237,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         shieldIncTick.update(extrp);
         hitTick.update(extrp);
 
-        if (!shield.isFull() && shieldIncTick.elapsedTime(context, SHIELD_INC_DELAY))
+        if (!shield.isFull() && shieldIncTick.elapsedTime(source.getRate(), SHIELD_INC_DELAY))
         {
             shieldIncTick.restart();
             shield.increase(1);
