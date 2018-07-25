@@ -1,23 +1,5 @@
-# Tyrian Remake
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-<table>
-    <tr>
-        <td>
-            <a href="http://www.b3dgs.com/v7/page.php?lang=en&section=tyrian_remake" border="1"><img src="http://www.b3dgs.com/v7/projects/tyrian_remake/tyrian_remake.jpg"/></a>
-        </td>
-        <td>
-            <h4 align="center">Summary</h4>
-            <div align="left">
-                <ul>
-                    <li><a href="#presentation">Presentation</a></li>
-                    <li><a href="#general-features">General features</a></li>
-                    <li><a href="#screenshots">Screenshots</a></li>
-                    <li><a href="#downloads">Downloads</a></li>
-                </ul>
-            </div>
-        </td>
-    </tr>
-</table>
+| [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) | <a href="http://www.b3dgs.com/v7/page.php?lang=en&section=tyrian_remake"><img src="http://www.b3dgs.com/v7/projects/tyrian_remake/tyrian_remake.jpg" hspace=65/></a> | [Presentation](#presentation)<br>[General features](#general-features)<br>[Screenshots](#screenshots)<br>[Downloads](#downloads) |
+|:---|:---:|---:|
 
 ## Presentation
 
@@ -45,7 +27,7 @@ Note: A tribute to Tyrian from Epic Megagames. Copyright goes to Epic Megagames 
 ## Screenshots
 
 | [![img1](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/mini/1.png)](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/1.png) | [![img2](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/mini/7.png)](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/7.png) | [![img3](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/mini/8.png)](http://www.b3dgs.com/v7/projects/tyrian_remake/screens/8.png)
---- | --- | ---
+|---|---|---|
 
 ## Downloads
 
