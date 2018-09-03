@@ -23,11 +23,13 @@ import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.android.ActivityGame;
 import com.b3dgs.lionengine.android.graphic.EngineAndroid;
 import com.b3dgs.lionengine.audio.AudioFactory;
-import com.b3dgs.lionengine.audio.adplug.AdPlugFormat;
+import com.b3dgs.lionengine.audio.AudioVoidFormat;
 import com.b3dgs.lionengine.graphic.engine.Loader;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Loading;
 import com.b3dgs.tyrian.Sfx;
+
+import java.util.Arrays;
 
 /**
  * Tyrian android entry point.
@@ -46,7 +48,7 @@ public final class ActivityTyrian extends ActivityGame
     protected void start(Bundle bundle)
     {
         EngineAndroid.start(Constant.NAME, Constant.VERSION, this);
-        AudioFactory.addFormat(AdPlugFormat.getFailsafe());
+        AudioFactory.addFormat(new AudioVoidFormat(Arrays.asList("lds")));
         Sfx.setEnabled(true);
         Loader.start(Config.windowed(Constant.NATIVE), Loading.class);
     }
