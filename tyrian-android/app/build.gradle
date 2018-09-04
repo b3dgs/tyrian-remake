@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.b3dgs.tyrian"
-        minSdkVersion 24
-        targetSdkVersion 24
+        minSdkVersion 26
+        targetSdkVersion 26
     }
     buildTypes {
         release {
@@ -25,7 +25,6 @@ repositories {
 
 dependencies {
     implementation 'com.b3dgs.lionengine:lionengine-core:9.0.0-SNAPSHOT'
-    implementation 'com.b3dgs.lionengine:lionengine-audio-adplug:9.0.0-SNAPSHOT'
     implementation 'com.b3dgs.lionengine:lionengine-core-android:9.0.0-SNAPSHOT'
     implementation 'com.b3dgs.tyrian:tyrian-game:0.4.0'
 }
