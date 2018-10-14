@@ -38,6 +38,7 @@ import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
+import com.b3dgs.lionengine.game.feature.collidable.Collision;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
@@ -155,7 +156,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     }
 
     @Override
-    public void notifyCollided(Collidable collidable)
+    public void notifyCollided(Collidable collidable, Collision collision)
     {
         Sfx.BULLET_HIT.play();
         spawnEffectHit();
