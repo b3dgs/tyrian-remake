@@ -23,6 +23,7 @@ import com.b3dgs.lionengine.game.Cursor;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
@@ -33,6 +34,7 @@ import com.b3dgs.tyrian.ship.ShipModel;
 /**
  * Ship control implementation.
  */
+@FeatureInterface
 public final class ShipControllerPc extends FeatureModel implements ShipController
 {
     private static final double SENSIBILITY = 1.0;

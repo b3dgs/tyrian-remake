@@ -27,6 +27,7 @@ import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.FramesConfig;
 import com.b3dgs.lionengine.game.SurfaceConfig;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
@@ -35,6 +36,7 @@ import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 /**
  * Projectile model implementation.
  */
+@FeatureInterface
 public final class ProjectileModel extends FeatureModel
 {
     private static final String NODE_EFFECT = Constant.XML_PREFIX + "effect";

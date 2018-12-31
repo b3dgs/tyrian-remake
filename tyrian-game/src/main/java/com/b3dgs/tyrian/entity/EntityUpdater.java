@@ -28,6 +28,7 @@ import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -48,6 +49,7 @@ import com.b3dgs.tyrian.effect.Explode;
 /**
  * Entity updater implementation.
  */
+@FeatureInterface
 public class EntityUpdater extends FeatureModel implements Refreshable, CollidableListener
 {
     /**
@@ -80,6 +82,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     @FeatureGet private Transformable transformable;
     @FeatureGet private Collidable collidable;
     @FeatureGet private EntityModel model;
+    @FeatureGet private Routine routine;
 
     /**
      * Create an entity updater.
@@ -137,6 +140,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     @Override
     public void update(double extrp)
     {
+        routine.update(extrp);
         transformable.moveLocation(extrp, direction);
         surface.setLocation(camera, transformable);
         surface.update(extrp);

@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.graphic.Graphic;
@@ -27,6 +28,7 @@ import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 /**
  * Projectile renderer implementation.
  */
+@FeatureInterface
 final class ProjectileRenderer extends FeatureModel implements Displayable
 {
     private final SpriteAnimated surface;

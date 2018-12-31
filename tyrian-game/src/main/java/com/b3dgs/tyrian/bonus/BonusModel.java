@@ -21,6 +21,7 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.SizeConfig;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Setup;
@@ -32,6 +33,7 @@ import com.b3dgs.tyrian.Constant;
 /**
  * Bonus model implementation.
  */
+@FeatureInterface
 public final class BonusModel extends FeatureModel
 {
     private static final String ANIM_IDLE = "idle";

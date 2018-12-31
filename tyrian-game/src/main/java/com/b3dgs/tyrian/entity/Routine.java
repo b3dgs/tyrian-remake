@@ -15,17 +15,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.ship;
+package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Updatable;
 import com.b3dgs.lionengine.game.Feature;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 
 /**
- * Describes how ship is controlled by input.
+ * Routine interface representing a feature aimed to be updated.
  */
 @FeatureInterface
-public interface ShipController extends Feature, Updatable
+public interface Routine extends Feature, Updatable
 {
     // Marker interface
 }

@@ -19,6 +19,7 @@ package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.FramesConfig;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
@@ -27,6 +28,7 @@ import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 /**
  * Effect model implementation.
  */
+@FeatureInterface
 final class EffectModel extends FeatureModel
 {
     private final SpriteAnimated surface;

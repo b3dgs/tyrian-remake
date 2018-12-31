@@ -23,6 +23,7 @@ import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -34,6 +35,7 @@ import com.b3dgs.tyrian.Sfx;
 /**
  * Weapon updater implementation.
  */
+@FeatureInterface
 public class WeaponUpdater extends FeatureModel implements Refreshable
 {
     private final WeaponModel model;

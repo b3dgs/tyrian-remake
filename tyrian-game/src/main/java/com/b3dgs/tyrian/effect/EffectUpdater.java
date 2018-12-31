@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.effect;
 import com.b3dgs.lionengine.AnimState;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
@@ -30,6 +31,7 @@ import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 /**
  * Effect updater implementation.
  */
+@FeatureInterface
 final class EffectUpdater extends FeatureModel implements Refreshable
 {
     private final SpriteAnimated surface;

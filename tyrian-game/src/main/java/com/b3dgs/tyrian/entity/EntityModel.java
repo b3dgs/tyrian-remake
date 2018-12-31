@@ -29,6 +29,7 @@ import com.b3dgs.lionengine.game.DirectionNone;
 import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.Setup;
@@ -41,6 +42,7 @@ import com.b3dgs.tyrian.effect.Effect;
 /**
  * Entity model implementation.
  */
+@FeatureInterface
 public final class EntityModel extends FeatureModel implements Recyclable
 {
     private static final String ANIM_IDLE = "idle";

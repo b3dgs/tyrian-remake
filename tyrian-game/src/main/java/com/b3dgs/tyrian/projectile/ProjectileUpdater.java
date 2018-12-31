@@ -28,6 +28,7 @@ import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -44,6 +45,7 @@ import com.b3dgs.tyrian.effect.Effect;
 /**
  * Projectile updater implementation.
  */
+@FeatureInterface
 final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyclable
 {
     private final Tick tick = new Tick();

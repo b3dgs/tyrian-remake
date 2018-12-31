@@ -20,6 +20,7 @@ package com.b3dgs.tyrian.bonus.action;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Services;
@@ -32,6 +33,7 @@ import com.b3dgs.tyrian.weapon.WeaponModel;
 /**
  * Change weapon action.
  */
+@FeatureInterface
 public class ChangeWeapon extends FeatureModel implements Action
 {
     private static final String NODE_WEAPON_FRONT = com.b3dgs.lionengine.Constant.XML_PREFIX + "weaponFront";

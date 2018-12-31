@@ -19,8 +19,10 @@ package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
+import com.b3dgs.lionengine.game.feature.Recycler;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
+import com.b3dgs.lionengine.game.feature.TransformableModel;
 import com.b3dgs.lionengine.game.feature.collidable.CollidableModel;
 
 /**
@@ -38,10 +40,21 @@ public class Entity extends FeaturableModel
     {
         super(services, setup);
 
+        addFeature(new TransformableModel(setup));
         addFeature(new CollidableModel(services, setup));
         addFeature(new LayerableModel());
+        addFeature(new Recycler());
 
         addFeature(new EntityModel(setup));
+    }
+    
+    @Override
+    public void addAfter(Services services, Setup setup)
+    {
+        if (!hasFeature(Routine.class))
+        {
+            addFeature(new RoutineVoid());
+        }
         addFeature(new EntityUpdater(services, setup));
         addFeature(new EntityRenderer(services));
     }

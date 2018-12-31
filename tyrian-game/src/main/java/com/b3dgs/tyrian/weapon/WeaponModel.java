@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.weapon;
 
 import com.b3dgs.lionengine.audio.Audio;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
@@ -25,6 +26,7 @@ import com.b3dgs.tyrian.Sfx;
 /**
  * Weapon model implementation.
  */
+@FeatureInterface
 public class WeaponModel extends FeatureModel
 {
     private final Audio sfxFire;

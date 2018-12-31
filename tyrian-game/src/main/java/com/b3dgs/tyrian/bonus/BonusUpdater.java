@@ -21,6 +21,7 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
@@ -33,6 +34,7 @@ import com.b3dgs.tyrian.Constant;
 /**
  * Bonus updater implementation.
  */
+@FeatureInterface
 public class BonusUpdater extends FeatureModel implements Refreshable
 {
     private static final double FALLING_SPEED = -1.0;

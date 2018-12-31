@@ -27,6 +27,7 @@ import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
+import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -53,6 +54,7 @@ import com.b3dgs.tyrian.entity.EntityModel;
 /**
  * Ship updater implementation.
  */
+@FeatureInterface
 public final class ShipUpdater extends FeatureModel implements Refreshable, CollidableListener
 {
     /** Shield increment delay in milliseconds. */

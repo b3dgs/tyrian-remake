@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
     <lionengine:class>com.b3dgs.tyrian.entity.Entity</lionengine:class>
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
     <lionengine:feature>com.b3dgs.tyrian.entity.Shooter</lionengine:feature>
     <lionengine:explode>explode_little</lionengine:explode>
     <lionengine:surface image="DoublePulse.png"/>
