@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.b3dgs.tyrian"
         minSdkVersion 26
-        targetSdkVersion 26
+        targetSdkVersion 27
     }
     buildTypes {
         release {
@@ -21,6 +22,7 @@ android {
 
 repositories {
     mavenLocal()
+    jcenter()
 }
 
 dependencies {
