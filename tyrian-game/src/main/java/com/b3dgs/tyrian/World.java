@@ -48,8 +48,8 @@ import com.b3dgs.tyrian.ship.ShipUpdater;
  */
 public class World extends WorldGame
 {
-    private static final long SPAWN_DELAY = 90;
-    private static final int SPAWN_BONUS_CHANCE = 1;
+    private static final long SPAWN_DELAY = 100;
+    private static final int SPAWN_BONUS_CHANCE = 10;
     private static final List<Media> SPAWN_ENTITIES = getEntities();
     private static final List<Media> SPAWN_BONUS = new ArrayList<>();
 
