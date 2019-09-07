@@ -17,9 +17,9 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
-import com.b3dgs.lionengine.game.feature.Recycler;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.TransformableModel;
@@ -30,27 +30,26 @@ import com.b3dgs.tyrian.Constant;
 /**
  * Projectile base implementation.
  */
-// CHECKSTYLE IGNORE LINE: DataAbstractionCoupling
 public class Projectile extends FeaturableModel
 {
     /**
-     * Create a projectile.
+     * Create projectile.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Projectile(Services services, Setup setup)
     {
         super(services, setup);
 
-        addFeature(new Recycler());
-        addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
-        addFeature(new TransformableModel(setup));
-        addFeature(new LaunchableModel());
+        addFeature(new LayerableModel(Constant.LAYER_PROJECTILES.intValue()));
+        addFeature(new TransformableModel(services, setup));
+        addFeature(new LaunchableModel(services, setup));
         addFeature(new CollidableModel(services, setup));
 
-        final ProjectileModel model = addFeatureAndGet(new ProjectileModel(setup));
-        addFeature(new ProjectileUpdater(services, model));
-        addFeature(new ProjectileRenderer(model));
+        final ProjectileModel model = addFeatureAndGet(new ProjectileModel(services, setup));
+        addFeature(new ProjectileUpdater(services, setup, model));
+        addFeature(new ProjectileRenderer(services, setup, model));
     }
 }

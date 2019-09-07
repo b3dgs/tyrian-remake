@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.bonus;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.FeatureProvider;
@@ -24,6 +25,7 @@ import com.b3dgs.lionengine.game.SizeConfig;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Layerable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
@@ -41,13 +43,15 @@ public final class BonusModel extends FeatureModel
     private final SpriteAnimated surface;
 
     /**
-     * Create an entity model.
+     * Create feature.
      * 
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    BonusModel(Setup setup)
+    BonusModel(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         final SizeConfig sizeConfig = SizeConfig.imports(setup);
         final ImageBuffer buffer = setup.getSurface();
@@ -68,7 +72,7 @@ public final class BonusModel extends FeatureModel
     {
         super.prepare(provider);
 
-        getFeature(Layerable.class).setLayer(Constant.LAYER_ENTITIES_MOVING);
+        getFeature(Layerable.class).setLayer(Constant.LAYER_ENTITIES_MOVING, Constant.LAYER_ENTITIES_MOVING);
     }
 
     /**

@@ -31,11 +31,11 @@ import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.HandlerPersister;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.tile.TileConfig;
-import com.b3dgs.lionengine.game.feature.tile.TileRef;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppender;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppenderModel;
@@ -45,6 +45,7 @@ import com.b3dgs.lionengine.game.feature.tile.map.TileSheetsConfig;
 import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersister;
 import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersisterModel;
 import com.b3dgs.lionengine.io.FileReading;
+import com.b3dgs.lionengine.io.FileWriting;
 import com.b3dgs.tyrian.entity.Entity;
 
 /**
@@ -65,12 +66,17 @@ public final class Map
      */
     public static MapTile generate(Services services, String theme)
     {
+        for (int i = 0; i <= 20; i++)
+        {
+            // importLevelAndSave(Medias.create(Constant.FOLDER_LEVELS, "level1", String.valueOf(i) + ".png"));
+        }
+
         final MapTile map = services.create(MapTileGame.class);
         final MapTileAppender appender = map.addFeatureAndGet(new MapTileAppenderModel(services));
-        map.addFeature(new LayerableModel(Constant.LAYER_MAP));
+        map.addFeature(new LayerableModel(Constant.LAYER_MAP.intValue()));
         map.loadSheets(Medias.create(Constant.FOLDER_TILE, theme, TileSheetsConfig.FILENAME));
 
-        final java.util.Map<TileRef, Media> entities = getEntities(theme);
+        final java.util.Map<Integer, Media> entities = getEntities(theme);
         final TileSetListener listener = createListener(entities, map, services);
         map.addListener(listener);
 
@@ -91,6 +97,34 @@ public final class Map
     }
 
     /**
+     * Import the level and save it.
+     * 
+     * @param level The level to import.
+     */
+    private static void importLevelAndSave(Media level)
+    {
+        final Services services = new Services();
+        services.add(new Factory(services));
+        services.add(new Handler(services));
+
+        final MapTile map = services.create(MapTileGame.class);
+        final MapTilePersister mapPersister = map.addFeatureAndGet(new MapTilePersisterModel(services));
+        final HandlerPersister handlerPersister = new HandlerPersister(services);
+        map.create(level, Medias.create(Constant.FOLDER_TILE, "level1", "sheets.xml"));
+
+        try (FileWriting output = new FileWriting(Medias.create(level.getParentPath(),
+                                                                level.getName().replace(".png", "") + ".map")))
+        {
+            mapPersister.save(output);
+            handlerPersister.save(output);
+        }
+        catch (final IOException exception)
+        {
+            Verbose.exception(exception, "Error on saving map !");
+        }
+    }
+
+    /**
      * Create the map listener to add entities over tiles.
      * 
      * @param entities The entities mapping.
@@ -98,7 +132,7 @@ public final class Map
      * @param services The services reference.
      * @return The created listener.
      */
-    private static TileSetListener createListener(final java.util.Map<TileRef, Media> entities,
+    private static TileSetListener createListener(final java.util.Map<Integer, Media> entities,
                                                   final MapTile map,
                                                   Services services)
     {
@@ -107,7 +141,7 @@ public final class Map
 
         return tile ->
         {
-            final TileRef tileRef = new TileRef(tile);
+            final Integer tileRef = tile.getKey();
             if (entities.containsKey(tileRef))
             {
                 final Media media = entities.get(tileRef);
@@ -156,13 +190,13 @@ public final class Map
      * @param theme The theme used.
      * @return The equivalence table between entities and tile.
      */
-    private static java.util.Map<TileRef, Media> getEntities(String theme)
+    private static java.util.Map<Integer, Media> getEntities(String theme)
     {
-        final java.util.Map<TileRef, Media> entities = new HashMap<>();
+        final java.util.Map<Integer, Media> entities = new HashMap<>();
         final Xml config = new Xml(Medias.create(Constant.FOLDER_TILE, theme, FILE_ENTITIES_TABLE));
         for (final Xml nodeTile : config.getChildren(TileConfig.NODE_TILE))
         {
-            final TileRef tile = TileConfig.imports(nodeTile);
+            final Integer tile = Integer.valueOf(TileConfig.imports(nodeTile));
             final String file = nodeTile.getText() + Factory.FILE_DATA_DOT_EXTENSION;
             final Media entity = Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_SCENERY, file);
             entities.put(tile, entity);

@@ -17,6 +17,8 @@
  */
 package com.b3dgs.tyrian.bonus;
 
+import com.b3dgs.lionengine.Check;
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Camera;
@@ -26,6 +28,7 @@ import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
@@ -47,14 +50,18 @@ public class BonusUpdater extends FeatureModel implements Refreshable
     @FeatureGet private Collidable collidable;
 
     /**
-     * Create a bonus updater.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param model The model reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @param model The model reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    BonusUpdater(Services services, BonusModel model)
+    BonusUpdater(Services services, Setup setup, BonusModel model)
     {
-        super();
+        super(services, setup);
+
+        Check.notNull(model);
 
         camera = services.get(Camera.class);
         surface = model.getSurface();

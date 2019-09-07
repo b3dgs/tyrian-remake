@@ -18,12 +18,12 @@
 package com.b3dgs.tyrian.effect;
 
 import com.b3dgs.lionengine.Animation;
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
-import com.b3dgs.lionengine.game.feature.Recycler;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -47,10 +47,11 @@ public class Effect extends FeaturableModel
     private final Viewer viewer;
 
     /**
-     * Create an effect.
+     * Create effect.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Effect(Services services, Setup setup)
     {
@@ -58,13 +59,12 @@ public class Effect extends FeaturableModel
 
         viewer = services.get(Viewer.class);
 
-        addFeature(new Recycler());
-        addFeature(new LayerableModel(Constant.LAYER_EFFECT));
-        transformable = addFeatureAndGet(new TransformableModel(setup));
+        addFeature(new LayerableModel(Constant.LAYER_EFFECT.intValue()));
+        transformable = addFeatureAndGet(new TransformableModel(services, setup));
 
-        final EffectModel model = addFeatureAndGet(new EffectModel(setup));
-        addFeature(new EffectUpdater(services, model));
-        addFeature(new EffectRenderer(model));
+        final EffectModel model = addFeatureAndGet(new EffectModel(services, setup));
+        addFeature(new EffectUpdater(services, setup, model));
+        addFeature(new EffectRenderer(services, setup, model));
 
         anim = AnimationConfig.imports(setup).getAnimation("start");
         surface = model.getSurface();

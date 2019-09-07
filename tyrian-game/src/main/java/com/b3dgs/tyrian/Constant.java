@@ -69,32 +69,34 @@ public final class Constant
     public static final String FOLDER_LEVELS = "level";
 
     /** Ship layer update. */
-    public static final int LAYER_SHIP_UPDATE = 0;
+    public static final Integer LAYER_SHIP_UPDATE = Integer.valueOf(0);
     /** Map layer. */
-    public static final int LAYER_MAP = LAYER_SHIP_UPDATE + 1;
+    public static final Integer LAYER_MAP = Integer.valueOf(LAYER_SHIP_UPDATE.intValue() + 1);
     /** Entities layer. */
-    public static final int LAYER_ENTITIES_STATIC = LAYER_MAP + 1;
+    public static final Integer LAYER_ENTITIES_STATIC = Integer.valueOf(LAYER_MAP.intValue() + 1);
     /** Entities layer. */
-    public static final int LAYER_ENTITIES_MOVING = LAYER_ENTITIES_STATIC + 1;
+    public static final Integer LAYER_ENTITIES_MOVING = Integer.valueOf(LAYER_ENTITIES_STATIC.intValue() + 1);
     /** Projectiles layer. */
-    public static final int LAYER_PROJECTILES = LAYER_ENTITIES_MOVING + 1;
+    public static final Integer LAYER_PROJECTILES = Integer.valueOf(LAYER_ENTITIES_MOVING.intValue() + 1);
     /** Bonus layer. */
-    public static final int LAYER_BONUS = LAYER_PROJECTILES + 1;
+    public static final Integer LAYER_BONUS = Integer.valueOf(LAYER_PROJECTILES.intValue() + 1);
     /** Effects layer. */
-    public static final int LAYER_EFFECT = LAYER_BONUS + 1;
+    public static final Integer LAYER_EFFECT = Integer.valueOf(LAYER_BONUS.intValue() + 1);
     /** Ship layer. */
-    public static final int LAYER_SHIP = LAYER_EFFECT + 1;
+    public static final Integer LAYER_SHIP = Integer.valueOf(LAYER_EFFECT.intValue() + 1);
 
     /** Collision group ship. */
-    public static final int COLLISION_GROUP_SHIP = 0;
+    public static final Integer COLLISION_GROUP_SHIP = Integer.valueOf(0);
     /** Collision group projectiles. */
-    public static final int COLLISION_GROUP_PROJECTILES_SHIP = COLLISION_GROUP_SHIP + 1;
+    public static final Integer COLLISION_GROUP_PROJECTILES_SHIP = Integer.valueOf(COLLISION_GROUP_SHIP.intValue() + 1);
     /** Collision group projectiles. */
-    public static final int COLLISION_GROUP_PROJECTILES_ENTITIES = COLLISION_GROUP_PROJECTILES_SHIP + 1;
+    public static final Integer COLLISION_GROUP_PROJECTILES_ENTITIES = Integer.valueOf(COLLISION_GROUP_PROJECTILES_SHIP.intValue()
+                                                                                       + 1);
     /** Collision group entities. */
-    public static final int COLLISION_GROUP_ENTITIES = COLLISION_GROUP_PROJECTILES_ENTITIES + 1;
+    public static final Integer COLLISION_GROUP_ENTITIES = Integer.valueOf(COLLISION_GROUP_PROJECTILES_ENTITIES.intValue()
+                                                                           + 1);
     /** Collision group bonus. */
-    public static final int COLLISION_GROUP_BONUS = COLLISION_GROUP_ENTITIES + 1;
+    public static final Integer COLLISION_GROUP_BONUS = Integer.valueOf(COLLISION_GROUP_ENTITIES.intValue() + 1);
 
     /** Horizontal movement margin. */
     public static final double MARGIN_H = 60.0;

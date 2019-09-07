@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
@@ -34,6 +35,7 @@ import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Routines;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -58,7 +60,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
      * @param setup The setup reference.
      * @return The entity layer.
      */
-    private static int getLayer(Setup setup)
+    private static Integer getLayer(Setup setup)
     {
         final Xml root = setup.getRoot();
         if (root.hasChild(ForceConfig.NODE_FORCE))
@@ -68,7 +70,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
         return Constant.LAYER_ENTITIES_STATIC;
     }
 
-    private final int layer;
+    private final Integer layer;
     private Alterable life;
     private Direction direction;
     private SpriteAnimated surface;
@@ -82,17 +84,18 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     @FeatureGet private Transformable transformable;
     @FeatureGet private Collidable collidable;
     @FeatureGet private EntityModel model;
-    @FeatureGet private Routine routine;
+    @FeatureGet private Routines routines;
 
     /**
-     * Create an entity updater.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     EntityUpdater(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         factory = services.get(Factory.class);
         handler = services.get(Handler.class);
@@ -126,7 +129,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     {
         super.prepare(provider);
 
-        layerable.setLayer(layer);
+        layerable.setLayer(layer, layer);
         collidable.setGroup(Constant.COLLISION_GROUP_ENTITIES);
         collidable.addAccept(Constant.COLLISION_GROUP_PROJECTILES_SHIP);
         collidable.setOrigin(Origin.MIDDLE);
@@ -140,7 +143,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     @Override
     public void update(double extrp)
     {
-        routine.update(extrp);
+        routines.update(extrp);
         transformable.moveLocation(extrp, direction);
         surface.setLocation(camera, transformable);
         surface.update(extrp);
@@ -160,7 +163,7 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     }
 
     @Override
-    public void notifyCollided(Collidable collidable, Collision collision)
+    public void notifyCollided(Collidable collidable, Collision with, Collision by)
     {
         Sfx.BULLET_HIT.play();
         spawnEffectHit();

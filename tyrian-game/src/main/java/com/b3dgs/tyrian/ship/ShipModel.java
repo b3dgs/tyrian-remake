@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
@@ -74,14 +75,15 @@ public final class ShipModel extends FeatureModel
     @FeatureGet private Transformable transformable;
 
     /**
-     * Create a ship.
+     * Create ship.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     ShipModel(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         factory = services.get(Factory.class);
         handler = services.get(Handler.class);

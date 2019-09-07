@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Updatable;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Viewer;
@@ -48,14 +49,15 @@ public class Ship extends FeatureModel implements Updatable
     @FeatureGet private Transformable player;
 
     /**
-     * Create ship.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Ship(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         this.services = services;
         viewer = services.get(Viewer.class);

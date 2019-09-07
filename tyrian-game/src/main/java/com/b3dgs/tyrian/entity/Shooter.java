@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.entity;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.FeatureProvider;
@@ -24,6 +25,7 @@ import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -48,14 +50,15 @@ public class Shooter extends FeatureModel implements Routine
     @FeatureGet private Transformable transformable;
 
     /**
-     * Create a shooter.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     Shooter(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         factory = services.get(Factory.class);
         ship = services.get(ShipUpdater.class);
@@ -93,5 +96,6 @@ public class Shooter extends FeatureModel implements Routine
     public void update(double extrp)
     {
         weapon.fire(transformable, target);
+        weapon.update(extrp);
     }
 }

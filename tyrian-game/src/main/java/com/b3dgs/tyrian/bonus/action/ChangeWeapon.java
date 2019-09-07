@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.bonus.action;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
@@ -43,14 +44,15 @@ public class ChangeWeapon extends FeatureModel implements Action
     private final Factory factory;
 
     /**
-     * Create power up action.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public ChangeWeapon(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         factory = services.get(Factory.class);
 

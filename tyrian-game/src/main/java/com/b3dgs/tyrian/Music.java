@@ -17,7 +17,6 @@
  */
 package com.b3dgs.tyrian;
 
-import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.audio.AudioFactory;
@@ -28,7 +27,7 @@ import com.b3dgs.lionengine.audio.AudioFactory;
 public enum Music
 {
     /** Asteroid 2 music. */
-    ASTEROID_2(Medias.create(Constant.FOLDER_MUSIC, "asteroid2.lds"));
+    ASTEROID_2("asteroid2.lds");
 
     /** Playing music. */
     private static Audio playing;
@@ -50,11 +49,11 @@ public enum Music
     /**
      * Constructor.
      * 
-     * @param media The music media.
+     * @param name The music name.
      */
-    Music(Media media)
+    Music(String name)
     {
-        audio = AudioFactory.loadAudio(media);
+        audio = AudioFactory.loadAudio(Medias.create(Constant.FOLDER_MUSIC, name));
     }
 
     /**

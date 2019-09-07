@@ -17,9 +17,12 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.game.feature.Displayable;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 
@@ -32,13 +35,16 @@ final class EffectRenderer extends FeatureModel implements Displayable
     private final SpriteAnimated surface;
 
     /**
-     * Create an effect renderer.
+     * Create feature.
      * 
-     * @param model The model reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @param model The model reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    EffectRenderer(EffectModel model)
+    EffectRenderer(Services services, Setup setup, EffectModel model)
     {
-        super();
+        super(services, setup);
 
         surface = model.getSurface();
     }

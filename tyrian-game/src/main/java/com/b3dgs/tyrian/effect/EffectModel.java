@@ -21,6 +21,7 @@ import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.FramesConfig;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
@@ -36,11 +37,12 @@ final class EffectModel extends FeatureModel
     /**
      * Create an effect.
      * 
+     * @param services The services reference.
      * @param setup The setup reference.
      */
-    EffectModel(Setup setup)
+    EffectModel(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         final FramesConfig config = FramesConfig.imports(setup);
         surface = Drawable.loadSpriteAnimated(setup.getSurface(), config.getHorizontal(), config.getVertical());

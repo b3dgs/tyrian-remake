@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.bonus;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
@@ -53,21 +54,22 @@ public class Bonus extends FeaturableModel
     public static final Media POWER_UP = Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS, "power_up.xml");
 
     /**
-     * Create an entity.
+     * Create bonus.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Bonus(Services services, Setup setup)
     {
         super(services, setup);
 
-        addFeature(new TransformableModel(setup));
+        addFeature(new TransformableModel(services, setup));
         addFeature(new CollidableModel(services, setup));
-        addFeature(new LayerableModel());
+        addFeature(new LayerableModel(services, setup));
 
-        final BonusModel model = addFeatureAndGet(new BonusModel(setup));
-        addFeature(new BonusUpdater(services, model));
-        addFeature(new BonusRenderer(model));
+        final BonusModel model = addFeatureAndGet(new BonusModel(services, setup));
+        addFeature(new BonusUpdater(services, setup, model));
+        addFeature(new BonusRenderer(services, setup, model));
     }
 }

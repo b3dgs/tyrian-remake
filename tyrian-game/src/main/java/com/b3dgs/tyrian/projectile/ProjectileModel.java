@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.projectile;
 
 import com.b3dgs.lionengine.Constant;
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
@@ -29,6 +30,7 @@ import com.b3dgs.lionengine.game.FramesConfig;
 import com.b3dgs.lionengine.game.SurfaceConfig;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
@@ -49,13 +51,15 @@ public final class ProjectileModel extends FeatureModel
     private final Direction acceleration;
 
     /**
-     * Create a projectile model.
+     * Create feature.
      * 
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    ProjectileModel(Setup setup)
+    ProjectileModel(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         final FramesConfig frames = FramesConfig.imports(setup);
         surface = Drawable.loadSpriteAnimated(setup.getSurface(), frames.getHorizontal(), frames.getVertical());

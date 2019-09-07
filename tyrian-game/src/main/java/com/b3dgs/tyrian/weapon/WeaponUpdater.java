@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.audio.Audio;
@@ -26,6 +27,7 @@ import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Refreshable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.lionengine.game.feature.launchable.LauncherListener;
@@ -44,13 +46,16 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     @FeatureGet private Launcher launcher;
 
     /**
-     * Create a weapon updater.
+     * Create feature.
      * 
-     * @param model The model reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @param model The model reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    public WeaponUpdater(WeaponModel model)
+    public WeaponUpdater(Services services, WeaponSetup setup, WeaponModel model)
     {
-        super();
+        super(services, setup);
 
         this.model = model;
     }

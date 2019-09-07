@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.effect;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
@@ -63,10 +64,11 @@ public class Explode extends FeaturableModel
     private final Handler handler;
 
     /**
-     * Create an explode effect.
+     * Create explode.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Explode(Services services, Setup setup)
     {
@@ -79,7 +81,7 @@ public class Explode extends FeaturableModel
         media = Medias.create(setup.getText(Effect.NODE_EXPLODE));
         countMax = setup.getInteger(ATT_COUNT, Effect.NODE_EXPLODE);
 
-        addFeature(new ExplodeUpdater());
+        addFeature(new ExplodeUpdater(services, setup));
     }
 
     /**
@@ -120,10 +122,13 @@ public class Explode extends FeaturableModel
 
         /**
          * Create explode medium updater.
+         * 
+         * @param services The services reference.
+         * @param setup The setup reference.
          */
-        ExplodeUpdater()
+        ExplodeUpdater(Services services, Setup setup)
         {
-            super();
+            super(services, setup);
         }
 
         @Override

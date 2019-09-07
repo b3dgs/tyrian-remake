@@ -60,7 +60,7 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
      */
     public ShipControllerPc(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         context = services.get(Context.class);
         mouse = services.get(Mouse.class);

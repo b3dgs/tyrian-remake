@@ -17,9 +17,12 @@
  */
 package com.b3dgs.tyrian.bonus.action;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.ship.ShipModel;
 
@@ -30,11 +33,15 @@ import com.b3dgs.tyrian.ship.ShipModel;
 public class PowerUp extends FeatureModel implements Action
 {
     /**
-     * Create power up action.
+     * Create feature.
+     * 
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    public PowerUp()
+    public PowerUp(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
     }
 
     @Override

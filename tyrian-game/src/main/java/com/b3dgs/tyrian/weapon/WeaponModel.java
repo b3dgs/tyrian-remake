@@ -17,9 +17,11 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 
@@ -33,13 +35,15 @@ public class WeaponModel extends FeatureModel
     private final boolean front;
 
     /**
-     * Create a weapon model.
+     * Create feature.
      * 
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    public WeaponModel(WeaponSetup setup)
+    public WeaponModel(Services services, WeaponSetup setup)
     {
-        super();
+        super(services, setup);
 
         sfxFire = setup.getSfxFire();
         front = setup.getMedia().getPath().contains(Constant.FOLDER_FRONT);

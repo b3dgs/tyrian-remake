@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Tick;
@@ -127,14 +128,15 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     @FeatureGet private ShipController controller;
 
     /**
-     * Create a ship renderer.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     ShipUpdater(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         source = services.get(SourceResolutionProvider.class);
         sequence = services.get(Sequencer.class);
@@ -249,7 +251,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     }
 
     @Override
-    public void notifyCollided(Collidable collidable, Collision collision)
+    public void notifyCollided(Collidable collidable, Collision with, Collision by)
     {
         if (collidable.hasFeature(EntityModel.class))
         {

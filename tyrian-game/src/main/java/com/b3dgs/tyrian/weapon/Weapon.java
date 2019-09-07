@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
@@ -51,20 +52,21 @@ public class Weapon extends FeaturableModel
                                                                           "missile_heavy_launcher.xml");
 
     /**
-     * Create a weapon.
+     * Create weapon.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     public Weapon(Services services, WeaponSetup setup)
     {
         super(services, setup);
 
-        addFeature(new LayerableModel(Constant.LAYER_PROJECTILES));
-        addFeatureAndGet(new TransformableModel(setup));
+        addFeature(new LayerableModel(Constant.LAYER_PROJECTILES.intValue()));
+        addFeatureAndGet(new TransformableModel(services, setup));
         addFeature(new LauncherModel(services, setup));
 
-        final WeaponModel model = addFeatureAndGet(new WeaponModel(setup));
-        addFeature(new WeaponUpdater(model));
+        final WeaponModel model = addFeatureAndGet(new WeaponModel(services, setup));
+        addFeature(new WeaponUpdater(services, setup, model));
     }
 }

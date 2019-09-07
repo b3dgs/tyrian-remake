@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.Animation;
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Origin;
@@ -32,6 +33,7 @@ import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Recyclable;
+import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.graphic.ImageBuffer;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
@@ -54,13 +56,15 @@ public final class EntityModel extends FeatureModel implements Recyclable
     private final Animation anim;
 
     /**
-     * Create an entity model.
+     * Create feature.
      * 
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    EntityModel(Setup setup)
+    EntityModel(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         final Xml root = setup.getRoot();
         if (root.hasChild(ForceConfig.NODE_FORCE))

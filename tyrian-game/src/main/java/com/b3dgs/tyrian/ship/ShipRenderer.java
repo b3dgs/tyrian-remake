@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.ship;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.Viewer;
@@ -55,14 +56,15 @@ final class ShipRenderer extends FeatureModel implements Displayable
     @FeatureGet private Collidable collidable;
 
     /**
-     * Create a ship renderer.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param setup The setup reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
     ShipRenderer(Services services, Setup setup)
     {
-        super();
+        super(services, setup);
 
         source = services.get(SourceResolutionProvider.class);
         viewer = services.get(Viewer.class);

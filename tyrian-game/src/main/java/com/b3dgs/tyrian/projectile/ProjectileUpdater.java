@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.projectile;
 
+import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Origin;
@@ -35,6 +36,7 @@ import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.Refreshable;
 import com.b3dgs.lionengine.game.feature.Services;
+import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
@@ -65,14 +67,16 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     @FeatureGet private Collidable collidable;
 
     /**
-     * Create a projectile updater.
+     * Create feature.
      * 
-     * @param services The services reference.
-     * @param model The model reference.
+     * @param services The services reference (must not be <code>null</code>).
+     * @param setup The setup reference (must not be <code>null</code>).
+     * @param model The model reference (must not be <code>null</code>).
+     * @throws LionEngineException If invalid arguments.
      */
-    ProjectileUpdater(Services services, ProjectileModel model)
+    ProjectileUpdater(Services services, Setup setup, ProjectileModel model)
     {
-        super();
+        super(services, setup);
 
         source = services.get(SourceResolutionProvider.class);
         factory = services.get(Factory.class);

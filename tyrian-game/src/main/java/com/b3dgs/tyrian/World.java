@@ -51,7 +51,7 @@ public class World extends WorldGame
     /** Stalker media. */
     public static final Media STALKER = Medias.create(Constant.FOLDER_SHIP, "stalker.xml");
 
-    private static final long SPAWN_DELAY = 1500L;
+    private static final long SPAWN_DELAY = 90;
     private static final int SPAWN_BONUS_CHANCE = 1;
     private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
     private static final List<Media> SPAWN_BONUS = new ArrayList<>();
@@ -128,13 +128,13 @@ public class World extends WorldGame
      * @param medias The medias array.
      * @param layer The associated layer.
      */
-    private void spawn(List<Media> medias, int layer)
+    private void spawn(List<Media> medias, Integer layer)
     {
         if (!medias.isEmpty())
         {
             final Media media = getRandomMedia(medias);
             final Featurable featurable = factory.create(media);
-            featurable.getFeature(Layerable.class).setLayer(layer);
+            featurable.getFeature(Layerable.class).setLayer(layer, layer);
             handler.add(featurable);
             final Transformable transformable = featurable.getFeature(Transformable.class);
             final double x = UtilRandom.getRandomInteger(camera.getWidth() - transformable.getWidth() * 2)
@@ -163,7 +163,7 @@ public class World extends WorldGame
         background.update(extrp);
         tick.update(extrp);
 
-        if (tick.elapsedTime(source.getRate(), SPAWN_DELAY))
+        if (tick.elapsed(SPAWN_DELAY))
         {
             spawn(SPAWN_ENTITIES, Constant.LAYER_ENTITIES_MOVING);
 
