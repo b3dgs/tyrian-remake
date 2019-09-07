@@ -59,9 +59,9 @@ public class Explode extends FeaturableModel
     private PostAction action = EMPTY_ACTION;
     private int count = -1;
 
-    private final SourceResolutionProvider source;
-    private final Factory factory;
-    private final Handler handler;
+    private final SourceResolutionProvider source = services.get(SourceResolutionProvider.class);
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
 
     /**
      * Create explode.
@@ -73,10 +73,6 @@ public class Explode extends FeaturableModel
     public Explode(Services services, Setup setup)
     {
         super(services, setup);
-
-        source = services.get(SourceResolutionProvider.class);
-        factory = services.get(Factory.class);
-        handler = services.get(Handler.class);
 
         media = Medias.create(setup.getText(Effect.NODE_EXPLODE));
         countMax = setup.getInteger(ATT_COUNT, Effect.NODE_EXPLODE);
@@ -141,7 +137,7 @@ public class Explode extends FeaturableModel
             if (count == 0 || tick.elapsedTime(source.getRate(), DELAY) && count <= countMax)
             {
                 final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
-                final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight());
+                final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight()) + area.getHeight() / 2;
 
                 effect = factory.create(media);
                 effect.start(Geom.createLocalizable(x, y));

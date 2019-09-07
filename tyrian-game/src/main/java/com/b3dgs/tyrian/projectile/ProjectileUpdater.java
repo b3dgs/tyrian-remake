@@ -57,10 +57,10 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     private final Media effectMedia;
     private final Direction acceleration;
 
-    private final SourceResolutionProvider source;
-    private final Factory factory;
-    private final Handler handler;
-    private final Viewer viewer;
+    private final SourceResolutionProvider source = services.get(SourceResolutionProvider.class);
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
+    private final Viewer viewer = services.get(Viewer.class);
 
     @FeatureGet private Transformable transformable;
     @FeatureGet private Launchable launchable;
@@ -77,11 +77,6 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
     ProjectileUpdater(Services services, Setup setup, ProjectileModel model)
     {
         super(services, setup);
-
-        source = services.get(SourceResolutionProvider.class);
-        factory = services.get(Factory.class);
-        handler = services.get(Handler.class);
-        viewer = services.get(Viewer.class);
 
         surface = model.getSurface();
         effectRate = model.getEffectRate();
@@ -108,6 +103,7 @@ final class ProjectileUpdater extends FeatureModel implements Refreshable, Recyc
         super.prepare(provider);
 
         collidable.setOrigin(Origin.MIDDLE);
+        collidable.setCollisionVisibility(false);
         launchable.addListener(launchable ->
         {
             if (effectMedia != null)

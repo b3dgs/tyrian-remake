@@ -46,11 +46,8 @@ public final class Background implements Updatable, Renderable
     /** Vertical speed divisor. */
     private static final double VY_DIVISOR = 15.0;
 
-    /** Surface reference. */
     private final SpriteTiled surface;
-    /** Stars array. */
     private final Star[] stars = new Star[DENSITY];
-    /** Viewer reference. */
     private final Viewer viewer;
     private final ImageBuffer[] layers;
     private final double[] speed;

@@ -18,6 +18,7 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.LionEngineException;
+import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Routines;
@@ -43,7 +44,7 @@ public class Entity extends FeaturableModel
         super(services, setup);
 
         addFeature(new TransformableModel(services, setup));
-        addFeature(new CollidableModel(services, setup));
+        addFeatureAndGet(new CollidableModel(services, setup)).setOrigin(Origin.MIDDLE);
         addFeature(new LayerableModel(services, setup));
         addFeature(new EntityModel(services, setup));
     }

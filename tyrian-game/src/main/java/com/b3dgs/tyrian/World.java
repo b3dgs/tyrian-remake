@@ -19,13 +19,13 @@ package com.b3dgs.tyrian;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.UtilRandom;
-import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Services;
@@ -48,29 +48,52 @@ import com.b3dgs.tyrian.ship.ShipUpdater;
  */
 public class World extends WorldGame
 {
-    /** Stalker media. */
-    public static final Media STALKER = Medias.create(Constant.FOLDER_SHIP, "stalker.xml");
-
     private static final long SPAWN_DELAY = 90;
     private static final int SPAWN_BONUS_CHANCE = 1;
-    private static final List<Media> SPAWN_ENTITIES = getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC);
+    private static final List<Media> SPAWN_ENTITIES = getEntities();
     private static final List<Media> SPAWN_BONUS = new ArrayList<>();
 
     static
     {
-        SPAWN_BONUS.addAll(getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS));
-        SPAWN_BONUS.addAll(getMedias(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS, Constant.FOLDER_WEAPON));
+        SPAWN_BONUS.addAll(getBonus());
+        SPAWN_BONUS.addAll(getWeapon());
     }
 
     /**
      * Get medias in path.
      * 
-     * @param path The path.
      * @return The medias found
      */
-    private static List<Media> getMedias(String... path)
+    private static List<Media> getEntities()
     {
-        return Medias.getByExtension(Factory.FILE_DATA_EXTENSION, Medias.create(path));
+        return Arrays.asList(Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "d.xml"),
+                             Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_big.xml"),
+                             Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_little_1.xml"),
+                             Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_medium_1.xml"));
+    }
+
+    /**
+     * Get medias in path.
+     * 
+     * @return The medias found
+     */
+    private static List<Media> getBonus()
+    {
+        return Arrays.asList(Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS, "power_up.xml"));
+    }
+
+    /**
+     * Get medias in path.
+     * 
+     * @return The medias found
+     */
+    private static List<Media> getWeapon()
+    {
+        final Media root = Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_BONUS, Constant.FOLDER_WEAPON);
+        return Arrays.asList(Medias.create(root.getPath(), "missile_launcher_rear.xml"),
+                             Medias.create(root.getPath(), "missile_launcher.xml"),
+                             Medias.create(root.getPath(), "pulse_cannon.xml"),
+                             Medias.create(root.getPath(), "sonic_wave.xml"));
     }
 
     /**
@@ -104,7 +127,7 @@ public class World extends WorldGame
 
         handler.addComponent(new ComponentCollision());
 
-        final Featurable ship = factory.create(STALKER);
+        final Featurable ship = factory.create(Medias.create(Constant.FOLDER_SHIP, "stalker.xml"));
         handler.add(ship);
         services.add(ship.getFeature(ShipUpdater.class));
         map = Map.generate(services, "level1");

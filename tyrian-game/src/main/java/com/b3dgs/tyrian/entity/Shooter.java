@@ -44,8 +44,8 @@ public class Shooter extends FeatureModel implements Routine
     private WeaponUpdater weapon;
     private Localizable target;
 
-    private final Factory factory;
-    private final ShipUpdater ship;
+    private final Factory factory = services.get(Factory.class);
+    private final ShipUpdater ship = services.get(ShipUpdater.class);
 
     @FeatureGet private Transformable transformable;
 
@@ -59,9 +59,6 @@ public class Shooter extends FeatureModel implements Routine
     Shooter(Services services, Setup setup)
     {
         super(services, setup);
-
-        factory = services.get(Factory.class);
-        ship = services.get(ShipUpdater.class);
     }
 
     @Override

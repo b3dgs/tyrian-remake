@@ -115,11 +115,11 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     private Force hitForce;
     private Tick hitTick;
 
-    private final SourceResolutionProvider source;
-    private final Sequencer sequence;
-    private final Factory factory;
-    private final Handler handler;
-    private final Camera camera;
+    private final SourceResolutionProvider source = services.get(SourceResolutionProvider.class);
+    private final Sequencer sequence = services.get(Sequencer.class);
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
+    private final Camera camera = services.get(Camera.class);
 
     @FeatureGet private Layerable layerable;
     @FeatureGet private Transformable transformable;
@@ -137,12 +137,6 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
     ShipUpdater(Services services, Setup setup)
     {
         super(services, setup);
-
-        source = services.get(SourceResolutionProvider.class);
-        sequence = services.get(Sequencer.class);
-        factory = services.get(Factory.class);
-        handler = services.get(Handler.class);
-        camera = services.get(Camera.class);
 
         shieldIncTick.start();
     }
@@ -185,7 +179,7 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
                 final Explode explode = factory.create(Medias.create(Constant.FOLDER_EFFECT, "explode_big.xml"));
                 final PostAction action = () -> sequence.end();
                 explode.start(new Rectangle(transformable.getX() - transformable.getWidth() / 2,
-                                            transformable.getY() + -transformable.getHeight() / 2,
+                                            transformable.getY() - transformable.getHeight() / 2,
                                             50,
                                             50),
                               action);
@@ -238,6 +232,8 @@ public final class ShipUpdater extends FeatureModel implements Refreshable, Coll
         surface.setTile(getTile(transformable.getX() - transformable.getOldX()));
         surface.setLocation(camera, transformable);
 
+        model.getFront().update(extrp);
+        model.getRear().update(extrp);
         energy.increase(extrp, 1);
         shieldIncTick.update(extrp);
         hitTick.update(extrp);

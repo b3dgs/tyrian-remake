@@ -94,8 +94,6 @@ public final class EntityModel extends FeatureModel implements Recyclable
         {
             anim = null;
         }
-
-        recycle();
     }
 
     /**

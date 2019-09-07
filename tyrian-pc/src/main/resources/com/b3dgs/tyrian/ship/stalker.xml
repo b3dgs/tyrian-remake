@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.LayerableModel</lionengine:feature>
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.TransformableModel</lionengine:feature>
-    <lionengine:feature>com.b3dgs.lionengine.game.feature.collidable.CollidableModel</lionengine:feature>
-    <lionengine:feature>com.b3dgs.tyrian.ship.ShipModel</lionengine:feature>
+    <lionengine:class>com.b3dgs.tyrian.ship.Ship</lionengine:class>
     <lionengine:feature>com.b3dgs.tyrian.pc.ship.ShipControllerPc</lionengine:feature>
-    <lionengine:feature>com.b3dgs.tyrian.ship.ShipUpdater</lionengine:feature>
-    <lionengine:feature>com.b3dgs.tyrian.ship.ShipRenderer</lionengine:feature>
     <lionengine:surface image="stalker.png"/>
     <lionengine:size width="24" height="28"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="14" height="20" mirror="false"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="-24" width="18" height="24" mirror="false"/>
 </lionengine:featurable>

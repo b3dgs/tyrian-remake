@@ -31,7 +31,7 @@ import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -66,8 +66,8 @@ public final class ShipModel extends FeatureModel
     private final Tick hitTick = new Tick();
     private final SpriteTiled surface;
     private final SpriteAnimated hit;
-    private final Factory factory;
-    private final Handler handler;
+
+    private final Factory factory = services.get(Factory.class);
 
     private WeaponUpdater front;
     private WeaponUpdater rear;
@@ -85,9 +85,6 @@ public final class ShipModel extends FeatureModel
     {
         super(services, setup);
 
-        factory = services.get(Factory.class);
-        handler = services.get(Handler.class);
-
         final SizeConfig config = SizeConfig.imports(setup);
         surface = Drawable.loadSpriteTiled(setup.getSurface(), config.getWidth(), config.getHeight());
         surface.setOrigin(Origin.MIDDLE);
@@ -102,7 +99,7 @@ public final class ShipModel extends FeatureModel
         armor.fill();
         energy.fill();
 
-        front = createWeapon(Weapon.MISSILE_LAUNCHER);
+        front = createWeapon(Weapon.PULSE_CANNON);
         rear = createWeapon(Weapon.SONIC_WAVE);
     }
 
@@ -115,11 +112,13 @@ public final class ShipModel extends FeatureModel
     {
         if (weapon.isFront())
         {
+            front.getFeature(Identifiable.class).destroy();
             front = weapon.take(true);
             ignoreProjectileCollision(front.getFeature(Launcher.class));
         }
         else
         {
+            rear.getFeature(Identifiable.class).destroy();
             rear = weapon.take(true);
             ignoreProjectileCollision(rear.getFeature(Launcher.class));
         }
@@ -176,7 +175,6 @@ public final class ShipModel extends FeatureModel
     private WeaponUpdater createWeapon(Media media)
     {
         final Weapon weapon = factory.create(media);
-        handler.add(weapon);
         ignoreProjectileCollision(weapon.getFeature(Launcher.class));
         return weapon.getFeature(WeaponModel.class).take(false);
     }

@@ -15,46 +15,42 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
-package com.b3dgs.tyrian.effect;
+package com.b3dgs.tyrian.ship;
 
-import com.b3dgs.lionengine.Check;
 import com.b3dgs.lionengine.LionEngineException;
-import com.b3dgs.lionengine.game.feature.Displayable;
-import com.b3dgs.lionengine.game.feature.FeatureInterface;
-import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.FeaturableModel;
+import com.b3dgs.lionengine.game.feature.LayerableModel;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.graphic.Graphic;
-import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.game.feature.TransformableModel;
+import com.b3dgs.lionengine.game.feature.collidable.CollidableModel;
 
 /**
- * Effect renderer implementation.
+ * Ship base implementation.
  */
-@FeatureInterface
-final class EffectRenderer extends FeatureModel implements Displayable
+public class Ship extends FeaturableModel
 {
-    private final SpriteAnimated surface;
-
     /**
-     * Create feature.
+     * Create ship.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
-     * @param model The model reference (must not be <code>null</code>).
      * @throws LionEngineException If invalid arguments.
      */
-    EffectRenderer(Services services, Setup setup, EffectModel model)
+    public Ship(Services services, Setup setup)
     {
         super(services, setup);
 
-        Check.notNull(model);
-
-        surface = model.getSurface();
+        addFeature(new TransformableModel(services, setup));
+        addFeature(new CollidableModel(services, setup));
+        addFeature(new LayerableModel(services, setup));
+        addFeature(new ShipModel(services, setup));
     }
 
     @Override
-    public void render(Graphic g)
+    public void addAfter(Services services, Setup setup)
     {
-        surface.render(g);
+        addFeature(new ShipUpdater(services, setup));
+        addFeature(new ShipRenderer(services, setup));
     }
 }

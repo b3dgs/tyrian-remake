@@ -38,8 +38,7 @@ import com.b3dgs.tyrian.ship.ShipUpdater;
  */
 public class Hud implements Updatable, Renderable
 {
-    /** Stalker media. */
-    public static final Media HUD = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
+    private static final Media HUD = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
     private static final ColorRgba BROWN = new ColorRgba(90, 45, 0);
 
     private final Bar shield = new Bar(60, 9);

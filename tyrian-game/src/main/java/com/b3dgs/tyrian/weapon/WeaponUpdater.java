@@ -17,6 +17,7 @@
  */
 package com.b3dgs.tyrian.weapon;
 
+import com.b3dgs.lionengine.Check;
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.UtilMath;
@@ -56,6 +57,8 @@ public class WeaponUpdater extends FeatureModel implements Refreshable
     public WeaponUpdater(Services services, WeaponSetup setup, WeaponModel model)
     {
         super(services, setup);
+
+        Check.notNull(model);
 
         this.model = model;
     }

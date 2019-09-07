@@ -54,6 +54,7 @@ public enum Music
     Music(String name)
     {
         audio = AudioFactory.loadAudio(Medias.create(Constant.FOLDER_MUSIC, name));
+        audio.setVolume(50);
     }
 
     /**

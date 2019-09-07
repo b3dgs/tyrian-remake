@@ -38,7 +38,7 @@ import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
 @FeatureInterface
 final class EntityRenderer extends FeatureModel implements Displayable
 {
-    private final Viewer viewer;
+    private final Viewer viewer = services.get(Viewer.class);
 
     private SpriteAnimated surface;
 
@@ -56,8 +56,6 @@ final class EntityRenderer extends FeatureModel implements Displayable
     EntityRenderer(Services services, Setup setup)
     {
         super(services, setup);
-
-        viewer = services.get(Viewer.class);
     }
 
     @Override

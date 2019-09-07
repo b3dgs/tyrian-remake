@@ -70,15 +70,15 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
         return Constant.LAYER_ENTITIES_STATIC;
     }
 
-    private final Integer layer;
+    private final Integer layer = getLayer(setup);
     private Alterable life;
     private Direction direction;
     private SpriteAnimated surface;
     private Media media;
 
-    private final Factory factory;
-    private final Handler handler;
-    private final Camera camera;
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
+    private final Camera camera = services.get(Camera.class);
 
     @FeatureGet private Layerable layerable;
     @FeatureGet private Transformable transformable;
@@ -96,12 +96,6 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
     EntityUpdater(Services services, Setup setup)
     {
         super(services, setup);
-
-        factory = services.get(Factory.class);
-        handler = services.get(Handler.class);
-        camera = services.get(Camera.class);
-
-        layer = getLayer(setup);
     }
 
     /**
@@ -147,14 +141,6 @@ public class EntityUpdater extends FeatureModel implements Refreshable, Collidab
         transformable.moveLocation(extrp, direction);
         surface.setLocation(camera, transformable);
         surface.update(extrp);
-        if (hasFeature(Shooter.class))
-        {
-            getFeature(Shooter.class).update(extrp);
-        }
-        if (hasFeature(Ship.class))
-        {
-            getFeature(Ship.class).update(extrp);
-        }
 
         if (transformable.getY() < camera.getY() - transformable.getHeight())
         {

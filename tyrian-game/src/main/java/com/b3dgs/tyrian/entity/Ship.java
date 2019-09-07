@@ -18,7 +18,6 @@
 package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.LionEngineException;
-import com.b3dgs.lionengine.Updatable;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.FeatureProvider;
@@ -26,6 +25,7 @@ import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -35,15 +35,14 @@ import com.b3dgs.tyrian.ship.ShipUpdater;
  * Ship entity feature, shooting player.
  */
 @FeatureInterface
-public class Ship extends FeatureModel implements Updatable
+public class Ship extends FeatureModel implements Routine
 {
     private static final int RANDOM_Y = 64;
 
     private final boolean follow;
     private final int y;
 
-    private final Services services;
-    private final Viewer viewer;
+    private final Viewer viewer = services.get(Viewer.class);
 
     @FeatureGet private Transformable transformable;
     @FeatureGet private Transformable player;
@@ -58,9 +57,6 @@ public class Ship extends FeatureModel implements Updatable
     public Ship(Services services, Setup setup)
     {
         super(services, setup);
-
-        this.services = services;
-        viewer = services.get(Viewer.class);
 
         y = UtilRandom.getRandomInteger(RANDOM_Y);
         follow = UtilRandom.getRandomBoolean();

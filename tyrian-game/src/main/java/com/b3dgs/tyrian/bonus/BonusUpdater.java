@@ -44,7 +44,7 @@ public class BonusUpdater extends FeatureModel implements Refreshable
 
     private final SpriteAnimated surface;
 
-    private final Camera camera;
+    private final Camera camera = services.get(Camera.class);
 
     @FeatureGet private Transformable transformable;
     @FeatureGet private Collidable collidable;
@@ -63,7 +63,6 @@ public class BonusUpdater extends FeatureModel implements Refreshable
 
         Check.notNull(model);
 
-        camera = services.get(Camera.class);
         surface = model.getSurface();
     }
 
@@ -83,7 +82,7 @@ public class BonusUpdater extends FeatureModel implements Refreshable
         surface.setLocation(camera, transformable);
         surface.update(extrp);
 
-        if (transformable.getY() < -transformable.getHeight())
+        if (camera.getViewpointY(transformable.getY() + transformable.getHeight()) > camera.getHeight())
         {
             getFeature(Identifiable.class).destroy();
         }

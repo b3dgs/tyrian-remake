@@ -41,7 +41,8 @@ public class ChangeWeapon extends FeatureModel implements Action
     private static final String NODE_WEAPON_REAR = com.b3dgs.lionengine.Constant.XML_PREFIX + "weaponRear";
 
     private final Media media;
-    private final Factory factory;
+
+    private final Factory factory = services.get(Factory.class);
 
     /**
      * Create feature.
@@ -53,8 +54,6 @@ public class ChangeWeapon extends FeatureModel implements Action
     public ChangeWeapon(Services services, Setup setup)
     {
         super(services, setup);
-
-        factory = services.get(Factory.class);
 
         if (setup.hasNode(NODE_WEAPON_FRONT))
         {

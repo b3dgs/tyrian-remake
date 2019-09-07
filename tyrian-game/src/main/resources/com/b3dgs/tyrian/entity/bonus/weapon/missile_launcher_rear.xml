@@ -5,5 +5,5 @@
     <lionengine:weaponRear>missile_heavy_launcher</lionengine:weaponRear>
     <lionengine:surface image="missile_launcher_rear.png"/>
     <lionengine:size width="24" height="28"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="-28" width="24" height="28" mirror="false"/>
 </lionengine:featurable>

@@ -7,5 +7,5 @@
 	<lionengine:offset x="0" y="0"/>
     <lionengine:effect rate="20">effect/smoke.xml</lionengine:effect>
     <lionengine:force velocity="0.01" sensibility="0" vx="0" vy="1"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="2" height="10" mirror="false" />
+    <lionengine:collision name="default" offsetX="0" offsetY="-10" width="2" height="10" mirror="false" />
 </lionengine:featurable>
