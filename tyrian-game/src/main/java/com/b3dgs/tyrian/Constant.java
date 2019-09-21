@@ -30,7 +30,7 @@ public final class Constant
     /** Application version. */
     public static final Version VERSION = Version.create(0, 4, 0);
     /** Native resolution. */
-    public static final Resolution NATIVE = new Resolution(200, 355, 60);
+    public static final Resolution NATIVE = new Resolution(216, 384, 60);
 
     /** Ships folder. */
     public static final String FOLDER_SHIP = "ship";

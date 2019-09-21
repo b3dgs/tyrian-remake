@@ -71,25 +71,25 @@ public class Hud implements Updatable, Renderable
         shipUpdater = services.get(ShipUpdater.class);
         ship = shipUpdater.getFeature(ShipModel.class);
 
-        shield.setLocation(4, 305);
+        shield.setLocation(12, 334);
         shield.setColor(ColorRgba.BLACK, ColorRgba.BLUE);
 
-        armor.setLocation(4, 342);
+        armor.setLocation(12, 371);
         armor.setColor(ColorRgba.BLACK, BROWN);
 
-        energy.setLocation(100, 303);
+        energy.setLocation(108, 332);
         energy.setColorBackground(ColorRgba.BLACK);
         energy.setColorGradient(ColorRgba.RED, ColorRgba.YELLOW);
 
-        levelFront.setLocation(190, 319);
+        levelFront.setLocation(198, 348);
         levelFront.setColorBackground(ColorRgba.BLACK);
         levelFront.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
 
-        levelRear.setLocation(190, 335);
+        levelRear.setLocation(198, 364);
         levelRear.setColorBackground(ColorRgba.BLACK);
         levelRear.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
 
-        progress.setLocation(73, 302);
+        progress.setLocation(81, 331);
         progress.setColorGradient(ColorRgba.GREEN, ColorRgba.RED);
     }
 

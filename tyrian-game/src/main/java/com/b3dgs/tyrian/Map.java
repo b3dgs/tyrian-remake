@@ -100,6 +100,7 @@ public final class Map
      * 
      * @param level The level to import.
      */
+    @SuppressWarnings("unused")
     private static void importLevelAndSave(Media level)
     {
         final Services services = new Services();

@@ -18,6 +18,7 @@ package com.b3dgs.tyrian;
 
 import com.b3dgs.lionengine.Config;
 import com.b3dgs.lionengine.LionEngineException;
+import com.b3dgs.lionengine.Resolution;
 import com.b3dgs.lionengine.audio.AudioFactory;
 import com.b3dgs.lionengine.audio.adplug.AdPlugFormat;
 import com.b3dgs.lionengine.audio.wav.WavFormat;
@@ -29,6 +30,9 @@ import com.b3dgs.lionengine.graphic.engine.Loader;
  */
 public final class AppTyrianPc
 {
+    /** Default display. */
+    private static final Resolution DEFAULT_RESOLUTION = new Resolution(540, 960, 60);
+
     /**
      * Main function.
      * 
@@ -40,7 +44,7 @@ public final class AppTyrianPc
         AudioFactory.addFormat(new WavFormat());
         AudioFactory.addFormat(AdPlugFormat.getFailsafe());
         Sfx.setEnabled(true);
-        Loader.start(Config.windowed(Constant.NATIVE.get2x()), Loading.class);
+        Loader.start(Config.windowed(DEFAULT_RESOLUTION), Loading.class);
     }
 
     /**
