@@ -5,5 +5,5 @@
     <lionengine:weaponFront>pulse_cannon</lionengine:weaponFront>
     <lionengine:surface image="pulse_cannon.png"/>
     <lionengine:size width="24" height="28"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="-28" width="24" height="28" mirror="false"/>
 </lionengine:featurable>

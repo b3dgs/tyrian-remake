@@ -5,5 +5,5 @@
     <lionengine:size width="72" height="84"/>
     <lionengine:explode>explode_big</lionengine:explode>
     <lionengine:force vx="0.0" vy="-0.5"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="54" height="68" mirror="false"/>
+    <lionengine:collision name="default" offsetX="0" offsetY="-68" width="54" height="68" mirror="false"/>
 </lionengine:featurable>

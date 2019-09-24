@@ -4,6 +4,6 @@
     <lionengine:explode>explode_little</lionengine:explode>
     <lionengine:surface image="Head.png"/>
 	<lionengine:size width="48" height="56"/>
-	<lionengine:collision name="default" offsetX="0" offsetY="0" width="30" height="50" mirror="false" />
+	<lionengine:collision name="default" offsetX="0" offsetY="-50" width="30" height="50" mirror="false" />
 	<lionengine:animation name="idle" start="1" end="1" speed="0.2" reversed="false" repeat="false"/>
 </lionengine:featurable>
