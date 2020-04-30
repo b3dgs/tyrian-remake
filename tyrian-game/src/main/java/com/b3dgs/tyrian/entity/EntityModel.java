@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,39 +20,58 @@ import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
-import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.DirectionNone;
+import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.ForceConfig;
-import com.b3dgs.lionengine.game.SizeConfig;
+import com.b3dgs.lionengine.game.feature.Animatable;
+import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.Featurable;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Handler;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.graphic.ImageBuffer;
-import com.b3dgs.lionengine.graphic.drawable.Drawable;
-import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
+import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
+import com.b3dgs.lionengine.game.feature.collidable.Collision;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.effect.Effect;
+import com.b3dgs.tyrian.Sfx;
+import com.b3dgs.tyrian.effect.EffectModel;
+import com.b3dgs.tyrian.effect.Explode;
 
 /**
  * Entity model implementation.
  */
 @FeatureInterface
-public final class EntityModel extends FeatureModel implements Recyclable
+public final class EntityModel extends FeatureModel implements Routine, CollidableListener, Recyclable
 {
     private static final String ANIM_IDLE = "idle";
 
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
+    private final Camera camera = services.get(Camera.class);
+
     private final Alterable life = new Alterable(3);
     private final Direction direction;
-    private final SpriteAnimated surface;
     private final Media explode;
     private final Animation anim;
+
+    @FeatureGet private Layerable layerable;
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Collidable collidable;
+    @FeatureGet private Animatable animatable;
+    @FeatureGet private Identifiable identifiable;
 
     /**
      * Create feature.
@@ -75,14 +94,7 @@ public final class EntityModel extends FeatureModel implements Recyclable
             direction = DirectionNone.INSTANCE;
         }
         explode = Medias.create(Constant.FOLDER_EFFECT,
-                                setup.getText(Effect.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);
-
-        final SizeConfig sizeConfig = SizeConfig.imports(setup);
-        final ImageBuffer buffer = setup.getSurface();
-        surface = Drawable.loadSpriteAnimated(buffer,
-                                              buffer.getWidth() / sizeConfig.getWidth(),
-                                              buffer.getHeight() / sizeConfig.getHeight());
-        surface.setOrigin(Origin.MIDDLE);
+                                setup.getText(EffectModel.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);
 
         final AnimationConfig animConfig = AnimationConfig.imports(setup);
         if (animConfig.hasAnimation(ANIM_IDLE))
@@ -96,16 +108,6 @@ public final class EntityModel extends FeatureModel implements Recyclable
     }
 
     /**
-     * Get the entity life.
-     * 
-     * @return The entity life.
-     */
-    public Alterable getLife()
-    {
-        return life;
-    }
-
-    /**
      * Get the entity force.
      * 
      * @return The entity force.
@@ -116,33 +118,58 @@ public final class EntityModel extends FeatureModel implements Recyclable
     }
 
     /**
-     * Get the surface representation.
-     * 
-     * @return The surface representation.
+     * Spawn bullet hit effect.
      */
-    public SpriteAnimated getSurface()
+    private void spawnEffectHit()
     {
-        return surface;
+        final Featurable hit = factory.create(Medias.create(Constant.FOLDER_EFFECT, "bullet_hit.xml"));
+        hit.getFeature(EffectModel.class).start(transformable);
+        handler.add(hit);
     }
 
     /**
-     * Get the associated explode media.
-     * 
-     * @return The explode media.
+     * Spawn explode effect.
      */
-    public Media getExplode()
+    private void spawnEffectExplode()
     {
-        return explode;
+        final Explode explode = factory.create(this.explode);
+        explode.start(transformable);
+        handler.add(explode);
     }
 
-    /**
-     * Get the associated animation.
-     * 
-     * @return The associated animation, <code>null</code> if none.
-     */
-    public Animation getAnim()
+    @Override
+    public void prepare(FeatureProvider provider)
     {
-        return anim;
+        super.prepare(provider);
+
+        collidable.setCollisionVisibility(false);
+    }
+
+    @Override
+    public void update(double extrp)
+    {
+        transformable.moveLocation(extrp, direction);
+
+        if (transformable.getY() < camera.getY() - transformable.getHeight())
+        {
+            identifiable.destroy();
+        }
+    }
+
+    @Override
+    public void notifyCollided(Collidable collidable, Collision with, Collision by)
+    {
+        Sfx.BULLET_HIT.play();
+        spawnEffectHit();
+
+        life.decrease(1);
+        if (life.getCurrent() == 0)
+        {
+            spawnEffectExplode();
+            identifiable.destroy();
+        }
+
+        collidable.getFeature(Identifiable.class).destroy();
     }
 
     @Override
@@ -151,7 +178,7 @@ public final class EntityModel extends FeatureModel implements Recyclable
         life.fill();
         if (anim != null)
         {
-            surface.play(anim);
+            animatable.play(anim);
         }
     }
 }

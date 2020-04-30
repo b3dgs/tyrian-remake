@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,8 @@ import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.Featurable;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -27,7 +29,6 @@ import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.ship.ShipModel;
-import com.b3dgs.tyrian.weapon.Weapon;
 import com.b3dgs.tyrian.weapon.WeaponModel;
 
 /**
@@ -36,12 +37,14 @@ import com.b3dgs.tyrian.weapon.WeaponModel;
 @FeatureInterface
 public class ChangeWeapon extends FeatureModel implements Action
 {
-    private static final String NODE_WEAPON_FRONT = com.b3dgs.lionengine.Constant.XML_PREFIX + "weaponFront";
-    private static final String NODE_WEAPON_REAR = com.b3dgs.lionengine.Constant.XML_PREFIX + "weaponRear";
+    private static final String NODE_WEAPON_FRONT = "weaponFront";
+    private static final String NODE_WEAPON_REAR = "weaponRear";
+
+    private final Factory factory = services.get(Factory.class);
 
     private final Media media;
 
-    private final Factory factory = services.get(Factory.class);
+    @FeatureGet private Identifiable identifiable;
 
     /**
      * Create feature.
@@ -77,9 +80,9 @@ public class ChangeWeapon extends FeatureModel implements Action
     {
         if (media != null)
         {
-            final Weapon weapon = factory.create(media);
+            final Featurable weapon = factory.create(media);
             ship.takeWeapon(weapon.getFeature(WeaponModel.class));
         }
-        getFeature(Identifiable.class).destroy();
+        identifiable.destroy();
     }
 }

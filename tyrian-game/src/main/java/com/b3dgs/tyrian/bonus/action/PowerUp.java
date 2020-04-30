@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 package com.b3dgs.tyrian.bonus.action;
 
 import com.b3dgs.lionengine.LionEngineException;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -31,6 +32,8 @@ import com.b3dgs.tyrian.ship.ShipModel;
 @FeatureInterface
 public class PowerUp extends FeatureModel implements Action
 {
+    @FeatureGet private Identifiable identifiable;
+
     /**
      * Create feature.
      * 
@@ -48,6 +51,6 @@ public class PowerUp extends FeatureModel implements Action
     {
         Sfx.POWER_UP.play();
         ship.powerUp();
-        getFeature(Identifiable.class).destroy();
+        identifiable.destroy();
     }
 }

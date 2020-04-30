@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.tyrian.ship.ShipUpdater;
+import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * Ship entity feature, shooting player.
@@ -38,10 +38,10 @@ public class Ship extends FeatureModel implements Routine
 {
     private static final int RANDOM_Y = 64;
 
-    private final boolean follow;
-    private final int y;
-
     private final Viewer viewer = services.get(Viewer.class);
+
+    private final boolean follow = UtilRandom.getRandomBoolean();
+    private final int y = UtilRandom.getRandomInteger(RANDOM_Y);
 
     @FeatureGet private Transformable transformable;
     @FeatureGet private Transformable player;
@@ -56,9 +56,6 @@ public class Ship extends FeatureModel implements Routine
     public Ship(Services services, Setup setup)
     {
         super(services, setup);
-
-        y = UtilRandom.getRandomInteger(RANDOM_Y);
-        follow = UtilRandom.getRandomBoolean();
     }
 
     @Override
@@ -66,7 +63,7 @@ public class Ship extends FeatureModel implements Routine
     {
         super.prepare(provider);
 
-        player = services.get(ShipUpdater.class).getFeature(Transformable.class);
+        player = services.get(ShipModel.class).getFeature(Transformable.class);
     }
 
     @Override

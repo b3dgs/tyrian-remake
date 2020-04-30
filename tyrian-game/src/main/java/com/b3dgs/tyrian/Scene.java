@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,11 +43,12 @@ public final class Scene extends SequenceGame
     @Override
     public void onTerminated(boolean hasNextSequence)
     {
-        super.onTerminated(hasNextSequence);
         if (!hasNextSequence)
         {
             Sfx.stopAll();
             Music.stop();
         }
+
+        super.onTerminated(hasNextSequence);
     }
 }

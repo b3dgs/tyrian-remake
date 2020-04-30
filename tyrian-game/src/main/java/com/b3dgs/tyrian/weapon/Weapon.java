@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,20 +16,14 @@
  */
 package com.b3dgs.tyrian.weapon;
 
-import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
-import com.b3dgs.lionengine.game.feature.FeaturableModel;
-import com.b3dgs.lionengine.game.feature.LayerableModel;
-import com.b3dgs.lionengine.game.feature.Services;
-import com.b3dgs.lionengine.game.feature.TransformableModel;
-import com.b3dgs.lionengine.game.feature.launchable.LauncherModel;
 import com.b3dgs.tyrian.Constant;
 
 /**
  * Weapon base implementation.
  */
-public class Weapon extends FeaturableModel
+public class Weapon
 {
     /** Pulse Cannon. */
     public static final Media PULSE_CANNON = Medias.create(Constant.FOLDER_WEAPON,
@@ -49,23 +43,4 @@ public class Weapon extends FeaturableModel
     public static final Media MISSILE_HEAVY_LAUNCHER_REAR = Medias.create(Constant.FOLDER_WEAPON,
                                                                           Constant.FOLDER_REAR,
                                                                           "missile_heavy_launcher.xml");
-
-    /**
-     * Create weapon.
-     * 
-     * @param services The services reference (must not be <code>null</code>).
-     * @param setup The setup reference (must not be <code>null</code>).
-     * @throws LionEngineException If invalid arguments.
-     */
-    public Weapon(Services services, WeaponSetup setup)
-    {
-        super(services, setup);
-
-        addFeature(new LayerableModel(Constant.LAYER_PROJECTILES.intValue()));
-        addFeatureAndGet(new TransformableModel(services, setup));
-        addFeature(new LauncherModel(services, setup));
-
-        final WeaponModel model = addFeatureAndGet(new WeaponModel(services, setup));
-        addFeature(new WeaponUpdater(services, setup, model));
-    }
 }

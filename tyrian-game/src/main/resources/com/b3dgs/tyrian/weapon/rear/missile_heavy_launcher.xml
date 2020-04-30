@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:class>com.b3dgs.tyrian.weapon.Weapon</lionengine:class>
-    <lionengine:fire>weapon_missile</lionengine:fire>
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com/xsd/9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lionengine.b3dgs.com/xsd/9 http://lionengine.b3dgs.com/xsd/9/featurable.xsd">
+    <lionengine:class>com.b3dgs.lionengine.helper.EntityHelper</lionengine:class>
+    <lionengine:features>
+        <lionengine:feature>com.b3dgs.tyrian.weapon.WeaponModel</lionengine:feature>
+    </lionengine:features>
     <lionengine:surface image="missile_heavy_launcher.png"/>
     <lionengine:size width="24" height="28"/>
-    <lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false"/>
+    <lionengine:collisions>
+        <lionengine:collision name="default" offsetX="0" offsetY="0" width="24" height="28" mirror="false"/>
+    </lionengine:collisions>
+    <lionengine:layerable layerDisplay="4" layerRefresh="4"/>
     <lionengine:launcher level="0" rate="30">
         <lionengine:launchable media="projectile/missile_heavy_left_1.xml" delay="0" ox="-2">
             <lionengine:force velocity="8" sensibility="0" vx="-8" vy="4"/>
@@ -47,4 +52,5 @@
             <lionengine:force velocity="8" sensibility="0" vx="8" vy="3"/>
         </lionengine:launchable>
     </lionengine:launcher>
+    <fire>weapon_missile</fire>
 </lionengine:featurable>

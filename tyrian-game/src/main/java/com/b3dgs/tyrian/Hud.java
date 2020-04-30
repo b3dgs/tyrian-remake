@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@ import com.b3dgs.lionengine.graphic.Renderable;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.drawable.Sprite;
 import com.b3dgs.tyrian.ship.ShipModel;
-import com.b3dgs.tyrian.ship.ShipUpdater;
 
 /**
  * HUD representation.
@@ -48,7 +47,6 @@ public class Hud implements Updatable, Renderable
     private final Bar progress = new Bar(12, 49);
     private final Sprite surface = Drawable.loadSprite(HUD);
     private final ShipModel ship;
-    private final ShipUpdater shipUpdater;
     private final Camera camera;
     private final MapTile map;
 
@@ -68,8 +66,7 @@ public class Hud implements Updatable, Renderable
         surface.prepare();
         surface.setLocation(0.0, services.get(Viewer.class).getHeight() - surface.getHeight());
 
-        shipUpdater = services.get(ShipUpdater.class);
-        ship = shipUpdater.getFeature(ShipModel.class);
+        ship = services.get(ShipModel.class);
 
         shield.setLocation(12, 334);
         shield.setColor(ColorRgba.BLACK, ColorRgba.BLUE);
@@ -91,34 +88,6 @@ public class Hud implements Updatable, Renderable
 
         progress.setLocation(81, 331);
         progress.setColorGradient(ColorRgba.GREEN, ColorRgba.RED);
-    }
-
-    @Override
-    public void update(double extrp)
-    {
-        shield.setWidthPercent(ship.getShield().getPercent());
-        armor.setWidthPercent(ship.getArmor().getPercent());
-        energy.setWidthPercent(ship.getEnergy().getPercent());
-
-        levelFront.setHeightPercent(getLevelPercentFront());
-        levelRear.setHeightPercent(getLevelPercentRear());
-
-        progress.setHeightPercent((int) ((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
-    }
-
-    @Override
-    public void render(Graphic g)
-    {
-        shield.render(g);
-        armor.render(g);
-        energy.render(g);
-
-        surface.render(g);
-
-        levelFront.render(g);
-        levelRear.render(g);
-
-        progress.render(g);
     }
 
     /**
@@ -149,5 +118,33 @@ public class Hud implements Updatable, Renderable
     public int getLevelPercentRear()
     {
         return (int) Math.max(1, Math.floor(ship.getRear().getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
+    }
+
+    @Override
+    public void update(double extrp)
+    {
+        shield.setWidthPercent(ship.getShield().getPercent());
+        armor.setWidthPercent(ship.getArmor().getPercent());
+        energy.setWidthPercent(ship.getEnergy().getPercent());
+
+        levelFront.setHeightPercent(getLevelPercentFront());
+        levelRear.setHeightPercent(getLevelPercentRear());
+
+        progress.setHeightPercent((int) ((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
+    }
+
+    @Override
+    public void render(Graphic g)
+    {
+        shield.render(g);
+        armor.render(g);
+        energy.render(g);
+
+        surface.render(g);
+
+        levelFront.render(g);
+        levelRear.render(g);
+
+        progress.render(g);
     }
 }

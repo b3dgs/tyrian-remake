@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,22 +16,35 @@
  */
 package com.b3dgs.tyrian.effect;
 
-import com.b3dgs.lionengine.Origin;
-import com.b3dgs.lionengine.game.FramesConfig;
+import com.b3dgs.lionengine.AnimState;
+import com.b3dgs.lionengine.Animation;
+import com.b3dgs.lionengine.AnimatorStateListener;
+import com.b3dgs.lionengine.Localizable;
+import com.b3dgs.lionengine.game.AnimationConfig;
+import com.b3dgs.lionengine.game.FeatureProvider;
+import com.b3dgs.lionengine.game.feature.Animatable;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.graphic.drawable.Drawable;
-import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
+import com.b3dgs.lionengine.game.feature.Transformable;
 
 /**
  * Effect model implementation.
  */
 @FeatureInterface
-final class EffectModel extends FeatureModel
+public final class EffectModel extends FeatureModel
 {
-    private final SpriteAnimated surface;
+    /** Explode node name. */
+    public static final String NODE_EXPLODE = "explode";
+
+    private final Animation anim;
+
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Animatable animatable;
+    @FeatureGet private Identifiable identifiable;
 
     /**
      * Create an effect.
@@ -43,18 +56,41 @@ final class EffectModel extends FeatureModel
     {
         super(services, setup);
 
-        final FramesConfig config = FramesConfig.imports(setup);
-        surface = Drawable.loadSpriteAnimated(setup.getSurface(), config.getHorizontal(), config.getVertical());
-        surface.setOrigin(Origin.MIDDLE);
+        anim = AnimationConfig.imports(setup).getAnimation("start");
     }
 
     /**
-     * Get the surface representation.
+     * Start the effect.
      * 
-     * @return The surface representation.
+     * @param localizable The localizable reference.
      */
-    public SpriteAnimated getSurface()
+    public void start(Localizable localizable)
     {
-        return surface;
+        transformable.setLocation(localizable.getX(), localizable.getY());
+        animatable.play(anim);
+    }
+
+    /**
+     * Check if finished.
+     * 
+     * @return <code>true</code> if finished, <code>false</code> else.
+     */
+    public boolean isFinished()
+    {
+        return animatable.is(AnimState.FINISHED);
+    }
+
+    @Override
+    public void prepare(FeatureProvider provider)
+    {
+        super.prepare(provider);
+
+        animatable.addListener((AnimatorStateListener) state ->
+        {
+            if (AnimState.FINISHED == state)
+            {
+                identifiable.destroy();
+            }
+        });
     }
 }

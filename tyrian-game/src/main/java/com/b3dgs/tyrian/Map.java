@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.HandlerPersister;
 import com.b3dgs.lionengine.game.feature.LayerableModel;
@@ -37,7 +38,6 @@ import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.tile.TileConfig;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppender;
-import com.b3dgs.lionengine.game.feature.tile.map.MapTileAppenderModel;
 import com.b3dgs.lionengine.game.feature.tile.map.MapTileGame;
 import com.b3dgs.lionengine.game.feature.tile.map.TileSetListener;
 import com.b3dgs.lionengine.game.feature.tile.map.TileSheetsConfig;
@@ -45,7 +45,6 @@ import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersister;
 import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersisterModel;
 import com.b3dgs.lionengine.io.FileReading;
 import com.b3dgs.lionengine.io.FileWriting;
-import com.b3dgs.tyrian.entity.Entity;
 
 /**
  * Map game representation.
@@ -61,17 +60,16 @@ public final class Map
      * 
      * @param services The services reference.
      * @param theme The theme name.
-     * @return The generated map.
      */
-    public static MapTile generate(Services services, String theme)
+    public static void generate(Services services, String theme)
     {
         for (int i = 0; i <= 20; i++)
         {
             // importLevelAndSave(Medias.create(Constant.FOLDER_LEVELS, "level1", String.valueOf(i) + ".png"));
         }
 
-        final MapTile map = services.create(MapTileGame.class);
-        final MapTileAppender appender = map.addFeatureAndGet(new MapTileAppenderModel(services));
+        final MapTileGame map = services.get(MapTileGame.class);
+        final MapTileAppender appender = map.getFeature(MapTileAppender.class);
         map.addFeature(new LayerableModel(Constant.LAYER_MAP.intValue()));
         map.loadSheets(Medias.create(Constant.FOLDER_TILE, theme, TileSheetsConfig.FILENAME));
 
@@ -91,8 +89,6 @@ public final class Map
 
         map.removeListener(listener);
         entities.clear();
-
-        return map;
     }
 
     /**
@@ -107,8 +103,8 @@ public final class Map
         services.add(new Factory(services));
         services.add(new Handler(services));
 
-        final MapTile map = services.create(MapTileGame.class);
-        final MapTilePersister mapPersister = map.addFeatureAndGet(new MapTilePersisterModel(services));
+        final MapTileGame map = services.create(MapTileGame.class);
+        final MapTilePersister mapPersister = map.addFeatureAndGet(new MapTilePersisterModel());
         final HandlerPersister handlerPersister = new HandlerPersister(services);
         map.create(level, Medias.create(Constant.FOLDER_TILE, "level1", "sheets.xml"));
 
@@ -145,7 +141,7 @@ public final class Map
             if (entities.containsKey(tileRef))
             {
                 final Media media = entities.get(tileRef);
-                final Entity entity = factory.create(media);
+                final Featurable entity = factory.create(media);
                 final Transformable transformable = entity.getFeature(Transformable.class);
                 final int x = (int) (tile.getX() + transformable.getWidth() / 2);
                 final int y = (int) (tile.getY() + map.getTileHeight() - transformable.getHeight() / 2);
@@ -169,8 +165,8 @@ public final class Map
         {
             final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".map");
             final Services services = new Services();
-            final MapTile map = services.create(MapTileGame.class);
-            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel(services));
+            final MapTileGame map = services.create(MapTileGame.class);
+            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel());
             try (FileReading reading = new FileReading(level))
             {
                 persister.load(reading);

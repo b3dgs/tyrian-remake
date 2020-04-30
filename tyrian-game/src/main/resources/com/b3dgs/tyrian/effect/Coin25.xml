@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<lionengine:effect xmlns:lionengine="http://lionengine.b3dgs.com">
+<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com/xsd/9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lionengine.b3dgs.com/xsd/9 http://lionengine.b3dgs.com/xsd/9/featurable.xsd">
     <lionengine:class>com.b3dgs.tyrian.effect.Coin25</lionengine:class>
     <lionengine:surface image="Coin25.png"/>
-	<lionengine:frames horizontal="3" vertical="1"/>
-	<lionengine:animation name="start" start="1" end="3" speed="0.2" reversed="false" repeat="false"/>
-</lionengine:effect>
+    <lionengine:frames horizontal="3" vertical="1"/>
+    <lionengine:animations>
+        <lionengine:animation name="start" start="1" end="3" speed="0.2" reversed="false" repeat="false"/>
+    </lionengine:animations>
+</lionengine:featurable>

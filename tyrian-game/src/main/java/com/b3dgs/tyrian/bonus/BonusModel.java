@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,30 +16,39 @@
  */
 package com.b3dgs.tyrian.bonus;
 
+import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.LionEngineException;
-import com.b3dgs.lionengine.Origin;
 import com.b3dgs.lionengine.game.AnimationConfig;
 import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.SizeConfig;
+import com.b3dgs.lionengine.game.feature.Animatable;
+import com.b3dgs.lionengine.game.feature.Camera;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Layerable;
+import com.b3dgs.lionengine.game.feature.Identifiable;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
-import com.b3dgs.lionengine.graphic.ImageBuffer;
-import com.b3dgs.lionengine.graphic.drawable.Drawable;
-import com.b3dgs.lionengine.graphic.drawable.SpriteAnimated;
-import com.b3dgs.tyrian.Constant;
+import com.b3dgs.lionengine.game.feature.Transformable;
+import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 
 /**
  * Bonus model implementation.
  */
 @FeatureInterface
-public final class BonusModel extends FeatureModel
+public final class BonusModel extends FeatureModel implements Routine
 {
     private static final String ANIM_IDLE = "idle";
+    private static final double FALLING_SPEED = -1.0;
 
-    private final SpriteAnimated surface;
+    private final Camera camera = services.get(Camera.class);
+
+    private final Animation anim;
+
+    @FeatureGet private Transformable transformable;
+    @FeatureGet private Collidable collidable;
+    @FeatureGet private Animatable animatable;
+    @FeatureGet private Identifiable identifiable;
 
     /**
      * Create feature.
@@ -52,17 +61,14 @@ public final class BonusModel extends FeatureModel
     {
         super(services, setup);
 
-        final SizeConfig sizeConfig = SizeConfig.imports(setup);
-        final ImageBuffer buffer = setup.getSurface();
-        surface = Drawable.loadSpriteAnimated(buffer,
-                                              buffer.getWidth() / sizeConfig.getWidth(),
-                                              buffer.getHeight() / sizeConfig.getHeight());
-        surface.setOrigin(Origin.MIDDLE);
-
         final AnimationConfig animConfig = AnimationConfig.imports(setup);
         if (animConfig.hasAnimation(ANIM_IDLE))
         {
-            surface.play(animConfig.getAnimation(ANIM_IDLE));
+            anim = animConfig.getAnimation(ANIM_IDLE);
+        }
+        else
+        {
+            anim = null;
         }
     }
 
@@ -71,16 +77,20 @@ public final class BonusModel extends FeatureModel
     {
         super.prepare(provider);
 
-        getFeature(Layerable.class).setLayer(Constant.LAYER_ENTITIES_MOVING, Constant.LAYER_ENTITIES_MOVING);
+        if (anim != null)
+        {
+            animatable.play(anim);
+        }
     }
 
-    /**
-     * Get the surface representation.
-     * 
-     * @return The surface representation.
-     */
-    public SpriteAnimated getSurface()
+    @Override
+    public void update(double extrp)
     {
-        return surface;
+        transformable.moveLocation(extrp, 0.0, FALLING_SPEED);
+
+        if (camera.getViewpointY(transformable.getY() + transformable.getHeight()) > camera.getHeight())
+        {
+            identifiable.destroy();
+        }
     }
 }

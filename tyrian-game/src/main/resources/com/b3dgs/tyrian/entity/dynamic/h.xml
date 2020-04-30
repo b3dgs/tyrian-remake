@@ -3,18 +3,18 @@
     <lionengine:class>com.b3dgs.lionengine.helper.EntityHelper</lionengine:class>
     <lionengine:features>
         <lionengine:feature>com.b3dgs.tyrian.entity.EntityModel</lionengine:feature>
+        <lionengine:feature>com.b3dgs.tyrian.entity.Ship</lionengine:feature>
+        <lionengine:feature>com.b3dgs.tyrian.entity.Shooter</lionengine:feature>
     </lionengine:features>
-    <lionengine:surface image="Spider.png"/>
-    <lionengine:frames horizontal="3" vertical="1"/>
-    <lionengine:size width="48" height="56"/>
+    <lionengine:surface image="h.png"/>
+    <lionengine:frames horizontal="1" vertical="1"/>
+    <lionengine:size width="24" height="28"/>
     <lionengine:origin>MIDDLE</lionengine:origin>
-    <lionengine:animations>
-        <lionengine:animation name="idle" start="1" end="3" speed="0.1" reversed="true" repeat="true"/>
-    </lionengine:animations>
+    <lionengine:force vx="0.0" vy="-0.75"/>
     <lionengine:collisions>
-        <lionengine:collision name="default" offsetX="0" offsetY="-40" width="36" height="40" mirror="false"/>
+        <lionengine:collision name="default" offsetX="0" offsetY="-24" width="20" height="24" mirror="false"/>
     </lionengine:collisions>
-    <lionengine:layerable layerDisplay="2" layerRefresh="2"/>
+    <lionengine:layerable layerDisplay="3" layerRefresh="3"/>
     <lionengine:collidable group="3" accepted="1"/>
-    <explode>explode_little</explode>
+    <explode>explode_medium</explode>
 </lionengine:featurable>

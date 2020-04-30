@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,29 +24,29 @@ import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.tyrian.ship.ShipController;
 import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * Ship control implementation.
  */
 @FeatureInterface
-public final class ShipControllerPc extends FeatureModel implements ShipController
+public final class ShipControllerPc extends FeatureModel implements Routine
 {
     private static final double SENSIBILITY = 1.0;
 
     private final Cursor cursor = new Cursor();
+
+    private final Context context = services.get(Context.class);
+    private final Mouse mouse = services.get(Mouse.class);
+    private final Camera camera = services.get(Camera.class);
+
     private double oldX;
     private double oldY;
-
     private int count;
-
-    private final Context context;
-    private final Mouse mouse;
-    private final Camera camera;
 
     @FeatureGet private Transformable transformable;
     @FeatureGet private ShipModel model;
@@ -60,10 +60,6 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
     public ShipControllerPc(Services services, Setup setup)
     {
         super(services, setup);
-
-        context = services.get(Context.class);
-        mouse = services.get(Mouse.class);
-        camera = services.get(Camera.class);
     }
 
     /**
@@ -123,8 +119,9 @@ public final class ShipControllerPc extends FeatureModel implements ShipControll
         oldX = cursor.getX();
         oldY = cursor.getY();
         cursor.update(extrp);
-        // mouse.lock();
+        mouse.lock();
         updatePosition(extrp);
+
         if (mouse.getClick() > 0)
         {
             model.fire();

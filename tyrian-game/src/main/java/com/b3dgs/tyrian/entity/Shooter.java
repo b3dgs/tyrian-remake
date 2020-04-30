@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,8 +31,8 @@ import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.ship.ShipUpdater;
-import com.b3dgs.tyrian.weapon.WeaponUpdater;
+import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.weapon.WeaponModel;
 
 /**
  * Shooter implementation.
@@ -40,11 +40,11 @@ import com.b3dgs.tyrian.weapon.WeaponUpdater;
 @FeatureInterface
 public class Shooter extends FeatureModel implements Routine
 {
-    private WeaponUpdater weapon;
-    private Localizable target;
-
     private final Factory factory = services.get(Factory.class);
-    private final ShipUpdater ship = services.get(ShipUpdater.class);
+    private final ShipModel ship = services.get(ShipModel.class);
+
+    private final WeaponModel weapon;
+    private Localizable target;
 
     @FeatureGet private Transformable transformable;
 
@@ -55,17 +55,17 @@ public class Shooter extends FeatureModel implements Routine
      * @param setup The setup reference (must not be <code>null</code>).
      * @throws LionEngineException If invalid arguments.
      */
-    Shooter(Services services, Setup setup)
+    public Shooter(Services services, Setup setup)
     {
         super(services, setup);
+
+        weapon = factory.create(Medias.create(Constant.FOLDER_WEAPON, "pulser.xml")).getFeature(WeaponModel.class);
     }
 
     @Override
     public void prepare(FeatureProvider provider)
     {
         super.prepare(provider);
-
-        weapon = factory.create(Medias.create(Constant.FOLDER_WEAPON, "pulser.xml")).getFeature(WeaponUpdater.class);
 
         final Transformable transformable = ship.getFeature(Transformable.class);
         target = new Localizable()

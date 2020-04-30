@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
  */
 package com.b3dgs.tyrian;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,23 +28,16 @@ import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.lionengine.game.feature.WorldGame;
-import com.b3dgs.lionengine.game.feature.collidable.ComponentCollision;
-import com.b3dgs.lionengine.game.feature.tile.map.MapTile;
-import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersister;
-import com.b3dgs.lionengine.game.feature.tile.map.persister.MapTilePersisterModel;
-import com.b3dgs.lionengine.game.feature.tile.map.viewer.MapTileViewerModel;
 import com.b3dgs.lionengine.graphic.Graphic;
-import com.b3dgs.lionengine.io.FileReading;
-import com.b3dgs.lionengine.io.FileWriting;
+import com.b3dgs.lionengine.helper.WorldHelper;
 import com.b3dgs.lionengine.io.InputDevicePointer;
 import com.b3dgs.tyrian.background.Background;
-import com.b3dgs.tyrian.ship.ShipUpdater;
+import com.b3dgs.tyrian.ship.ShipModel;
 
 /**
  * World game representation.
  */
-public class World extends WorldGame
+public class World extends WorldHelper
 {
     private static final long SPAWN_DELAY = 100;
     private static final int SPAWN_BONUS_CHANCE = 10;
@@ -65,7 +57,7 @@ public class World extends WorldGame
      */
     private static List<Media> getEntities()
     {
-        return Arrays.asList(Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "d.xml"),
+        return Arrays.asList(Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "h.xml"),
                              Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_big.xml"),
                              Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_little_1.xml"),
                              Medias.create(Constant.FOLDER_ENTITY, Constant.FOLDER_DYNAMIC, "meteor_medium_1.xml"));
@@ -110,7 +102,6 @@ public class World extends WorldGame
     private final Background background = new Background(camera);
     private final Tick tick = new Tick();
     private final Hud hud;
-    private final MapTile map;
 
     /**
      * Create the world.
@@ -124,16 +115,13 @@ public class World extends WorldGame
         final double underMapHeight = -camera.getHeight() * 1.5;
         camera.teleport(0, underMapHeight);
 
-        handler.addComponent(new ComponentCollision());
-
         final Featurable ship = factory.create(Medias.create(Constant.FOLDER_SHIP, "stalker.xml"));
         handler.add(ship);
-        services.add(ship.getFeature(ShipUpdater.class));
-        map = Map.generate(services, "level1");
-        map.addFeature(new MapTileViewerModel(services));
-        map.addFeature(new MapTilePersisterModel(services));
-        handler.add(map);
+        services.add(ship.getFeature(ShipModel.class));
+
         hud = new Hud(services);
+
+        Map.generate(services, "level1");
 
         camera.setView(0,
                        0,
@@ -164,18 +152,6 @@ public class World extends WorldGame
             final double y = (int) camera.getY() + camera.getHeight() + transformable.getHeight();
             transformable.teleport(x, y);
         }
-    }
-
-    @Override
-    protected void saving(FileWriting file) throws IOException
-    {
-        map.getFeature(MapTilePersister.class).save(file);
-    }
-
-    @Override
-    protected void loading(FileReading file) throws IOException
-    {
-        map.getFeature(MapTilePersister.class).load(file);
     }
 
     @Override

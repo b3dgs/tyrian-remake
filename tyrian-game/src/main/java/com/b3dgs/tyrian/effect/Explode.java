@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,9 @@ import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.feature.Factory;
+import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
+import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -52,15 +54,15 @@ public class Explode extends FeaturableModel
         // Nothing to do
     };
 
+    private final SourceResolutionProvider source = services.get(SourceResolutionProvider.class);
+    private final Factory factory = services.get(Factory.class);
+    private final Handler handler = services.get(Handler.class);
+
     private final Rectangle area = new Rectangle();
     private final Media media;
     private final int countMax;
     private PostAction action = EMPTY_ACTION;
     private int count = -1;
-
-    private final SourceResolutionProvider source = services.get(SourceResolutionProvider.class);
-    private final Factory factory = services.get(Factory.class);
-    private final Handler handler = services.get(Handler.class);
 
     /**
      * Create explode.
@@ -73,8 +75,8 @@ public class Explode extends FeaturableModel
     {
         super(services, setup);
 
-        media = Medias.create(setup.getText(Effect.NODE_EXPLODE));
-        countMax = setup.getInteger(ATT_COUNT, Effect.NODE_EXPLODE);
+        media = Medias.create(setup.getText(EffectModel.NODE_EXPLODE));
+        countMax = setup.getInteger(ATT_COUNT, EffectModel.NODE_EXPLODE);
 
         addFeature(new ExplodeUpdater(services, setup));
     }
@@ -113,7 +115,9 @@ public class Explode extends FeaturableModel
         private final Tick tick = new Tick();
         private final Tick tickSfx = new Tick();
         private final Tick extraDelay = new Tick();
-        private Effect effect;
+        private EffectModel effect;
+
+        @FeatureGet private Identifiable identifiable;
 
         /**
          * Create explode medium updater.
@@ -138,9 +142,10 @@ public class Explode extends FeaturableModel
                 final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
                 final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight()) + area.getHeight() / 2;
 
-                effect = factory.create(media);
+                final Featurable featurable = factory.create(media);
+                effect = featurable.getFeature(EffectModel.class);
                 effect.start(Geom.createLocalizable(x, y));
-                handler.add(effect);
+                handler.add(featurable);
 
                 checkSfx();
 
@@ -170,13 +175,13 @@ public class Explode extends FeaturableModel
          */
         private void checkEnd()
         {
-            if (count > countMax && effect != null && effect.getFeature(EffectUpdater.class).isFinished())
+            if (count > countMax && effect != null && effect.isFinished())
             {
                 extraDelay.start();
                 if (extraDelay.elapsedTime(source.getRate(), EXTRA_DELAY))
                 {
                     action.execute();
-                    getFeature(Identifiable.class).destroy();
+                    identifiable.destroy();
                     count = 0;
                     effect = null;
                     action = EMPTY_ACTION;
