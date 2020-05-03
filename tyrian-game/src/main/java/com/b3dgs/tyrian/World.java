@@ -32,7 +32,7 @@ import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.helper.WorldHelper;
 import com.b3dgs.lionengine.io.InputDevicePointer;
 import com.b3dgs.tyrian.background.Background;
-import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.entity.ShipModel;
 
 /**
  * World game representation.

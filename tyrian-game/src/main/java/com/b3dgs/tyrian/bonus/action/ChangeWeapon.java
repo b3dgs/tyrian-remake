@@ -28,8 +28,8 @@ import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.ship.ShipModel;
-import com.b3dgs.tyrian.weapon.WeaponModel;
+import com.b3dgs.tyrian.entity.ShipModel;
+import com.b3dgs.tyrian.entity.WeaponModel;
 
 /**
  * Change weapon action.

@@ -47,8 +47,6 @@ import com.b3dgs.lionengine.game.feature.collidable.CollidableListener;
 import com.b3dgs.lionengine.game.feature.collidable.Collision;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
-import com.b3dgs.tyrian.effect.EffectModel;
-import com.b3dgs.tyrian.effect.Explode;
 
 /**
  * Entity model implementation.

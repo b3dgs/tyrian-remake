@@ -18,7 +18,7 @@ package com.b3dgs.tyrian.bonus.action;
 
 import com.b3dgs.lionengine.game.Feature;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
-import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.entity.ShipModel;
 
 /**
  * Action feature interface. Executed when entity is destroyed.

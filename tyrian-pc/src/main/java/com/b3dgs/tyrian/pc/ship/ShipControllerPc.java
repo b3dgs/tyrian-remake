@@ -28,7 +28,7 @@ import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.entity.ShipModel;
 
 /**
  * Ship control implementation.

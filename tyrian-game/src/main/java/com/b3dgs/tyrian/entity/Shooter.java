@@ -31,8 +31,6 @@ import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launcher;
 import com.b3dgs.tyrian.Constant;
-import com.b3dgs.tyrian.ship.ShipModel;
-import com.b3dgs.tyrian.weapon.WeaponModel;
 
 /**
  * Shooter implementation.

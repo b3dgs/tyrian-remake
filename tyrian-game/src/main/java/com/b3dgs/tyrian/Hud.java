@@ -19,7 +19,6 @@ package com.b3dgs.tyrian;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.Updatable;
-import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.game.Bar;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Services;
@@ -29,7 +28,7 @@ import com.b3dgs.lionengine.graphic.Graphic;
 import com.b3dgs.lionengine.graphic.Renderable;
 import com.b3dgs.lionengine.graphic.drawable.Drawable;
 import com.b3dgs.lionengine.graphic.drawable.Sprite;
-import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.entity.ShipModel;
 
 /**
  * HUD representation.
@@ -39,19 +38,34 @@ public class Hud implements Updatable, Renderable
     private static final Media HUD = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
     private static final ColorRgba BROWN = new ColorRgba(90, 45, 0);
 
-    private final Bar shield = new Bar(60, 9);
-    private final Bar armor = new Bar(60, 9);
-    private final Bar energy = new Bar(96, 11);
-    private final Bar levelFront = new Bar(4, 12);
-    private final Bar levelRear = new Bar(4, 12);
-    private final Bar progress = new Bar(12, 49);
+    private static Bar createBar(int width, int height, int x, int y, ColorRgba color)
+    {
+        final Bar bar = new Bar(width, height);
+        bar.setLocation(x, y);
+        bar.setColor(ColorRgba.BLACK, color);
+        return bar;
+    }
+
+    private static Bar createBar(int width, int height, int x, int y, ColorRgba gradientA, ColorRgba gradientB)
+    {
+        final Bar bar = createBar(width, height, x, y, ColorRgba.BLACK);
+        bar.setColorGradient(gradientA, gradientB);
+        return bar;
+    }
+
+    private final Bar shield = createBar(60, 9, 12, 334, ColorRgba.BLUE);
+    private final Bar armor = createBar(60, 9, 12, 371, BROWN);
+    private final Bar energy = createBar(96, 11, 108, 332, ColorRgba.RED, ColorRgba.YELLOW);
+    private final Bar levelFront = createBar(4, 12, 198, 348, ColorRgba.YELLOW, ColorRgba.RED);
+    private final Bar levelRear = createBar(4, 12, 198, 364, ColorRgba.YELLOW, ColorRgba.RED);
+    private final Bar progress = createBar(12, 49, 81, 331, ColorRgba.GREEN, ColorRgba.RED);
     private final Sprite surface = Drawable.loadSprite(HUD);
     private final ShipModel ship;
     private final Camera camera;
     private final MapTile map;
 
     /**
-     * Create HUD.
+     * Create hud.
      * 
      * @param services The services reference.
      */
@@ -61,37 +75,15 @@ public class Hud implements Updatable, Renderable
 
         camera = services.get(Camera.class);
         map = services.get(MapTile.class);
+        ship = services.get(ShipModel.class);
 
         surface.load();
         surface.prepare();
-        surface.setLocation(0.0, services.get(Viewer.class).getHeight() - surface.getHeight());
-
-        ship = services.get(ShipModel.class);
-
-        shield.setLocation(12, 334);
-        shield.setColor(ColorRgba.BLACK, ColorRgba.BLUE);
-
-        armor.setLocation(12, 371);
-        armor.setColor(ColorRgba.BLACK, BROWN);
-
-        energy.setLocation(108, 332);
-        energy.setColorBackground(ColorRgba.BLACK);
-        energy.setColorGradient(ColorRgba.RED, ColorRgba.YELLOW);
-
-        levelFront.setLocation(198, 348);
-        levelFront.setColorBackground(ColorRgba.BLACK);
-        levelFront.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
-
-        levelRear.setLocation(198, 364);
-        levelRear.setColorBackground(ColorRgba.BLACK);
-        levelRear.setColorGradient(ColorRgba.YELLOW, ColorRgba.RED);
-
-        progress.setLocation(81, 331);
-        progress.setColorGradient(ColorRgba.GREEN, ColorRgba.RED);
+        surface.setLocation(0.0, camera.getHeight() - surface.getHeight());
     }
 
     /**
-     * Get the HUD height.
+     * Get the height.
      * 
      * @return The height.
      */
@@ -105,7 +97,7 @@ public class Hud implements Updatable, Renderable
      * 
      * @return The front weapon level.
      */
-    public int getLevelPercentFront()
+    private int getLevelPercentFront()
     {
         return (int) Math.max(1, Math.floor(ship.getFront().getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
     }
@@ -115,7 +107,7 @@ public class Hud implements Updatable, Renderable
      * 
      * @return The rear weapon level.
      */
-    public int getLevelPercentRear()
+    private int getLevelPercentRear()
     {
         return (int) Math.max(1, Math.floor(ship.getRear().getLevel() * 100.0 / Constant.WEAPON_LEVEL_MAX));
     }
@@ -130,7 +122,7 @@ public class Hud implements Updatable, Renderable
         levelFront.setHeightPercent(getLevelPercentFront());
         levelRear.setHeightPercent(getLevelPercentRear());
 
-        progress.setHeightPercent((int) ((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
+        progress.setHeightPercent((int) Math.floor((camera.getY() + camera.getHeight()) * 100.0 / map.getHeight()));
     }
 
     @Override

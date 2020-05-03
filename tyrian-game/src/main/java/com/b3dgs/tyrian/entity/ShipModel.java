@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.b3dgs.tyrian.ship;
+package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
@@ -55,12 +55,7 @@ import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
 import com.b3dgs.tyrian.Constant;
 import com.b3dgs.tyrian.Sfx;
 import com.b3dgs.tyrian.bonus.action.Action;
-import com.b3dgs.tyrian.effect.Explode;
-import com.b3dgs.tyrian.effect.Explode.PostAction;
-import com.b3dgs.tyrian.entity.EntityModel;
-import com.b3dgs.tyrian.projectile.ProjectileModel;
-import com.b3dgs.tyrian.weapon.Weapon;
-import com.b3dgs.tyrian.weapon.WeaponModel;
+import com.b3dgs.tyrian.entity.Explode.PostAction;
 
 /**
  * Ship model implementation.
@@ -133,8 +128,8 @@ public final class ShipModel extends FeatureModel implements Routine, Collidable
         armor.fill();
         energy.fill();
 
-        front = createWeapon(Weapon.PULSE_CANNON);
-        rear = createWeapon(Weapon.SONIC_WAVE);
+        front = createWeapon(Medias.create(Constant.FOLDER_WEAPON, Constant.FOLDER_FRONT, "pulse_cannon.xml"));
+        rear = createWeapon(Medias.create(Constant.FOLDER_WEAPON, Constant.FOLDER_REAR, "sonic_wave.xml"));
 
         shieldIncTick.start();
     }

@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-package com.b3dgs.tyrian.projectile;
+package com.b3dgs.tyrian.entity;
 
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
@@ -45,7 +45,6 @@ import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 import com.b3dgs.lionengine.game.feature.launchable.Launchable;
 import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
-import com.b3dgs.tyrian.effect.EffectModel;
 
 /**
  * Projectile model implementation.
