@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.game.feature.SequenceGame;
 /**
  * Game loop designed to handle our little world.
  */
-public final class Scene extends SequenceGame
+public final class Scene extends SequenceGame<World>
 {
     /**
      * Constructor.
