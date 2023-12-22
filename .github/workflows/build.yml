@@ -1,0 +1,70 @@
+# This workflow will:
+# - compile game on windows, linux, macos
+# - run game sonar on linux
+
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        jdk: [17]
+    runs-on: ${{ matrix.os }}
+    env:
+      JDK_VERSION: ${{ matrix.jdk }}
+      AUDIODEV: "null"
+
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v4.1.1
+       with:
+         fetch-depth: 0
+
+     - name: Cache
+       uses: actions/cache@v3.3.2
+       with:
+          path: ~/.m2/repository
+          key: maven-${{ matrix.os }}-java${{ matrix.jdk }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ matrix.os }}-java${{ matrix.jdk }}-
+            maven-${{ matrix.os }}-
+
+     - name: Maven
+       uses: stCarolas/setup-maven@v4.5
+       with:
+         maven-version: 3.9.6
+
+     - name: JDK
+       uses: actions/setup-java@v4.0.0
+       with:
+         java-version: |
+           ${{ matrix.jdk }}
+         distribution: 'temurin'
+         mvn-toolchain-id: |
+           JavaSE-17
+
+     - name: Compile windows
+       if: matrix.os == 'windows-latest'
+       uses: coactions/setup-xvfb@v1.0.1
+       with:
+         run: mvn clean install --file tyrian-parent/pom.xml -U -Pall
+
+     - name: Compile macos
+       if: matrix.os == 'macos-latest'
+       uses: coactions/setup-xvfb@v1.0.1
+       with:
+         run: mvn clean install --file tyrian-parent/pom.xml -U -Pall
+
+     - name: Sonar ubuntu
+       if: matrix.os == 'ubuntu-latest'
+       uses: coactions/setup-xvfb@v1.0.1
+       with:
+         run: mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar --file tyrian-parent/pom.xml -U -Pall -Dsonar.organization=b3dgs -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=b3dgs_tyrian-remake
