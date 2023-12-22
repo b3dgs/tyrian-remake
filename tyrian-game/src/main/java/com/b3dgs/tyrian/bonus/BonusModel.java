@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,10 @@
  */
 package com.b3dgs.tyrian.bonus;
 
-import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.game.AnimationConfig;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Animatable;
 import com.b3dgs.lionengine.game.feature.Camera;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -43,43 +40,36 @@ public final class BonusModel extends FeatureModel implements Routine
 
     private final Camera camera = services.get(Camera.class);
 
-    private final Animation anim;
-
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Collidable collidable;
-    @FeatureGet private Animatable animatable;
-    @FeatureGet private Identifiable identifiable;
+    private final Identifiable identifiable;
+    private final Transformable transformable;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param identifiable The identifiable feature.
+     * @param transformable The transformable feature.
+     * @param collidable The collidable feature.
+     * @param animatable The animatable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    BonusModel(Services services, Setup setup)
+    public BonusModel(Services services,
+                      Setup setup,
+                      Identifiable identifiable,
+                      Transformable transformable,
+                      Collidable collidable,
+                      Animatable animatable)
     {
         super(services, setup);
+
+        this.identifiable = identifiable;
+        this.transformable = transformable;
 
         final AnimationConfig animConfig = AnimationConfig.imports(setup);
         if (animConfig.hasAnimation(ANIM_IDLE))
         {
-            anim = animConfig.getAnimation(ANIM_IDLE);
-        }
-        else
-        {
-            anim = null;
-        }
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        if (anim != null)
-        {
-            animatable.play(anim);
+            animatable.play(animConfig.getAnimation(ANIM_IDLE));
         }
     }
 

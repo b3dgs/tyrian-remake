@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@ import com.b3dgs.lionengine.game.feature.Animatable;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
@@ -60,30 +59,45 @@ public final class EntityModel extends FeatureModel implements Routine, Collidab
     private final Handler handler = services.get(Handler.class);
     private final Camera camera = services.get(Camera.class);
 
+    private final Identifiable identifiable;
+    private final Transformable transformable;
+    private final Collidable collidable;
+    private final Animatable animatable;
+
     private final Alterable life = new Alterable(3);
     private final Direction direction;
     private final Media explode;
     private final Animation anim;
-
-    @FeatureGet private Layerable layerable;
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Collidable collidable;
-    @FeatureGet private Animatable animatable;
-    @FeatureGet private Identifiable identifiable;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param identifiable The identifiable feature.
+     * @param layerable The layerable feature.
+     * @param transformable The transformable feature.
+     * @param collidable The collidable feature.
+     * @param animatable The animatable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    EntityModel(Services services, Setup setup)
+    public EntityModel(Services services,
+                       Setup setup,
+                       Identifiable identifiable,
+                       Layerable layerable,
+                       Transformable transformable,
+                       Collidable collidable,
+                       Animatable animatable)
     {
         super(services, setup);
 
+        this.identifiable = identifiable;
+        this.transformable = transformable;
+        this.collidable = collidable;
+        this.animatable = animatable;
+
         final Xml root = setup.getRoot();
-        if (root.hasChild(ForceConfig.NODE_FORCE))
+        if (root.hasNode(ForceConfig.NODE_FORCE))
         {
             direction = ForceConfig.imports(setup);
         }

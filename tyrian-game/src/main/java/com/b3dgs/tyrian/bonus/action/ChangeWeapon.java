@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -35,27 +34,30 @@ import com.b3dgs.tyrian.entity.WeaponModel;
  * Change weapon action.
  */
 @FeatureInterface
-public class ChangeWeapon extends FeatureModel implements Action
+public final class ChangeWeapon extends FeatureModel implements Action
 {
     private static final String NODE_WEAPON_FRONT = "weaponFront";
     private static final String NODE_WEAPON_REAR = "weaponRear";
 
     private final Factory factory = services.get(Factory.class);
 
-    private final Media media;
+    private final Identifiable identifiable;
 
-    @FeatureGet private Identifiable identifiable;
+    private final Media media;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param identifiable The identifiable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    public ChangeWeapon(Services services, Setup setup)
+    public ChangeWeapon(Services services, Setup setup, Identifiable identifiable)
     {
         super(services, setup);
+
+        this.identifiable = identifiable;
 
         if (setup.hasNode(NODE_WEAPON_FRONT))
         {

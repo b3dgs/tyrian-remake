@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,7 @@ package com.b3dgs.tyrian.pc.ship;
 import com.b3dgs.lionengine.Context;
 import com.b3dgs.lionengine.awt.Mouse;
 import com.b3dgs.lionengine.game.Cursor;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Camera;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Routine;
@@ -38,28 +36,40 @@ public final class ShipControllerPc extends FeatureModel implements Routine
 {
     private static final double SENSIBILITY = 1.0;
 
-    private final Cursor cursor = new Cursor();
-
     private final Context context = services.get(Context.class);
-    private final Mouse mouse = services.get(Mouse.class);
+    private final Mouse mouse = context.getInputDevice(Mouse.class);
     private final Camera camera = services.get(Camera.class);
+
+    private final Transformable transformable;
+    private final ShipModel model;
+
+    private final Cursor cursor = new Cursor(services);
 
     private double oldX;
     private double oldY;
     private int count;
-
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private ShipModel model;
 
     /**
      * Create a PC ship controller.
      * 
      * @param services The services reference.
      * @param setup The setup reference.
+     * @param transformable The transformable feature.
+     * @param model The model feature.
      */
-    public ShipControllerPc(Services services, Setup setup)
+    public ShipControllerPc(Services services, Setup setup, Transformable transformable, ShipModel model)
     {
         super(services, setup);
+
+        this.transformable = transformable;
+        this.model = model;
+
+        mouse.setCenter(context.getX() + context.getConfig().getOutput().getWidth() / 2,
+                        context.getY() + context.getConfig().getOutput().getHeight() / 2);
+
+        cursor.setSync(mouse);
+        cursor.setViewer(camera);
+        cursor.setSensibility(SENSIBILITY, SENSIBILITY);
     }
 
     /**
@@ -100,29 +110,15 @@ public final class ShipControllerPc extends FeatureModel implements Routine
     }
 
     @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        mouse.setCenter(context.getX() + context.getConfig().getOutput().getWidth() / 2,
-                        context.getY() + context.getConfig().getOutput().getHeight() / 2);
-
-        cursor.setInputDevice(mouse);
-        cursor.setSyncMode(false);
-        cursor.setViewer(camera);
-        cursor.setSensibility(SENSIBILITY, SENSIBILITY);
-    }
-
-    @Override
     public void update(double extrp)
     {
         oldX = cursor.getX();
         oldY = cursor.getY();
         cursor.update(extrp);
-        mouse.lock();
+        // mouse.lock();
         updatePosition(extrp);
 
-        if (mouse.getClick() > 0)
+        if (mouse.isPushed())
         {
             model.fire();
         }

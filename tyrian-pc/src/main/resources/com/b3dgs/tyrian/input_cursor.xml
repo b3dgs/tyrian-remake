@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lionengine:input mapping="com.b3dgs.tyrian.DeviceMapping" xmlns:lionengine="http://lionengine.b3dgs.com/xsd/9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lionengine.b3dgs.com/xsd/9 http://lionengine.b3dgs.com/xsd/9/input.xsd">
+    <lionengine:device class="com.b3dgs.lionengine.awt.Mouse" id="0" index="0" name="Cursor">
+        <lionengine:fire index="ACTION_LEFT" positive="1"/>
+        <lionengine:fire index="ACTION_RIGHT" positive="3"/>
+    </lionengine:device>
+</lionengine:input>

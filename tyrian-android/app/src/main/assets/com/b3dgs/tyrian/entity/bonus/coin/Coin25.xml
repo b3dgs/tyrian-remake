@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:class>com.b3dgs.tyrian.entity.bonus.Coin25</lionengine:class>
-    <lionengine:surface image="Coin25.png"/>
-	<lionengine:size width="12" height="14"/>
-	<lionengine:collision name="default" offsetX="0" offsetY="0" width="12" height="14" mirror="false" />
-	<lionengine:animation name="idle" start="1" end="5" speed="0.2" reversed="false" repeat="true"/>
-</lionengine:featurable>

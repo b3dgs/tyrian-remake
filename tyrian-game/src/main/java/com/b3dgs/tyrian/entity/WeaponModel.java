@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,8 +24,6 @@ import com.b3dgs.lionengine.UtilMath;
 import com.b3dgs.lionengine.audio.Audio;
 import com.b3dgs.lionengine.audio.AudioFactory;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureProvider;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Routine;
@@ -41,27 +39,32 @@ import com.b3dgs.tyrian.Sfx;
  * Weapon model implementation.
  */
 @FeatureInterface
-public class WeaponModel extends FeatureModel implements Routine
+public final class WeaponModel extends FeatureModel implements Routine
 {
     /** Fire node name. */
     private static final String NODE_FIRE = "fire";
 
+    private final Transformable transformable;
+    private final Launcher launcher;
+
     private final Audio sfxFire;
     private final boolean front;
-
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Launcher launcher;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param transformable The transformable feature.
+     * @param launcher The launcher feature.
      * @throws LionEngineException If invalid arguments.
      */
-    public WeaponModel(Services services, Setup setup)
+    public WeaponModel(Services services, Setup setup, Transformable transformable, Launcher launcher)
     {
         super(services, setup);
+
+        this.transformable = transformable;
+        this.launcher = launcher;
 
         if (setup.hasNode(NODE_FIRE))
         {
@@ -76,6 +79,14 @@ public class WeaponModel extends FeatureModel implements Routine
         }
 
         front = setup.getMedia().getPath().contains(Constant.FOLDER_FRONT);
+
+        launcher.addListener((LauncherListener) () ->
+        {
+            if (sfxFire != null && Sfx.isEnabled())
+            {
+                sfxFire.play();
+            }
+        });
     }
 
     /**
@@ -143,20 +154,6 @@ public class WeaponModel extends FeatureModel implements Routine
     public int getLevel()
     {
         return launcher.getLevel();
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        launcher.addListener((LauncherListener) () ->
-        {
-            if (sfxFire != null && Sfx.isEnabled())
-            {
-                sfxFire.play();
-            }
-        });
     }
 
     @Override

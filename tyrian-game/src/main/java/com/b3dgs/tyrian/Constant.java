@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ public final class Constant
     /** Application name. */
     public static final String NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = Version.create(0, 4, 1);
+    public static final Version VERSION = new Version(0, 4, 1);
     /** Native resolution. */
     public static final Resolution NATIVE = new Resolution(216, 384, 60);
 

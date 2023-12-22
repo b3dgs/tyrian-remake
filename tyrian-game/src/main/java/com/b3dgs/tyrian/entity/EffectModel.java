@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,7 @@ import com.b3dgs.lionengine.Animation;
 import com.b3dgs.lionengine.AnimatorStateListener;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.game.AnimationConfig;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Animatable;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -40,23 +38,40 @@ public final class EffectModel extends FeatureModel
     /** Explode node name. */
     public static final String NODE_EXPLODE = "explode";
 
-    private final Animation anim;
+    private final Transformable transformable;
+    private final Animatable animatable;
 
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Animatable animatable;
-    @FeatureGet private Identifiable identifiable;
+    private final Animation anim;
 
     /**
      * Create an effect.
      * 
      * @param services The services reference.
      * @param setup The setup reference.
+     * @param identifiable The identifiable feature.
+     * @param transformable The transformable feature.
+     * @param animatable The animatable feature.
      */
-    EffectModel(Services services, Setup setup)
+    public EffectModel(Services services,
+                       Setup setup,
+                       Identifiable identifiable,
+                       Transformable transformable,
+                       Animatable animatable)
     {
         super(services, setup);
 
+        this.transformable = transformable;
+        this.animatable = animatable;
+
         anim = AnimationConfig.imports(setup).getAnimation("start");
+
+        animatable.addListener((AnimatorStateListener) state ->
+        {
+            if (AnimState.FINISHED == state)
+            {
+                identifiable.destroy();
+            }
+        });
     }
 
     /**
@@ -78,19 +93,5 @@ public final class EffectModel extends FeatureModel
     public boolean isFinished()
     {
         return animatable.is(AnimState.FINISHED);
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        animatable.addListener((AnimatorStateListener) state ->
-        {
-            if (AnimState.FINISHED == state)
-            {
-                identifiable.destroy();
-            }
-        });
     }
 }

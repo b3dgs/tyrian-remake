@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@ import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.FeaturableModel;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
@@ -40,7 +39,7 @@ import com.b3dgs.tyrian.Sfx;
 /**
  * Explode effect implementation.
  */
-public class Explode extends FeaturableModel
+public final class Explode extends FeaturableModel
 {
     /** Explode count attribute. */
     public static final String ATT_COUNT = "count";
@@ -61,6 +60,7 @@ public class Explode extends FeaturableModel
     private final Rectangle area = new Rectangle();
     private final Media media;
     private final int countMax;
+
     private PostAction action = EMPTY_ACTION;
     private int count = -1;
 
@@ -78,7 +78,7 @@ public class Explode extends FeaturableModel
         media = Medias.create(setup.getText(EffectModel.NODE_EXPLODE));
         countMax = setup.getInteger(ATT_COUNT, EffectModel.NODE_EXPLODE);
 
-        addFeature(new ExplodeUpdater(services, setup));
+        addFeature(new ExplodeUpdater(services, setup, getFeature(Identifiable.class)));
     }
 
     /**
@@ -108,26 +108,30 @@ public class Explode extends FeaturableModel
     /**
      * Explode updater implementation.
      */
-    private class ExplodeUpdater extends FeatureModel implements Refreshable
+    private final class ExplodeUpdater extends FeatureModel implements Refreshable
     {
         private static final long EXTRA_DELAY = 1000L;
+
+        private final Identifiable identifiable;
 
         private final Tick tick = new Tick();
         private final Tick tickSfx = new Tick();
         private final Tick extraDelay = new Tick();
-        private EffectModel effect;
 
-        @FeatureGet private Identifiable identifiable;
+        private EffectModel effect;
 
         /**
          * Create explode medium updater.
          * 
          * @param services The services reference.
          * @param setup The setup reference.
+         * @param identifiable The identifiable feature.
          */
-        ExplodeUpdater(Services services, Setup setup)
+        ExplodeUpdater(Services services, Setup setup, Identifiable identifiable)
         {
             super(services, setup);
+
+            this.identifiable = identifiable;
         }
 
         @Override

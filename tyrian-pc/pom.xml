@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.b3dgs.tyrian</groupId>
         <artifactId>tyrian-parent</artifactId>
         <version>0.4.1-SNAPSHOT</version>
-        <relativePath>../tyrian-parent</relativePath>
+        <relativePath>../tyrian-parent/pom.xml</relativePath>
     </parent>
     <artifactId>tyrian-pc</artifactId>
     <packaging>jar</packaging>
-    <name>Tyrian PC</name>
+    <name>Tyrian Remake PC</name>
     <properties>
-        <jna.version>5.6.0</jna.version>
+        <jna.version>5.14.0</jna.version>
+        <checkstyle.skip>true</checkstyle.skip>
+        <maven.test.skip>true</maven.test.skip>
+        <log4j2.version>2.22.0</log4j2.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>
             <artifactId>lionengine-core-awt</artifactId>
@@ -36,6 +56,11 @@
         </dependency>
         <dependency>
             <groupId>com.b3dgs.tyrian</groupId>
+            <artifactId>tyrian-assets</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.b3dgs.tyrian</groupId>
             <artifactId>tyrian-game</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -43,28 +68,21 @@
     <build>
         <plugins>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludedGroups>manual</excludedGroups>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.b3dgs.tyrian.AppTyrianPc</mainClass>
+                            <mainClass>com.b3dgs.tyrian.AppTyrian</mainClass>
                         </manifest>
                     </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.game</Bundle-SymbolicName>
-                    </instructions>
                 </configuration>
             </plugin>
             <plugin>
@@ -72,25 +90,7 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>unpack-resources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.b3dgs.tyrian</groupId>
-                                    <artifactId>tyrian-game</artifactId>
-                                    <version>${project.version}</version>
-                                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                                    <excludes>**/*.class, META-INF/**</excludes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-dependencies</id>
+                        <id>unpack-dependencies</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>unpack-dependencies</goal>
@@ -100,20 +100,40 @@
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
+                            <excludeArtifactIds>${tyrian-pc-excludes}</excludeArtifactIds>
+                            <excludeGroupIds>org.apiguardian,org.hamcrest,org.opentest4j,org.junit,junit</excludeGroupIds>
+                            <excludes>
+                                armeabi-v7a/,arm64-v8a/,com/sun/jna/freebsd*/,com/sun/jna/openbsd*/,com/sun/jna/sunos*/,com/sun/jna/android*/,com/sun/jna/*ppc*/,com/sun/jna/*arm*/,com/sun/jna/*aarch64/,com/sun/jna/sunos-sparc*/,com/sun/jna/linux-s390x/,com/sun/jna/linux-riscv64/,com/sun/jna/linux-mips64el/,
+                            </excludes>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>copy-dependencies2</id>
+                        <id>copy-dependencies</id>
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <skip>true</skip>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>org/apache/logging/log4j/**/*.class</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

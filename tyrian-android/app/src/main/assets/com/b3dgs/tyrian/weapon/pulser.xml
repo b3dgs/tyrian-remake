@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:class>com.b3dgs.tyrian.weapon.Weapon</lionengine:class>
-    <lionengine:launcher level="0" rate="60">
-        <lionengine:launchable media="projectile/bullet.xml" delay="0" oy="8">
-            <lionengine:force velocity="8" sensibility="0" vx="3" vy="3"/>
-        </lionengine:launchable>
-    </lionengine:launcher>
-</lionengine:featurable>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,13 +25,11 @@ import com.b3dgs.lionengine.Tick;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.game.Alterable;
 import com.b3dgs.lionengine.game.Direction;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.feature.Animatable;
 import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
@@ -92,6 +90,9 @@ public final class ShipModel extends FeatureModel implements Routine, Collidable
     private final Handler handler = services.get(Handler.class);
     private final Camera camera = services.get(Camera.class);
 
+    private final Transformable transformable;
+    private final Animatable animatable;
+
     private final Alterable shield = new Alterable(15);
     private final Alterable armor = new Alterable(10);
     private final Alterable energy = new Alterable(200);
@@ -99,24 +100,32 @@ public final class ShipModel extends FeatureModel implements Routine, Collidable
     private final Tick hitTick = new Tick();
     private final Tick shieldIncTick = new Tick();
     private final SpriteAnimated hit;
+
     private WeaponModel front;
     private WeaponModel rear;
-
-    @FeatureGet private Layerable layerable;
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Collidable collidable;
-    @FeatureGet private Animatable animatable;
 
     /**
      * Create ship.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param layerable The layerable feature.
+     * @param transformable The transformable feature.
+     * @param collidable The collidable feature.
+     * @param animatable The animatable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    ShipModel(Services services, Setup setup)
+    public ShipModel(Services services,
+                     Setup setup,
+                     Layerable layerable,
+                     Transformable transformable,
+                     Collidable collidable,
+                     Animatable animatable)
     {
         super(services, setup);
+
+        this.transformable = transformable;
+        this.animatable = animatable;
 
         hit = Drawable.loadSpriteAnimated(Medias.create(Constant.FOLDER_EFFECT, "Hit.png"), 1, 1);
         hit.load();
@@ -132,6 +141,12 @@ public final class ShipModel extends FeatureModel implements Routine, Collidable
         rear = createWeapon(Medias.create(Constant.FOLDER_WEAPON, Constant.FOLDER_REAR, "sonic_wave.xml"));
 
         shieldIncTick.start();
+
+        collidable.setCollisionVisibility(false);
+
+        final double startX = (camera.getWidth() + Constant.MARGIN_H + transformable.getWidth()) / 2;
+        final double startY = camera.getY() + camera.getHeight() / 4 - transformable.getHeight();
+        transformable.teleport(startX, startY);
     }
 
     /**
@@ -374,18 +389,6 @@ public final class ShipModel extends FeatureModel implements Routine, Collidable
             tile = TURNING_NOT;
         }
         return tile;
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        collidable.setCollisionVisibility(false);
-
-        final double startX = (camera.getWidth() + Constant.MARGIN_H + transformable.getWidth()) / 2;
-        final double startY = camera.getY() + camera.getHeight() / 4 - transformable.getHeight();
-        transformable.teleport(startX, startY);
     }
 
     @Override

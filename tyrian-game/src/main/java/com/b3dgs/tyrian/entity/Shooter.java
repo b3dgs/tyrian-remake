@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,7 @@ package com.b3dgs.tyrian.entity;
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Localizable;
 import com.b3dgs.lionengine.Medias;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.feature.Factory;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Routine;
@@ -36,48 +34,44 @@ import com.b3dgs.tyrian.Constant;
  * Shooter implementation.
  */
 @FeatureInterface
-public class Shooter extends FeatureModel implements Routine
+public final class Shooter extends FeatureModel implements Routine
 {
     private final Factory factory = services.get(Factory.class);
     private final ShipModel ship = services.get(ShipModel.class);
 
-    private final WeaponModel weapon;
-    private Localizable target;
+    private final Transformable transformable;
 
-    @FeatureGet private Transformable transformable;
+    private final WeaponModel weapon = factory.create(Medias.create(Constant.FOLDER_WEAPON, "pulser.xml"))
+                                              .getFeature(WeaponModel.class);
+    private Localizable target;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param transformable The transformable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    public Shooter(Services services, Setup setup)
+    public Shooter(Services services, Setup setup, Transformable transformable)
     {
         super(services, setup);
 
-        weapon = factory.create(Medias.create(Constant.FOLDER_WEAPON, "pulser.xml")).getFeature(WeaponModel.class);
-    }
+        this.transformable = transformable;
 
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        final Transformable transformable = ship.getFeature(Transformable.class);
+        final Transformable other = ship.getFeature(Transformable.class);
         target = new Localizable()
         {
             @Override
             public double getX()
             {
-                return transformable.getX() + ship.getSpeed().getDirectionHorizontal();
+                return other.getX() + ship.getSpeed().getDirectionHorizontal();
             }
 
             @Override
             public double getY()
             {
-                return transformable.getY() + ship.getSpeed().getDirectionVertical();
+                return other.getY() + ship.getSpeed().getDirectionVertical();
             }
         };
 

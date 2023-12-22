@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,12 +22,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.Media;
 import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.UtilRandom;
-import com.b3dgs.lionengine.Verbose;
 import com.b3dgs.lionengine.Xml;
+import com.b3dgs.lionengine.XmlReader;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
 import com.b3dgs.lionengine.game.feature.Handler;
@@ -54,6 +57,8 @@ public final class Map
     private static final String FILE_ENTITIES_TABLE = "entity.xml";
     private static final int MAX_LEVELS = 14;
     private static final int MAX_LEVEL_INTERVAL_HEIGHT_IN_TILE = 6;
+    /** Logger. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(Map.class);
 
     /**
      * Generate a map.
@@ -104,7 +109,7 @@ public final class Map
         services.add(new Handler(services));
 
         final MapTileGame map = services.create(MapTileGame.class);
-        final MapTilePersister mapPersister = map.addFeatureAndGet(new MapTilePersisterModel());
+        final MapTilePersister mapPersister = map.addFeature(new MapTilePersisterModel());
         final HandlerPersister handlerPersister = new HandlerPersister(services);
         map.create(level, Medias.create(Constant.FOLDER_TILE, "level1", "sheets.xml"));
 
@@ -116,7 +121,7 @@ public final class Map
         }
         catch (final IOException exception)
         {
-            Verbose.exception(exception, "Error on saving map !");
+            LOGGER.error("importLevelAndSave error", exception);
         }
     }
 
@@ -128,8 +133,8 @@ public final class Map
      * @param services The services reference.
      * @return The created listener.
      */
-    private static TileSetListener createListener(final java.util.Map<Integer, Media> entities,
-                                                  final MapTile map,
+    private static TileSetListener createListener(java.util.Map<Integer, Media> entities,
+                                                  MapTile map,
                                                   Services services)
     {
         final Factory factory = services.get(Factory.class);
@@ -166,14 +171,14 @@ public final class Map
             final Media level = Medias.create(Constant.FOLDER_LEVELS, theme, i + ".map");
             final Services services = new Services();
             final MapTileGame map = services.create(MapTileGame.class);
-            final MapTilePersister persister = map.addFeatureAndGet(new MapTilePersisterModel());
+            final MapTilePersister persister = map.addFeature(new MapTilePersisterModel());
             try (FileReading reading = new FileReading(level))
             {
                 persister.load(reading);
             }
             catch (final IOException exception)
             {
-                Verbose.exception(exception);
+                LOGGER.error("getMaps error", exception);
             }
             maps.add(map);
         }
@@ -190,7 +195,7 @@ public final class Map
     {
         final java.util.Map<Integer, Media> entities = new HashMap<>();
         final Xml config = new Xml(Medias.create(Constant.FOLDER_TILE, theme, FILE_ENTITIES_TABLE));
-        for (final Xml nodeTile : config.getChildren(TileConfig.NODE_TILE))
+        for (final XmlReader nodeTile : config.getChildren(TileConfig.NODE_TILE))
         {
             final Integer tile = Integer.valueOf(TileConfig.imports(nodeTile));
             final String file = nodeTile.getText() + Factory.FILE_DATA_DOT_EXTENSION;

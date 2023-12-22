@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<lionengine:featurable xmlns:lionengine="http://lionengine.b3dgs.com">
-    <lionengine:class>com.b3dgs.tyrian.entity.Entity</lionengine:class>
-    <lionengine:explode>explode_little</lionengine:explode>
-    <lionengine:surface image="DoubleCanon.png"/>
-	<lionengine:size width="24" height="28"/>
-	<lionengine:collision name="default" offsetX="0" offsetY="-24" width="18" height="24" mirror="false" />
-	<lionengine:animation name="idle" start="1" end="4" speed="0.2" reversed="true" repeat="true"/>
-</lionengine:featurable>

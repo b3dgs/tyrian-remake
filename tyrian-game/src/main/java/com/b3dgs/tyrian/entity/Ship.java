@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,7 @@ package com.b3dgs.tyrian.entity;
 import com.b3dgs.lionengine.LionEngineException;
 import com.b3dgs.lionengine.UtilRandom;
 import com.b3dgs.lionengine.Viewer;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Routine;
@@ -33,36 +31,31 @@ import com.b3dgs.lionengine.game.feature.Transformable;
  * Ship entity feature, shooting player.
  */
 @FeatureInterface
-public class Ship extends FeatureModel implements Routine
+public final class Ship extends FeatureModel implements Routine
 {
     private static final int RANDOM_Y = 64;
 
     private final Viewer viewer = services.get(Viewer.class);
+    private final Transformable player = services.get(ShipModel.class).getFeature(Transformable.class);
+
+    private final Transformable transformable;
 
     private final boolean follow = UtilRandom.getRandomBoolean();
     private final int y = UtilRandom.getRandomInteger(RANDOM_Y);
-
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Transformable player;
 
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param transformable The transformable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    public Ship(Services services, Setup setup)
+    public Ship(Services services, Setup setup, Transformable transformable)
     {
         super(services, setup);
-    }
 
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        player = services.get(ShipModel.class).getFeature(Transformable.class);
+        this.transformable = transformable;
     }
 
     @Override

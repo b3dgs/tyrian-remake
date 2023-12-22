@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2019 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,17 +22,17 @@ import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
+import com.b3dgs.lionengine.game.feature.Routine;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.tyrian.ship.ShipController;
-import com.b3dgs.tyrian.ship.ShipModel;
+import com.b3dgs.tyrian.entity.ShipModel;
 
 /**
  * Ship control implementation.
  */
 @FeatureInterface
-public final class ShipControllerAndroid extends FeatureModel implements ShipController
+public final class ShipControllerAndroid extends FeatureModel implements Routine
 {
     private static final double SPEED_DIVISOR = 10.0;
 
@@ -41,18 +41,23 @@ public final class ShipControllerAndroid extends FeatureModel implements ShipCon
     private final Mouse mouse = services.get(Mouse.class);
     private final Camera camera = services.get(Camera.class);
 
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private ShipModel model;
+    private final Transformable transformable;
+    private final ShipModel model;
 
     /**
      * Create an Android ship controller.
      * 
      * @param services The services reference.
      * @param setup The setup reference.
+     * @param transformable The transformable feature.
+     * @param model The model feature.
      */
-    public ShipControllerAndroid(Services services, Setup setup)
+    public ShipControllerAndroid(Services services, Setup setup, Transformable transformable, ShipModel model)
     {
         super(services, setup);
+        
+        this.transformable = transformable;
+        this.model = model;
     }
 
     /**

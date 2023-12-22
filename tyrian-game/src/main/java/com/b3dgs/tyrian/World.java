@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,8 +29,9 @@ import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Transformable;
 import com.b3dgs.lionengine.graphic.Graphic;
+import com.b3dgs.lionengine.helper.DeviceControllerConfig;
 import com.b3dgs.lionengine.helper.WorldHelper;
-import com.b3dgs.lionengine.io.InputDevicePointer;
+import com.b3dgs.lionengine.io.DeviceController;
 import com.b3dgs.tyrian.background.Background;
 import com.b3dgs.tyrian.entity.ShipModel;
 
@@ -98,7 +99,7 @@ public class World extends WorldHelper
         return medias.get(UtilRandom.getRandomInteger(medias.size() - 1));
     }
 
-    private final InputDevicePointer mouse = services.add(getInputDevice(InputDevicePointer.class));
+    private final DeviceController deviceCursor;
     private final Background background = new Background(camera);
     private final Tick tick = new Tick();
     private final Hud hud;
@@ -111,6 +112,8 @@ public class World extends WorldHelper
     public World(Services services)
     {
         super(services);
+
+        deviceCursor = services.add(DeviceControllerConfig.create(services, Medias.create("input_cursor.xml")));
 
         final double underMapHeight = -camera.getHeight() * 1.5;
         camera.teleport(0, underMapHeight);
@@ -157,7 +160,7 @@ public class World extends WorldHelper
     @Override
     public void update(double extrp)
     {
-        mouse.update(extrp);
+        deviceCursor.update(extrp);
         background.update(extrp);
         tick.update(extrp);
 

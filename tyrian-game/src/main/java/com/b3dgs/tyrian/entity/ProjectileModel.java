@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2020 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
+ * Copyright (C) 2013-2023 Byron 3D Games Studio (www.b3dgs.com) Pierre-Alexandre (contact@b3dgs.com)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,14 +25,12 @@ import com.b3dgs.lionengine.Viewer;
 import com.b3dgs.lionengine.Xml;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.DirectionNone;
-import com.b3dgs.lionengine.game.FeatureProvider;
 import com.b3dgs.lionengine.game.Force;
 import com.b3dgs.lionengine.game.ForceConfig;
 import com.b3dgs.lionengine.game.SurfaceConfig;
 import com.b3dgs.lionengine.game.feature.Animatable;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.Featurable;
-import com.b3dgs.lionengine.game.feature.FeatureGet;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
@@ -61,6 +59,9 @@ public final class ProjectileModel extends FeatureModel implements Routine, Recy
     private final Handler handler = services.get(Handler.class);
     private final Viewer viewer = services.get(Viewer.class);
 
+    private final Transformable transformable;
+    private final Animatable animatable;
+
     private final Tick tick = new Tick();
     private final Force force = new Force();
     private final long effectRate;
@@ -68,24 +69,31 @@ public final class ProjectileModel extends FeatureModel implements Routine, Recy
     private final Direction acceleration;
     private final int frame;
 
-    @FeatureGet private Transformable transformable;
-    @FeatureGet private Launchable launchable;
-    @FeatureGet private Collidable collidable;
-    @FeatureGet private Animatable animatable;
-
     /**
      * Create feature.
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
+     * @param transformable The transformable feature.
+     * @param launchable The launchable feature.
+     * @param collidable The collidable feature.
+     * @param animatable The animatable feature.
      * @throws LionEngineException If invalid arguments.
      */
-    ProjectileModel(Services services, Setup setup)
+    public ProjectileModel(Services services,
+                           Setup setup,
+                           Transformable transformable,
+                           Launchable launchable,
+                           Collidable collidable,
+                           Animatable animatable)
     {
         super(services, setup);
 
+        this.transformable = transformable;
+        this.animatable = animatable;
+
         frame = setup.getInteger(ATT_FRAME, SurfaceConfig.NODE_SURFACE);
-        effectRate = setup.getIntegerDefault(0, ATT_RATE, NODE_EFFECT);
+        effectRate = setup.getInteger(0, ATT_RATE, NODE_EFFECT);
         if (setup.hasNode(NODE_EFFECT))
         {
             effectMedia = Medias.create(setup.getText(NODE_EFFECT));
@@ -96,13 +104,20 @@ public final class ProjectileModel extends FeatureModel implements Routine, Recy
         }
 
         final Xml root = setup.getRoot();
-        if (root.hasChild(ForceConfig.NODE_FORCE))
+        if (root.hasNode(ForceConfig.NODE_FORCE))
         {
             acceleration = ForceConfig.imports(root);
         }
         else
         {
             acceleration = new Force();
+        }
+
+        collidable.setCollisionVisibility(false);
+
+        if (effectMedia != null)
+        {
+            launchable.addListener(l -> startEffect(transformable));
         }
     }
 
@@ -117,19 +132,6 @@ public final class ProjectileModel extends FeatureModel implements Routine, Recy
         handler.add(effect);
         effect.getFeature(EffectModel.class).start(localizable);
         tick.restart();
-    }
-
-    @Override
-    public void prepare(FeatureProvider provider)
-    {
-        super.prepare(provider);
-
-        collidable.setCollisionVisibility(false);
-
-        if (effectMedia != null)
-        {
-            launchable.addListener(launchable -> startEffect(transformable));
-        }
     }
 
     @Override
