@@ -90,10 +90,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>../warcraft-pc</module>
+                <module>../tyrian-pc</module>
             </modules>
             <properties>
-                <warcraft-pc-excludes>b3dgs-buildtools</warcraft-pc-excludes>
+                <tyrian-pc-excludes>b3dgs-buildtools</tyrian-pc-excludes>
             </properties>
         </profile>
         <profile>
