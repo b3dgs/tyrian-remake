@@ -16,7 +16,7 @@
         <jna.version>5.14.0</jna.version>
         <checkstyle.skip>true</checkstyle.skip>
         <maven.test.skip>true</maven.test.skip>
-        <log4j2.version>2.22.0</log4j2.version>
+        <log4j2.version>2.22.1</log4j2.version>
     </properties>
     <dependencies>
         <dependency>
