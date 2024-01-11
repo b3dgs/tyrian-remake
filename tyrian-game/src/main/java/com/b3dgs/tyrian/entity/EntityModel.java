@@ -37,7 +37,7 @@ import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -51,7 +51,7 @@ import com.b3dgs.tyrian.Sfx;
  * Entity model implementation.
  */
 @FeatureInterface
-public final class EntityModel extends FeatureModel implements Routine, CollidableListener, Recyclable
+public final class EntityModel extends FeatureModel implements RoutineUpdate, CollidableListener, Recyclable
 {
     private static final String ANIM_IDLE = "idle";
 

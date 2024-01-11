@@ -36,7 +36,7 @@ import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -48,7 +48,7 @@ import com.b3dgs.lionengine.graphic.engine.SourceResolutionProvider;
  * Projectile model implementation.
  */
 @FeatureInterface
-public final class ProjectileModel extends FeatureModel implements Routine, Recyclable
+public final class ProjectileModel extends FeatureModel implements RoutineUpdate, Recyclable
 {
     private static final String NODE_EFFECT = "effect";
     private static final String ATT_RATE = "rate";

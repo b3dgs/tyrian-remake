@@ -26,7 +26,7 @@ import com.b3dgs.lionengine.audio.AudioFactory;
 import com.b3dgs.lionengine.game.Direction;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -39,7 +39,7 @@ import com.b3dgs.tyrian.Sfx;
  * Weapon model implementation.
  */
 @FeatureInterface
-public final class WeaponModel extends FeatureModel implements Routine
+public final class WeaponModel extends FeatureModel implements RoutineUpdate
 {
     /** Fire node name. */
     private static final String NODE_FIRE = "fire";

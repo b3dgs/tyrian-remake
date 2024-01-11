@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.Medias;
 import com.b3dgs.lionengine.game.feature.Factory;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -34,7 +34,7 @@ import com.b3dgs.tyrian.Constant;
  * Shooter implementation.
  */
 @FeatureInterface
-public final class Shooter extends FeatureModel implements Routine
+public final class Shooter extends FeatureModel implements RoutineUpdate
 {
     private final Factory factory = services.get(Factory.class);
     private final ShipModel ship = services.get(ShipModel.class);

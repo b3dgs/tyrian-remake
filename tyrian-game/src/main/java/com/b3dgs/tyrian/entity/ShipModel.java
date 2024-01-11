@@ -35,7 +35,8 @@ import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
 import com.b3dgs.lionengine.game.feature.Layerable;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineRender;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -59,7 +60,7 @@ import com.b3dgs.tyrian.entity.Explode.PostAction;
  * Ship model implementation.
  */
 @FeatureInterface
-public final class ShipModel extends FeatureModel implements Routine, CollidableListener
+public final class ShipModel extends FeatureModel implements RoutineUpdate, RoutineRender, CollidableListener
 {
     /** Default energy. */
     static final int ENERGY = 8;

@@ -23,7 +23,7 @@ import com.b3dgs.lionengine.game.feature.Camera;
 import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Identifiable;
-import com.b3dgs.lionengine.game.feature.Routine;
+import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
@@ -33,7 +33,7 @@ import com.b3dgs.lionengine.game.feature.collidable.Collidable;
  * Bonus model implementation.
  */
 @FeatureInterface
-public final class BonusModel extends FeatureModel implements Routine
+public final class BonusModel extends FeatureModel implements RoutineUpdate
 {
     private static final String ANIM_IDLE = "idle";
     private static final double FALLING_SPEED = -1.0;
