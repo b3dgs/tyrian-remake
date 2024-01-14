@@ -33,7 +33,7 @@ public final class Loading extends Sequence
     private static final String TEXT_LOADING = "Loading... ";
     private static final int LOADING_OFFSET_Y = 50;
 
-    private final Image loading = Drawable.loadImage(Medias.create(Constant.FOLDER_PIC, "loading.png"));
+    private final Image background = Drawable.loadImage(Medias.create(Constant.FOLDER_PIC, "loading.png"));
     private final SpriteFont font = Drawable.loadSpriteFont(Medias.create(Constant.FOLDER_FONT, "font.png"),
                                                             Medias.create(Constant.FOLDER_FONT, "font.xml"),
                                                             8,
@@ -56,8 +56,8 @@ public final class Loading extends Sequence
     @Override
     public void load()
     {
-        loading.load();
-        loading.prepare();
+        background.load();
+        background.prepare();
 
         font.load();
         font.prepare();
@@ -80,7 +80,7 @@ public final class Loading extends Sequence
     @Override
     public void render(Graphic g)
     {
-        loading.render(g);
+        background.render(g);
         font.render(g);
     }
 
@@ -89,7 +89,7 @@ public final class Loading extends Sequence
     {
         super.onTerminated(hasNextSequence);
 
-        loading.dispose();
+        background.dispose();
         font.dispose();
     }
 }

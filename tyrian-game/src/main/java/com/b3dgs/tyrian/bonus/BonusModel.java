@@ -27,7 +27,6 @@ import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
 import com.b3dgs.lionengine.game.feature.Setup;
 import com.b3dgs.lionengine.game.feature.Transformable;
-import com.b3dgs.lionengine.game.feature.collidable.Collidable;
 
 /**
  * Bonus model implementation.
@@ -50,7 +49,6 @@ public final class BonusModel extends FeatureModel implements RoutineUpdate
      * @param setup The setup reference (must not be <code>null</code>).
      * @param identifiable The identifiable feature.
      * @param transformable The transformable feature.
-     * @param collidable The collidable feature.
      * @param animatable The animatable feature.
      * @throws LionEngineException If invalid arguments.
      */
@@ -58,7 +56,6 @@ public final class BonusModel extends FeatureModel implements RoutineUpdate
                       Setup setup,
                       Identifiable identifiable,
                       Transformable transformable,
-                      Collidable collidable,
                       Animatable animatable)
     {
         super(services, setup);

@@ -35,7 +35,6 @@ import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
-import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.Recyclable;
 import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
@@ -66,7 +65,7 @@ public final class EntityModel extends FeatureModel implements RoutineUpdate, Co
 
     private final Alterable life = new Alterable(3);
     private final Direction direction;
-    private final Media explode;
+    private final Media explodeMedia;
     private final Animation anim;
 
     /**
@@ -75,7 +74,6 @@ public final class EntityModel extends FeatureModel implements RoutineUpdate, Co
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
      * @param identifiable The identifiable feature.
-     * @param layerable The layerable feature.
      * @param transformable The transformable feature.
      * @param collidable The collidable feature.
      * @param animatable The animatable feature.
@@ -84,7 +82,6 @@ public final class EntityModel extends FeatureModel implements RoutineUpdate, Co
     public EntityModel(Services services,
                        Setup setup,
                        Identifiable identifiable,
-                       Layerable layerable,
                        Transformable transformable,
                        Collidable collidable,
                        Animatable animatable)
@@ -105,8 +102,8 @@ public final class EntityModel extends FeatureModel implements RoutineUpdate, Co
         {
             direction = DirectionNone.INSTANCE;
         }
-        explode = Medias.create(Constant.FOLDER_EFFECT,
-                                setup.getText(EffectModel.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);
+        explodeMedia = Medias.create(Constant.FOLDER_EFFECT,
+                                     setup.getText(EffectModel.NODE_EXPLODE) + Factory.FILE_DATA_DOT_EXTENSION);
 
         final AnimationConfig animConfig = AnimationConfig.imports(setup);
         if (animConfig.hasAnimation(ANIM_IDLE))
@@ -144,7 +141,7 @@ public final class EntityModel extends FeatureModel implements RoutineUpdate, Co
      */
     private void spawnEffectExplode()
     {
-        final Explode explode = factory.create(this.explode);
+        final Explode explode = factory.create(explodeMedia);
         explode.start(transformable);
         handler.add(explode);
     }

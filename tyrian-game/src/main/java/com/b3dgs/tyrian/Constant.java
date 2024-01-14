@@ -26,9 +26,9 @@ import com.b3dgs.lionengine.Version;
 public final class Constant
 {
     /** Application name. */
-    public static final String NAME = "Tyrian Remake";
+    public static final String PROGRAM_NAME = "Tyrian Remake";
     /** Application version. */
-    public static final Version VERSION = new Version(0, 4, 1);
+    public static final Version PROGRAM_VERSION = new Version(0, 4, 1);
     /** Native resolution. */
     public static final Resolution NATIVE = new Resolution(216, 384, 60);
 

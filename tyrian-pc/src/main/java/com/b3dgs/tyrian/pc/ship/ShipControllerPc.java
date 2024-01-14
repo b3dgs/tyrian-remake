@@ -90,7 +90,7 @@ public final class ShipControllerPc extends FeatureModel implements RoutineUpdat
             count++;
         }
         final double width = transformable.getWidth() / 2.0;
-        final double maxX = camera.getWidth() + camera.getWidth() / 2 - width * 2;
+        final double maxX = camera.getWidth() + camera.getWidth() / 2.0 - width * 2;
         if (transformable.getX() < width)
         {
             transformable.teleportX(width);

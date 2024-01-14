@@ -148,8 +148,8 @@ public final class Map
                 final Media media = entities.get(tileRef);
                 final Featurable entity = factory.create(media);
                 final Transformable transformable = entity.getFeature(Transformable.class);
-                final int x = (int) (tile.getX() + transformable.getWidth() / 2);
-                final int y = (int) (tile.getY() + map.getTileHeight() - transformable.getHeight() / 2);
+                final int x = (int) (tile.getX() + transformable.getWidth() / 2.0);
+                final int y = (int) (tile.getY() + map.getTileHeight() - transformable.getHeight() / 2.0);
                 transformable.teleport(x, y);
                 handler.add(entity);
             }

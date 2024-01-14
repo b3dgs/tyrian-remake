@@ -40,7 +40,7 @@ public final class AppTyrian
      */
     public static void main(String[] args) // CHECKSTYLE IGNORE LINE: TrailingComment|UncommentedMain
     {
-        EngineAwt.start(Constant.NAME, Constant.VERSION, AppTyrian.class);
+        EngineAwt.start(Constant.PROGRAM_NAME, Constant.PROGRAM_VERSION, AppTyrian.class);
         AudioFactory.addFormat(new WavFormat());
         AudioFactory.addFormat(AdPlugFormat.getFailsafe());
         Sfx.setEnabled(true);

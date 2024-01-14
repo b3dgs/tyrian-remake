@@ -14,9 +14,8 @@
     <name>Tyrian Remake PC</name>
     <properties>
         <jna.version>5.14.0</jna.version>
-        <checkstyle.skip>true</checkstyle.skip>
-        <maven.test.skip>true</maven.test.skip>
         <log4j2.version>2.22.1</log4j2.version>
+        <checkstyle.skip>true</checkstyle.skip>
     </properties>
     <dependencies>
         <dependency>
@@ -33,6 +32,14 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.b3dgs.lionengine</groupId>
+            <artifactId>lionengine-core</artifactId>
+            <version>${lionengine.version}</version>
+            <classifier>tests</classifier>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.b3dgs.lionengine</groupId>

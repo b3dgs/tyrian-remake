@@ -151,8 +151,8 @@ public class World extends WorldHelper
             handler.add(featurable);
             final Transformable transformable = featurable.getFeature(Transformable.class);
             final double x = UtilRandom.getRandomInteger(camera.getWidth() - transformable.getWidth() * 2)
-                             + transformable.getWidth();
-            final double y = (int) camera.getY() + camera.getHeight() + transformable.getHeight();
+                             + (double) transformable.getWidth();
+            final double y = camera.getY() + camera.getHeight() + transformable.getHeight();
             transformable.teleport(x, y);
         }
     }

@@ -34,7 +34,6 @@ import com.b3dgs.lionengine.game.feature.FeatureInterface;
 import com.b3dgs.lionengine.game.feature.FeatureModel;
 import com.b3dgs.lionengine.game.feature.Handler;
 import com.b3dgs.lionengine.game.feature.Identifiable;
-import com.b3dgs.lionengine.game.feature.Layerable;
 import com.b3dgs.lionengine.game.feature.RoutineRender;
 import com.b3dgs.lionengine.game.feature.RoutineUpdate;
 import com.b3dgs.lionengine.game.feature.Services;
@@ -63,9 +62,7 @@ import com.b3dgs.tyrian.entity.Explode.PostAction;
 public final class ShipModel extends FeatureModel implements RoutineUpdate, RoutineRender, CollidableListener
 {
     /** Default energy. */
-    static final int ENERGY = 8;
-    /** Speed. */
-    static final Direction SPEED = new Force(0.0, 1.0);
+    static final int DEFAULT_ENERGY = 8;
     private static final int OFFSET_Y = 8;
     private static final long HIT_TIME = 25L;
     /** Shield increment delay in milliseconds. */
@@ -100,6 +97,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
     private final Force hitForce = new Force(0.0, 0.0, 1, 0.1);
     private final Tick hitTick = new Tick();
     private final Tick shieldIncTick = new Tick();
+    private final Direction speed = new Force(0.0, 1.0);
     private final SpriteAnimated hit;
 
     private WeaponModel front;
@@ -110,7 +108,6 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      * 
      * @param services The services reference (must not be <code>null</code>).
      * @param setup The setup reference (must not be <code>null</code>).
-     * @param layerable The layerable feature.
      * @param transformable The transformable feature.
      * @param collidable The collidable feature.
      * @param animatable The animatable feature.
@@ -118,7 +115,6 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      */
     public ShipModel(Services services,
                      Setup setup,
-                     Layerable layerable,
                      Transformable transformable,
                      Collidable collidable,
                      Animatable animatable)
@@ -146,7 +142,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
         collidable.setCollisionVisibility(false);
 
         final double startX = (camera.getWidth() + Constant.MARGIN_H + transformable.getWidth()) / 2;
-        final double startY = camera.getY() + camera.getHeight() / 4 - transformable.getHeight();
+        final double startY = camera.getY() + camera.getHeight() / 4.0 - transformable.getHeight();
         transformable.teleport(startX, startY);
     }
 
@@ -180,13 +176,13 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
         if (weapon.isFront())
         {
             front.getFeature(Identifiable.class).destroy();
-            front = weapon.take(true);
+            front = weapon.take();
             ignoreProjectileCollision(front.getFeature(Launcher.class));
         }
         else
         {
             rear.getFeature(Identifiable.class).destroy();
-            rear = weapon.take(true);
+            rear = weapon.take();
             ignoreProjectileCollision(rear.getFeature(Launcher.class));
         }
     }
@@ -214,10 +210,10 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      */
     public void fire()
     {
-        if (energy.isEnough(ShipModel.ENERGY * 2))
+        if (energy.isEnough(DEFAULT_ENERGY * 2))
         {
-            front.fire(transformable, SPEED);
-            rear.fire(transformable, SPEED);
+            front.fire(transformable, speed);
+            rear.fire(transformable, speed);
         }
     }
 
@@ -228,7 +224,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      */
     public Direction getSpeed()
     {
-        return ShipModel.SPEED;
+        return speed;
     }
 
     /**
@@ -298,7 +294,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      */
     private void ignoreProjectileCollision(Launcher launcher)
     {
-        launcher.addListener((LauncherListener) () -> energy.decrease(ENERGY));
+        launcher.addListener((LauncherListener) () -> energy.decrease(DEFAULT_ENERGY));
         launcher.addListener(launchable -> launchable.getFeature(Collidable.class)
                                                      .setGroup(Constant.COLLISION_GROUP_PROJECTILES_SHIP));
     }
@@ -313,7 +309,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
     {
         final Featurable weapon = factory.create(media);
         ignoreProjectileCollision(weapon.getFeature(Launcher.class));
-        return weapon.getFeature(WeaponModel.class).take(false);
+        return weapon.getFeature(WeaponModel.class);
     }
 
     /**
@@ -323,7 +319,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
      */
     private void onHit(double dir)
     {
-        hitForce.setDirection(0.0, dir * 2 - ShipModel.SPEED.getDirectionVertical() * 2);
+        hitForce.setDirection(0.0, dir * 2 - speed.getDirectionVertical() * 2);
         if (showHit(transformable))
         {
             onHurt(1);
@@ -342,9 +338,9 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
             if (armor.decrease(1) == 0)
             {
                 final Explode explode = factory.create(Medias.create(Constant.FOLDER_EFFECT, "explode_big.xml"));
-                final PostAction action = () -> sequence.end();
-                explode.start(new Rectangle(transformable.getX() - transformable.getWidth() / 2,
-                                            transformable.getY() - transformable.getHeight() / 2,
+                final PostAction action = sequence::end;
+                explode.start(new Rectangle(transformable.getX() - transformable.getWidth() / 2.0,
+                                            transformable.getY() - transformable.getHeight() / 2.0,
                                             50,
                                             50),
                               action);
@@ -398,7 +394,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
         hitForce.update(extrp);
 
         camera.setLocation(transformable.getX() / (camera.getWidth() / Constant.MARGIN_H),
-                           camera.getY() + ShipModel.SPEED.getDirectionVertical() * extrp);
+                           camera.getY() + speed.getDirectionVertical() * extrp);
 
         front.update(extrp);
         rear.update(extrp);
@@ -411,7 +407,7 @@ public final class ShipModel extends FeatureModel implements RoutineUpdate, Rout
         {
             shieldIncTick.restart();
             shield.increase(1);
-            energy.decrease(ShipModel.ENERGY * 2);
+            energy.decrease(DEFAULT_ENERGY * 2);
         }
     }
 

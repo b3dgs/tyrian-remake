@@ -11,18 +11,18 @@
     <groupId>com.b3dgs.tyrian</groupId>
     <artifactId>tyrian-parent</artifactId>
     <version>0.4.1-SNAPSHOT</version>
-    <name>Tyrian Remake</name>
     <packaging>pom</packaging>
+    <name>Tyrian Remake</name>
     <description>Remake of the original Tyrian on the DOS by Epic Games</description>
     <url>https://github.com/b3dgs/tyrian-remake</url>
-    <modules>
-        <module>../tyrian-assets</module>
-        <module>../tyrian-game</module>
-    </modules>
     <organization>
         <name>Byron 3D Games Studio</name>
         <url>www.b3dgs.com</url>
     </organization>
+    <modules>
+        <module>../tyrian-assets</module>
+        <module>../tyrian-game</module>
+    </modules>
     <scm>
         <url>https://github.com/b3dgs/tyrian-remake</url>
         <connection>scm:git:git@github.com:b3dgs/tyrian-remake.git</connection>
@@ -33,6 +33,7 @@
         <lionengine.version>10.0.0-SNAPSHOT</lionengine.version>
         <radial.base-package>com.b3dgs.tyrian</radial.base-package>
         <checkstyle.skip>true</checkstyle.skip>
+        <sonar.coverage.jacoco.xmlReportPaths>${basedir}/../tyrian-coverage/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -90,6 +91,7 @@
             </activation>
             <modules>
                 <module>../tyrian-pc</module>
+                <module>../tyrian-coverage</module>
             </modules>
             <properties>
                 <tyrian-pc-excludes>b3dgs-buildtools</tyrian-pc-excludes>

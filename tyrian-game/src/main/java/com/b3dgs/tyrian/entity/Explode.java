@@ -143,8 +143,8 @@ public final class Explode extends FeaturableModel
 
             if (count == 0 || tick.elapsedTime(source.getRate(), DELAY) && count <= countMax)
             {
-                final double x = area.getX() - area.getWidth() / 2 + UtilRandom.getRandomInteger(area.getWidth());
-                final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight()) + area.getHeight() / 2;
+                final double x = area.getX() - area.getWidth() / 2.0 + UtilRandom.getRandomInteger(area.getWidth());
+                final double y = area.getY() - UtilRandom.getRandomInteger(area.getHeight()) + area.getHeight() / 2.0;
 
                 final Featurable featurable = factory.create(media);
                 effect = featurable.getFeature(EffectModel.class);

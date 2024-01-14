@@ -22,7 +22,7 @@ import com.b3dgs.lionengine.game.feature.SequenceGame;
 /**
  * Game loop designed to handle our little world.
  */
-public final class Scene extends SequenceGame<World>
+public class Scene extends SequenceGame<World>
 {
     /**
      * Constructor.
@@ -37,7 +37,7 @@ public final class Scene extends SequenceGame<World>
     @Override
     public void load()
     {
-        Music.ASTEROID_2.play();
+        Music.play(Music.ASTEROID_2);
     }
 
     @Override

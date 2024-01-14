@@ -37,7 +37,7 @@ import com.b3dgs.tyrian.Constant;
 public final class Background implements Updatable, Renderable
 {
     /** Color background. */
-    private static final ColorRgba BACKGROUND = new ColorRgba(0, 0, 0);
+    private static final ColorRgba COLOR = new ColorRgba(0, 0, 0);
     /** Default star density. */
     private static final int DENSITY = 128;
     /** Vertical speed range. */
@@ -121,7 +121,7 @@ public final class Background implements Updatable, Renderable
     @Override
     public void render(Graphic g)
     {
-        g.setColor(BACKGROUND);
+        g.setColor(COLOR);
         g.drawRect(0, 0, viewer.getWidth(), viewer.getHeight(), true);
 
         for (int i = 0; i < layers.length; i++)

@@ -90,17 +90,13 @@ public final class WeaponModel extends FeatureModel implements RoutineUpdate
     }
 
     /**
-     * Take the weapon.
+     * Take the weapon and play sound.
      * 
-     * @param sfx <code>true</code> to play sound, <code>false</code> else.
      * @return The weapon taken.
      */
-    public WeaponModel take(boolean sfx)
+    public WeaponModel take()
     {
-        if (sfx)
-        {
-            Sfx.POWER_UP.play();
-        }
+        Sfx.POWER_UP.play();
         return this;
     }
 

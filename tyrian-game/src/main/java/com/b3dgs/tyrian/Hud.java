@@ -35,7 +35,7 @@ import com.b3dgs.tyrian.entity.ShipModel;
  */
 public class Hud implements Updatable, Renderable
 {
-    private static final Media HUD = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
+    private static final Media SPRITE = Medias.create(Constant.FOLDER_SPRITE, "hud.png");
     private static final ColorRgba BROWN = new ColorRgba(90, 45, 0);
 
     private static Bar createBar(int width, int height, int x, int y, ColorRgba color)
@@ -59,7 +59,7 @@ public class Hud implements Updatable, Renderable
     private final Bar levelFront = createBar(4, 12, 198, 348, ColorRgba.YELLOW, ColorRgba.RED);
     private final Bar levelRear = createBar(4, 12, 198, 364, ColorRgba.YELLOW, ColorRgba.RED);
     private final Bar progress = createBar(12, 49, 81, 331, ColorRgba.GREEN, ColorRgba.RED);
-    private final Sprite surface = Drawable.loadSprite(HUD);
+    private final Sprite surface = Drawable.loadSprite(SPRITE);
     private final ShipModel ship;
     private final Camera camera;
     private final MapTile map;
@@ -79,7 +79,7 @@ public class Hud implements Updatable, Renderable
 
         surface.load();
         surface.prepare();
-        surface.setLocation(0.0, camera.getHeight() - surface.getHeight());
+        surface.setLocation(0.0, camera.getHeight() - (double) surface.getHeight());
     }
 
     /**

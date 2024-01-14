@@ -32,6 +32,21 @@ public enum Music
     private static Audio playing;
 
     /**
+     * Play music.
+     * 
+     * @param music The music to play.
+     */
+    public static void play(Music music)
+    {
+        if (playing != null)
+        {
+            playing.stop();
+        }
+        music.audio.play();
+        playing = music.audio;
+    }
+
+    /**
      * Stop playing music.
      */
     public static void stop()
@@ -54,18 +69,5 @@ public enum Music
     {
         audio = AudioFactory.loadAudio(Medias.create(Constant.FOLDER_MUSIC, name));
         audio.setVolume(50);
-    }
-
-    /**
-     * Play music.
-     */
-    public void play()
-    {
-        if (playing != null)
-        {
-            playing.stop();
-        }
-        audio.play();
-        playing = audio;
     }
 }
